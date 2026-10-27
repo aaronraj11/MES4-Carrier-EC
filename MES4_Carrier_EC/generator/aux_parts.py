@@ -66,6 +66,41 @@ def tca9535_symbol():
     return base
 
 
+def ina236_symbol():
+    """TI INA236 (DDF, TSOT-23-8), drawn on KiCad's INA226 body so the Flasher relay wiring still lands on the
+    same pins: VBUS and A1 dropped (the INA236 reads the bus on IN-, address via A0 only), pins renumbered."""
+    base = B.kicad_symbol('Sensor_Energy:INA226')
+    new = 'INA236'
+    base[1] = Q(LIBNAME + ':' + new)
+    num = {'Vin+': ('IN+', '1'), 'Vin-': ('IN-', '2'), 'GND': ('GND', '3'), 'VS': ('VS', '4'),
+           'SCL': ('SCL', '5'), 'SDA': ('SDA', '6'), 'A0': ('A0', '7'), '~{Alert}': ('~{ALERT}', '8')}
+    for sub in find(base, 'symbol'):
+        sub[1] = Q(sub[1].replace('INA226', new))
+        keep = []
+        for it in sub[2:]:
+            if isinstance(it, list) and it[0] == 'pin':
+                name = first(it, 'name')[1]
+                if name not in num:
+                    continue
+                first(it, 'name')[1] = Q(num[name][0])
+                first(it, 'number')[1] = Q(num[name][1])
+            keep.append(it)
+        sub[2:] = keep
+    for p in find(base, 'property'):
+        if p[1] == 'Value':
+            p[2] = Q(new)
+        elif p[1] == 'Footprint':
+            p[2] = Q('Package_TO_SOT_SMD:TSOT-23-8')
+        elif p[1] == 'Datasheet':
+            p[2] = Q('https://www.ti.com/lit/ds/symlink/ina236.pdf')
+        elif p[1] == 'Description':
+            p[2] = Q('TI INA236: 48 V (50 V abs max), 16-bit current / voltage / power monitor, I2C, '
+                     'bus voltage on IN-, 4 addresses via A0, TSOT-23-8 (DDF)')
+        elif p[1] == 'ki_fp_filters':
+            p[2] = Q('TSOT?23*')
+    return base
+
+
 def im03gr_symbol():
     """TE Axicom IM03GR, 5 V monostable 2 form C (TE terminal assignment: coil 1+ / 8-,
     pole 1: 3 COM, 2 NC, 4 NO; pole 2: 6 COM, 7 NC, 5 NO)."""

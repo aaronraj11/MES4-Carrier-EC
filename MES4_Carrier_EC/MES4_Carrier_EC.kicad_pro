@@ -743,7 +743,7 @@
   },
   "sheets": [
     [
-      "0370b922-a365-5c71-ab6f-f5cfbc7b5e5a",
+      "0d8fbf0e-dd62-5be6-8889-307c6423adb0",
       "Root"
     ],
     [
@@ -763,27 +763,27 @@
       "Relays1-2"
     ],
     [
-      "761a0ad6-718e-5dd4-a056-174aade9268d",
+      "5609072e-de3f-53a8-bb6e-9df3d5e3d424",
       "Relays3-4"
     ],
     [
-      "d2afada6-de87-5912-97f5-b42fa3dcc378",
+      "cf262129-e5b0-5d64-8856-f7a5af9d3be1",
       "Sensors"
     ],
     [
-      "7a923097-dc8d-55bd-9fc1-856d492ab900",
+      "a2d22bff-d9fc-5b98-b276-72fc25ba4d20",
       "LoadCell"
     ],
     [
-      "3d5a074b-88ea-5b07-b9d6-caba1f0d7d7e",
+      "564e9a93-7402-5291-998d-8aa4e1f40b1f",
       "AuxPower"
     ],
     [
-      "1faebd9f-5ef7-5632-999b-932f8eeca23c",
+      "ab87f4c8-555d-52c8-a423-b1818ccd4582",
       "Winch"
     ],
     [
-      "e4fdf398-68fc-5df0-b425-388721a51a5c",
+      "c62394d5-7678-5876-bacc-0367e6759efe",
       "Pinout"
     ]
   ],

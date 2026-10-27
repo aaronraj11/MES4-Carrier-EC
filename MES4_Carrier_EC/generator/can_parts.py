@@ -52,9 +52,12 @@ def rj45x4_symbol():
     return sym
 
 
-# Pad data: JLC/EasyEDA library footprint RJ45-TH_HC-RJ45-059-4-4 (10-mil units, pad 1 = origin);
-# drill sizes from the HCTL drawing (32 x Ø1.0, 5 x Ø1.5, 2 x Ø3.2), shield drills kept at the
-# library's Ø1.7 to absorb the 0.2 mm difference between the two sources on the rear shield row.
+# Pads from the HCTL HC-RJ45-059-4-4 drawing ("PCB参考图", LCSC C3000204 PDF), pad 1 = origin:
+# 32 x Ø1.0 contacts, 1.27 mm pitch, rows 2.54 mm apart, ports 14.0 mm apart; 2 x Ø3.2 pegs 53.5 mm apart,
+# 8.89 mm in front of the rear row; 5 x Ø1.5 shield pins: rear row 10.25 mm behind the pegs, 14.0 mm apart,
+# front pair 4.4 mm in front of the pegs, 59.0 mm apart. All centred on the contact field.
+# (The JLC/EasyEDA library part has rows 2.50 mm apart, 13.97 mm ports and Ø3.5 pegs: not used.)
+# Silk / Fab outline still from the library part (10-mil units).
 _O = (3999.378, 2970.571)
 
 
@@ -78,8 +81,8 @@ def rj45x4_footprint():
     fp = ['footprint', Q(RJ_FP), ['version', 20241229], ['generator', Q('pcbnew')], ['generator_version', Q('9.0')],
           ['layer', Q('F.Cu')],
           ['descr', Q('HCTL HC-RJ45-059-4-4: RJ45 1x4 ganged, shielded, no magnetics, no LEDs, right angle, THT '
-                      '(LCSC C3000204). Pad positions from the JLC/EasyEDA library footprint, drills from the HCTL '
-                      'drawing. Port front face 17.0 mm in front of the pin-1 row.')],
+                      '(LCSC C3000204). Pads and drills from the HCTL drawing. Port front face 10.6 mm in front '
+                      'of the pegs (17.0 mm in front of the pin-1 row).')],
           ['tags', Q('RJ45 8P8C 1x4 quad ganged shielded CAN')],
           ['property', Q('Reference'), Q('REF**'), ['at', 25.4, -6.6, 0], ['layer', Q('F.SilkS')], ['uuid', U('fp')],
            ['effects', ['font', ['size', 1, 1], ['thickness', 0.15]]]],
@@ -112,18 +115,21 @@ def rj45x4_footprint():
         for a, b in zip(pts, pts[1:]):
             fp.append(line(a, b, 'F.SilkS', 0.12))
     fp.append(line((-1.0, 1.5), (1.0, 1.5), 'F.SilkS', 0.12))  # pin 1 mark
-    # 32 contacts: port pitch 13.97 mm (550 mil), 1.27 mm pitch, rows 2.54 mm apart (pin 1 row nearer the front)
+    # 32 contacts (pin 1 row nearer the front)
     for port in range(4):
         for k in range(1, 9):
             num = 8 * port + k
-            x = round(13.97 * port + 1.27 * (k - 1), 3)
+            x = round(14.0 * port + 1.27 * (k - 1), 3)
             y = 0 if k % 2 else -2.54
             fp.append(pad(str(num), 'thru_hole', 'rect' if num == 1 else 'circle', (x, y), 1.6, 1.0))
-    for num, raw in (('33', (4099.378, 2954.429)), ('33', (4154.496, 2954.429)), ('33', (4215.52, 3013.091)),
-                     ('34', (4044.26, 2954.429)), ('34', (3983.237, 3013.091))):
-        fp.append(pad(num, 'thru_hole', 'circle', _mm(*raw), 2.3, 1.7))
-    for raw in ((3994.063, 2995.768), (4204.693, 2995.768)):
-        fp.append(pad('', 'np_thru_hole', 'circle', _mm(*raw), 3.2, 3.2))
+    c = (3 * 14.0 + 8.89) / 2         # centre of the contact field
+    yp = round(-2.54 + 8.89, 3)        # pegs
+    yr, yf = round(yp - 10.25, 3), round(yp + 4.4, 3)  # rear / front shield rows
+    for num, x, y in (('34', c - 14.0, yr), ('33', c, yr), ('33', c + 14.0, yr),
+                      ('34', c - 29.5, yf), ('33', c + 29.5, yf)):
+        fp.append(pad(num, 'thru_hole', 'circle', (round(x, 3), y), 2.3, 1.5))
+    for x in (c - 26.75, c + 26.75):
+        fp.append(pad('', 'np_thru_hole', 'circle', (round(x, 3), yp), 3.2, 3.2))
     fp.append(['embedded_fonts', 'no'])
     return fp
 

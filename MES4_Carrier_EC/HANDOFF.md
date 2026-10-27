@@ -43,14 +43,14 @@ The user first set the rule **"all GPIOs must match the MES4-MCU standard"** (`.
 | PA8 (31) / PC6 (29) / PB3 (61) / PA7 (35) | Relay CH1–CH4 drive | Same |
 | PA0 (49) / PA1 (47) | Relay CH1 / CH2 coil feedback | **Winch CLK / ACLK relay drive** (IM03GR K5 / K6, AO3400A Q6 / Q7) |
 | PA2 (45) / PA3 (43) | Relay CH3 / CH4 coil feedback | **Door servo UART, USART2** TX / RX → J17 (FE-URT-2) |
-| PA15 (63) | INA226 ALERT | Same |
+| PA15 (63) | INA226 ALERT | Same (INA236 ALERT) |
 | PA4 / PA5 / PA6 (41 / 39 / 37) | ADS1232 DRDY, SCLK, PDWN | Same |
 | PB6 (59) / PC15 (51) | Spare (inputs only) | Autonics sensor 1 / 2 (PC817 opto) |
-| I²C1 (53 / 55) | INA226 0x40 / 41 / 44 / 45, optional TCA9535 | 4 × INA226 only |
+| I²C1 (53 / 55) | INA226 0x40 / 41 / 44 / 45, optional TCA9535 | 4 × INA236 at 0x40 / 41 / 42 / 43 |
 
 What went with it:
 - The Flasher template's 10k / 15k / 10 nF coil dividers are removed in `relay_sheet()` (`fb_parts` in `TPL`).
-- Relay diagnosis is INA226-only (`RELAY_DIAG`): an open coil or dead driver now looks like a contact that doesn't close ("ON, I ≈ 0").
+- Relay diagnosis is current-monitor-only (INA236) (`RELAY_DIAG`): an open coil or dead driver now looks like a contact that doesn't close ("ON, I ≈ 0").
 - The SC16IS740 I²C-UART bridge, its 16 MHz crystal and caps, and the TCA9535 expander are gone (and out of `parts.py`). `aux_parts.tca9535_symbol()` and `im03gr_symbol()` are kept as library code.
 - The photoMOS winch idea (KAQY214S C2890344, back-to-back LEDs, 220 Ω C25091 for ≥ 5 mA worst case; KiCad `Package_SO:SO-4_4.4x3.9mm_P2.54mm` matches the datasheet land) was **not** used: the user chose the IM03GR relays on PA0 / PA1. TCA9539PWR (C131972, RESET pin) was the alternative if an expander comes back.
 
@@ -60,17 +60,44 @@ What went with it:
 - FE-URT-2 must be set to **3.3 V UART levels** (noted on the AuxPower sheet and in the README). Bench check: read a servo's ID / position at 3.3 V; the FE-URT-2 datasheet wasn't found, so it's unconfirmed whether the switch also changes the servo-bus side. Servo supply is raw 24 V through F9 3 A PTC: check the servos' stall current against it.
 - SW2 (SS12D10G5, IMU switch) is rated 0.5 A: check the IMU's current.
 - Low stock at last check: URB2409S-10WR3 C7424703 (78), SMBJ30A C113998 (920 global), L1 SWPA5040S100MT C84608 (LCSC page "not found", JLC page live).
-- Custom footprints built from datasheets / EasyEDA data must be checked against real parts: RJ45 1×4 (`RJ45_HCTL_HC-RJ45-059-4-4_1x4_Horizontal`) and URB2405LD-20WR3 (`PWRM-TH_YLPTEC_URBXXXXLD-20WR3`).
+- Custom footprints checked against the manufacturer drawings (2026-10-27): RJ45 1×4 now built from the HCTL drawing (14.0 mm ports, Ø1.0 / Ø1.5 / Ø3.2 holes; the JLC library part has 13.97 mm ports, 2.50 mm rows and Ø3.5 pegs, so it isn't used); URB2405LD-20WR3 matches the YLPTEC drawing and the JLC part. Still worth a print-out test fit before ordering.
 - No PCB has been started.
+
+## Design review R1 (MES4-Carrier-EC_Design_Review.pdf, 27 Oct 2026)
+
+| ID | Status |
+|---|---|
+| M1 INA226 40 V vs SMBJ30A 48 V clamp | Fixed: U2–U5 are now INA236AIDDFR (C5443912, 50 V abs max, TSOT-23-8), addresses 0x40–0x43 via A0 (GND / VS / SDA / SCL). INA238 / INA228 (85 V) had 0 LCSC stock |
+| M2 24 V on the load-cell terminals | Silkscreen only (user's choice: no keyed connector): "5V LOAD CELL – NEVER 24V" box, J12 / J13 away from 24 V terminals |
+| M3 J15 polarity | Fixed: pin 1 = +24 V, pin 2 = GND_24V. Re-pin the Harvester CN5 cable |
+| M4 Simulations | Open: hot-plug, surge into D9 (with M1), U10 start-up |
+| L1 LED resistor power | Already 1206 (0.25 W): no change |
+| L2 5 mA threshold | Fixed: 3 mA in the diagnosis note |
+| L3 Servo return via logic GND | Layout: J15, J17 and NT1 together, away from the load cell; heavy wire on J15 |
+| L4 PA3 back-power | Fixed: R38 = 1 kΩ |
+| L5 RJ45 looks like Ethernet | Silkscreen + panel "CAN – NOT ETHERNET" (CAN note on Main) |
+| L6 Stale Power notes | Fixed: 13 A worst case, Q1 2.2 W |
+| L7 PTC derating | Noted (2.2 A at 60 °C > 2 A); check enclosure temperature |
+| L8 Screen on 5 V | Bench test (unverified list) |
+| L9 DC/DC pins | Closed: U1, U9, U10 symbols and footprints match the JLC library, U10 also the YLPTEC drawing |
+
+## Layout checklist (from the reviews)
+
+- Winch: Winch_48V nets ≥ 2 mm from other copper, no GND pour under J18 / relay contacts, no ESD to GND on J18.
+- Q1 drain-tab copper for 2.2 W.
+- J15, J17 and NT1 together, away from the load cell (L3).
+- Silkscreen: "5V LOAD CELL – NEVER 24V" (filled box) at J12 / J13, placed away from the 24 V terminals; "CAN – NOT ETHERNET" at J4; polarity marks on every power terminal.
 
 ## Decisions already made with the user (don't re-ask)
 
 - 2 Autonics sensors (not 4), opto + fuse only, on PB6 / PC15.
 - Relay drivers: AO3400A + 100 Ω + 100k pull-down (CIF §7a), not the Flasher's 2SC2884.
+- Current monitors: INA236 (50 V), not the CIF's INA226 (40 V), because of the SMBJ30A clamp (review M1).
 - No relay coil feedback; PA0 / PA1 = winch, PA2 / PA3 = servo USART2 (above).
 - DB9 male to the IPC: **1 GND, 3 CAN_H, 5 CAN_L** (the IPC's pinout, deliberately not CiA 303-1). 1×4 RJ45 without magnetics, T568B pins 1 H / 2 L / 3 GND.
 - IMU 9 V: MES3.1 parts (URB2409S-10WR3, SS12D10G5), LED8 after the switch.
 - Screen: USB-C 5 V / 3 A source on URB2405LD-20WR3, Rp 10k.
-- Servo: FE-URT-2 like the MES2 Harvester, 24 V supply terminal plus 4-pin UART terminal, on USART2.
+- Servo: FE-URT-2 like the MES2 Harvester, 24 V supply terminal (pin 1 = +24 V, unlike Harvester CN5) plus 4-pin UART terminal, on USART2.
+- Load cell: keep the KF250NH terminals (no keyed connector: JLC doesn't stock the mating plugs); silkscreen warning instead.
 - Winch: the MES2_Extension's two IM03GR relays with the contact interlock, on PA0 / PA1.
 - Winch 48 V isolation: J18 / WINCH_* / ILK_* touch only relay contacts (net class `Winch_48V`, ≥ 2 mm to other copper on the PCB). No ESD to GND on J18.

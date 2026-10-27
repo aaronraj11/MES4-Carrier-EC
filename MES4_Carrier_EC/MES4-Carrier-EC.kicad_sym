@@ -496,6 +496,98 @@
 		)
 		(embedded_fonts no)
 	)
+	(symbol "INA236"
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(property "Reference" "U"
+			(at -6.35 11.43 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Value" "INA236"
+			(at 3.81 11.43 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Footprint" "Package_TO_SOT_SMD:TSOT-23-8"
+			(at 20.32 -11.43 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/ina236.pdf"
+			(at 8.89 -2.54 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Description" "TI INA236: 48 V (50 V abs max), 16-bit current / voltage / power monitor, I2C, bus voltage on IN-, 4 addresses via A0, TSOT-23-8 (DDF)"
+			(at 0 0 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "ki_keywords" "ADC I2C 16-Bit Oversampling Current Shunt"
+			(at 0 0 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "ki_fp_filters" "TSOT?23*"
+			(at 0 0 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(symbol "INA236_0_1"
+			(rectangle
+				(start 7.62 10.16)
+				(end -7.62 -10.16)
+				(stroke (width 0.254) (type default))
+				(fill (type background))
+			)
+		)
+		(symbol "INA236_1_1"
+			(pin input line
+				(at -10.16 -2.54 0)
+				(length 2.54)
+				(name "IN+" (effects (font (size 1.27 1.27))))
+				(number "1" (effects (font (size 1.27 1.27))))
+			)
+			(pin input line
+				(at -10.16 -5.08 0)
+				(length 2.54)
+				(name "IN-" (effects (font (size 1.27 1.27))))
+				(number "2" (effects (font (size 1.27 1.27))))
+			)
+			(pin power_in line
+				(at 0 12.7 270)
+				(length 2.54)
+				(name "VS" (effects (font (size 1.27 1.27))))
+				(number "4" (effects (font (size 1.27 1.27))))
+			)
+			(pin power_in line
+				(at 0 -12.7 90)
+				(length 2.54)
+				(name "GND" (effects (font (size 1.27 1.27))))
+				(number "3" (effects (font (size 1.27 1.27))))
+			)
+			(pin input line
+				(at 10.16 5.08 180)
+				(length 2.54)
+				(name "A0" (effects (font (size 1.27 1.27))))
+				(number "7" (effects (font (size 1.27 1.27))))
+			)
+			(pin bidirectional line
+				(at 10.16 0 180)
+				(length 2.54)
+				(name "SDA" (effects (font (size 1.27 1.27))))
+				(number "6" (effects (font (size 1.27 1.27))))
+			)
+			(pin input line
+				(at 10.16 -2.54 180)
+				(length 2.54)
+				(name "SCL" (effects (font (size 1.27 1.27))))
+				(number "5" (effects (font (size 1.27 1.27))))
+			)
+			(pin open_collector line
+				(at 10.16 -7.62 180)
+				(length 2.54)
+				(name "~{ALERT}" (effects (font (size 1.27 1.27))))
+				(number "8" (effects (font (size 1.27 1.27))))
+			)
+		)
+		(embedded_fonts no)
+	)
 	(symbol "MES4-MCU_M.2_Slot"
 		(pin_names (offset 1.016))
 		(exclude_from_sim no)

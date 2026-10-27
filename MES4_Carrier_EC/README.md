@@ -11,8 +11,8 @@ Monkey Robotics · Rev A · KiCad 9 · Designed by Aaron Raj Bhatti
 - **Four relay outputs** (switched 24 V, 2 A continuous each, CIF §7):
   - 1 safety light, 2 LED DRL, 3 battery stopper (1.5 A solenoid, intermittent), 4 spare;
   - AO3400A coil driver with a 100k gate pull-down, so every relay is OFF during reset and boot;
-  - no coil readback (its pins drive the winch and the servo UART): the INA226 does the diagnosis;
-  - an INA226 per channel measuring the load current and the 24 V rail;
+  - no coil readback (its pins drive the winch and the servo UART): the INA236 does the diagnosis;
+  - an INA236 per channel measuring the load current and the 24 V rail;
   - a PTC per output, an SS34 load flyback and an "output on" LED.
 - **Two Autonics sensor inputs** for 3-wire PNP 24 V sensors. Each has a PC817 opto input (as on the MES4-Flasher), a 100 mA supply PTC and a 100 nF / 50 V cap at the terminal.
 - **Load-cell input**: the MES4-Flasher circuit unchanged. ADS1232 24-bit ADC, ratiometric 5 V excitation, RC filters and BAV199 clamps.
@@ -26,32 +26,32 @@ Monkey Robotics · Rev A · KiCad 9 · Designed by Aaron Raj Bhatti
 
 ## GPIO budget
 
-All 14 module GPIOs are used. The pins are checked against the MES4-MCU netlist. This differs from the MES4-CIF §2c table on one point: the relay coil feedback (PA0–PA3 in the CIF) is left out, which frees PA0 / PA1 for the winch relays and PA2 / PA3 (USART2) for the door servo. Without it, an open coil or a dead driver shows up only as "relay ON, no current" on the INA226, the same as a contact that doesn't close.
+All 14 module GPIOs are used. The pins are checked against the MES4-MCU netlist. This differs from the MES4-CIF §2c table on one point: the relay coil feedback (PA0–PA3 in the CIF) is left out, which frees PA0 / PA1 for the winch relays and PA2 / PA3 (USART2) for the door servo. Without it, an open coil or a dead driver shows up only as "relay ON, no current" on the INA236, the same as a contact that doesn't close.
 
 | Module pin (finger) | Use |
 |---|---|
 | PA8 / PC6 / PB3 / PA7 (31 / 29 / 61 / 35) | Relay 1 / 2 / 3 / 4 drive (CIF §2c) |
 | PA0 (49) / PA1 (47) | Winch CLK / ACLK relay drive (K5 / K6) |
 | PA2 (45) / PA3 (43) | Door servo UART TX / RX (USART2) → J17 |
-| PA15 (63) | INA226 ALERT (all four wire-OR'd, 10k pull-up) |
+| PA15 (63) | INA236 ALERT (all four wire-OR'd, 10k pull-up) |
 | PA4 / PA5 / PA6 (41 / 39 / 37) | ADS1232 DRDY/DOUT, SCLK, PDWN |
 | PB6 / PC15 (59 / 51) | Sensor 1 / 2: HIGH = sensor output on |
-| I²C1 SDA / SCL (53 / 55) | Four INA226s (2.2k pull-ups) |
+| I²C1 SDA / SCL (53 / 55) | Four INA236s (2.2k pull-ups) |
 
 | I²C device | Address | Measures / does |
 |---|---|---|
-| U2 / U3 / U4 / U5 INA226 | 0x40 / 0x41 / 0x44 / 0x45 | Relay 1 / 2 / 3 / 4 load current and the 24 V rail |
+| U2 / U3 / U4 / U5 INA236 | 0x40 / 0x41 / 0x42 / 0x43 (A0 = GND / VS / SDA / SCL) | Relay 1 / 2 / 3 / 4 load current and the 24 V rail (read on IN−) |
 
 Firmware notes:
-- **EXTI15:** PC15 (sensor 2) and PA15 (ALERT) share EXTI line 15. Give the interrupt to PC15 and poll ALERT; the INA226 latches it (MASK/ENABLE 0x8001), so no fault is missed.
+- **EXTI15:** PC15 (sensor 2) and PA15 (ALERT) share EXTI line 15. Give the interrupt to PC15 and poll ALERT; the INA236 latches it (MASK/ENABLE 0x8001), so no fault is missed.
 - **PB6:** the ST bootloader enables a pull-up on PB6 on a blank chip only. With the 10k pull-down it reads LOW, which is harmless for an input.
-- **Relay diagnosis:** INA226 only (no coil feedback). Read ≥ 30 ms after switching: OFF with current > 5 mA = welded contact or shorted driver; ON with no current = the relay didn't close (coil, driver, contact, PTC, fuse or 24 V). The 6.7 mA "output on" LED makes a closed contact visible with no load.
+- **Relay diagnosis:** INA236 only (no coil feedback). Read ≥ 30 ms after switching: OFF with current > 3 mA = welded contact or shorted driver; ON with no current = the relay didn't close (coil, driver, contact, PTC, fuse or 24 V). The 6.7 mA "output on" LED makes a closed contact visible with no load.
 - **USART2:** the ST bootloader also probes PA2 / PA3 on a blank chip, so flash over SWD first (the normal flow).
 - **Winch:** drive only one of PA0 / PA1 at a time. The hardware interlock opens both outputs if both are on, but don't rely on it as the only guard.
 
 ## Power
 
-**24 V input chain:** J5 XT30 → F1 fuse → Q1 P-MOSFET reverse-polarity block → D9 SMBJ30A TVS + C1 100 µF bulk + C2 / C3 ceramics → **+24V** (relay contacts, INA226 VBUS, sensor supplies).
+**24 V input chain:** J5 XT30 → F1 fuse → Q1 P-MOSFET reverse-polarity block → D9 SMBJ30A TVS + C1 100 µF bulk + C2 / C3 ceramics → **+24V** (relay contacts, INA236 VBUS, sensor supplies).
 
 **Logic supply:** +24V → L1 + C4 / C5 pi filter → U1 URB2405S-6WR3 (isolated, 5 V 1.2 A) → **+5V_24** (relay coils) → F2 1.1 A PTC + FB1 + C8 / C9 pi filter → **+5V** (module fingers 20 / 22, ADS1232 AVDD).
 
@@ -76,12 +76,13 @@ All are checked against LCSC / JLCPCB product pages; all are JLC Extended parts.
 |---|---|---|---|
 | F1 | Littelfuse 0451015.MRL, 15 A fast, 65 V, Nano2 2410 | C44480 | 15 A fast. Realistic load 6–8 A; see Limits for the all-at-once case. |
 | F3–F6 | LUTE 2920L300/36GR PTC, 3 A hold, 5 A trip, 36 V, 2920 | C22435908 | One per relay output. 3 A rather than 2.5 A because hold current drops to ~80 % at 50 °C. |
-| Q1 | AGMSEMI AGM60P90D P-MOSFET, −60 V, 13 mΩ max, TO-252 (1 G, 2 D tab, 3 S) | C5464761 | −60 V because the TVS clamps at 48.4 V. About 1.3 W at 10 A, so give the drain tab a large copper area. |
+| U2–U5 | TI INA236AIDDFR, 48 V (50 V abs max) current / power monitor, I²C, TSOT-23-8 | C5443912 | Replaces the MES4-Flasher's INA226 (40 V abs max), because the SMBJ30A can clamp at up to 48.4 V (design review M1). Same CONFIG / CAL / MASK / ALERT values as the INA226; bus LSB 1.6 mV, bus read on IN−, Device ID 0xA080. 1,272 in stock on 2026-10-27. The 85 V INA238 / INA228 are pin-compatible with the INA226 but had 0 stock. |
+| Q1 | AGMSEMI AGM60P90D P-MOSFET, −60 V, 13 mΩ max, TO-252 (1 G, 2 D tab, 3 S) | C5464761 | −60 V because the TVS clamps at 48.4 V. About 0.8 W at a realistic 8 A and 2.2 W with every load at its limit (≈ 13 A): size the drain-tab copper for 2.2 W. |
 | D8 | CJ MMSZ5245B Zener, 15 V, SOD-123 | C2126 | Q1 gate clamp, keeps Vgs inside ±20 V. |
 | D9 | MDD SMBJ30A TVS, 600 W | C113998 | CIF §7a. LCSC global stock is low (the China warehouse has stock); the fallback is MCC SMBJ30A-TP, C669047. |
 | L1 | Sunlord SWPA5040S100MT, 10 µH, 2.1 A, 5 × 5 mm | C84608 | DC/DC input pi filter. JLC's page is live but LCSC's returned "not found": check stock when ordering. |
 | J3 | XUNPU D-SUB-DR-9PCG-BB, DB9 male (pins), right-angle THT | C19077344 | CAN to the IPC. KiCad footprint `Connector_Dsub:DSUB-9_Pins_Horizontal_P2.77x2.84mm_EdgePinOffset7.70mm_Housed_MountingHolesOffset9.12mm`: its pads and outline match the JLC library part to 0.02 mm. LCSC stock 5,795. |
-| J4 | HCTL HC-RJ45-059-4-4, RJ45 1×4, shielded, no magnetics, no LEDs | C3000204 | 4 CAN ports. Project footprint `MES4-Carrier-EC:RJ45_HCTL_HC-RJ45-059-4-4_1x4_Horizontal`: pad positions from the JLC library part, drill sizes from the HCTL drawing. The rear shield-tab row differs by 0.2 mm between the two sources, which the Ø1.7 mm holes absorb. LCSC stock 744. |
+| J4 | HCTL HC-RJ45-059-4-4, RJ45 1×4, shielded, no magnetics, no LEDs | C3000204 | 4 CAN ports. Project footprint `MES4-Carrier-EC:RJ45_HCTL_HC-RJ45-059-4-4_1x4_Horizontal`: pads and drills taken from the HCTL drawing (32 × Ø1.0 contacts, ports 14.0 mm apart, 5 × Ø1.5 shield pins, 2 × Ø3.2 pegs 53.5 mm apart). The JLC library part differs (13.97 mm ports, 2.50 mm rows, Ø3.5 pegs), so it isn't used. LCSC stock 744. |
 
 Parts reused from the Flasher with checked ratings: F2 Littelfuse 1206L110THYR (1.1 A hold, 8 V; the module side draws ≤ 0.25 A), FB1 / FB2 Murata BLM21PG121SN1D (3 A, 30 mΩ), Q2–Q5 AO3400A (JLC Basic).
 
@@ -119,7 +120,7 @@ R40 / R41 (10k Rp to 5 V on CC2 / CC1) advertise Type-C current 3.0 A. The shell
 | Ref | Part | LCSC | Notes |
 |---|---|---|---|
 | U9 | YLPTEC URB2409S-10WR3, 9 V 1.11 A, SIP-8 | C7424703 | Same as the MES3.1's U15. **LCSC stock was only 78** on 2026-10-27, so order early. Footprint and 3D model copied from the MES3.1 project. |
-| U10 | YLPTEC URB2405LD-20WR3, 5 V 4 A, 50.8 × 25.4 mm | C5369825 | 378 in stock. Project footprint built from the JLC library pad data. |
+| U10 | YLPTEC URB2405LD-20WR3, 5 V 4 A, 50.8 × 25.4 mm | C5369825 | 378 in stock. Project footprint built from the JLC library pad data and checked against the YLPTEC drawing (2026-10-27): pin positions, pin-out and 50.8 × 25.4 mm body match. |
 | SW2 | SHOU HAN SS12D10G5 slide switch | C7431054 | Same as the MES3.1's U22. Uses the MES4-Flasher's SS12D10G4 footprint. |
 | C28, C30, C32 | JIERR RV100V47M8X10, 47 µF / 100 V | C48935391 | The MES3.1's input electrolytic. |
 | C29 | TDK C2012X5R1C226KT000E, 22 µF / 16 V | C76637 | The MES3.1's 9 V output capacitor. |
@@ -127,10 +128,10 @@ R40 / R41 (10k Rp to 5 V on CC2 / CC1) advertise Type-C current 3.0 A. The shell
 ### Door servo (Feetech, via the FE-URT-2)
 
 The MES2 Harvester drives its servo through Feetech's FE-URT-2 board, which turns a normal UART into the half-duplex servo bus and passes the supply through to the servos. This board copies its two terminals, so the Harvester's cables fit:
-- **J15 SERVO 24V** (CN5 on the Harvester): +24 V through F9, a 3 A PTC (the relay outputs' part), plus C31 100 nF and C32 47 µF.
+- **J15 SERVO 24V**: pin 1 = +24 V, pin 2 = GND_24V, like every other power terminal on this board. The Harvester's CN5 has them the other way round, so re-pin that cable. +24 V comes through F9, a 3 A PTC (the relay outputs' part), plus C31 100 nF and C32 47 µF.
 - **J17 SERVO UART** (CN13 on the Harvester): GND, +5 V, RX, TX.
 
-The UART uses module **USART2**: PA2 TX (finger 45) → R39 100 Ω → pin 4, and pin 3 → R38 100 Ω → PA3 RX (finger 43, 5 V-tolerant). There are H5VSD3B ESD clamps (D23 / D24) at the connector, per CIF rule 8. R36 10k holds RX idle-HIGH when the FE-URT-2 is unplugged, and R37 10k holds TX idle-HIGH while PA2 floats during MCU reset and boot, so the FE-URT-2 never sees a floating input.
+The UART uses module **USART2**: PA2 TX (finger 45) → R39 100 Ω → pin 4, and pin 3 → R38 1 kΩ → PA3 RX (finger 43, 5 V-tolerant). There are H5VSD3B ESD clamps (D23 / D24) at the connector, per CIF rule 8. R36 10k holds RX idle-HIGH when the FE-URT-2 is unplugged, and R37 10k holds TX idle-HIGH while PA2 floats during MCU reset and boot, so the FE-URT-2 never sees a floating input. R38 is 1 kΩ (not 100 Ω) so that if the module is off while the FE-URT-2 is powered, its TX can push at most a few mA into PA3 (MES4-CIF rule 6); that's still fast enough for 1 Mbit/s.
 
 **Set the FE-URT-2's level switch to 3.3 V, not 5 V.** The switch only sets the UART signal levels on J17 pins 3 / 4. The servo 24 V (J15) and the FE-URT-2's own 5 V (J17 pin 2) don't change. At 5 V, the module's 3.3 V TX may not reliably read as HIGH, the FE-URT-2's TX back-feeds the module 3V3 through R36, and at power-up (FE-URT-2 alive before the module) it exceeds PA3's VDD + 4 V limit. After setting it, read a servo's ID or position once on the bench to confirm the servo bus works at 3.3 V.
 
@@ -168,7 +169,7 @@ These are the MES2_Extension's "WINCH CONTROL" relays: two TE **IM03GR** (C21531
 | J2 | STDC14, 1.27 mm (Samtec FTSH-107-01-L-DV-K) | ST-Link V3MINIE: SWD, NRST, VCP |
 | J1 | TE 2199230-3 M.2 B-key 4.2 mm | MES4-MCU module; hold-down H1 (M3 SMD standoff) |
 | J14 | 2-pin 3.5 mm push-in | IMU power: 1 = **+9 V** after SW2, 2 = GND |
-| J15 | 2-pin 3.5 mm push-in (as CN5 on the MES2 Harvester) | Door servo supply (FE-URT-2 power in): 1 = GND_24V, 2 = **+24 V** via F9 3 A PTC |
+| J15 | 2-pin 3.5 mm push-in | Door servo supply (FE-URT-2 power in): 1 = **+24 V** via F9 3 A PTC, 2 = GND_24V (Harvester CN5 cable: re-pin) |
 | J16 | USB-C power-only receptacle (as the MES4-Flasher's J2) | Screen power: 5 V / 3 A source, CC1 / CC2 with 10k Rp (Type-C 3.0 A), no data |
 | J17 | 4-pin 3.5 mm push-in KF250NH-3.5-4P (as CN13 on the MES2 Harvester) | Door servo UART (FE-URT-2): 1 = GND, 2 = +5 V (F10 1.1 A PTC, from the screen converter), 3 = RX → PA3, 4 = TX ← PA2 (100 Ω + H5VSD3B ESD on both) |
 | J18 | 3-pin 3.5 mm push-in (as CN1 on the MES2_Extension) | Winch controller direction inputs: 1 = CLK, 2 = COM, 3 = ACLK (relay contacts, 2 A / 220 VDC max) |
@@ -190,7 +191,9 @@ All LEDs are JLC **Basic** parts (no extended-part fee, Economic PCBA): red NCD0
 ## Limits
 
 - **No hot-plug** (CIF rule 5). There is no module power switch: unplug the XT30 before inserting or removing a module.
-- **J12 / J13 are 5 V load-cell terminals** of the same push-in type as the 24 V outputs. A 24 V wire there damages the module and the ADC; mark them on the silk.
+- **J12 / J13 are 5 V load-cell terminals** of the same push-in type as the 24 V outputs. A 24 V wire there damages the module and the ADC. Countermeasure (no keyed connector, to keep one terminal type): a filled silkscreen box "5V LOAD CELL – NEVER 24V" at J12 / J13, and place them away from the 24 V terminals.
+- **J4 RJ45 ports are CAN, not Ethernet.** An Ethernet cable or passive PoE on them damages the bus: silkscreen and panel label "CAN – NOT ETHERNET".
+- **3 A PTCs derate** to about 2.2 A hold at 60 °C (F3–F6, F9, F11): still above the 2 A relay rating, but check against the enclosure temperature.
 - **Sensor inputs are for PNP (sourcing) 24 V sensors.** NPN types need a different circuit.
 - **Never run CAN in a cable or connector with 24 V** (CIF rule 9).
 - **The screen port's VBUS is always on** (no cold-socket switch): plug in only the monitor or another sink, never a charger or a laptop.

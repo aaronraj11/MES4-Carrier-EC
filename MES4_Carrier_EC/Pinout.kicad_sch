@@ -2,7 +2,7 @@
 	(version 20250114)
 	(generator "eeschema")
 	(generator_version "9.0")
-	(uuid "e73f19f9-c0a1-5ddb-9584-f6b13cd129b1")
+	(uuid "bc8ef0f0-ea8e-52ee-80f5-f231df2d7d06")
 	(paper "A3")
 	(title_block
 		(title "MES4-Carrier-EC")
@@ -17,7 +17,7 @@
 		(exclude_from_sim no)
 		(at 24.13 22.86 0)
 		(effects (font (size 2 2) (bold yes)) (justify left top))
-		(uuid "4eeb363f-82fe-5dde-a47f-e65c97fc7ea6")
+		(uuid "9427be43-348a-5034-b71a-b30a599b8960")
 	)
 	(table
 		(column_count 8)
@@ -42,7 +42,7 @@
 				(span 1 1)
 				(fill (type color) (color 194 194 194 1))
 				(effects (font (size 1.27 1.27) (bold yes) (color 0 0 0 1)) (justify left top))
-				(uuid "2f479fc8-096f-5d1c-a744-1479c12cf8df")
+				(uuid "7f09a1e5-87b6-51e8-a960-1775a03fb5e6")
 			)
 			(table_cell "Port"
 				(exclude_from_sim no)
@@ -52,7 +52,7 @@
 				(span 1 1)
 				(fill (type color) (color 194 194 194 1))
 				(effects (font (size 1.27 1.27) (bold yes) (color 0 0 0 1)) (justify left top))
-				(uuid "672f9ab3-7b21-50d2-b20b-52c6b97d2900")
+				(uuid "3c6d6e21-4409-52fc-b528-851cc9654893")
 			)
 			(table_cell "Net / signal"
 				(exclude_from_sim no)
@@ -62,7 +62,7 @@
 				(span 1 1)
 				(fill (type color) (color 194 194 194 1))
 				(effects (font (size 1.27 1.27) (bold yes) (color 0 0 0 1)) (justify left top))
-				(uuid "f54bfe7b-ad63-5724-a2d4-5a426c122e83")
+				(uuid "d91236bf-df71-5116-9c7c-ab9ca2ba144f")
 			)
 			(table_cell "Function"
 				(exclude_from_sim no)
@@ -72,7 +72,7 @@
 				(span 1 1)
 				(fill (type color) (color 194 194 194 1))
 				(effects (font (size 1.27 1.27) (bold yes) (color 0 0 0 1)) (justify left top))
-				(uuid "1eb19dc1-6b97-598e-8db1-e34ee6eedd64")
+				(uuid "d05e05d9-e5ca-53c1-8adb-47fa6e4d6ced")
 			)
 			(table_cell "Connected to (this carrier)"
 				(exclude_from_sim no)
@@ -82,7 +82,7 @@
 				(span 1 1)
 				(fill (type color) (color 194 194 194 1))
 				(effects (font (size 1.27 1.27) (bold yes) (color 0 0 0 1)) (justify left top))
-				(uuid "6d80f431-61d2-5a7d-85cb-e4a98b4039c3")
+				(uuid "6f7bd942-c37b-5a2c-8630-058cc71e2c6b")
 			)
 			(table_cell "Carrier parts"
 				(exclude_from_sim no)
@@ -92,7 +92,7 @@
 				(span 1 1)
 				(fill (type color) (color 194 194 194 1))
 				(effects (font (size 1.27 1.27) (bold yes) (color 0 0 0 1)) (justify left top))
-				(uuid "eea70bd0-d8d6-56e9-a3dc-b6cc6b31c889")
+				(uuid "50e9926a-2b57-51b2-9802-797534136162")
 			)
 			(table_cell "MES4-CIF §2c"
 				(exclude_from_sim no)
@@ -102,7 +102,7 @@
 				(span 1 1)
 				(fill (type color) (color 194 194 194 1))
 				(effects (font (size 1.27 1.27) (bold yes) (color 0 0 0 1)) (justify left top))
-				(uuid "ac9332e1-648f-5106-a1a3-e04672b4fc7c")
+				(uuid "8fe99e84-8787-5e59-8de9-bcc6e13cb54a")
 			)
 			(table_cell "Notes"
 				(exclude_from_sim no)
@@ -112,7 +112,7 @@
 				(span 1 1)
 				(fill (type color) (color 194 194 194 1))
 				(effects (font (size 1.27 1.27) (bold yes) (color 0 0 0 1)) (justify left top))
-				(uuid "247f1480-f5cd-5759-83c5-085c113ee355")
+				(uuid "8334b498-310c-57a9-94dc-5433763ddb08")
 			)
 			(table_cell "SMALL FINGER GROUP  1–11  ·  CAN + debug"
 				(exclude_from_sim no)
@@ -122,7 +122,7 @@
 				(span 8 1)
 				(fill (type color) (color 150 190 255 1))
 				(effects (font (size 1.27 1.27) (bold yes) (color 0 0 0 1)) (justify left top))
-				(uuid "85512967-b636-537c-a1f9-7f3a3632f616")
+				(uuid "e41a4a45-22fe-5b74-8665-7576244b2e98")
 			)
 			(table_cell ""
 				(exclude_from_sim no)
@@ -132,7 +132,7 @@
 				(span 0 0)
 				(fill (type color) (color 150 190 255 1))
 				(effects (font (size 1.27 1.27) (bold yes) (color 0 0 0 1)) (justify left top))
-				(uuid "d0ed0ca1-e3e5-5bb5-a2c9-b4dd63ef8414")
+				(uuid "e40bb567-6333-5829-a2b0-e547daa5cae2")
 			)
 			(table_cell ""
 				(exclude_from_sim no)
@@ -142,7 +142,7 @@
 				(span 0 0)
 				(fill (type color) (color 150 190 255 1))
 				(effects (font (size 1.27 1.27) (bold yes) (color 0 0 0 1)) (justify left top))
-				(uuid "a9dae469-0b96-5422-906f-ce3a462ee201")
+				(uuid "038bced1-2414-5550-a30d-da8b9a55b847")
 			)
 			(table_cell ""
 				(exclude_from_sim no)
@@ -152,7 +152,7 @@
 				(span 0 0)
 				(fill (type color) (color 150 190 255 1))
 				(effects (font (size 1.27 1.27) (bold yes) (color 0 0 0 1)) (justify left top))
-				(uuid "53e822b8-3828-5d31-96c3-e8a21a3de590")
+				(uuid "d976b8f6-2787-5dcd-a66f-bd408bce2119")
 			)
 			(table_cell ""
 				(exclude_from_sim no)
@@ -162,7 +162,7 @@
 				(span 0 0)
 				(fill (type color) (color 150 190 255 1))
 				(effects (font (size 1.27 1.27) (bold yes) (color 0 0 0 1)) (justify left top))
-				(uuid "744fddbb-eee5-5ea0-b35e-4b447646da8b")
+				(uuid "70226db3-c037-5c59-b812-d538613077ed")
 			)
 			(table_cell ""
 				(exclude_from_sim no)
@@ -172,7 +172,7 @@
 				(span 0 0)
 				(fill (type color) (color 150 190 255 1))
 				(effects (font (size 1.27 1.27) (bold yes) (color 0 0 0 1)) (justify left top))
-				(uuid "02d2af6b-0482-5c93-a7e8-bd4244b956d0")
+				(uuid "55d5b9b3-2831-5595-943d-3a18997a4fa6")
 			)
 			(table_cell ""
 				(exclude_from_sim no)
@@ -182,7 +182,7 @@
 				(span 0 0)
 				(fill (type color) (color 150 190 255 1))
 				(effects (font (size 1.27 1.27) (bold yes) (color 0 0 0 1)) (justify left top))
-				(uuid "a9855825-9371-557b-9938-41eb7b3fc77b")
+				(uuid "618530a9-0cd6-5263-aa07-25d1fb1d2e79")
 			)
 			(table_cell ""
 				(exclude_from_sim no)
@@ -192,7 +192,7 @@
 				(span 0 0)
 				(fill (type color) (color 150 190 255 1))
 				(effects (font (size 1.27 1.27) (bold yes) (color 0 0 0 1)) (justify left top))
-				(uuid "676cb2eb-7ad5-58a7-a185-5bdd9117f096")
+				(uuid "1b06cbe9-0c46-56a5-9d8c-c6dd46ce16f3")
 			)
 			(table_cell "1"
 				(exclude_from_sim no)
@@ -202,7 +202,7 @@
 				(span 1 1)
 				(fill (type color) (color 215 230 255 1))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "17bfb7bb-c529-5482-ae9d-670b90f2d167")
+				(uuid "886bc54f-2bb5-5039-b3af-3f28b4a2e1d9")
 			)
 			(table_cell "—"
 				(exclude_from_sim no)
@@ -212,7 +212,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "6b884c7b-832d-5ad1-b3db-9acc1698437d")
+				(uuid "0fd6a723-ccc2-5186-bb8b-2e1e1810f5b1")
 			)
 			(table_cell "CANH"
 				(exclude_from_sim no)
@@ -222,7 +222,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "570ecbcd-918d-535b-af45-0ee0d586a335")
+				(uuid "d5f0c854-894e-5346-bd8a-22845d02f0bc")
 			)
 			(table_cell "CAN"
 				(exclude_from_sim no)
@@ -232,7 +232,7 @@
 				(span 1 1)
 				(fill (type color) (color 200 240 200 1))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "7f09a1e5-87b6-51e8-a960-1775a03fb5e6")
+				(uuid "4ec83848-209e-5321-a202-cbad86c6d534")
 			)
 			(table_cell "DB9 pin 3, RJ45 pin 1 (all 4 ports)"
 				(exclude_from_sim no)
@@ -242,7 +242,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "3c6d6e21-4409-52fc-b528-851cc9654893")
+				(uuid "622aeacd-c954-53c6-a047-920d7d1515c5")
 			)
 			(table_cell "J3, J4, ESD D6 / D7"
 				(exclude_from_sim no)
@@ -252,7 +252,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "d91236bf-df71-5116-9c7c-ab9ca2ba144f")
+				(uuid "42509a42-f0c8-54f6-9265-7ff6d1f5449f")
 			)
 			(table_cell "CANH"
 				(exclude_from_sim no)
@@ -262,7 +262,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "d05e05d9-e5ca-53c1-8adb-47fa6e4d6ced")
+				(uuid "3d795cf4-f5d8-5d3d-b5c5-47f80f634ad2")
 			)
 			(table_cell "Transceiver + 120 Ω terminator (JP1) are on the module"
 				(exclude_from_sim no)
@@ -272,7 +272,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "6f7bd942-c37b-5a2c-8630-058cc71e2c6b")
+				(uuid "0a8de122-8974-59e6-a55d-e0a3c5ec4fb3")
 			)
 			(table_cell "3"
 				(exclude_from_sim no)
@@ -282,7 +282,7 @@
 				(span 1 1)
 				(fill (type color) (color 215 230 255 1))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "50e9926a-2b57-51b2-9802-797534136162")
+				(uuid "f545b9ba-b5f4-5a92-a9f3-b526ab50a3f4")
 			)
 			(table_cell "—"
 				(exclude_from_sim no)
@@ -292,7 +292,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "8fe99e84-8787-5e59-8de9-bcc6e13cb54a")
+				(uuid "4fd96a07-f62e-5603-852c-530b83fa685b")
 			)
 			(table_cell "CANL"
 				(exclude_from_sim no)
@@ -302,7 +302,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "8334b498-310c-57a9-94dc-5433763ddb08")
+				(uuid "a400674e-7a71-59a3-ab03-349329fd8f77")
 			)
 			(table_cell "CAN"
 				(exclude_from_sim no)
@@ -312,7 +312,7 @@
 				(span 1 1)
 				(fill (type color) (color 200 240 200 1))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "e41a4a45-22fe-5b74-8665-7576244b2e98")
+				(uuid "fc77c4c9-6209-545d-84fd-e21a7b28683b")
 			)
 			(table_cell "DB9 pin 5, RJ45 pin 2"
 				(exclude_from_sim no)
@@ -322,7 +322,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "e40bb567-6333-5829-a2b0-e547daa5cae2")
+				(uuid "4352b53d-2443-5804-807e-2fa2549c9f2f")
 			)
 			(table_cell "as CANH"
 				(exclude_from_sim no)
@@ -332,7 +332,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "038bced1-2414-5550-a30d-da8b9a55b847")
+				(uuid "3371837a-e42c-5dfc-9d52-c71dc522335b")
 			)
 			(table_cell "CANL"
 				(exclude_from_sim no)
@@ -342,7 +342,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "d976b8f6-2787-5dcd-a66f-bd408bce2119")
+				(uuid "d731b74f-1f5a-5334-8c31-1a08ba0a8d79")
 			)
 			(table_cell "No 24 V on any CAN connector"
 				(exclude_from_sim no)
@@ -352,7 +352,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "70226db3-c037-5c59-b812-d538613077ed")
+				(uuid "a00f11ea-ffd8-5ab4-9236-b438052285cd")
 			)
 			(table_cell "4"
 				(exclude_from_sim no)
@@ -362,7 +362,7 @@
 				(span 1 1)
 				(fill (type color) (color 215 230 255 1))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "55d5b9b3-2831-5595-943d-3a18997a4fa6")
+				(uuid "97cbf31a-de60-5470-8588-62793af855e5")
 			)
 			(table_cell "—"
 				(exclude_from_sim no)
@@ -372,7 +372,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "618530a9-0cd6-5263-aa07-25d1fb1d2e79")
+				(uuid "80e0603a-0521-542b-aeaa-2b7768f3eb2b")
 			)
 			(table_cell "+3V3"
 				(exclude_from_sim no)
@@ -382,7 +382,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "1b06cbe9-0c46-56a5-9d8c-c6dd46ce16f3")
+				(uuid "eb3bed57-061c-57d7-9c63-6786e0c23320")
 			)
 			(table_cell "POWER"
 				(exclude_from_sim no)
@@ -392,9 +392,9 @@
 				(span 1 1)
 				(fill (type color) (color 255 205 205 1))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "886bc54f-2bb5-5039-b3af-3f28b4a2e1d9")
+				(uuid "ab96c831-444a-543f-b179-47048ba5fb87")
 			)
-			(table_cell "M.2 4 → +3V3_MOD: INA226s, ADS1232 DVDD, PC817s, pull-ups"
+			(table_cell "M.2 4 → +3V3_MOD: INA236s, ADS1232 DVDD, PC817s, pull-ups"
 				(exclude_from_sim no)
 				(at 90.17 43.16 0)
 				(size 81.28 3.17)
@@ -402,7 +402,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "0fd6a723-ccc2-5186-bb8b-2e1e1810f5b1")
+				(uuid "db54ba26-ac1b-5f28-91d4-6218479f88e7")
 			)
 			(table_cell "LED2 green, J2 VTref"
 				(exclude_from_sim no)
@@ -412,7 +412,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "d5f0c854-894e-5346-bd8a-22845d02f0bc")
+				(uuid "72b29f6c-45f1-5eef-a9b3-1818a38f865f")
 			)
 			(table_cell "+3V3 out"
 				(exclude_from_sim no)
@@ -422,7 +422,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "4ec83848-209e-5321-a202-cbad86c6d534")
+				(uuid "684ac000-46e2-59e3-92fb-0753e51dd7d0")
 			)
 			(table_cell "≤ 50 mA allowed; this carrier draws ≈ 7 mA worst case"
 				(exclude_from_sim no)
@@ -432,7 +432,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "622aeacd-c954-53c6-a047-920d7d1515c5")
+				(uuid "2755db86-97c4-569b-b0c2-58272986e9f9")
 			)
 			(table_cell "6"
 				(exclude_from_sim no)
@@ -442,7 +442,7 @@
 				(span 1 1)
 				(fill (type color) (color 215 230 255 1))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "42509a42-f0c8-54f6-9265-7ff6d1f5449f")
+				(uuid "123455a7-8a78-5674-9ff6-bb664c717238")
 			)
 			(table_cell "PA9"
 				(exclude_from_sim no)
@@ -452,7 +452,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "3d795cf4-f5d8-5d3d-b5c5-47f80f634ad2")
+				(uuid "be4e9bc7-18e2-5322-950e-cb88172020eb")
 			)
 			(table_cell "VCP_TX"
 				(exclude_from_sim no)
@@ -462,7 +462,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "0a8de122-8974-59e6-a55d-e0a3c5ec4fb3")
+				(uuid "68792e28-4c65-5085-8202-6d7ecf0951f0")
 			)
 			(table_cell "UART"
 				(exclude_from_sim no)
@@ -472,7 +472,7 @@
 				(span 1 1)
 				(fill (type color) (color 200 230 255 1))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "f545b9ba-b5f4-5a92-a9f3-b526ab50a3f4")
+				(uuid "1e88038a-48f8-534c-9038-3c6d9368c939")
 			)
 			(table_cell "M.2 6 → ST-Link T_VCP_TX (STDC14 pin 14)"
 				(exclude_from_sim no)
@@ -482,7 +482,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "4fd96a07-f62e-5603-852c-530b83fa685b")
+				(uuid "77f7dbf4-5ced-5721-b60c-792f582c7db5")
 			)
 			(table_cell "J2, H5VSD3B ESD"
 				(exclude_from_sim no)
@@ -492,7 +492,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "a400674e-7a71-59a3-ab03-349329fd8f77")
+				(uuid "871dc4e0-b8d7-527c-a8be-c7cba268f8e8")
 			)
 			(table_cell "VCP_TX"
 				(exclude_from_sim no)
@@ -502,7 +502,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "fc77c4c9-6209-545d-84fd-e21a7b28683b")
+				(uuid "5f7801d9-c3c9-5ac7-b406-a046af569ca2")
 			)
 			(table_cell "USART1 TX: ST-Link VCP + bootloader UART"
 				(exclude_from_sim no)
@@ -512,7 +512,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "4352b53d-2443-5804-807e-2fa2549c9f2f")
+				(uuid "e44b904e-417c-5360-afe1-0507fc95369e")
 			)
 			(table_cell "7"
 				(exclude_from_sim no)
@@ -522,7 +522,7 @@
 				(span 1 1)
 				(fill (type color) (color 215 230 255 1))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "3371837a-e42c-5dfc-9d52-c71dc522335b")
+				(uuid "adebcd32-69dd-545e-b499-a2705de8aedc")
 			)
 			(table_cell "PA13"
 				(exclude_from_sim no)
@@ -532,7 +532,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "d731b74f-1f5a-5334-8c31-1a08ba0a8d79")
+				(uuid "31544cb5-3795-5c22-b49a-0ce58bb69e4a")
 			)
 			(table_cell "SWDIO"
 				(exclude_from_sim no)
@@ -542,7 +542,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "a00f11ea-ffd8-5ab4-9236-b438052285cd")
+				(uuid "8e3f4f8d-dff0-5e28-90c8-c6a4daae2493")
 			)
 			(table_cell "DEBUG"
 				(exclude_from_sim no)
@@ -552,7 +552,7 @@
 				(span 1 1)
 				(fill (type color) (color 205 215 255 1))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "97cbf31a-de60-5470-8588-62793af855e5")
+				(uuid "763b3e91-accd-53eb-92fc-3b2b33696757")
 			)
 			(table_cell "M.2 7 → ST-Link SWDIO (STDC14 pin 4)"
 				(exclude_from_sim no)
@@ -562,7 +562,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "80e0603a-0521-542b-aeaa-2b7768f3eb2b")
+				(uuid "a5d57d14-42af-507a-9e42-22f8ec4bb72a")
 			)
 			(table_cell "J2, H5VSD3B ESD"
 				(exclude_from_sim no)
@@ -572,7 +572,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "eb3bed57-061c-57d7-9c63-6786e0c23320")
+				(uuid "4b279674-20db-5cc0-a6fb-3a23190f0767")
 			)
 			(table_cell "SWDIO"
 				(exclude_from_sim no)
@@ -582,7 +582,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "ab96c831-444a-543f-b179-47048ba5fb87")
+				(uuid "7bb0e299-15db-5ee7-9e36-cd0692c7d04a")
 			)
 			(table_cell "Do not reuse as GPIO"
 				(exclude_from_sim no)
@@ -592,7 +592,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "db54ba26-ac1b-5f28-91d4-6218479f88e7")
+				(uuid "0ecc8b9d-be60-52ef-aace-4e5efa8df7b0")
 			)
 			(table_cell "8"
 				(exclude_from_sim no)
@@ -602,7 +602,7 @@
 				(span 1 1)
 				(fill (type color) (color 215 230 255 1))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "72b29f6c-45f1-5eef-a9b3-1818a38f865f")
+				(uuid "56278410-bd4e-575d-a875-2a7781c47a16")
 			)
 			(table_cell "PA10"
 				(exclude_from_sim no)
@@ -612,7 +612,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "684ac000-46e2-59e3-92fb-0753e51dd7d0")
+				(uuid "1f5396d0-995b-5c1d-ad09-5e4b7cbb7de3")
 			)
 			(table_cell "VCP_RX"
 				(exclude_from_sim no)
@@ -622,7 +622,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "2755db86-97c4-569b-b0c2-58272986e9f9")
+				(uuid "6866bf1b-e5c6-53ba-bc24-af20ae882b9e")
 			)
 			(table_cell "UART"
 				(exclude_from_sim no)
@@ -632,7 +632,7 @@
 				(span 1 1)
 				(fill (type color) (color 200 230 255 1))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "123455a7-8a78-5674-9ff6-bb664c717238")
+				(uuid "5ec40fbd-b2ba-5c7e-aad2-eefa78a42395")
 			)
 			(table_cell "M.2 8 ← ST-Link T_VCP_RX (STDC14 pin 13)"
 				(exclude_from_sim no)
@@ -642,7 +642,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "be4e9bc7-18e2-5322-950e-cb88172020eb")
+				(uuid "a5200430-0ebc-5547-9e4c-3e279a418303")
 			)
 			(table_cell "J2, H5VSD3B ESD"
 				(exclude_from_sim no)
@@ -652,7 +652,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "68792e28-4c65-5085-8202-6d7ecf0951f0")
+				(uuid "68c95a2a-40fb-51f8-a82c-7c9427a183c5")
 			)
 			(table_cell "VCP_RX"
 				(exclude_from_sim no)
@@ -662,7 +662,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "1e88038a-48f8-534c-9038-3c6d9368c939")
+				(uuid "a751bea5-4f63-57c9-9213-e1582e2d612b")
 			)
 			(table_cell "USART1 RX"
 				(exclude_from_sim no)
@@ -672,7 +672,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "77f7dbf4-5ced-5721-b60c-792f582c7db5")
+				(uuid "b2734c57-6899-5dc5-8885-9c013a31ae29")
 			)
 			(table_cell "9"
 				(exclude_from_sim no)
@@ -682,7 +682,7 @@
 				(span 1 1)
 				(fill (type color) (color 215 230 255 1))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "871dc4e0-b8d7-527c-a8be-c7cba268f8e8")
+				(uuid "3aeb09ee-ad70-55d7-ad59-21c0fb98ff64")
 			)
 			(table_cell "PA14"
 				(exclude_from_sim no)
@@ -692,7 +692,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "5f7801d9-c3c9-5ac7-b406-a046af569ca2")
+				(uuid "09ecb87a-1849-52aa-ab35-c6f51fb503ec")
 			)
 			(table_cell "SWCLK"
 				(exclude_from_sim no)
@@ -702,7 +702,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "e44b904e-417c-5360-afe1-0507fc95369e")
+				(uuid "dd9772b9-cc1c-5bbb-ba97-feeff539f2c4")
 			)
 			(table_cell "DEBUG"
 				(exclude_from_sim no)
@@ -712,7 +712,7 @@
 				(span 1 1)
 				(fill (type color) (color 205 215 255 1))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "adebcd32-69dd-545e-b499-a2705de8aedc")
+				(uuid "85f90a4b-896c-5540-9981-98fb5d33c2c0")
 			)
 			(table_cell "M.2 9 → ST-Link SWCLK (STDC14 pin 6)"
 				(exclude_from_sim no)
@@ -722,7 +722,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "31544cb5-3795-5c22-b49a-0ce58bb69e4a")
+				(uuid "e8e23c3c-996b-55ea-ac6e-d3c95d948cb0")
 			)
 			(table_cell "J2, H5VSD3B ESD"
 				(exclude_from_sim no)
@@ -732,7 +732,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "8e3f4f8d-dff0-5e28-90c8-c6a4daae2493")
+				(uuid "b5326c84-20ca-5067-903d-23168172fdc9")
 			)
 			(table_cell "SWCLK"
 				(exclude_from_sim no)
@@ -742,7 +742,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "763b3e91-accd-53eb-92fc-3b2b33696757")
+				(uuid "644b62d4-8f77-50e9-9984-7e5f2c11887b")
 			)
 			(table_cell "Shared with BOOT0, ignored by the module: no BOOT button"
 				(exclude_from_sim no)
@@ -752,7 +752,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "a5d57d14-42af-507a-9e42-22f8ec4bb72a")
+				(uuid "310128b6-4a32-5c44-808e-531210dea0ac")
 			)
 			(table_cell "11"
 				(exclude_from_sim no)
@@ -762,7 +762,7 @@
 				(span 1 1)
 				(fill (type color) (color 215 230 255 1))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "4b279674-20db-5cc0-a6fb-3a23190f0767")
+				(uuid "ed7bbf8f-e91a-50c2-849a-cef74f57144c")
 			)
 			(table_cell "PF2"
 				(exclude_from_sim no)
@@ -772,7 +772,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "7bb0e299-15db-5ee7-9e36-cd0692c7d04a")
+				(uuid "d93afed6-3f3b-5305-82ef-22e79ece710c")
 			)
 			(table_cell "NRST"
 				(exclude_from_sim no)
@@ -782,7 +782,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "0ecc8b9d-be60-52ef-aace-4e5efa8df7b0")
+				(uuid "7b44c7dc-000c-574f-a131-821821ff9fb7")
 			)
 			(table_cell "RESET"
 				(exclude_from_sim no)
@@ -792,7 +792,7 @@
 				(span 1 1)
 				(fill (type color) (color 225 205 255 1))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "56278410-bd4e-575d-a875-2a7781c47a16")
+				(uuid "6003cb31-9c36-5d42-a374-18bbb98d0e1d")
 			)
 			(table_cell "ST-Link NRST (STDC14 pin 12) + reset button"
 				(exclude_from_sim no)
@@ -802,7 +802,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "1f5396d0-995b-5c1d-ad09-5e4b7cbb7de3")
+				(uuid "df5a70de-e25b-57ad-b8ba-14d8003af5fa")
 			)
 			(table_cell "J2, SW1"
 				(exclude_from_sim no)
@@ -812,7 +812,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "6866bf1b-e5c6-53ba-bc24-af20ae882b9e")
+				(uuid "6b20c37e-2def-551b-aeee-96d43d22baf0")
 			)
 			(table_cell "NRST"
 				(exclude_from_sim no)
@@ -822,7 +822,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "5ec40fbd-b2ba-5c7e-aad2-eefa78a42395")
+				(uuid "23367a61-33e5-504e-80c5-e22e9e088094")
 			)
 			(table_cell "Pull LOW only; no capacitor or pull-up here (100 nF on the module)"
 				(exclude_from_sim no)
@@ -832,7 +832,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "a5200430-0ebc-5547-9e4c-3e279a418303")
+				(uuid "2ce25624-fb66-59a8-8ec3-e1b7c930ad68")
 			)
 			(table_cell "2, 5, 10"
 				(exclude_from_sim no)
@@ -842,7 +842,7 @@
 				(span 1 1)
 				(fill (type color) (color 215 230 255 1))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "68c95a2a-40fb-51f8-a82c-7c9427a183c5")
+				(uuid "2d5a32c3-f9f4-55f2-9857-feb2fc0567f8")
 			)
 			(table_cell "—"
 				(exclude_from_sim no)
@@ -852,7 +852,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "a751bea5-4f63-57c9-9213-e1582e2d612b")
+				(uuid "28fda504-2b27-5b1b-a44c-527a424f1f6b")
 			)
 			(table_cell "GND"
 				(exclude_from_sim no)
@@ -862,7 +862,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "b2734c57-6899-5dc5-8885-9c013a31ae29")
+				(uuid "3c8b05e3-6544-52ff-a7c9-017a62c49635")
 			)
 			(table_cell "GND"
 				(exclude_from_sim no)
@@ -872,7 +872,7 @@
 				(span 1 1)
 				(fill (type color) (color 205 205 205 1))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "3aeb09ee-ad70-55d7-ad59-21c0fb98ff64")
+				(uuid "e0d306e0-ea0e-5c62-8a3e-31935541be7f")
 			)
 			(table_cell "GND plane"
 				(exclude_from_sim no)
@@ -882,7 +882,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "09ecb87a-1849-52aa-ab35-c6f51fb503ec")
+				(uuid "e71907cf-4112-54e1-b20f-bc1bb20b27e3")
 			)
 			(table_cell "—"
 				(exclude_from_sim no)
@@ -892,7 +892,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "dd9772b9-cc1c-5bbb-ba97-feeff539f2c4")
+				(uuid "76fc7417-7dba-5988-94c1-fea09efea411")
 			)
 			(table_cell "GND"
 				(exclude_from_sim no)
@@ -902,7 +902,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "85f90a4b-896c-5540-9981-98fb5d33c2c0")
+				(uuid "cd4939c9-f2dc-536e-91df-18415f95fb72")
 			)
 			(table_cell ""
 				(exclude_from_sim no)
@@ -912,7 +912,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "e8e23c3c-996b-55ea-ac6e-d3c95d948cb0")
+				(uuid "d09fe910-f704-53f1-bd28-69dd328b40dc")
 			)
 			(table_cell "LARGE FINGER GROUP  20–75  ·  power + GPIO"
 				(exclude_from_sim no)
@@ -922,7 +922,7 @@
 				(span 8 1)
 				(fill (type color) (color 150 190 255 1))
 				(effects (font (size 1.27 1.27) (bold yes) (color 0 0 0 1)) (justify left top))
-				(uuid "b5326c84-20ca-5067-903d-23168172fdc9")
+				(uuid "b59c2bf9-be3f-5f14-8933-18eeff90dfe9")
 			)
 			(table_cell ""
 				(exclude_from_sim no)
@@ -932,7 +932,7 @@
 				(span 0 0)
 				(fill (type color) (color 150 190 255 1))
 				(effects (font (size 1.27 1.27) (bold yes) (color 0 0 0 1)) (justify left top))
-				(uuid "644b62d4-8f77-50e9-9984-7e5f2c11887b")
+				(uuid "082a5119-25c9-5303-844a-cc0ed87a3a59")
 			)
 			(table_cell ""
 				(exclude_from_sim no)
@@ -942,7 +942,7 @@
 				(span 0 0)
 				(fill (type color) (color 150 190 255 1))
 				(effects (font (size 1.27 1.27) (bold yes) (color 0 0 0 1)) (justify left top))
-				(uuid "310128b6-4a32-5c44-808e-531210dea0ac")
+				(uuid "b0826d68-6154-59ee-812a-7b0b61ef1a2e")
 			)
 			(table_cell ""
 				(exclude_from_sim no)
@@ -952,7 +952,7 @@
 				(span 0 0)
 				(fill (type color) (color 150 190 255 1))
 				(effects (font (size 1.27 1.27) (bold yes) (color 0 0 0 1)) (justify left top))
-				(uuid "ed7bbf8f-e91a-50c2-849a-cef74f57144c")
+				(uuid "3173a575-0ce8-5718-a4d6-85f828b2dbcd")
 			)
 			(table_cell ""
 				(exclude_from_sim no)
@@ -962,7 +962,7 @@
 				(span 0 0)
 				(fill (type color) (color 150 190 255 1))
 				(effects (font (size 1.27 1.27) (bold yes) (color 0 0 0 1)) (justify left top))
-				(uuid "d93afed6-3f3b-5305-82ef-22e79ece710c")
+				(uuid "69412923-5487-5d3c-a3e3-a56a0b0e5c1b")
 			)
 			(table_cell ""
 				(exclude_from_sim no)
@@ -972,7 +972,7 @@
 				(span 0 0)
 				(fill (type color) (color 150 190 255 1))
 				(effects (font (size 1.27 1.27) (bold yes) (color 0 0 0 1)) (justify left top))
-				(uuid "7b44c7dc-000c-574f-a131-821821ff9fb7")
+				(uuid "a6097dc8-cd9a-50c0-833a-fe75a7ba559c")
 			)
 			(table_cell ""
 				(exclude_from_sim no)
@@ -982,7 +982,7 @@
 				(span 0 0)
 				(fill (type color) (color 150 190 255 1))
 				(effects (font (size 1.27 1.27) (bold yes) (color 0 0 0 1)) (justify left top))
-				(uuid "6003cb31-9c36-5d42-a374-18bbb98d0e1d")
+				(uuid "8c36be78-ffe8-5617-b714-0a722da578a3")
 			)
 			(table_cell ""
 				(exclude_from_sim no)
@@ -992,7 +992,7 @@
 				(span 0 0)
 				(fill (type color) (color 150 190 255 1))
 				(effects (font (size 1.27 1.27) (bold yes) (color 0 0 0 1)) (justify left top))
-				(uuid "df5a70de-e25b-57ad-b8ba-14d8003af5fa")
+				(uuid "23dc76cb-1c79-510d-b9c2-faa162ebc009")
 			)
 			(table_cell "20, 22"
 				(exclude_from_sim no)
@@ -1002,7 +1002,7 @@
 				(span 1 1)
 				(fill (type color) (color 215 230 255 1))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "6b20c37e-2def-551b-aeee-96d43d22baf0")
+				(uuid "79e7e125-77c9-55ac-b015-28209521ce1c")
 			)
 			(table_cell "—"
 				(exclude_from_sim no)
@@ -1012,7 +1012,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "23367a61-33e5-504e-80c5-e22e9e088094")
+				(uuid "bb900d74-62c5-576c-980d-806a9485112e")
 			)
 			(table_cell "+5V"
 				(exclude_from_sim no)
@@ -1022,7 +1022,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "2ce25624-fb66-59a8-8ec3-e1b7c930ad68")
+				(uuid "58248140-2652-5c7b-bc8a-a11d3768402b")
 			)
 			(table_cell "POWER"
 				(exclude_from_sim no)
@@ -1032,7 +1032,7 @@
 				(span 1 1)
 				(fill (type color) (color 255 205 205 1))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "2d5a32c3-f9f4-55f2-9857-feb2fc0567f8")
+				(uuid "fe92657a-1c4b-5ddd-8ef2-524554704f4e")
 			)
 			(table_cell "Module supply from +5V_24"
 				(exclude_from_sim no)
@@ -1042,7 +1042,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "28fda504-2b27-5b1b-a44c-527a424f1f6b")
+				(uuid "50adfc14-fdbe-515f-bf3b-ed154092a76f")
 			)
 			(table_cell "F2 1.1 A PTC + FB1 ferrite pi filter"
 				(exclude_from_sim no)
@@ -1052,7 +1052,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "3c8b05e3-6544-52ff-a7c9-017a62c49635")
+				(uuid "c57a3c14-a7f5-5852-b574-f65c243929f5")
 			)
 			(table_cell "+5V in"
 				(exclude_from_sim no)
@@ -1062,7 +1062,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "e0d306e0-ea0e-5c62-8a3e-31935541be7f")
+				(uuid "30053991-d95c-5f40-8b2e-fa14e07958de")
 			)
 			(table_cell "Module window 4.75–5.5 V"
 				(exclude_from_sim no)
@@ -1072,7 +1072,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "e71907cf-4112-54e1-b20f-bc1bb20b27e3")
+				(uuid "764036e6-b73e-58d1-ba12-87c402e3d933")
 			)
 			(table_cell "23"
 				(exclude_from_sim no)
@@ -1082,7 +1082,7 @@
 				(span 1 1)
 				(fill (type color) (color 215 230 255 1))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "76fc7417-7dba-5988-94c1-fea09efea411")
+				(uuid "4cd4e29d-4dc7-5512-9cfd-9c6f44839f1e")
 			)
 			(table_cell "PA12"
 				(exclude_from_sim no)
@@ -1092,7 +1092,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "cd4939c9-f2dc-536e-91df-18415f95fb72")
+				(uuid "65714a95-7f39-5291-b404-26fad074346f")
 			)
 			(table_cell "USB_DP"
 				(exclude_from_sim no)
@@ -1102,7 +1102,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "d09fe910-f704-53f1-bd28-69dd328b40dc")
+				(uuid "09e15c83-57d3-5321-81dc-6791def7f2c2")
 			)
 			(table_cell "USB"
 				(exclude_from_sim no)
@@ -1112,7 +1112,7 @@
 				(span 1 1)
 				(fill (type color) (color 190 240 240 1))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "b59c2bf9-be3f-5f14-8933-18eeff90dfe9")
+				(uuid "19a82737-5570-50d8-95c2-e14e4bb10843")
 			)
 			(table_cell "Not connected"
 				(exclude_from_sim no)
@@ -1122,7 +1122,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "082a5119-25c9-5303-844a-cc0ed87a3a59")
+				(uuid "00898ccc-dd0e-5bb4-a63c-2aae58c2a5b3")
 			)
 			(table_cell "—"
 				(exclude_from_sim no)
@@ -1132,7 +1132,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "b0826d68-6154-59ee-812a-7b0b61ef1a2e")
+				(uuid "fb89b547-a867-56e6-9b4c-af63b056f820")
 			)
 			(table_cell "not used"
 				(exclude_from_sim no)
@@ -1142,7 +1142,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "3173a575-0ce8-5718-a4d6-85f828b2dbcd")
+				(uuid "cbba197c-d94b-5959-a87f-e916987da442")
 			)
 			(table_cell "CIF rule 8: leave open"
 				(exclude_from_sim no)
@@ -1152,7 +1152,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "69412923-5487-5d3c-a3e3-a56a0b0e5c1b")
+				(uuid "aeb47606-c7db-533e-83e5-3135c5a6d7c5")
 			)
 			(table_cell "25"
 				(exclude_from_sim no)
@@ -1162,7 +1162,7 @@
 				(span 1 1)
 				(fill (type color) (color 215 230 255 1))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "a6097dc8-cd9a-50c0-833a-fe75a7ba559c")
+				(uuid "5575a480-bf2f-53bd-8747-dc0f5d3e2dda")
 			)
 			(table_cell "PA11"
 				(exclude_from_sim no)
@@ -1172,7 +1172,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "8c36be78-ffe8-5617-b714-0a722da578a3")
+				(uuid "ef2522f6-346f-534b-9c08-da1e6795a387")
 			)
 			(table_cell "USB_DN"
 				(exclude_from_sim no)
@@ -1182,7 +1182,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "23dc76cb-1c79-510d-b9c2-faa162ebc009")
+				(uuid "59861362-9361-5016-8960-2ec26a11344a")
 			)
 			(table_cell "USB"
 				(exclude_from_sim no)
@@ -1192,7 +1192,7 @@
 				(span 1 1)
 				(fill (type color) (color 190 240 240 1))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "79e7e125-77c9-55ac-b015-28209521ce1c")
+				(uuid "b6c3fc9b-ec10-5408-a450-40a79fa07371")
 			)
 			(table_cell "Not connected"
 				(exclude_from_sim no)
@@ -1202,7 +1202,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "bb900d74-62c5-576c-980d-806a9485112e")
+				(uuid "f65f53f7-a6a8-59d2-a222-1493aaeb9fdd")
 			)
 			(table_cell "—"
 				(exclude_from_sim no)
@@ -1212,7 +1212,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "58248140-2652-5c7b-bc8a-a11d3768402b")
+				(uuid "518db75a-f675-5fa1-a5b6-502c77c8b18a")
 			)
 			(table_cell "not used"
 				(exclude_from_sim no)
@@ -1222,7 +1222,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "fe92657a-1c4b-5ddd-8ef2-524554704f4e")
+				(uuid "d8b66018-7b86-582d-9b84-963d319b7184")
 			)
 			(table_cell "CIF rule 8: leave open"
 				(exclude_from_sim no)
@@ -1232,7 +1232,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "50adfc14-fdbe-515f-bf3b-ed154092a76f")
+				(uuid "0c91075d-7e67-5f97-81c2-c96e4ca9e708")
 			)
 			(table_cell "29"
 				(exclude_from_sim no)
@@ -1242,7 +1242,7 @@
 				(span 1 1)
 				(fill (type color) (color 215 230 255 1))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "c57a3c14-a7f5-5852-b574-f65c243929f5")
+				(uuid "d4bbf8f7-4db8-5a1a-b17a-e3860f119f04")
 			)
 			(table_cell "PC6"
 				(exclude_from_sim no)
@@ -1252,7 +1252,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "30053991-d95c-5f40-8b2e-fa14e07958de")
+				(uuid "f3877b94-0e80-5323-a530-918e203cd867")
 			)
 			(table_cell "PC6"
 				(exclude_from_sim no)
@@ -1262,7 +1262,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "764036e6-b73e-58d1-ba12-87c402e3d933")
+				(uuid "7c4c6769-dcc2-54df-b366-3aff9bc711af")
 			)
 			(table_cell "GPIO"
 				(exclude_from_sim no)
@@ -1272,7 +1272,7 @@
 				(span 1 1)
 				(fill (type color) (color 232 232 232 1))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "4cd4e29d-4dc7-5512-9cfd-9c6f44839f1e")
+				(uuid "1b833e8f-d9a1-5adc-9050-32fb19841ba0")
 			)
 			(table_cell "Relay 2 drive, LED DRL (out)"
 				(exclude_from_sim no)
@@ -1282,7 +1282,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "65714a95-7f39-5291-b404-26fad074346f")
+				(uuid "233ae970-8112-54ec-b38d-f5a5ba1b1916")
 			)
 			(table_cell "Q3 AO3400A, R12 100 Ω, R13 100k"
 				(exclude_from_sim no)
@@ -1292,7 +1292,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "09e15c83-57d3-5321-81dc-6791def7f2c2")
+				(uuid "0c85298b-f375-5e4b-98c7-447a6d6b8f8a")
 			)
 			(table_cell "Relay CH2 drive"
 				(exclude_from_sim no)
@@ -1302,7 +1302,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "19a82737-5570-50d8-95c2-e14e4bb10843")
+				(uuid "8c804029-69ac-5ae8-ad6a-e37295831339")
 			)
 			(table_cell ""
 				(exclude_from_sim no)
@@ -1312,7 +1312,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "00898ccc-dd0e-5bb4-a63c-2aae58c2a5b3")
+				(uuid "bfdfce87-2fb2-591a-b35f-06c24375e1a7")
 			)
 			(table_cell "31"
 				(exclude_from_sim no)
@@ -1322,7 +1322,7 @@
 				(span 1 1)
 				(fill (type color) (color 215 230 255 1))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "fb89b547-a867-56e6-9b4c-af63b056f820")
+				(uuid "b58d9bb3-44d0-5cf9-8fc2-c4499e7e6f16")
 			)
 			(table_cell "PA8"
 				(exclude_from_sim no)
@@ -1332,7 +1332,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "cbba197c-d94b-5959-a87f-e916987da442")
+				(uuid "6efdd4e0-0c15-570a-a6de-49f281a825fa")
 			)
 			(table_cell "PA8"
 				(exclude_from_sim no)
@@ -1342,7 +1342,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "aeb47606-c7db-533e-83e5-3135c5a6d7c5")
+				(uuid "daa41adc-b9e8-590b-9525-d3f19b063dd1")
 			)
 			(table_cell "GPIO"
 				(exclude_from_sim no)
@@ -1352,7 +1352,7 @@
 				(span 1 1)
 				(fill (type color) (color 232 232 232 1))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "5575a480-bf2f-53bd-8747-dc0f5d3e2dda")
+				(uuid "c1123e5b-f95a-5978-80ff-778b2ec3d5bf")
 			)
 			(table_cell "Relay 1 drive, safety light (out)"
 				(exclude_from_sim no)
@@ -1362,7 +1362,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "ef2522f6-346f-534b-9c08-da1e6795a387")
+				(uuid "1408ee65-93b9-51ef-a84c-01e6cf95a426")
 			)
 			(table_cell "Q2 AO3400A, R9 100 Ω, R10 100k"
 				(exclude_from_sim no)
@@ -1372,7 +1372,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "59861362-9361-5016-8960-2ec26a11344a")
+				(uuid "526c9871-cc6c-5426-932e-7a6a9d1fcafb")
 			)
 			(table_cell "Relay CH1 drive"
 				(exclude_from_sim no)
@@ -1382,7 +1382,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "b6c3fc9b-ec10-5408-a450-40a79fa07371")
+				(uuid "93fbc1f5-8bf5-5081-b05a-3044400ed651")
 			)
 			(table_cell "May read LOW in reset (UCPD pull-down) until the UCPD1_STROBE write (FW)"
 				(exclude_from_sim no)
@@ -1392,7 +1392,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "f65f53f7-a6a8-59d2-a222-1493aaeb9fdd")
+				(uuid "112be175-57ed-50bd-8d15-cdf00cd05a18")
 			)
 			(table_cell "35"
 				(exclude_from_sim no)
@@ -1402,7 +1402,7 @@
 				(span 1 1)
 				(fill (type color) (color 215 230 255 1))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "518db75a-f675-5fa1-a5b6-502c77c8b18a")
+				(uuid "9455b92d-1f42-5b4f-bf0d-ba950966718e")
 			)
 			(table_cell "PA7"
 				(exclude_from_sim no)
@@ -1412,7 +1412,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "d8b66018-7b86-582d-9b84-963d319b7184")
+				(uuid "5603e906-6a78-5405-b8bb-f2d62c06c620")
 			)
 			(table_cell "PA7"
 				(exclude_from_sim no)
@@ -1422,7 +1422,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "0c91075d-7e67-5f97-81c2-c96e4ca9e708")
+				(uuid "33a94ff2-dacb-51b4-8e1c-04dee15d56d7")
 			)
 			(table_cell "GPIO"
 				(exclude_from_sim no)
@@ -1432,7 +1432,7 @@
 				(span 1 1)
 				(fill (type color) (color 232 232 232 1))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "d4bbf8f7-4db8-5a1a-b17a-e3860f119f04")
+				(uuid "2d1efad5-4c62-5f08-b223-25930a55a6ed")
 			)
 			(table_cell "Relay 4 drive, spare (out)"
 				(exclude_from_sim no)
@@ -1442,7 +1442,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "f3877b94-0e80-5323-a530-918e203cd867")
+				(uuid "85409e49-542a-56c6-9725-5097d7cd6692")
 			)
 			(table_cell "Q5 AO3400A, R20 100 Ω, R21 100k"
 				(exclude_from_sim no)
@@ -1452,7 +1452,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "7c4c6769-dcc2-54df-b366-3aff9bc711af")
+				(uuid "edfc4edf-f1e7-58ae-8b65-a690ecd6b2cf")
 			)
 			(table_cell "Relay CH4 drive"
 				(exclude_from_sim no)
@@ -1462,7 +1462,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "1b833e8f-d9a1-5adc-9050-32fb19841ba0")
+				(uuid "4232c2ba-2fe9-5968-933a-b127baedc680")
 			)
 			(table_cell "Bootloader pulls it LOW on a blank chip: relay stays off"
 				(exclude_from_sim no)
@@ -1472,7 +1472,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "233ae970-8112-54ec-b38d-f5a5ba1b1916")
+				(uuid "190a176a-9032-5fc6-b20d-328cae3739a1")
 			)
 			(table_cell "37"
 				(exclude_from_sim no)
@@ -1482,7 +1482,7 @@
 				(span 1 1)
 				(fill (type color) (color 215 230 255 1))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "0c85298b-f375-5e4b-98c7-447a6d6b8f8a")
+				(uuid "5f6724d3-a346-5212-bbdb-40c2b8e61a43")
 			)
 			(table_cell "PA6"
 				(exclude_from_sim no)
@@ -1492,7 +1492,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "8c804029-69ac-5ae8-ad6a-e37295831339")
+				(uuid "57c98926-1dff-542d-b99a-e2def56b4a08")
 			)
 			(table_cell "PA6"
 				(exclude_from_sim no)
@@ -1502,7 +1502,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "bfdfce87-2fb2-591a-b35f-06c24375e1a7")
+				(uuid "2479b50e-3372-5daf-90ae-4e1e75d6c156")
 			)
 			(table_cell "GPIO"
 				(exclude_from_sim no)
@@ -1512,7 +1512,7 @@
 				(span 1 1)
 				(fill (type color) (color 232 232 232 1))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "b58d9bb3-44d0-5cf9-8fc2-c4499e7e6f16")
+				(uuid "0b1f0de9-1293-5fb1-b2f6-cff23c5b01cb")
 			)
 			(table_cell "ADS1232 PDWN (out, 100k pull-down)"
 				(exclude_from_sim no)
@@ -1522,7 +1522,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "6efdd4e0-0c15-570a-a6de-49f281a825fa")
+				(uuid "45149114-91d4-5ce4-8fbf-d606e3b0d5de")
 			)
 			(table_cell "U8 ADS1232"
 				(exclude_from_sim no)
@@ -1532,7 +1532,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "daa41adc-b9e8-590b-9525-d3f19b063dd1")
+				(uuid "a1b935a1-0a13-55b6-a88a-4ebe5091faab")
 			)
 			(table_cell "ADS1232 PDWN"
 				(exclude_from_sim no)
@@ -1542,7 +1542,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "c1123e5b-f95a-5978-80ff-778b2ec3d5bf")
+				(uuid "0ce31bf6-b515-50ee-9e71-0addd0d6d278")
 			)
 			(table_cell "ADC held off in reset"
 				(exclude_from_sim no)
@@ -1552,7 +1552,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "1408ee65-93b9-51ef-a84c-01e6cf95a426")
+				(uuid "57175171-cf00-5809-9a73-8cfdd98f56d2")
 			)
 			(table_cell "39"
 				(exclude_from_sim no)
@@ -1562,7 +1562,7 @@
 				(span 1 1)
 				(fill (type color) (color 215 230 255 1))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "526c9871-cc6c-5426-932e-7a6a9d1fcafb")
+				(uuid "276f337a-0a20-5b9e-9087-40f6b0b0e946")
 			)
 			(table_cell "PA5"
 				(exclude_from_sim no)
@@ -1572,7 +1572,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "93fbc1f5-8bf5-5081-b05a-3044400ed651")
+				(uuid "4118601c-4d9f-5d85-8f04-756a8312fd24")
 			)
 			(table_cell "PA5"
 				(exclude_from_sim no)
@@ -1582,7 +1582,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "112be175-57ed-50bd-8d15-cdf00cd05a18")
+				(uuid "ecb5e8db-7102-5ff1-8c2b-afb66bff3561")
 			)
 			(table_cell "GPIO"
 				(exclude_from_sim no)
@@ -1592,7 +1592,7 @@
 				(span 1 1)
 				(fill (type color) (color 232 232 232 1))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "9455b92d-1f42-5b4f-bf0d-ba950966718e")
+				(uuid "b1812c65-4165-5248-aaa2-c4cb6d0f3e1a")
 			)
 			(table_cell "ADS1232 SCLK (out, 100k pull-down)"
 				(exclude_from_sim no)
@@ -1602,7 +1602,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "5603e906-6a78-5405-b8bb-f2d62c06c620")
+				(uuid "8e702ee7-80a1-5733-a678-c6ae7bb37868")
 			)
 			(table_cell "U8 ADS1232"
 				(exclude_from_sim no)
@@ -1612,7 +1612,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "33a94ff2-dacb-51b4-8e1c-04dee15d56d7")
+				(uuid "45fa3641-b43a-5070-891e-9bf3ad92131f")
 			)
 			(table_cell "ADS1232 SCLK"
 				(exclude_from_sim no)
@@ -1622,7 +1622,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "2d1efad5-4c62-5f08-b223-25930a55a6ed")
+				(uuid "640f8dd9-c415-550a-bc25-b8be3ba7cc96")
 			)
 			(table_cell "TT pin: 3.6 V max"
 				(exclude_from_sim no)
@@ -1632,7 +1632,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "85409e49-542a-56c6-9725-5097d7cd6692")
+				(uuid "1bae4193-60b6-5119-9d2a-8ac45a2563cf")
 			)
 			(table_cell "41"
 				(exclude_from_sim no)
@@ -1642,7 +1642,7 @@
 				(span 1 1)
 				(fill (type color) (color 215 230 255 1))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "edfc4edf-f1e7-58ae-8b65-a690ecd6b2cf")
+				(uuid "190d26bd-76ab-5984-86cc-9786e16092fa")
 			)
 			(table_cell "PA4"
 				(exclude_from_sim no)
@@ -1652,7 +1652,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "4232c2ba-2fe9-5968-933a-b127baedc680")
+				(uuid "890b49fe-c534-54ce-b9e0-33a1909d36d5")
 			)
 			(table_cell "PA4"
 				(exclude_from_sim no)
@@ -1662,7 +1662,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "190a176a-9032-5fc6-b20d-328cae3739a1")
+				(uuid "488fce83-b5a5-5bb3-bcb9-e30a9647efd2")
 			)
 			(table_cell "GPIO"
 				(exclude_from_sim no)
@@ -1672,7 +1672,7 @@
 				(span 1 1)
 				(fill (type color) (color 232 232 232 1))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "5f6724d3-a346-5212-bbdb-40c2b8e61a43")
+				(uuid "45279fd3-a445-5896-84a8-ac1bb1faa01f")
 			)
 			(table_cell "ADS1232 DRDY / DOUT (in, 100 Ω)"
 				(exclude_from_sim no)
@@ -1682,7 +1682,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "57c98926-1dff-542d-b99a-e2def56b4a08")
+				(uuid "f232f91f-08db-5b64-bd4a-fb0c08a9361a")
 			)
 			(table_cell "U8 ADS1232"
 				(exclude_from_sim no)
@@ -1692,7 +1692,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "2479b50e-3372-5daf-90ae-4e1e75d6c156")
+				(uuid "3bf4f2cb-9c33-5f2f-a479-60d898482c4c")
 			)
 			(table_cell "ADS1232 DRDY"
 				(exclude_from_sim no)
@@ -1702,7 +1702,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "0b1f0de9-1293-5fb1-b2f6-cff23c5b01cb")
+				(uuid "486dda04-b33a-5780-a0e0-f08f5a4f264d")
 			)
 			(table_cell "TT pin: 3.6 V max (DVDD = 3V3). Bit-banged read: DOUT is not on SPI1 MISO"
 				(exclude_from_sim no)
@@ -1712,7 +1712,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "45149114-91d4-5ce4-8fbf-d606e3b0d5de")
+				(uuid "5063ad1e-4afe-5647-b9e4-006d04f7ccc1")
 			)
 			(table_cell "43"
 				(exclude_from_sim no)
@@ -1722,7 +1722,7 @@
 				(span 1 1)
 				(fill (type color) (color 215 230 255 1))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "a1b935a1-0a13-55b6-a88a-4ebe5091faab")
+				(uuid "de2ab55a-ddac-51c9-ae40-1c281ca60d12")
 			)
 			(table_cell "PA3"
 				(exclude_from_sim no)
@@ -1732,7 +1732,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "0ce31bf6-b515-50ee-9e71-0addd0d6d278")
+				(uuid "fed36f87-ff3c-5696-857f-84baeb6b72a3")
 			)
 			(table_cell "PA3"
 				(exclude_from_sim no)
@@ -1742,7 +1742,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "57175171-cf00-5809-9a73-8cfdd98f56d2")
+				(uuid "ed4104a1-d1d5-536b-a56f-340df2a3b97c")
 			)
 			(table_cell "UART"
 				(exclude_from_sim no)
@@ -1752,7 +1752,7 @@
 				(span 1 1)
 				(fill (type color) (color 200 230 255 1))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "276f337a-0a20-5b9e-9087-40f6b0b0e946")
+				(uuid "47bb1fb2-cf49-5fd0-9540-699a39ee33b9")
 			)
 			(table_cell "USART2 RX ← J17 pin 3, door servo (FE-URT-2)"
 				(exclude_from_sim no)
@@ -1762,9 +1762,9 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "4118601c-4d9f-5d85-8f04-756a8312fd24")
+				(uuid "88161c3a-056b-5837-b661-414d35243084")
 			)
-			(table_cell "J17, R38 100 Ω, R36 10k pull-up, D23"
+			(table_cell "J17, R38 1k, R36 10k pull-up, D23"
 				(exclude_from_sim no)
 				(at 171.45 97.05 0)
 				(size 86.36 3.17)
@@ -1772,7 +1772,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "ecb5e8db-7102-5ff1-8c2b-afb66bff3561")
+				(uuid "1aee2052-6028-53a3-b3ae-5456063eef85")
 			)
 			(table_cell "Relay CH4 coil FB"
 				(exclude_from_sim no)
@@ -1782,7 +1782,7 @@
 				(span 1 1)
 				(fill (type color) (color 255 245 170 1))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "b1812c65-4165-5248-aaa2-c4cb6d0f3e1a")
+				(uuid "433c8629-4926-576c-89e4-2f753a621471")
 			)
 			(table_cell "Differs from CIF. FE-URT-2 must be set to 3.3 V levels"
 				(exclude_from_sim no)
@@ -1792,7 +1792,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "8e702ee7-80a1-5733-a678-c6ae7bb37868")
+				(uuid "05f61f81-607a-5274-ada9-b5e895a1332a")
 			)
 			(table_cell "45"
 				(exclude_from_sim no)
@@ -1802,7 +1802,7 @@
 				(span 1 1)
 				(fill (type color) (color 215 230 255 1))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "45fa3641-b43a-5070-891e-9bf3ad92131f")
+				(uuid "b2c98d3e-5d84-53ab-b9c2-e034dd9aece3")
 			)
 			(table_cell "PA2"
 				(exclude_from_sim no)
@@ -1812,7 +1812,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "640f8dd9-c415-550a-bc25-b8be3ba7cc96")
+				(uuid "23f72531-2753-522e-952d-f85d5d8e8118")
 			)
 			(table_cell "PA2"
 				(exclude_from_sim no)
@@ -1822,7 +1822,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "1bae4193-60b6-5119-9d2a-8ac45a2563cf")
+				(uuid "72825598-b9de-52c4-87cf-4cb158be3f09")
 			)
 			(table_cell "UART"
 				(exclude_from_sim no)
@@ -1832,7 +1832,7 @@
 				(span 1 1)
 				(fill (type color) (color 200 230 255 1))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "190d26bd-76ab-5984-86cc-9786e16092fa")
+				(uuid "f250bbfd-7a3d-5d54-8184-b30fa4dc53b5")
 			)
 			(table_cell "USART2 TX → J17 pin 4, door servo (FE-URT-2)"
 				(exclude_from_sim no)
@@ -1842,7 +1842,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "890b49fe-c534-54ce-b9e0-33a1909d36d5")
+				(uuid "449117b1-959d-5d58-842c-8264d9deb9f0")
 			)
 			(table_cell "J17, R39 100 Ω, R37 10k pull-up, D24"
 				(exclude_from_sim no)
@@ -1852,7 +1852,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "488fce83-b5a5-5bb3-bcb9-e30a9647efd2")
+				(uuid "1f2a37d0-19dd-56b8-9dae-786276b40f46")
 			)
 			(table_cell "Relay CH3 coil FB"
 				(exclude_from_sim no)
@@ -1862,7 +1862,7 @@
 				(span 1 1)
 				(fill (type color) (color 255 245 170 1))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "45279fd3-a445-5896-84a8-ac1bb1faa01f")
+				(uuid "c634238d-ae76-5b69-99a5-22764166c2bc")
 			)
 			(table_cell "Differs from CIF. Bootloader probes PA2 / PA3 on a blank chip: flash over SWD"
 				(exclude_from_sim no)
@@ -1872,7 +1872,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "f232f91f-08db-5b64-bd4a-fb0c08a9361a")
+				(uuid "06c050ab-4227-54e7-a81e-fb775cccd749")
 			)
 			(table_cell "47"
 				(exclude_from_sim no)
@@ -1882,7 +1882,7 @@
 				(span 1 1)
 				(fill (type color) (color 215 230 255 1))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "3bf4f2cb-9c33-5f2f-a479-60d898482c4c")
+				(uuid "ed6d7e85-d99d-5c83-83f2-7cee3009048c")
 			)
 			(table_cell "PA1"
 				(exclude_from_sim no)
@@ -1892,7 +1892,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "486dda04-b33a-5780-a0e0-f08f5a4f264d")
+				(uuid "a46cebc6-246f-5c2e-8bc2-a41350e1e309")
 			)
 			(table_cell "PA1"
 				(exclude_from_sim no)
@@ -1902,7 +1902,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "5063ad1e-4afe-5647-b9e4-006d04f7ccc1")
+				(uuid "fcbd9c87-0845-5f6c-8033-c9559373d630")
 			)
 			(table_cell "GPIO"
 				(exclude_from_sim no)
@@ -1912,7 +1912,7 @@
 				(span 1 1)
 				(fill (type color) (color 232 232 232 1))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "de2ab55a-ddac-51c9-ae40-1c281ca60d12")
+				(uuid "36050bab-12e1-56d4-9e90-c21f5a456f71")
 			)
 			(table_cell "Winch ACLK relay drive (out)"
 				(exclude_from_sim no)
@@ -1922,7 +1922,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "fed36f87-ff3c-5696-857f-84baeb6b72a3")
+				(uuid "7bdbf8f9-fcb9-5b54-bbc6-da4e754e1570")
 			)
 			(table_cell "K6 IM03GR, Q7 AO3400A, R45 100 Ω, R46 100k"
 				(exclude_from_sim no)
@@ -1932,7 +1932,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "ed4104a1-d1d5-536b-a56f-340df2a3b97c")
+				(uuid "d58dca7d-4f1b-5e52-bb29-3f23d1fdff8d")
 			)
 			(table_cell "Relay CH2 coil FB"
 				(exclude_from_sim no)
@@ -1942,7 +1942,7 @@
 				(span 1 1)
 				(fill (type color) (color 255 245 170 1))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "47bb1fb2-cf49-5fd0-9540-699a39ee33b9")
+				(uuid "283c4c05-122d-5f42-ab93-bcc1d631a28e")
 			)
 			(table_cell "Differs from CIF. Drive only one of PA0 / PA1"
 				(exclude_from_sim no)
@@ -1952,7 +1952,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "88161c3a-056b-5837-b661-414d35243084")
+				(uuid "df513a93-a797-5600-baaa-5cffbdf2b349")
 			)
 			(table_cell "49"
 				(exclude_from_sim no)
@@ -1962,7 +1962,7 @@
 				(span 1 1)
 				(fill (type color) (color 215 230 255 1))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "1aee2052-6028-53a3-b3ae-5456063eef85")
+				(uuid "5fb6dbae-b9b5-5bdf-bbb4-833c33707b04")
 			)
 			(table_cell "PA0"
 				(exclude_from_sim no)
@@ -1972,7 +1972,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "433c8629-4926-576c-89e4-2f753a621471")
+				(uuid "9b234bab-1052-568f-81bd-f54c18a95c20")
 			)
 			(table_cell "PA0"
 				(exclude_from_sim no)
@@ -1982,7 +1982,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "05f61f81-607a-5274-ada9-b5e895a1332a")
+				(uuid "ae5fa266-7eb9-5c4f-86ef-65d68c3306c8")
 			)
 			(table_cell "GPIO"
 				(exclude_from_sim no)
@@ -1992,7 +1992,7 @@
 				(span 1 1)
 				(fill (type color) (color 232 232 232 1))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "b2c98d3e-5d84-53ab-b9c2-e034dd9aece3")
+				(uuid "af91a42b-d27b-558d-8c0f-39ab1852c35c")
 			)
 			(table_cell "Winch CLK relay drive (out)"
 				(exclude_from_sim no)
@@ -2002,7 +2002,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "23f72531-2753-522e-952d-f85d5d8e8118")
+				(uuid "fbd6b05c-018c-567b-b523-ef3938febd8b")
 			)
 			(table_cell "K5 IM03GR, Q6 AO3400A, R43 100 Ω, R44 100k"
 				(exclude_from_sim no)
@@ -2012,7 +2012,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "72825598-b9de-52c4-87cf-4cb158be3f09")
+				(uuid "c670b9fe-0721-5239-939a-c88b428f2c2b")
 			)
 			(table_cell "Relay CH1 coil FB"
 				(exclude_from_sim no)
@@ -2022,7 +2022,7 @@
 				(span 1 1)
 				(fill (type color) (color 255 245 170 1))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "f250bbfd-7a3d-5d54-8184-b30fa4dc53b5")
+				(uuid "80dd6e97-778a-569e-a755-9faffb6878e5")
 			)
 			(table_cell "Differs from CIF. Both winch relays off in reset (100k pull-downs)"
 				(exclude_from_sim no)
@@ -2032,7 +2032,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "449117b1-959d-5d58-842c-8264d9deb9f0")
+				(uuid "d53032e9-a13a-5bdc-8327-2acf657fd6ac")
 			)
 			(table_cell "51"
 				(exclude_from_sim no)
@@ -2042,7 +2042,7 @@
 				(span 1 1)
 				(fill (type color) (color 215 230 255 1))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "1f2a37d0-19dd-56b8-9dae-786276b40f46")
+				(uuid "f35dbe3f-5287-5d25-98b9-458ec229fd0c")
 			)
 			(table_cell "PC15"
 				(exclude_from_sim no)
@@ -2052,7 +2052,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "c634238d-ae76-5b69-99a5-22764166c2bc")
+				(uuid "7039b75f-4f01-50cf-89c6-f09c4e6c2b21")
 			)
 			(table_cell "PC15"
 				(exclude_from_sim no)
@@ -2062,7 +2062,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "06c050ab-4227-54e7-a81e-fb775cccd749")
+				(uuid "7cf934dc-da49-5fb5-9112-c716f250e6b1")
 			)
 			(table_cell "GPIO"
 				(exclude_from_sim no)
@@ -2072,7 +2072,7 @@
 				(span 1 1)
 				(fill (type color) (color 232 232 232 1))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "ed6d7e85-d99d-5c83-83f2-7cee3009048c")
+				(uuid "b4d6415b-08ad-598a-adac-f58f8e1dbfc6")
 			)
 			(table_cell "Autonics sensor 2 (in, HIGH = sensor on)"
 				(exclude_from_sim no)
@@ -2082,7 +2082,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "a46cebc6-246f-5c2e-8bc2-a41350e1e309")
+				(uuid "7cc292ed-7308-58ab-bc13-2c2a2bcb5351")
 			)
 			(table_cell "U7 PC817, R27 10k pull-down"
 				(exclude_from_sim no)
@@ -2092,7 +2092,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "fcbd9c87-0845-5f6c-8033-c9559373d630")
+				(uuid "7bc37d5d-5dda-5e3c-baa9-78fbe84b4dcf")
 			)
 			(table_cell "Spare input"
 				(exclude_from_sim no)
@@ -2102,7 +2102,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "36050bab-12e1-56d4-9e90-c21f5a456f71")
+				(uuid "3158c1be-cccd-5203-8156-2e27f7e10440")
 			)
 			(table_cell "Weak pin: input only, never source. EXTI15 shared with PA15"
 				(exclude_from_sim no)
@@ -2112,7 +2112,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "7bdbf8f9-fcb9-5b54-bbc6-da4e754e1570")
+				(uuid "b41dbb43-ac38-55ae-a093-47c7af2f7b95")
 			)
 			(table_cell "53"
 				(exclude_from_sim no)
@@ -2122,7 +2122,7 @@
 				(span 1 1)
 				(fill (type color) (color 215 230 255 1))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "d58dca7d-4f1b-5e52-bb29-3f23d1fdff8d")
+				(uuid "de79f128-def2-579c-b4f7-716f23435f5a")
 			)
 			(table_cell "PB9"
 				(exclude_from_sim no)
@@ -2132,7 +2132,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "283c4c05-122d-5f42-ab93-bcc1d631a28e")
+				(uuid "21f59bde-f12f-5ef6-bf6e-058f08b3db30")
 			)
 			(table_cell "I2C1_SDA"
 				(exclude_from_sim no)
@@ -2142,7 +2142,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "df513a93-a797-5600-baaa-5cffbdf2b349")
+				(uuid "bf1c0d03-cede-566e-ae20-b63516d5364b")
 			)
 			(table_cell "I2C"
 				(exclude_from_sim no)
@@ -2152,9 +2152,9 @@
 				(span 1 1)
 				(fill (type color) (color 225 245 190 1))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "5fb6dbae-b9b5-5bdf-bbb4-833c33707b04")
+				(uuid "d62a8ec4-af4f-5295-aa30-1f679df551ce")
 			)
-			(table_cell "I²C1 SDA: 4 × INA226 (0x40 / 0x41 / 0x44 / 0x45)"
+			(table_cell "I²C1 SDA: 4 × INA236 (0x40 / 0x41 / 0x42 / 0x43)"
 				(exclude_from_sim no)
 				(at 90.17 112.9 0)
 				(size 81.28 3.17)
@@ -2162,7 +2162,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "9b234bab-1052-568f-81bd-f54c18a95c20")
+				(uuid "126cc32f-7030-5119-ba72-9efd551732a6")
 			)
 			(table_cell "R3 2.2k pull-up to +3V3_MOD"
 				(exclude_from_sim no)
@@ -2172,7 +2172,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "ae5fa266-7eb9-5c4f-86ef-65d68c3306c8")
+				(uuid "40ee33d9-b8c2-5383-b7ee-673a4da8b455")
 			)
 			(table_cell "I²C1 SDA"
 				(exclude_from_sim no)
@@ -2182,7 +2182,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "af91a42b-d27b-558d-8c0f-39ab1852c35c")
+				(uuid "9eb1741c-b6f8-57a6-8a04-0f2c435374fd")
 			)
 			(table_cell "400 kHz"
 				(exclude_from_sim no)
@@ -2192,7 +2192,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "fbd6b05c-018c-567b-b523-ef3938febd8b")
+				(uuid "caae1cb3-91fd-5159-afdf-0005ecceda60")
 			)
 			(table_cell "55"
 				(exclude_from_sim no)
@@ -2202,7 +2202,7 @@
 				(span 1 1)
 				(fill (type color) (color 215 230 255 1))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "c670b9fe-0721-5239-939a-c88b428f2c2b")
+				(uuid "c400250f-d8dc-562b-8e2a-fb15ebcd299d")
 			)
 			(table_cell "PB8"
 				(exclude_from_sim no)
@@ -2212,7 +2212,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "80dd6e97-778a-569e-a755-9faffb6878e5")
+				(uuid "04a22089-a090-58b7-8821-dbafa23e8732")
 			)
 			(table_cell "I2C1_SCL"
 				(exclude_from_sim no)
@@ -2222,7 +2222,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "d53032e9-a13a-5bdc-8327-2acf657fd6ac")
+				(uuid "01570ded-c20c-54d3-8d50-190d6c67e28f")
 			)
 			(table_cell "I2C"
 				(exclude_from_sim no)
@@ -2232,9 +2232,9 @@
 				(span 1 1)
 				(fill (type color) (color 225 245 190 1))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "f35dbe3f-5287-5d25-98b9-458ec229fd0c")
+				(uuid "3075fb87-f076-562a-94e3-d931d6a3722d")
 			)
-			(table_cell "I²C1 SCL: 4 × INA226"
+			(table_cell "I²C1 SCL: 4 × INA236"
 				(exclude_from_sim no)
 				(at 90.17 116.07 0)
 				(size 81.28 3.17)
@@ -2242,7 +2242,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "7039b75f-4f01-50cf-89c6-f09c4e6c2b21")
+				(uuid "97ff4548-318a-5b45-bc70-ebaf8fea09c9")
 			)
 			(table_cell "R4 2.2k pull-up to +3V3_MOD"
 				(exclude_from_sim no)
@@ -2252,7 +2252,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "7cf934dc-da49-5fb5-9112-c716f250e6b1")
+				(uuid "417fe596-2b4c-5a44-9e73-fc838b94fc20")
 			)
 			(table_cell "I²C1 SCL"
 				(exclude_from_sim no)
@@ -2262,7 +2262,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "b4d6415b-08ad-598a-adac-f58f8e1dbfc6")
+				(uuid "e487bd0f-6b63-5d61-93f8-fa16124d3dd0")
 			)
 			(table_cell ""
 				(exclude_from_sim no)
@@ -2272,7 +2272,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "7cc292ed-7308-58ab-bc13-2c2a2bcb5351")
+				(uuid "e452fe3c-d4ba-5170-96c7-6d2182f4e0cd")
 			)
 			(table_cell "59"
 				(exclude_from_sim no)
@@ -2282,7 +2282,7 @@
 				(span 1 1)
 				(fill (type color) (color 215 230 255 1))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "7bc37d5d-5dda-5e3c-baa9-78fbe84b4dcf")
+				(uuid "f90583e4-130c-58d2-9637-fe4125de9473")
 			)
 			(table_cell "PB6"
 				(exclude_from_sim no)
@@ -2292,7 +2292,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "3158c1be-cccd-5203-8156-2e27f7e10440")
+				(uuid "7f678f31-a060-519b-9b44-52bb69f487ee")
 			)
 			(table_cell "PB6"
 				(exclude_from_sim no)
@@ -2302,7 +2302,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "b41dbb43-ac38-55ae-a093-47c7af2f7b95")
+				(uuid "177d5c6b-0296-5ae0-a445-af4d3242fbe8")
 			)
 			(table_cell "GPIO"
 				(exclude_from_sim no)
@@ -2312,7 +2312,7 @@
 				(span 1 1)
 				(fill (type color) (color 232 232 232 1))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "de79f128-def2-579c-b4f7-716f23435f5a")
+				(uuid "d45e3e65-13b9-5007-8ce5-fffd71452dad")
 			)
 			(table_cell "Autonics sensor 1 (in, HIGH = sensor on)"
 				(exclude_from_sim no)
@@ -2322,7 +2322,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "21f59bde-f12f-5ef6-bf6e-058f08b3db30")
+				(uuid "2b95c3e5-38cd-5a54-9df0-73b1d390f50b")
 			)
 			(table_cell "U6 PC817, R25 10k pull-down"
 				(exclude_from_sim no)
@@ -2332,7 +2332,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "bf1c0d03-cede-566e-ae20-b63516d5364b")
+				(uuid "7aa646df-d0fb-5c7d-94f6-cc3ef48f6fbe")
 			)
 			(table_cell "Spare input"
 				(exclude_from_sim no)
@@ -2342,7 +2342,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "d62a8ec4-af4f-5295-aa30-1f679df551ce")
+				(uuid "4d960444-da3b-52d0-a4a6-173915611df7")
 			)
 			(table_cell "Bootloader pull-up on a blank chip: reads LOW with the 10k, harmless"
 				(exclude_from_sim no)
@@ -2352,7 +2352,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "126cc32f-7030-5119-ba72-9efd551732a6")
+				(uuid "18c3d320-017b-5011-9e07-fe5eb7ed9a7a")
 			)
 			(table_cell "61"
 				(exclude_from_sim no)
@@ -2362,7 +2362,7 @@
 				(span 1 1)
 				(fill (type color) (color 215 230 255 1))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "40ee33d9-b8c2-5383-b7ee-673a4da8b455")
+				(uuid "f50afdc0-a3b9-5716-bc5c-a0380063d448")
 			)
 			(table_cell "PB3"
 				(exclude_from_sim no)
@@ -2372,7 +2372,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "9eb1741c-b6f8-57a6-8a04-0f2c435374fd")
+				(uuid "ea228f32-575c-5386-8230-372461dbe3a3")
 			)
 			(table_cell "PB3"
 				(exclude_from_sim no)
@@ -2382,7 +2382,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "caae1cb3-91fd-5159-afdf-0005ecceda60")
+				(uuid "8d842749-3be0-51cc-a16f-99918070f67c")
 			)
 			(table_cell "GPIO"
 				(exclude_from_sim no)
@@ -2392,7 +2392,7 @@
 				(span 1 1)
 				(fill (type color) (color 232 232 232 1))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "c400250f-d8dc-562b-8e2a-fb15ebcd299d")
+				(uuid "bc3c342c-2d08-5d6c-bc00-b33a32a5d906")
 			)
 			(table_cell "Relay 3 drive, battery stopper (out)"
 				(exclude_from_sim no)
@@ -2402,7 +2402,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "04a22089-a090-58b7-8821-dbafa23e8732")
+				(uuid "ce8c0d6b-7de5-5161-a31c-228d5033f894")
 			)
 			(table_cell "Q4 AO3400A, R17 100 Ω, R18 100k"
 				(exclude_from_sim no)
@@ -2412,7 +2412,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "01570ded-c20c-54d3-8d50-190d6c67e28f")
+				(uuid "950a0730-2c1a-51b9-90d2-7163b4cae19f")
 			)
 			(table_cell "Relay CH3 drive"
 				(exclude_from_sim no)
@@ -2422,7 +2422,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "3075fb87-f076-562a-94e3-d931d6a3722d")
+				(uuid "ef016ec9-b72f-5f5f-bb45-34fb96134e8a")
 			)
 			(table_cell ""
 				(exclude_from_sim no)
@@ -2432,7 +2432,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "97ff4548-318a-5b45-bc70-ebaf8fea09c9")
+				(uuid "85498973-8435-5b92-b6f2-79500713fabf")
 			)
 			(table_cell "63"
 				(exclude_from_sim no)
@@ -2442,7 +2442,7 @@
 				(span 1 1)
 				(fill (type color) (color 215 230 255 1))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "417fe596-2b4c-5a44-9e73-fc838b94fc20")
+				(uuid "a8614eb3-6dd3-51d0-83c8-42c1f42465c2")
 			)
 			(table_cell "PA15"
 				(exclude_from_sim no)
@@ -2452,7 +2452,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "e487bd0f-6b63-5d61-93f8-fa16124d3dd0")
+				(uuid "e2ad1354-4e6f-550c-9c72-32d6ddf8efda")
 			)
 			(table_cell "PA15"
 				(exclude_from_sim no)
@@ -2462,7 +2462,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "e452fe3c-d4ba-5170-96c7-6d2182f4e0cd")
+				(uuid "131409e7-91ad-528a-92d9-df3e6f6deff0")
 			)
 			(table_cell "GPIO"
 				(exclude_from_sim no)
@@ -2472,9 +2472,9 @@
 				(span 1 1)
 				(fill (type color) (color 232 232 232 1))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "f90583e4-130c-58d2-9637-fe4125de9473")
+				(uuid "2ad301c1-0026-5420-8859-907e4a5cc83f")
 			)
-			(table_cell "INA226 ALERT, all four wire-OR (in)"
+			(table_cell "INA236 ALERT, all four wire-OR (in)"
 				(exclude_from_sim no)
 				(at 90.17 125.58 0)
 				(size 81.28 3.17)
@@ -2482,7 +2482,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "7f678f31-a060-519b-9b44-52bb69f487ee")
+				(uuid "fdca89b7-6acc-54cb-b3e9-55cb49a4796d")
 			)
 			(table_cell "R5 10k pull-up to +3V3_MOD"
 				(exclude_from_sim no)
@@ -2492,9 +2492,9 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "177d5c6b-0296-5ae0-a445-af4d3242fbe8")
+				(uuid "221d0c72-6a20-50fb-8fec-e39dd020776b")
 			)
-			(table_cell "INA226 ALERT"
+			(table_cell "INA236 ALERT"
 				(exclude_from_sim no)
 				(at 257.81 125.58 0)
 				(size 30.48 3.17)
@@ -2502,7 +2502,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "d45e3e65-13b9-5007-8ce5-fffd71452dad")
+				(uuid "495bc071-92fb-5ccb-9457-f15e7c747938")
 			)
 			(table_cell "EXTI15 shared with PC15: interrupt on PC15, poll ALERT (latched)"
 				(exclude_from_sim no)
@@ -2512,7 +2512,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "2b95c3e5-38cd-5a54-9df0-73b1d390f50b")
+				(uuid "ed5f3e97-9038-5270-864c-632bdfdc3b12")
 			)
 			(table_cell "others"
 				(exclude_from_sim no)
@@ -2522,7 +2522,7 @@
 				(span 1 1)
 				(fill (type color) (color 215 230 255 1))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "7aa646df-d0fb-5c7d-94f6-cc3ef48f6fbe")
+				(uuid "d9744e09-f3bb-5c2b-a08d-3bd0eed51663")
 			)
 			(table_cell "—"
 				(exclude_from_sim no)
@@ -2532,7 +2532,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "4d960444-da3b-52d0-a4a6-173915611df7")
+				(uuid "62dfb85f-ab64-5903-9eea-67156707ac33")
 			)
 			(table_cell "GND"
 				(exclude_from_sim no)
@@ -2542,7 +2542,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "18c3d320-017b-5011-9e07-fe5eb7ed9a7a")
+				(uuid "a2f5bac2-3a91-58bb-b5ec-9219135a3258")
 			)
 			(table_cell "GND"
 				(exclude_from_sim no)
@@ -2552,7 +2552,7 @@
 				(span 1 1)
 				(fill (type color) (color 205 205 205 1))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "f50afdc0-a3b9-5716-bc5c-a0380063d448")
+				(uuid "5ed75ffe-d6dd-5b4f-9507-be73649a294e")
 			)
 			(table_cell "GND plane + socket hold-down pads"
 				(exclude_from_sim no)
@@ -2562,7 +2562,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "ea228f32-575c-5386-8230-372461dbe3a3")
+				(uuid "f0b2c77b-8069-5f47-bc56-3c08a306c9db")
 			)
 			(table_cell "—"
 				(exclude_from_sim no)
@@ -2572,7 +2572,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "8d842749-3be0-51cc-a16f-99918070f67c")
+				(uuid "c8fc2a85-df27-5d30-91ef-ac4930f18dfc")
 			)
 			(table_cell "GND"
 				(exclude_from_sim no)
@@ -2582,7 +2582,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "bc3c342c-2d08-5d6c-bc00-b33a32a5d906")
+				(uuid "414c82f8-0114-56b1-992d-c24cb5d10c70")
 			)
 			(table_cell "21, 24, 26–28, 30, 32–34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54, 56–58, 60, 62, 64–75"
 				(exclude_from_sim no)
@@ -2592,7 +2592,7 @@
 				(span 1 1)
 				(fill (type none))
 				(effects (font (size 1.27 1.27) (color 0 0 0 1)) (justify left top))
-				(uuid "ce8c0d6b-7de5-5161-a31c-228d5033f894")
+				(uuid "59dffb45-ba22-5dd5-851f-7b19c71bc474")
 			)
 		)
 	)
@@ -2600,7 +2600,7 @@
 		(exclude_from_sim no)
 		(at 24.13 135.73 0)
 		(effects (font (size 1.27 1.27)) (justify left top))
-		(uuid "4f395ced-0618-51ab-b056-b6507422c682")
+		(uuid "3ac45a27-c201-56a9-8410-d01d17501579")
 	)
 	(embedded_fonts no)
 )

@@ -93,10 +93,10 @@ def set_strap(sh, pin_xy, sym_xy, net):
 
 # ---------------------------------------------------------------- relay sheets (template: Flasher Relays)
 CH = {
-    1: dict(drv='PA8', addr='0x40', a1='GND', a0='GND', load='safety light'),
-    2: dict(drv='PC6', addr='0x41', a1='GND', a0='+3V3_MOD', load='LED DRL'),
-    3: dict(drv='PB3', addr='0x44', a1='+3V3_MOD', a0='GND', load='battery stopper'),
-    4: dict(drv='PA7', addr='0x45', a1='+3V3_MOD', a0='+3V3_MOD', load='spare'),
+    1: dict(drv='PA8', addr='0x40', a0='GND', load='safety light'),
+    2: dict(drv='PC6', addr='0x41', a0='+3V3_MOD', load='LED DRL'),
+    3: dict(drv='PB3', addr='0x42', a0='I2C1_SDA', load='battery stopper'),
+    4: dict(drv='PA7', addr='0x43', a0='I2C1_SCL', load='spare'),
 }
 # fb: the Flasher's coil-feedback divider (10k / 15k + 10 nF), removed here: PA0-PA3 drive the winch and servo UART
 TPL = [dict(Q='Q1', RB='R8', RPD='R10', F='F7', U='U5', K='K1', J='J9', LED='LED3', RLED='R27', DL='D27',
@@ -106,6 +106,7 @@ TPL = [dict(Q='Q1', RB='R8', RPD='R10', F='F7', U='U5', K='K1', J='J9', LED='LED
 
 
 def relay_sheet(name, file, page, chans, comment):
+    B.register_symbol(AP.ina236_symbol())
     sh = Sheet.from_template(FL + 'Relays.kicad_sch', name, file, comment, page)
     drop_texts(sh)
     fch = NEWP['F_CH']
@@ -121,7 +122,10 @@ def relay_sheet(name, file, page, chans, comment):
              desc='gate pull-down: relay %d OFF during reset / boot (CIF §4a, §7a)' % n)
         setf(g(t['F']), value=fch['value'], lcsc=fch['lcsc'], fp=fch['fp'], lib=fch['lib'],
              desc='relay %d output PTC: a shorted output trips only this channel' % n)
-        setf(g(t['U']), desc='INA226, I²C %s: relay %d (%s) load current + 24 V rail (CIF §6a)'
+        # INA236 instead of the Flasher's INA236: 50 V abs max vs 40 V (SMBJ30A clamps at up to 48.4 V, review M1)
+        setf(g(t['U']), lib=B.LIBNAME + ':INA236', value='INA236', lcsc='C5443912', fp='Package_TO_SOT_SMD:TSOT-23-8',
+             ds='https://www.ti.com/lit/ds/symlink/ina236.pdf',
+             desc='INA236AIDDFR, I²C %s: relay %d (%s) load current + 24 V rail (bus read on IN-)'
              % (c['addr'], n, c['load']))
         setf(g(t['J']), value='RLY%d OUT' % n,
              desc='relay %d (%s) output: 1 = switched +24 V, 2 = GND_24V (KF250NH 3.5 mm push-in)' % (n, c['load']))
@@ -132,29 +136,34 @@ def relay_sheet(name, file, page, chans, comment):
         sh.items = [it for it in sh.items if not (it[0] in ('label', 'global_label') and it[1] == t['fb'])]
         relabel(sh, t['out'], 'RLY%d_OUT' % n, region=region)
         X, Y, _ = g(t['U']).at
-        set_strap(sh, None, (R2(X + 12.70), R2(Y - 7.62)), c['a1'])
-        set_strap(sh, None, (R2(X + 17.78), R2(Y - 5.08)), c['a0'])
+        sh.parts.remove(power_at(sh, (R2(X + 12.70), R2(Y - 7.62))))  # A1 strap: the INA236 has no A1 (wire pruned)
+        a0 = (R2(X + 17.78), R2(Y - 5.08))
+        if c['a0'].startswith('I2C1'):  # 0x42 / 0x43: A0 to SDA / SCL
+            sh.parts.remove(power_at(sh, a0))
+            sh.glabel(c['a0'], a0, 0)
+        else:
+            set_strap(sh, None, a0, c['a0'])
         # retag for the note templates
         for k in ('Q', 'RB', 'RPD', 'F', 'U', 'K', 'J', 'LED', 'RLED', 'DL'):
             g(t[k]).tag = 'ch%d:%s' % (n, k)
-        sh.text('Relay %d (%s): drive %s, INA226 {ch%d:U} at %s'
+        sh.text('Relay %d (%s): drive %s, INA236 {ch%d:U} at %s'
                 % (n, c['load'], c['drv'], n, c['addr']), (111.76, t['y0'] + 2.54), size=2, bold=True)
-        sh.text('No coil feedback: PA0-PA3 drive the winch and the servo UART; the INA226 does the diagnosis.\n'
-                'INA226 %s (A1 = %s, A0 = %s): load current (30 mΩ, LSB 100 µA) + 24 V rail; ALERT → PA15.\n'
-                '{ch%d:LED}: output ON; its 6.7 mA also lets the INA226 see the contact close with no load.\n'
+        sh.text('No coil feedback: PA0-PA3 drive the winch and the servo UART; the INA236 does the diagnosis.\n'
+                'INA236 %s (A0 = %s): load current (30 mΩ, LSB 100 µA) + 24 V rail (read on IN-); ALERT → PA15.\n'
+                '{ch%d:LED}: output ON; its 6.7 mA also lets the INA236 see the contact close with no load.\n'
                 '{ch%d:F}: %s hold PTC, so a shorted output trips only this channel. {ch%d:DL}: load flyback.\n'
                 '{ch%d:Q} AO3400A: {ch%d:RB} 100 Ω gate, {ch%d:RPD} 100k pull-down = OFF in reset (CIF §7a).'
-                % (c['addr'], c['a1'].replace('+3V3_MOD', 'VS'), c['a0'].replace('+3V3_MOD', 'VS'),
+                % (c['addr'], c['a0'].replace('+3V3_MOD', 'VS').replace('I2C1_', ''),
                    n, n, fch['value'], n, n, n, n), (269.24, t['y0'] + 71.12))
     sh.clean()
     return sh
 
 
-RELAY_DIAG = ('Relay diagnosis (CIF §7b, INA226 only)', (
+RELAY_DIAG = ('Relay diagnosis (CIF §7b, INA236 only)', (
     'Coil supply = +5V_24 (U? DC/DC, Power sheet).\n'
     'Read ≥ 30 ms after switching.\n\n'
     'OFF, I ≈ 0 → OK, relay off\n'
-    'OFF, I > 5 mA → contacts welded or driver\n'
+    'OFF, I > 3 mA → contacts welded or driver\n'
     '   shorted\n'
     'ON, I in window → OK (LED 6.7 mA + load)\n'
     'ON, I ≈ 0 → relay not closing: open coil,\n'
@@ -167,16 +176,20 @@ RELAY_DIAG = ('Relay diagnosis (CIF §7b, INA226 only)', (
     'PA2 / PA3 are the servo UART (USART2). So an\n'
     'open coil or a dead driver looks the same as a\n'
     'contact that does not close: "ON, I ≈ 0".\n'
-    'I = INA226 load current, VBUS = 24 V rail.\n\n'
-    'INA226 (30 mΩ, CIF §6a): CONFIG 0x4327,\n'
+    'I = INA236 load current, VBUS = 24 V rail.\n\n'
+    'INA236 (30 mΩ; CIF §6a names the INA226, swapped\n'
+    'for its 50 V rating, review M1): CONFIG 0x4327,\n'
     'CAL 1707 (LSB 100 µA, FS 2.73 A),\n'
     'MASK/ENABLE 0x8001 (SOL, latched),\n'
     'ALERT limit 30000 = 2.5 A default; set each\n'
     "channel's value from the CANopen dictionary.\n"
-    '"Current present" threshold 5 mA.\n'
-    'On ALERT LOW: read MASK/ENABLE of each INA226\n'
+    '"Current present" threshold 3 mA (the LED alone\n'
+    'draws 5.1-6.7 mA over 21-29 V).\n'
+    'On ALERT LOW: read MASK/ENABLE of each INA236\n'
     '(AFF bit 4) to find the channel; the read also\n'
-    'clears the latch. Switch it OFF, report on CAN.'))
+    'clears the latch. Switch it OFF, report on CAN.\n'
+    'Unlike the INA226: bus LSB 1.6 mV, bus read on\n'
+    'IN- (no VBUS pin), Device ID 0xA080.'))
 
 RELAY_LOADS = ('Loads (CIF §7, all 24 V DC)', (
     'CH1 safety light: Hanyoung T084-PAD24Y-D\n'
@@ -191,7 +204,7 @@ RELAY_LOADS = ('Loads (CIF §7, all 24 V DC)', (
     'Every channel: 24 V / 2 A continuous,\n'
     '{F_CH_VALUE} hold PTC per output (CIF §7a: fuse\n'
     'per channel). Shunt on the supply side of the\n'
-    'contact, so the INA226 never sees the load\n'
+    'contact, so the INA236 never sees the load\n'
     'flyback (−0.7 V < −0.3 V input limit) and a\n'
     'welded contact still shows current while OFF.\n\n'
     'Inductive loads (solenoid): SS34 flyback at\n'
@@ -246,13 +259,13 @@ def sensor_sheet():
     sh.text(
         'For 3-wire PNP (sourcing) 24 V sensors, e.g. Autonics PRD08 / PR series (brown +V, black OUT, blue 0 V).\n'
         'NPN (sinking) sensors need a different input circuit.\n\n'
-        'Same circuit as the MES4-Flasher sensor channels 3 / 4 (PB6 / PC15), without the INA226 supply monitors.\n'
+        'Same circuit as the MES4-Flasher sensor channels 3 / 4 (PB6 / PC15), without the Flasher INA226 supply monitors.\n'
         'GPIO budget: all 14 module pins are used (Main sheet, MES4-CIF §2c). More sensors need inputs on\n'
         'I²C1, e.g. a TCA9535 expander (0x20-0x27), polled.\n\n'
         'PB6: the ST bootloader enables a 25-55 kΩ pull-up on PB6 (blank chip only); with the 10k pull-down it\n'
         'reads LOW, which is harmless for an input. PC15: input only (RTC-domain pin, CIF rule 10): fine here.\n'
-        'Interrupts: PB6 → EXTI6. PC15 shares EXTI15 with PA15 (INA226 ALERT): give EXTI15 to PC15 (sensor 2)\n'
-        'and poll ALERT, which the INA226 latches (MASK/ENABLE LEN = 1), so no fault is missed.\n'
+        'Interrupts: PB6 → EXTI6. PC15 shares EXTI15 with PA15 (INA236 ALERT): give EXTI15 to PC15 (sensor 2)\n'
+        'and poll ALERT, which the INA236 latches (MASK/ENABLE LEN = 1), so no fault is missed.\n'
         'No back-powering: the PC817 collectors run from +3V3_MOD (module finger 4), so nothing drives the\n'
         'module pins while it is unpowered.', (17.78, 139.70))
     return sh
@@ -293,7 +306,8 @@ def loadcell_sheet():
       'Bridge current ≈ 13 mA (two 780 Ω cells) from +5V. Warn at 1.5 t, alarm at 2.0 t total. Re-calibrate the scale factor (the old HX711\n'
       'factor was taken at 3.3 V). Filtering as before: 0.5 kg noise threshold, ±0.25 kg stability window, 0.1 kg rounding.\n\n'
       '5 V load cell only: {lc:J18} pin 1 is the +5V rail through {lc:FB1}. Never land a 24 V wire on {lc:J15} / {lc:J18}\n'
-      '(same push-in terminal type as the relay and sensor outputs): mark them "5V LOAD CELL" on the silk.\n'
+      '(same push-in terminal type as the relay and sensor outputs): mark them on the silk:\n'
+      'a filled box "5V LOAD CELL - NEVER 24V" at {lc:J15} / {lc:J18}, and place them away from the 24 V terminals (review M2).\n'
       'Excitation comes from +5V (Power sheet: URB2405S → PTC → ferrite pi filter), the same rail as the module.',
       (17.78, 177.80))
     return sh
@@ -323,8 +337,8 @@ def main_sheet():
     T('{LED1} red  = module +5V present (3 mA).\n{LED2} green = module 3V3 present\n(fed from finger 4, ~0.7 mA).',
       (165.10, 80.01))
     T('I²C1 + ALERT pull-ups', (223.52, 22.86), size=2, bold=True)
-    T("CIF rule 7: always fitted,\nto the module's 3V3 (finger 4).\n2.2k: 4 × INA226 at 400 kHz.\n"
-      '{R20}: INA226 ALERT wire-OR (PA15).', (223.52, 80.01))
+    T("CIF rule 7: always fitted,\nto the module's 3V3 (finger 4).\n2.2k: 4 × INA236 at 400 kHz.\n"
+      '{R20}: INA236 ALERT wire-OR (PA15).', (223.52, 80.01))
     T('Reset', (271.78, 22.86), size=2, bold=True)
     T('Pulls NRST low only.\nNo capacitor: C6 100 nF\nis on the module (CIF §4a).', (271.78, 80.01))
     sh.box(314.96, 20.32, 403.86, 101.60, 'CAN bus (page 3)')
@@ -336,7 +350,8 @@ def main_sheet():
       'white-green).\n\n'
       'All five ports are one bus, wired in parallel.\n'
       'ESD at each connector: {CAN/D_DB9}, {CAN/D_RJ} (H24VNT2B).\n'
-      'Transceiver + 120 Ω terminator (JP1) are on the module.', (317.50, 30.48))
+      'Transceiver + 120 Ω terminator (JP1) are on the module.\n'
+      'Silkscreen + panel at {CAN/J_RJ}: "CAN - NOT ETHERNET" (review L5).', (317.50, 30.48))
     sh.box(15.24, 20.32, 160.02, 101.60, 'Module GPIO map: all 14 used')
     T('PA8   finger 31  out  relay 1 drive, safety light ({Relays1-2/ch1:Q})\n'
       'PC6   finger 29  out  relay 2 drive, LED DRL ({Relays1-2/ch2:Q})\n'
@@ -346,21 +361,21 @@ def main_sheet():
       'PA1   finger 47  out  winch ACLK relay ({Winch/K_ACLK})\n'
       'PA2   finger 45  out  door servo UART TX, USART2 ({AuxPower/J_SRVU} pin 4)\n'
       'PA3   finger 43  in   door servo UART RX, USART2 ({AuxPower/J_SRVU} pin 3)\n'
-      'PA15  finger 63  in   INA226 ALERT, all four wire-OR ({R20} 10k pull-up)\n'
+      'PA15  finger 63  in   INA236 ALERT, all four wire-OR ({R20} 10k pull-up)\n'
       'PA4   finger 41  in   ADS1232 DRDY/DOUT ({LoadCell/lc:U13})\n'
       'PA5   finger 39  out  ADS1232 SCLK (100k pull-down)\n'
       'PA6   finger 37  out  ADS1232 PDWN (100k pull-down)\n'
       'PB6   finger 59  in   Autonics sensor 1 ({Sensors/s1:U} PC817)\n'
       'PC15  finger 51  in   Autonics sensor 2 ({Sensors/s2:U} PC817)\n'
-      'I²C1 SDA / SCL  fingers 53 / 55: INA226 0x40 / 0x41 / 0x44 / 0x45\n'
+      'I²C1 SDA / SCL  fingers 53 / 55: INA236 0x40 / 0x41 / 0x42 / 0x43\n'
       'Not used: USB 23 / 25 (open, CIF rule 8). VCP TX / RX: STDC14 only.\n'
       'Differs from MES4-CIF §2c: no relay coil feedback (PA0-PA3), so those four pins\n'
-      'drive the winch and the servo UART. Relay diagnosis uses the INA226s only.', (17.78, 30.48))
+      'drive the winch and the servo UART. Relay diagnosis uses the INA236s only.', (17.78, 30.48))
     T('Links to the other pages', (17.78, 109.22), size=2, bold=True)
     T('Page 1: block diagram and page list.\n'
       'Page 3 CAN: DB9 male to the IPC + 1x4 RJ45, ESD.\n'
       'Page 4 Power: XT30 24 V input, fuse, reverse-polarity FET, TVS, noise filter, 24 V → 5 V.\n'
-      'Pages 5-6 Relays: PA8 / PC6 / PB3 / PA7 drive, 4 × INA226 (no coil feedback).\n'
+      'Pages 5-6 Relays: PA8 / PC6 / PB3 / PA7 drive, 4 × INA236 (no coil feedback).\n'
       'Page 7 Sensors: PB6 / PC15 (two Autonics PNP sensors).\n'
       'Page 8 LoadCell: PA4 DRDY, PA5 SCLK, PA6 PDWN.\n'
       'Page 9 AuxPower: IMU 9 V (MES3.1), screen USB-C 5 V / 3 A, door servo (FE-URT-2, USART2 PA2 / PA3).\n'
@@ -387,14 +402,14 @@ def main_sheet():
       '   → {Power/FB_5V} ferrite: 4.75-5.5 V, ≥ 300 mA (rule 2, 4).\n'
       '4. +3V3_MOD = module LDO output on finger 4, never\n'
       '   driven (rule 3, ≤ 50 mA): LED 0.7 + pull-ups ≤ 3.3\n'
-      '   + 2 × PC817 0.7 + 4 × INA226 1.7 + ADS1232 0.1\n'
+      '   + 2 × PC817 0.7 + 4 × INA236 1.7 + ADS1232 0.1\n'
       '   + ST-Link VTref ≈ 10 mA.\n'
       '5. NRST: {SW1} and STDC14 pin 12 only pull low\n'
       '   (wired-OR). No extra capacitance (C6 on the module).\n'
       '6. ESD (rule 8): H5VSD3B on every STDC14 signal,\n'
       '   H24VNT2B on CANH / CANL, no series R on CAN.\n'
       '7. No back-powering (rule 6): carrier logic runs from\n'
-      '   +3V3_MOD (pull-ups, PC817s, INA226, ADS1232 DVDD).\n'
+      '   +3V3_MOD (pull-ups, PC817s, INA236, ADS1232 DVDD).\n'
       '8. All relay drives OFF in reset: 100k gate pull-downs.\n'
       '9. Parts: LCSC numbers in each symbol\'s LCSC field.', (317.50, 142.24))
     sh.box(162.56, 184.15, 284.48, 281.94, 'Board connectors')
@@ -410,7 +425,7 @@ def main_sheet():
       '{CAN/J_RJ} CAN RJ45 x4: 1 CAN_H, 2 CAN_L, 3 GND (T568B).\n'
       '{AuxPower/J_IMU} IMU 9V (KF250NH 2-pin): 1 = +9 V after the switch, 2 = GND.\n'
       '{AuxPower/J_USB} SCREEN USB-C: 5 V / 3 A power only (no data).\n'
-      '{AuxPower/J_SRVP} SERVO 24V: 1 GND_24V, 2 +24 V (3 A PTC).\n'
+      '{AuxPower/J_SRVP} SERVO 24V: 1 +24 V (3 A PTC), 2 GND_24V.\n'
       '{AuxPower/J_SRVU} SERVO UART: 1 GND, 2 +5 V, 3 RX, 4 TX.\n'
       '{Winch/J_WINCH} WINCH: 1 CLK, 2 COM, 3 ACLK (relay contacts).\n'
       '{J3} STDC14: ST-Link V3MINIE (SWD, NRST, VCP).\n'
@@ -656,16 +671,16 @@ def aux_sheet():
                desc='servo 24 V PTC, LUTE 2920L300/36GR: 3 A hold (a servo short trips only this output)')
     c1 = fpart(sh, 'C28', (53.34, 219.71), tag='C_SRV1', desc='servo 24 V bypass at the terminal (ESD / HF)')
     c2 = npart(sh, 'C_IMU_IN', 'C', (71.12, 219.71), tag='C_SRV2', desc='servo 24 V local bulk (stall / start current)')
-    jp = fpart(sh, 'J9', (96.52, 218.44), mirror='x', tag='J_SRVP', value='SERVO 24V',
+    jp = fpart(sh, 'J9', (96.52, 218.44), tag='J_SRVP', value='SERVO 24V',
                fields=((2.54, -3.81), (2.54, -1.27), 'left'),
-               desc='FE-URT-2 24 V supply (as CN5 on the MES2 Harvester): 1 = GND_24V, 2 = +24 V via a 3 A PTC')
+               desc='FE-URT-2 24 V supply: 1 = +24 V via a 3 A PTC, 2 = GND_24V (pin 1 = + on every power terminal)')
     sh.wire((25.40, y3), fv.p('1'))
-    sh.wire(fv.p('2'), (45.72, y3), c1.p('1'), c2.p('1'), jp.p('2'))
+    sh.wire(fv.p('2'), (45.72, y3), c1.p('1'), c2.p('1'), (88.90, y3), (88.90, jp.p('1')[1]), jp.p('1'))
     sh.label('+24V_SRV', (45.72, y3))
     gy(c1.p('2'))
     gy(c2.p('2'))
-    sh.wire(jp.p('1'), (88.90, jp.p('1')[1]), (88.90, 222.25))
-    gy((88.90, 222.25))
+    sh.wire(jp.p('2'), (91.44, jp.p('2')[1]), (91.44, 222.25))
+    gy((91.44, 222.25))
     # 5 V for the FE-URT-2 logic, from the screen converter (keeps servo-side faults off the module's 5 V)
     sh.label('+5V_SCR', (109.22, 205.74))
     f5 = fpart(sh, 'F1', (119.38, 205.74), rot=90, tag='F_SRV5', value='1.1A',
@@ -681,7 +696,9 @@ def aux_sheet():
     rpu = fpart(sh, 'R10', (165.10, yr - 3.81), tag='R_SRVPU', value='10k', fields='left',
                 desc='servo RX pull-up: idle HIGH with the FE-URT-2 unplugged')
     sh.pwr('+3V3_MOD', rpu.p('1'))
-    rr = fpart(sh, 'R36', (177.80, yr), rot=90, tag='R_SRVRX', desc='servo RX series resistor (CIF rule 8: 22-100 Ω)')
+    rr = fpart(sh, 'R36', (177.80, yr), rot=90, tag='R_SRVRX', value='1k',
+               desc='servo RX series resistor: 1k limits FE-URT-2 back-feed into PA3 when the module is off (CIF rule 6)')
+    setf(rr, lcsc='C11702')
     dr = fpart(sh, 'D2', (190.50, yr + 3.81), rot=270, tag='D_SRVRX', fields='right',
                desc='servo RX ESD, H5VSD3B (5 V, 1.5 pF)')
     sh.wire((160.02, yr), rpu.p('2'), rr.p('1'))
@@ -706,8 +723,9 @@ def aux_sheet():
     for n, lab in (('2', '+5V_SRV'), ('3', 'SRV_RX'), ('4', 'SRV_TX')):
         sh.wire(ju.p(n), (254.00, ju.p(n)[1]))
         sh.label(lab, (254.00, ju.p(n)[1]), 180)
-    sh.text('{J_SRVP} SERVO 24V and {J_SRVU} SERVO UART: same pinout\n'
-            'as CN5 / CN13 on the MES2 Harvester, so its cables fit.\n'
+    sh.text('{J_SRVU} SERVO UART: same pinout as CN13 on the MES2 Harvester.\n'
+            '{J_SRVP} SERVO 24V: pin 1 = +24 V like every power terminal here\n'
+            '(Harvester CN5 is reversed: re-pin that cable).\n'
             'The FE-URT-2 turns the UART into the Feetech half-duplex\n'
             'servo bus and passes the 24 V on to the servos.\n'
             'UART on module USART2: PA2 TX → pin 4,\n'
@@ -826,7 +844,7 @@ def pinout_sheet():
             '{CAN/J_DB9}, {CAN/J_RJ}, ESD {CAN/D_DB9} / {CAN/D_RJ}', 'CANH',
             'Transceiver + 120 Ω terminator (JP1) are on the module'),
         row('3', '—', 'CANL', 'CAN', 'DB9 pin 5, RJ45 pin 2', 'as CANH', 'CANL', 'No 24 V on any CAN connector'),
-        row('4', '—', '+3V3', 'POWER', 'M.2 4 → +3V3_MOD: INA226s, ADS1232 DVDD, PC817s, pull-ups',
+        row('4', '—', '+3V3', 'POWER', 'M.2 4 → +3V3_MOD: INA236s, ADS1232 DVDD, PC817s, pull-ups',
             '{Main/LED2} green, {Main/J3} VTref', '+3V3 out', '≤ 50 mA allowed; this carrier draws ≈ 7 mA worst case'),
         row('6', 'PA9', 'VCP_TX', 'UART', 'M.2 6 → ST-Link T_VCP_TX (STDC14 pin 14)', '{Main/J3}, H5VSD3B ESD',
             'VCP_TX', 'USART1 TX: ST-Link VCP + bootloader UART'),
@@ -856,7 +874,7 @@ def pinout_sheet():
         row('41', 'PA4', 'PA4', 'GPIO', 'ADS1232 DRDY / DOUT (in, 100 Ω)', '{LoadCell/lc:U13} ADS1232',
             'ADS1232 DRDY', 'TT pin: 3.6 V max (DVDD = 3V3). Bit-banged read: DOUT is not on SPI1 MISO'),
         row('43', 'PA3', 'PA3', 'UART', 'USART2 RX ← J17 pin 3, door servo (FE-URT-2)',
-            '{AuxPower/J_SRVU}, {AuxPower/R_SRVRX} 100 Ω, {AuxPower/R_SRVPU} 10k pull-up, {AuxPower/D_SRVRX}',
+            '{AuxPower/J_SRVU}, {AuxPower/R_SRVRX} 1k, {AuxPower/R_SRVPU} 10k pull-up, {AuxPower/D_SRVRX}',
             'Relay CH4 coil FB', 'Differs from CIF. FE-URT-2 must be set to 3.3 V levels', dev=True),
         row('45', 'PA2', 'PA2', 'UART', 'USART2 TX → J17 pin 4, door servo (FE-URT-2)',
             '{AuxPower/J_SRVU}, {AuxPower/R_SRVTX} 100 Ω, {AuxPower/R_SRVTXPU} 10k pull-up, {AuxPower/D_SRVTX}',
@@ -871,17 +889,17 @@ def pinout_sheet():
         row('51', 'PC15', 'PC15', 'GPIO', 'Autonics sensor 2 (in, HIGH = sensor on)',
             '{Sensors/s2:U} PC817, {Sensors/s2:RP} 10k pull-down', 'Spare input',
             'Weak pin: input only, never source. EXTI15 shared with PA15'),
-        row('53', 'PB9', 'I2C1_SDA', 'I2C', 'I²C1 SDA: 4 × INA226 (0x40 / 0x41 / 0x44 / 0x45)',
+        row('53', 'PB9', 'I2C1_SDA', 'I2C', 'I²C1 SDA: 4 × INA236 (0x40 / 0x41 / 0x42 / 0x43)',
             '{Main/R5} 2.2k pull-up to +3V3_MOD', 'I²C1 SDA', '400 kHz'),
-        row('55', 'PB8', 'I2C1_SCL', 'I2C', 'I²C1 SCL: 4 × INA226', '{Main/R6} 2.2k pull-up to +3V3_MOD',
+        row('55', 'PB8', 'I2C1_SCL', 'I2C', 'I²C1 SCL: 4 × INA236', '{Main/R6} 2.2k pull-up to +3V3_MOD',
             'I²C1 SCL', ''),
         row('59', 'PB6', 'PB6', 'GPIO', 'Autonics sensor 1 (in, HIGH = sensor on)',
             '{Sensors/s1:U} PC817, {Sensors/s1:RP} 10k pull-down', 'Spare input',
             'Bootloader pull-up on a blank chip: reads LOW with the 10k, harmless'),
         row('61', 'PB3', 'PB3', 'GPIO', 'Relay 3 drive, battery stopper (out)', rly(3, 'Relays3-4'),
             'Relay CH3 drive', ''),
-        row('63', 'PA15', 'PA15', 'GPIO', 'INA226 ALERT, all four wire-OR (in)', '{Main/R20} 10k pull-up to +3V3_MOD',
-            'INA226 ALERT', 'EXTI15 shared with PC15: interrupt on PC15, poll ALERT (latched)'),
+        row('63', 'PA15', 'PA15', 'GPIO', 'INA236 ALERT, all four wire-OR (in)', '{Main/R20} 10k pull-up to +3V3_MOD',
+            'INA236 ALERT', 'EXTI15 shared with PC15: interrupt on PC15, poll ALERT (latched)'),
         row('others', '—', 'GND', 'GND', 'GND plane + socket hold-down pads', '—', 'GND',
             '21, 24, 26–28, 30, 32–34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54, 56–58, 60, 62, 64–75'),
     ]
@@ -941,15 +959,15 @@ def power_sheet():
     sh.pwr('PWR_FLAG', (177.80, y))
     sh.pwr('+24V', (187.96, y))
     sh.text('{J_IN} XT30 (as on the MES4-Flasher): pin 1 + flat end, pin 2 - chamfered end.\n'
-            '{F_IN} {F_IN_VALUE} fast fuse (Nano2 2410, 65 V): protects the XT30 and the board copper; the 8.5 A worst case\n'
-            'stays under its 75 % derating. Each relay output has its own 3 A PTC, so a load short never blows {F_IN}.\n'
+            '{F_IN} {F_IN_VALUE} fast fuse (Nano2 2410, 65 V): protects the XT30 and the board copper; a realistic 6-8 A\n'
+            'stays under its 75 % derating (11 A); all loads at their limit (≈ 13 A, see the budget) would not. Each relay output has its own 3 A PTC, so a load short never blows {F_IN}.\n'
             '{Q_RP} P-MOSFET reverse-polarity block: correct polarity turns it on (Vgs clamped by {DZ},\n'
             '{RG} 10k to GND_24V); a reversed lead leaves it off. It replaces the Flasher\'s SS56 Schottky,\n'
-            'which would dissipate ≈ 3-4 W here. AGM60P90D: -60 V, 13 mΩ, ≈ 1 W at 8.5 A: copper on the drain tab.\n'
+            'which would dissipate ≈ 3-4 W here. AGM60P90D: -60 V, 13 mΩ: ≈ 0.8 W at 8 A, ≈ 2.2 W at 13 A: size the drain-tab copper for 2.2 W.\n'
             '{TVS} SMBJ30A (600 W): surges and spikes from motors and solenoids on the 24 V bus (CIF §7a).\n'
             '{C_BULK} 100 µF / 63 V electrolytic: bulk, and its ESR damps the cable inductance (hot-plug ringing).\n'
             '{C_IN10} / {C_IN100}: HF bypass. {LED24} green = 24 V present (after {Q_RP}).\n'
-            '+24V feeds the relay contacts, the INA226 VBUS inputs and the sensor supplies.', (17.78, 76.20))
+            '+24V feeds the relay contacts, the INA236 current monitors and the sensor supplies.', (17.78, 76.20))
     sh.box(198.12, 20.32, 403.86, 106.68, 'Power budget and noise strategy')
     sh.text('24 V current: relays ≤ 4 × 2 A (CIF §7; realistic 3-5 A: lamp ~0.3 A, DRL, 1.5 A solenoid), sensors\n'
             '2 × ≤ 100 mA, logic DC/DC ≈ 0.15 A, IMU 9 V ≤ 0.5 A + screen 5 V ≤ 0.95 A + door servo ≤ 3 A (page 9).\n'
@@ -994,7 +1012,7 @@ def power_sheet():
     sh.pwr('PWR_FLAG', (152.40, y))
     sh.pwr('+5V_24', (162.56, y))
     sh.text('{L_DC} 10 µH + {C_DC10} / {C_DC100}, with {C_IN10} on +24V: pi filter in front of the DC/DC only.\n'
-            'Relay contacts, INA226s and sensors use the unfiltered +24V.\n'
+            'Relay contacts, INA236s and sensors use the unfiltered +24V.\n'
             '{U_DCDC} URB2405S-6WR3 (as on the MES4-Flasher): 9-36 V in, 5 V 1.2 A, short-circuit protected.\n'
             'CTRL open = on. {C_DC100} = the maker\'s 100 µF input cap; {C_5V24A} / {C_5V24B} = output caps.\n'
             'The maker\'s EMC circuit adds a 470 µH common-mode choke + 1 nF Y caps: not fitted, because\n'
@@ -1029,8 +1047,8 @@ def power_sheet():
     sh.pwr('PWR_FLAG', (335.28, 132.08))
     sh.text('GND_24V: 24 V return (XT30 pin 2, relay outputs,\n'
             'sensor 0 V, TVS, bulk caps, DC/DC input side).\n'
-            'GND: logic (module, INA226, ADS1232, DC/DC output).\n'
-            '{NT}: the only joint between them (the INA226s\n'
+            'GND: logic (module, INA236, ADS1232, DC/DC output).\n'
+            '{NT}: the only joint between them (the INA236s\n'
             'measure +24V against GND). Place it at the DC/DC.', (314.96, 152.40))
     # ======== row 3: test points, bring-up
     sh.box(15.24, 187.96, 203.20, 248.92, 'Test points (bring-up)')
@@ -1124,20 +1142,20 @@ def root_items(sh, sheets):
           'STM32G0B1, 64 MHz, CAN transceiver.\n'
           'Gets +5V on fingers 20 / 22.\n'
           'Makes its own 3.3 V → +3V3_MOD\n(finger 4, ≤ 50 mA) for the I²C\n'
-          'pull-ups, INA226s, PC817 outputs\nand the ADS1232 logic.\n\n'
+          'pull-ups, INA236s, PC817 outputs\nand the ADS1232 logic.\n\n'
           'All 14 GPIOs are used\n(GPIO map on the Main sheet).\n\n'
           '{Main/LED1} = module +5V, {Main/LED2} = 3V3.\n'
           'Hold-down: {Main/H5} M3 standoff.\n\n'
           'No hot-plug: unplug the XT30\nbefore fitting a module.')
     block(205.74, 40.64, 297.18, 106.68, RED, (222, 242, 222), '4 relay outputs (CIF §7)',
-          '1 safety light: PA8 drive, INA226 0x40\n'
-          '2 LED DRL: PC6 drive, INA226 0x41\n'
-          '3 battery stopper: PB3 drive, INA226 0x44\n'
-          '4 spare: PA7 drive, INA226 0x45\n\n'
+          '1 safety light: PA8 drive, INA236 0x40\n'
+          '2 LED DRL: PC6 drive, INA236 0x41\n'
+          '3 battery stopper: PB3 drive, INA236 0x42\n'
+          '4 spare: PA7 drive, INA236 0x43\n\n'
           'GPIO → 100 Ω → AO3400A → 5 V coil\n(SRD-5VDC-SL-A, on +5V_24).\n'
           '+24V → 30 mΩ shunt → contact →\n{F_CH_VALUE} PTC → output (2 A continuous).\n'
           'No coil feedback (pins used elsewhere).\n'
-          'INA226 per channel: load current +\n24 V rail, ALERT → PA15.')
+          'INA236 per channel: load current +\n24 V rail, ALERT → PA15.')
     block(205.74, 116.84, 297.18, 142.24, RED, (222, 242, 222), '2 Autonics sensor inputs',
           '+24V → 100 mA PTC → sensor supply.\n'
           'Sensor OUT → 10k → PC817 → PB6 / PC15\n(HIGH = sensor ON). PNP 24 V sensors.')
@@ -1165,14 +1183,14 @@ def root_items(sh, sheets):
     line([(XR, 33.02), (XR, 132.08)], RED)
     arrow([(XR, 55.88), (297.18, 55.88)], RED)
     arrow([(XR, 132.08), (297.18, 132.08)], RED)
-    txt('+24V rail: relay contacts, INA226 VBUS, sensor supplies, servo and aux power', 120.65, 29.21, 1.6, False, RED)
+    txt('+24V rail: relay contacts, INA236 monitors, sensor supplies, servo and aux power', 120.65, 29.21, 1.6, False, RED)
     block(RX1, 40.64, RX2, 66.04, GRY, (238, 238, 238), 'Winch control (page 10)',
           'Two IM03GR relays, as on the MES2_Extension:\nPA0 → CLK, PA1 → ACLK (AO3400A drivers).\n'
           'Contacts switch the 48 V winch controller\'s\ndirection inputs ({Winch/J_WINCH}).\n'
           'Hardware interlock: both on = both open.')
     block(RX1, 76.20, RX2, 101.60, RED, (222, 242, 222), 'Door servo (page 9)',
           '{AuxPower/J_SRVP}: +24V → {AuxPower/F_SRV} 3 A PTC → FE-URT-2\n→ Feetech servos (24 V types).\n'
-          '{AuxPower/J_SRVU}: USART2 PA2 TX / PA3 RX, 100 Ω + ESD.\nFE-URT-2 set to 3.3 V levels; its 5 V\n'
+          '{AuxPower/J_SRVU}: USART2 PA2 TX / PA3 RX (100 Ω / 1k) + ESD.\nFE-URT-2 set to 3.3 V levels; its 5 V\n'
           'logic supply comes from the screen converter.')
     arrow([(400.05, 88.90), (RX2, 88.90)], RED)
     block(RX1, 111.76, RX2, 142.24, ORA, LP, 'IMU 9 V + screen 5 V (page 9)',
@@ -1202,7 +1220,7 @@ def root_items(sh, sheets):
     rect(17.78, 213.36, 248.92, 248.92, (60, 60, 60), (250, 250, 250))
     txt('Notes', 20.32, 215.65, 2.2, True)
     txt('E-Crawler carrier for one MES4-MCU module (MES4-CIF rev A-d6). Circuits taken from the MES4-Flasher: PC817 sensor inputs,\n'
-        'ADS1232 load cell, relay channels (driver, INA226) and the XT30 / URB2405S 24 V input.\n'
+        'ADS1232 load cell, relay channels (driver, current monitor) and the XT30 / URB2405S 24 V input.\n'
         'GPIO budget: 4 relay drives + ALERT + 3 ADS1232 + 2 sensors + winch (2) + servo USART2 (2) = 14.\n'
         'Differs from the MES4-CIF §2c table: no relay coil feedback, so PA0-PA3 drive the winch and the servo UART.\n'
         'Relay drive per CIF §7a (AO3400A, 100 Ω, 100k pull-down); the Flasher uses a 2SC2884 BJT for the same job.\n'
@@ -1230,9 +1248,9 @@ def sheet_symbol(sh, x, y, root_uuid, w=38.10, h=7.62):
 def main():
     sheets = [main_sheet(), can_sheet(), power_sheet(),
               relay_sheet('Relays1-2', 'Relays12.kicad_sch', 5, [1, 2],
-                          'Sheet 5: relay outputs 1-2 (safety light, LED DRL) with load-current feedback (INA226)'),
+                          'Sheet 5: relay outputs 1-2 (safety light, LED DRL) with load-current feedback (INA236)'),
               relay_sheet('Relays3-4', 'Relays34.kicad_sch', 6, [3, 4],
-                          'Sheet 6: relay outputs 3-4 (battery stopper, spare) with load-current feedback (INA226)'),
+                          'Sheet 6: relay outputs 3-4 (battery stopper, spare) with load-current feedback (INA236)'),
               sensor_sheet(), loadcell_sheet(), aux_sheet(), winch_sheet(), pinout_sheet()]
     S = {s.name: s for s in sheets}
     S['Relays1-2'].box(15.24, 20.32, 106.68, 250.19)
