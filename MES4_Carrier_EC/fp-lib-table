@@ -1,0 +1,4 @@
+(fp_lib_table
+  (version 7)
+  (lib (name "MES4-Carrier-EC")(type "KiCad")(uri "${KIPRJMOD}/MES4-Carrier-EC.pretty")(options "")(descr "MES4-Carrier-EC project footprints (from the MES4-Flasher, checked against datasheets)"))
+)

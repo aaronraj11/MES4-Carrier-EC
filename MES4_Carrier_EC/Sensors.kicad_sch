@@ -1,0 +1,2192 @@
+(kicad_sch
+	(version 20250114)
+	(generator "eeschema")
+	(generator_version "9.0")
+	(uuid "72b6c4b7-e202-5b1b-a265-7444907c8358")
+	(paper "A3")
+	(title_block
+		(title "MES4-Carrier-EC")
+		(date "2026-10-27")
+		(rev "A")
+		(company "Monkey Robotics")
+		(comment 1 "Aaron Raj Bhatti")
+		(comment 2 "Sheet 7: two Autonics PNP sensor inputs (PC817 opto, as on the MES4-Flasher)")
+	)
+	(lib_symbols
+		(symbol "Connector:Screw_Terminal_01x03"
+			(pin_names (offset 1.016) (hide yes))
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "J"
+				(at 0 5.08 0)
+				(effects (font (size 1.27 1.27)))
+			)
+			(property "Value" "Screw_Terminal_01x03"
+				(at 0 -5.08 0)
+				(effects (font (size 1.27 1.27)))
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "Datasheet" "~"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "Description" "Generic screw terminal, single row, 01x03, script generated (kicad-library-utils/schlib/autogen/connector/)"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "ki_keywords" "screw terminal"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "ki_fp_filters" "TerminalBlock*:*"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(symbol "Screw_Terminal_01x03_1_1"
+				(rectangle
+					(start -1.27 3.81)
+					(end 1.27 -3.81)
+					(stroke (width 0.254) (type default))
+					(fill (type background))
+				)
+				(polyline
+					(pts (xy -0.5334 2.8702) (xy 0.3302 2.032))
+					(stroke (width 0.1524) (type default))
+					(fill (type none))
+				)
+				(polyline
+					(pts (xy -0.5334 0.3302) (xy 0.3302 -0.508))
+					(stroke (width 0.1524) (type default))
+					(fill (type none))
+				)
+				(polyline
+					(pts (xy -0.5334 -2.2098) (xy 0.3302 -3.048))
+					(stroke (width 0.1524) (type default))
+					(fill (type none))
+				)
+				(polyline
+					(pts (xy -0.3556 3.048) (xy 0.508 2.2098))
+					(stroke (width 0.1524) (type default))
+					(fill (type none))
+				)
+				(polyline
+					(pts (xy -0.3556 0.508) (xy 0.508 -0.3302))
+					(stroke (width 0.1524) (type default))
+					(fill (type none))
+				)
+				(polyline
+					(pts (xy -0.3556 -2.032) (xy 0.508 -2.8702))
+					(stroke (width 0.1524) (type default))
+					(fill (type none))
+				)
+				(circle
+					(center 0 2.54)
+					(radius 0.635)
+					(stroke (width 0.1524) (type default))
+					(fill (type none))
+				)
+				(circle
+					(center 0 0)
+					(radius 0.635)
+					(stroke (width 0.1524) (type default))
+					(fill (type none))
+				)
+				(circle
+					(center 0 -2.54)
+					(radius 0.635)
+					(stroke (width 0.1524) (type default))
+					(fill (type none))
+				)
+				(pin passive line
+					(at -5.08 2.54 0)
+					(length 3.81)
+					(name "Pin_1" (effects (font (size 1.27 1.27))))
+					(number "1" (effects (font (size 1.27 1.27))))
+				)
+				(pin passive line
+					(at -5.08 0 0)
+					(length 3.81)
+					(name "Pin_2" (effects (font (size 1.27 1.27))))
+					(number "2" (effects (font (size 1.27 1.27))))
+				)
+				(pin passive line
+					(at -5.08 -2.54 0)
+					(length 3.81)
+					(name "Pin_3" (effects (font (size 1.27 1.27))))
+					(number "3" (effects (font (size 1.27 1.27))))
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "Device:C"
+			(pin_numbers (hide yes))
+			(pin_names (offset 0.254))
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "C"
+				(at 0.635 2.54 0)
+				(effects (font (size 1.27 1.27)) (justify left))
+			)
+			(property "Value" "C"
+				(at 0.635 -2.54 0)
+				(effects (font (size 1.27 1.27)) (justify left))
+			)
+			(property "Footprint" ""
+				(at 0.9652 -3.81 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "Datasheet" "~"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "Description" "Unpolarized capacitor"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "ki_keywords" "cap capacitor"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "ki_fp_filters" "C_*"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(symbol "C_0_1"
+				(polyline
+					(pts (xy -2.032 0.762) (xy 2.032 0.762))
+					(stroke (width 0.508) (type default))
+					(fill (type none))
+				)
+				(polyline
+					(pts (xy -2.032 -0.762) (xy 2.032 -0.762))
+					(stroke (width 0.508) (type default))
+					(fill (type none))
+				)
+			)
+			(symbol "C_1_1"
+				(pin passive line
+					(at 0 3.81 270)
+					(length 2.794)
+					(name "~" (effects (font (size 1.27 1.27))))
+					(number "1" (effects (font (size 1.27 1.27))))
+				)
+				(pin passive line
+					(at 0 -3.81 90)
+					(length 2.794)
+					(name "~" (effects (font (size 1.27 1.27))))
+					(number "2" (effects (font (size 1.27 1.27))))
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "MES4-Carrier-EC:GND_24V"
+			(power)
+			(pin_numbers (hide yes))
+			(pin_names (offset 0) (hide yes))
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "#PWR"
+				(at 0 -5.08 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "Value" "GND_24V"
+				(at 0 -3.302 0)
+				(effects (font (size 1.27 1.27)))
+			)
+			(property "Footprint" ""
+				(at 0 -1.27 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "Datasheet" ""
+				(at 0 -1.27 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "Description" "24 V side return (sensors, relay loads) - isolated from the logic GND"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "ki_keywords" "global ground"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(symbol "GND_24V_0_1"
+				(polyline
+					(pts (xy -1.016 -1.27) (xy -1.27 -2.032) (xy -1.27 -2.032))
+					(stroke (width 0.2032) (type default))
+					(fill (type none))
+				)
+				(polyline
+					(pts (xy -0.508 -1.27) (xy -0.762 -2.032) (xy -0.762 -2.032))
+					(stroke (width 0.2032) (type default))
+					(fill (type none))
+				)
+				(polyline
+					(pts (xy 0 -1.27) (xy 0 0))
+					(stroke (width 0) (type default))
+					(fill (type none))
+				)
+				(polyline
+					(pts (xy 0 -1.27) (xy -0.254 -2.032) (xy -0.254 -2.032))
+					(stroke (width 0.2032) (type default))
+					(fill (type none))
+				)
+				(polyline
+					(pts (xy 0.508 -1.27) (xy 0.254 -2.032) (xy 0.254 -2.032))
+					(stroke (width 0.2032) (type default))
+					(fill (type none))
+				)
+				(polyline
+					(pts (xy 1.016 -1.27) (xy -1.016 -1.27) (xy -1.016 -1.27))
+					(stroke (width 0.2032) (type default))
+					(fill (type none))
+				)
+				(polyline
+					(pts (xy 1.016 -1.27) (xy 0.762 -2.032) (xy 0.762 -2.032) (xy 0.762 -2.032))
+					(stroke (width 0.2032) (type default))
+					(fill (type none))
+				)
+			)
+			(symbol "GND_24V_1_1"
+				(pin power_in line
+					(at 0 0 270)
+					(length 0)
+					(name "~" (effects (font (size 1.27 1.27))))
+					(number "1" (effects (font (size 1.27 1.27))))
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "Device:Polyfuse"
+			(pin_numbers (hide yes))
+			(pin_names (offset 0))
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "F"
+				(at -2.54 0 90)
+				(effects (font (size 1.27 1.27)))
+			)
+			(property "Value" "Polyfuse"
+				(at 2.54 0 90)
+				(effects (font (size 1.27 1.27)))
+			)
+			(property "Footprint" ""
+				(at 1.27 -5.08 0)
+				(effects (font (size 1.27 1.27)) (justify left) (hide yes))
+			)
+			(property "Datasheet" "~"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "Description" "Resettable fuse, polymeric positive temperature coefficient"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "ki_keywords" "resettable fuse PTC PPTC polyfuse polyswitch"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "ki_fp_filters" "*polyfuse* *PTC*"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(symbol "Polyfuse_0_1"
+				(polyline
+					(pts (xy -1.524 2.54) (xy -1.524 1.524) (xy 1.524 -1.524) (xy 1.524 -2.54))
+					(stroke (width 0) (type default))
+					(fill (type none))
+				)
+				(rectangle
+					(start -0.762 2.54)
+					(end 0.762 -2.54)
+					(stroke (width 0.254) (type default))
+					(fill (type none))
+				)
+				(polyline
+					(pts (xy 0 2.54) (xy 0 -2.54))
+					(stroke (width 0) (type default))
+					(fill (type none))
+				)
+			)
+			(symbol "Polyfuse_1_1"
+				(pin passive line
+					(at 0 3.81 270)
+					(length 1.27)
+					(name "~" (effects (font (size 1.27 1.27))))
+					(number "1" (effects (font (size 1.27 1.27))))
+				)
+				(pin passive line
+					(at 0 -3.81 90)
+					(length 1.27)
+					(name "~" (effects (font (size 1.27 1.27))))
+					(number "2" (effects (font (size 1.27 1.27))))
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "power:+24V"
+			(power)
+			(pin_numbers (hide yes))
+			(pin_names (offset 0) (hide yes))
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "#PWR"
+				(at 0 -3.81 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "Value" "+24V"
+				(at 0 3.556 0)
+				(effects (font (size 1.27 1.27)))
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "Description" "Power symbol creates a global label with name \"+24V\""
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "ki_keywords" "global power"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(symbol "+24V_0_1"
+				(polyline
+					(pts (xy -0.762 1.27) (xy 0 2.54))
+					(stroke (width 0) (type default))
+					(fill (type none))
+				)
+				(polyline
+					(pts (xy 0 2.54) (xy 0.762 1.27))
+					(stroke (width 0) (type default))
+					(fill (type none))
+				)
+				(polyline
+					(pts (xy 0 0) (xy 0 2.54))
+					(stroke (width 0) (type default))
+					(fill (type none))
+				)
+			)
+			(symbol "+24V_1_1"
+				(pin power_in line
+					(at 0 0 90)
+					(length 0)
+					(name "~" (effects (font (size 1.27 1.27))))
+					(number "1" (effects (font (size 1.27 1.27))))
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "Device:R"
+			(pin_numbers (hide yes))
+			(pin_names (offset 0))
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "R"
+				(at 2.032 0 90)
+				(effects (font (size 1.27 1.27)))
+			)
+			(property "Value" "R"
+				(at 0 0 90)
+				(effects (font (size 1.27 1.27)))
+			)
+			(property "Footprint" ""
+				(at -1.778 0 90)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "Datasheet" "~"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "Description" "Resistor"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "ki_keywords" "R res resistor"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "ki_fp_filters" "R_*"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(symbol "R_0_1"
+				(rectangle
+					(start -1.016 -2.54)
+					(end 1.016 2.54)
+					(stroke (width 0.254) (type default))
+					(fill (type none))
+				)
+			)
+			(symbol "R_1_1"
+				(pin passive line
+					(at 0 3.81 270)
+					(length 1.27)
+					(name "~" (effects (font (size 1.27 1.27))))
+					(number "1" (effects (font (size 1.27 1.27))))
+				)
+				(pin passive line
+					(at 0 -3.81 90)
+					(length 1.27)
+					(name "~" (effects (font (size 1.27 1.27))))
+					(number "2" (effects (font (size 1.27 1.27))))
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "Isolator:PC817"
+			(pin_names (offset 1.016))
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "U"
+				(at -5.08 5.08 0)
+				(effects (font (size 1.27 1.27)) (justify left))
+			)
+			(property "Value" "PC817"
+				(at 0 5.08 0)
+				(effects (font (size 1.27 1.27)) (justify left))
+			)
+			(property "Footprint" "Package_DIP:DIP-4_W7.62mm"
+				(at -5.08 -5.08 0)
+				(effects (font (size 1.27 1.27) (italic yes)) (justify left) (hide yes))
+			)
+			(property "Datasheet" "http://www.soselectronic.cz/a_info/resource/d/pc817.pdf"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (justify left) (hide yes))
+			)
+			(property "Description" "DC Optocoupler, Vce 35V, CTR 50-300%, DIP-4"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "ki_keywords" "NPN DC Optocoupler"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "ki_fp_filters" "DIP*W7.62mm*"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(symbol "PC817_0_1"
+				(rectangle
+					(start -5.08 3.81)
+					(end 5.08 -3.81)
+					(stroke (width 0.254) (type default))
+					(fill (type background))
+				)
+				(polyline
+					(pts (xy -5.08 2.54) (xy -2.54 2.54) (xy -2.54 -0.635))
+					(stroke (width 0) (type default))
+					(fill (type none))
+				)
+				(polyline
+					(pts (xy -3.175 -0.635) (xy -1.905 -0.635))
+					(stroke (width 0.254) (type default))
+					(fill (type none))
+				)
+				(polyline
+					(pts (xy -2.54 -0.635) (xy -2.54 -2.54) (xy -5.08 -2.54))
+					(stroke (width 0) (type default))
+					(fill (type none))
+				)
+				(polyline
+					(pts (xy -2.54 -0.635) (xy -3.175 0.635) (xy -1.905 0.635) (xy -2.54 -0.635))
+					(stroke (width 0.254) (type default))
+					(fill (type none))
+				)
+				(polyline
+					(pts (xy -0.508 0.508) (xy 0.762 0.508) (xy 0.381 0.381) (xy 0.381 0.635) (xy 0.762 0.508))
+					(stroke (width 0) (type default))
+					(fill (type none))
+				)
+				(polyline
+					(pts (xy -0.508 -0.508) (xy 0.762 -0.508) (xy 0.381 -0.635) (xy 0.381 -0.381) (xy 0.762 -0.508))
+					(stroke (width 0) (type default))
+					(fill (type none))
+				)
+				(polyline
+					(pts (xy 2.54 1.905) (xy 2.54 -1.905) (xy 2.54 -1.905))
+					(stroke (width 0.508) (type default))
+					(fill (type none))
+				)
+				(polyline
+					(pts (xy 2.54 0.635) (xy 4.445 2.54))
+					(stroke (width 0) (type default))
+					(fill (type none))
+				)
+				(polyline
+					(pts (xy 3.048 -1.651) (xy 3.556 -1.143) (xy 4.064 -2.159) (xy 3.048 -1.651) (xy 3.048 -1.651))
+					(stroke (width 0) (type default))
+					(fill (type outline))
+				)
+				(polyline
+					(pts (xy 4.445 2.54) (xy 5.08 2.54))
+					(stroke (width 0) (type default))
+					(fill (type none))
+				)
+				(polyline
+					(pts (xy 4.445 -2.54) (xy 2.54 -0.635))
+					(stroke (width 0) (type default))
+					(fill (type outline))
+				)
+				(polyline
+					(pts (xy 4.445 -2.54) (xy 5.08 -2.54))
+					(stroke (width 0) (type default))
+					(fill (type none))
+				)
+			)
+			(symbol "PC817_1_1"
+				(pin passive line
+					(at -7.62 2.54 0)
+					(length 2.54)
+					(name "~" (effects (font (size 1.27 1.27))))
+					(number "1" (effects (font (size 1.27 1.27))))
+				)
+				(pin passive line
+					(at -7.62 -2.54 0)
+					(length 2.54)
+					(name "~" (effects (font (size 1.27 1.27))))
+					(number "2" (effects (font (size 1.27 1.27))))
+				)
+				(pin passive line
+					(at 7.62 2.54 180)
+					(length 2.54)
+					(name "~" (effects (font (size 1.27 1.27))))
+					(number "4" (effects (font (size 1.27 1.27))))
+				)
+				(pin passive line
+					(at 7.62 -2.54 180)
+					(length 2.54)
+					(name "~" (effects (font (size 1.27 1.27))))
+					(number "3" (effects (font (size 1.27 1.27))))
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "Device:D"
+			(pin_numbers (hide yes))
+			(pin_names (offset 1.016) (hide yes))
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "D"
+				(at 0 2.54 0)
+				(effects (font (size 1.27 1.27)))
+			)
+			(property "Value" "D"
+				(at 0 -2.54 0)
+				(effects (font (size 1.27 1.27)))
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "Datasheet" "~"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "Description" "Diode"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "Sim.Device" "D"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "Sim.Pins" "1=K 2=A"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "ki_keywords" "diode"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "ki_fp_filters" "TO-???* *_Diode_* *SingleDiode* D_*"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(symbol "D_0_1"
+				(polyline
+					(pts (xy -1.27 1.27) (xy -1.27 -1.27))
+					(stroke (width 0.254) (type default))
+					(fill (type none))
+				)
+				(polyline
+					(pts (xy 1.27 1.27) (xy 1.27 -1.27) (xy -1.27 0) (xy 1.27 1.27))
+					(stroke (width 0.254) (type default))
+					(fill (type none))
+				)
+				(polyline
+					(pts (xy 1.27 0) (xy -1.27 0))
+					(stroke (width 0) (type default))
+					(fill (type none))
+				)
+			)
+			(symbol "D_1_1"
+				(pin passive line
+					(at -3.81 0 0)
+					(length 2.54)
+					(name "K" (effects (font (size 1.27 1.27))))
+					(number "1" (effects (font (size 1.27 1.27))))
+				)
+				(pin passive line
+					(at 3.81 0 180)
+					(length 2.54)
+					(name "A" (effects (font (size 1.27 1.27))))
+					(number "2" (effects (font (size 1.27 1.27))))
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "MES4-Carrier-EC:+3V3_MOD"
+			(power)
+			(pin_numbers (hide yes))
+			(pin_names (offset 0) (hide yes))
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "#PWR"
+				(at 0 -3.81 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "Value" "+3V3_MOD"
+				(at 0 3.556 0)
+				(effects (font (size 1.27 1.27)))
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "Description" "Module 3.3 V output (M.2 finger 4) - never driven by the carrier"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "ki_keywords" "global power"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(symbol "+3V3_MOD_0_1"
+				(polyline
+					(pts (xy -0.762 1.27) (xy 0 2.54))
+					(stroke (width 0) (type default))
+					(fill (type none))
+				)
+				(polyline
+					(pts (xy 0 2.54) (xy 0.762 1.27))
+					(stroke (width 0) (type default))
+					(fill (type none))
+				)
+				(polyline
+					(pts (xy 0 0) (xy 0 2.54))
+					(stroke (width 0) (type default))
+					(fill (type none))
+				)
+			)
+			(symbol "+3V3_MOD_1_1"
+				(pin power_in line
+					(at 0 0 90)
+					(length 0)
+					(name "~" (effects (font (size 1.27 1.27))))
+					(number "1" (effects (font (size 1.27 1.27))))
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "power:GND"
+			(power)
+			(pin_numbers (hide yes))
+			(pin_names (offset 0) (hide yes))
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "#PWR"
+				(at 0 -6.35 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "Value" "GND"
+				(at 0 -3.81 0)
+				(effects (font (size 1.27 1.27)))
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "ki_keywords" "global power"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(symbol "GND_0_1"
+				(polyline
+					(pts (xy 0 0) (xy 0 -1.27) (xy 1.27 -1.27) (xy 0 -2.54) (xy -1.27 -1.27) (xy 0 -1.27))
+					(stroke (width 0) (type default))
+					(fill (type none))
+				)
+			)
+			(symbol "GND_1_1"
+				(pin power_in line
+					(at 0 0 270)
+					(length 0)
+					(name "~" (effects (font (size 1.27 1.27))))
+					(number "1" (effects (font (size 1.27 1.27))))
+				)
+			)
+			(embedded_fonts no)
+		)
+	)
+	(rectangle
+		(start 15.24 20.32)
+		(end 403.86 73.66)
+		(stroke (width 0) (type dash))
+		(fill (type none))
+		(uuid "1f034c28-ed84-59ee-842f-cdbfdc6401b1")
+	)
+	(wire
+		(pts (xy 33.02 45.72) (xy 38.1 45.72))
+		(stroke (width 0) (type default))
+		(uuid "4599cd07-74f0-5183-8d54-b96a90c37f45")
+	)
+	(wire
+		(pts (xy 38.1 45.72) (xy 38.1 33.02))
+		(stroke (width 0) (type default))
+		(uuid "a411a11a-e922-5bcc-ab8d-23ba63064bff")
+	)
+	(wire
+		(pts (xy 38.1 33.02) (xy 48.26 33.02))
+		(stroke (width 0) (type default))
+		(uuid "b96b4fa6-25e7-52d9-8e3d-20af0f198776")
+	)
+	(wire
+		(pts (xy 48.26 33.02) (xy 63.5 33.02))
+		(stroke (width 0) (type default))
+		(uuid "9ad88424-733f-5605-83a3-2afb94af3af5")
+	)
+	(wire
+		(pts (xy 63.5 33.02) (xy 132.08 33.02))
+		(stroke (width 0) (type default))
+		(uuid "3c0e4f07-68a4-5fdf-9a77-f0fc6286c91a")
+	)
+	(label "SENS1_PWR"
+		(at 48.26 33.02 0)
+		(fields_autoplaced yes)
+		(effects (font (size 1.27 1.27)) (justify left bottom))
+		(uuid "bf5632b6-782e-52ca-824a-fc974db61aa8")
+	)
+	(wire
+		(pts (xy 132.08 33.02) (xy 135.89 33.02))
+		(stroke (width 0) (type default))
+		(uuid "bc92f33d-a1a7-5435-bc3b-c056ad9f2794")
+	)
+	(wire
+		(pts (xy 143.51 33.02) (xy 147.32 33.02))
+		(stroke (width 0) (type default))
+		(uuid "d9d43a35-1a67-5ad2-a7b2-27195ebfcbe7")
+	)
+	(wire
+		(pts (xy 147.32 33.02) (xy 151.13 33.02))
+		(stroke (width 0) (type default))
+		(uuid "08a081d0-e3e3-53cb-a2e8-478b0c38e830")
+	)
+	(wire
+		(pts (xy 158.75 33.02) (xy 163.83 33.02))
+		(stroke (width 0) (type default))
+		(uuid "0a27f545-015b-5a9f-991e-cc73f8675c9a")
+	)
+	(wire
+		(pts (xy 33.02 50.8) (xy 38.1 50.8))
+		(stroke (width 0) (type default))
+		(uuid "dd74397b-1b10-5c91-9474-0f36410af0a3")
+	)
+	(wire
+		(pts (xy 38.1 50.8) (xy 38.1 55.88))
+		(stroke (width 0) (type default))
+		(uuid "aea15cb4-7f82-57d3-a4a1-5a6217fdddce")
+	)
+	(wire
+		(pts (xy 33.02 48.26) (xy 40.64 48.26))
+		(stroke (width 0) (type default))
+		(uuid "445c5851-b3b0-5294-b437-bed09841039c")
+	)
+	(wire
+		(pts (xy 40.64 48.26) (xy 45.72 48.26))
+		(stroke (width 0) (type default))
+		(uuid "824d778c-f2ef-5048-8aee-1384a228c384")
+	)
+	(label "SENS1"
+		(at 40.64 48.26 0)
+		(fields_autoplaced yes)
+		(effects (font (size 1.27 1.27)) (justify left bottom))
+		(uuid "352a1038-c571-5598-b1d7-c0fb5f4549ca")
+	)
+	(wire
+		(pts (xy 53.34 48.26) (xy 58.42 48.26))
+		(stroke (width 0) (type default))
+		(uuid "c01036c3-0b62-5bf4-9e5b-16e797a852b7")
+	)
+	(wire
+		(pts (xy 58.42 48.26) (xy 66.04 48.26))
+		(stroke (width 0) (type default))
+		(uuid "c9112fac-fdd0-5cf7-82f3-831baec242da")
+	)
+	(wire
+		(pts (xy 58.42 48.26) (xy 58.42 52.07))
+		(stroke (width 0) (type default))
+		(uuid "1211d3ab-befe-59d5-883c-8fbfe1ccd45a")
+	)
+	(wire
+		(pts (xy 66.04 53.34) (xy 66.04 59.69))
+		(stroke (width 0) (type default))
+		(uuid "c5061f23-bbe2-50bf-b058-2aad5d36b23d")
+	)
+	(wire
+		(pts (xy 58.42 59.69) (xy 66.04 59.69))
+		(stroke (width 0) (type default))
+		(uuid "c64728bd-d06d-5ac1-a738-8fb1bb976327")
+	)
+	(wire
+		(pts (xy 81.28 48.26) (xy 86.36 48.26))
+		(stroke (width 0) (type default))
+		(uuid "d7501b90-f9bb-5df8-91d5-e3c41c8cc4c6")
+	)
+	(wire
+		(pts (xy 86.36 48.26) (xy 86.36 43.18))
+		(stroke (width 0) (type default))
+		(uuid "09104c4c-a353-5a03-bc55-a0beb69010f7")
+	)
+	(wire
+		(pts (xy 81.28 53.34) (xy 91.44 53.34))
+		(stroke (width 0) (type default))
+		(uuid "a195dd97-5773-5fae-a7c5-f9024edd0bf2")
+	)
+	(wire
+		(pts (xy 91.44 53.34) (xy 101.6 53.34))
+		(stroke (width 0) (type default))
+		(uuid "e4e6b264-7c89-5854-acc2-be681ee54cb2")
+	)
+	(global_label "PB6"
+		(shape output)
+		(at 101.6 53.34 0)
+		(fields_autoplaced yes)
+		(effects (font (size 1.27 1.27)) (justify left))
+		(uuid "96b73379-37b4-5e5a-8bec-cc2d47c8d504")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 101.6 53.34 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+	)
+	(wire
+		(pts (xy 91.44 53.34) (xy 91.44 57.15))
+		(stroke (width 0) (type default))
+		(uuid "22c36338-87b1-5ac2-9bc3-ca75144f6d86")
+	)
+	(rectangle
+		(start 15.24 76.2)
+		(end 403.86 129.54)
+		(stroke (width 0) (type dash))
+		(fill (type none))
+		(uuid "8f007b5a-df57-5c7a-9fea-f9f4c06570e7")
+	)
+	(wire
+		(pts (xy 33.02 101.6) (xy 38.1 101.6))
+		(stroke (width 0) (type default))
+		(uuid "f0d6395b-883f-51d4-aed9-53c3bd35e46f")
+	)
+	(wire
+		(pts (xy 38.1 101.6) (xy 38.1 88.9))
+		(stroke (width 0) (type default))
+		(uuid "a6e66ffa-2238-5ea0-9b0b-7c98de896ae4")
+	)
+	(wire
+		(pts (xy 38.1 88.9) (xy 48.26 88.9))
+		(stroke (width 0) (type default))
+		(uuid "9ca52862-bef2-582e-bd42-9b10c1af136c")
+	)
+	(wire
+		(pts (xy 48.26 88.9) (xy 63.5 88.9))
+		(stroke (width 0) (type default))
+		(uuid "1353aa89-ba87-5430-90a2-de731fef0e15")
+	)
+	(wire
+		(pts (xy 63.5 88.9) (xy 132.08 88.9))
+		(stroke (width 0) (type default))
+		(uuid "657dc251-e943-5c69-af17-5dd242c05975")
+	)
+	(label "SENS2_PWR"
+		(at 48.26 88.9 0)
+		(fields_autoplaced yes)
+		(effects (font (size 1.27 1.27)) (justify left bottom))
+		(uuid "d307883f-cada-575c-8e6c-e56b5e13a2a1")
+	)
+	(wire
+		(pts (xy 132.08 88.9) (xy 135.89 88.9))
+		(stroke (width 0) (type default))
+		(uuid "2d9dfde2-e289-570f-bff7-8098517e3687")
+	)
+	(wire
+		(pts (xy 143.51 88.9) (xy 147.32 88.9))
+		(stroke (width 0) (type default))
+		(uuid "8604cf3e-dd7f-5381-a01a-7829dd9839af")
+	)
+	(wire
+		(pts (xy 147.32 88.9) (xy 151.13 88.9))
+		(stroke (width 0) (type default))
+		(uuid "890fa395-8cb5-552e-bbd5-4ca4a5d5a7a7")
+	)
+	(wire
+		(pts (xy 158.75 88.9) (xy 163.83 88.9))
+		(stroke (width 0) (type default))
+		(uuid "25b1df8c-247a-56cf-90a5-2f1e2ea3f7fd")
+	)
+	(wire
+		(pts (xy 33.02 106.68) (xy 38.1 106.68))
+		(stroke (width 0) (type default))
+		(uuid "0141dcb8-bb93-532e-99a4-7a0ab7abd71a")
+	)
+	(wire
+		(pts (xy 38.1 106.68) (xy 38.1 111.76))
+		(stroke (width 0) (type default))
+		(uuid "d8793790-9b21-5548-935d-da3bd4721bdd")
+	)
+	(wire
+		(pts (xy 33.02 104.14) (xy 40.64 104.14))
+		(stroke (width 0) (type default))
+		(uuid "13fa1120-544d-5841-8d40-ab55085487f4")
+	)
+	(wire
+		(pts (xy 40.64 104.14) (xy 45.72 104.14))
+		(stroke (width 0) (type default))
+		(uuid "303dd688-e895-520a-8075-7d70b5931bd2")
+	)
+	(label "SENS2"
+		(at 40.64 104.14 0)
+		(fields_autoplaced yes)
+		(effects (font (size 1.27 1.27)) (justify left bottom))
+		(uuid "914ea0d4-4d85-5057-a61e-38865cc20323")
+	)
+	(wire
+		(pts (xy 53.34 104.14) (xy 58.42 104.14))
+		(stroke (width 0) (type default))
+		(uuid "af055cca-aa70-5a21-91e4-bd7e9f5ee066")
+	)
+	(wire
+		(pts (xy 58.42 104.14) (xy 66.04 104.14))
+		(stroke (width 0) (type default))
+		(uuid "03a0ba19-6374-5565-9058-cade4f03bc84")
+	)
+	(wire
+		(pts (xy 58.42 104.14) (xy 58.42 107.95))
+		(stroke (width 0) (type default))
+		(uuid "5177d6ee-2ea6-528c-8e6a-ba2a9a3110ce")
+	)
+	(wire
+		(pts (xy 66.04 109.22) (xy 66.04 115.57))
+		(stroke (width 0) (type default))
+		(uuid "ad22937c-69b4-56d4-9027-93ddaecff93f")
+	)
+	(wire
+		(pts (xy 58.42 115.57) (xy 66.04 115.57))
+		(stroke (width 0) (type default))
+		(uuid "5f13b476-cc4e-50c6-81c8-88c27324f4c0")
+	)
+	(wire
+		(pts (xy 81.28 104.14) (xy 86.36 104.14))
+		(stroke (width 0) (type default))
+		(uuid "5e6f39c1-51d1-5ab2-836e-959a8c92114e")
+	)
+	(wire
+		(pts (xy 86.36 104.14) (xy 86.36 99.06))
+		(stroke (width 0) (type default))
+		(uuid "6c63e230-2f82-5497-90d4-299243bd5267")
+	)
+	(wire
+		(pts (xy 81.28 109.22) (xy 91.44 109.22))
+		(stroke (width 0) (type default))
+		(uuid "01d07d4c-0525-5b30-95d7-0970cdc666c7")
+	)
+	(wire
+		(pts (xy 91.44 109.22) (xy 101.6 109.22))
+		(stroke (width 0) (type default))
+		(uuid "5f16616f-7b29-58f9-83ad-a8780dcc83cc")
+	)
+	(global_label "PC15"
+		(shape output)
+		(at 101.6 109.22 0)
+		(fields_autoplaced yes)
+		(effects (font (size 1.27 1.27)) (justify left))
+		(uuid "b4da0151-7b0b-5a1e-b2dc-4dabe8de6fe8")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 101.6 109.22 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+	)
+	(wire
+		(pts (xy 91.44 109.22) (xy 91.44 113.03))
+		(stroke (width 0) (type default))
+		(uuid "59c5e0a3-4115-5332-bf90-571834f53fcb")
+	)
+	(wire
+		(pts (xy 143.51 33.02) (xy 135.89 33.02))
+		(stroke (width 0) (type default))
+		(uuid "209a5969-ed97-52e3-8800-258b85ca8977")
+	)
+	(wire
+		(pts (xy 143.51 88.9) (xy 135.89 88.9))
+		(stroke (width 0) (type default))
+		(uuid "ef9aad0c-e898-561d-8662-541d767a3832")
+	)
+	(text "Sensor 1 → PB6: Autonics PNP proximity sensor, PC817 opto input"
+		(exclude_from_sim no)
+		(at 17.78 22.86 0)
+		(effects (font (size 2 2) (bold yes)) (justify left top))
+		(uuid "e23988a9-60a9-5ead-9905-27e411167aae")
+	)
+	(text "J10: 1 = +24 V (brown) through F7 100 mA PTC, 2 = sensor output (black), 3 = 0 V (blue).\nOutput ON (24 V): ≈ 2.3 mA through R32 10k + U7 LED → PB6 HIGH (3.3 V, emitter follower).\nOutput OFF, cable unplugged or broken: PB6 LOW (R33 10k pull-down).\nD18 1N4148W: reverse clamp across the opto LED. C19 100 nF / 50 V: supply decoupling + ESD.\nA shorted sensor cable trips F7 only: the other sensor and the board keep running."
+		(exclude_from_sim no)
+		(at 177.8 33.02 0)
+		(effects (font (size 1.27 1.27)) (justify left top))
+		(uuid "20104f9c-bb38-5a8d-99c2-aa5a403e085e")
+	)
+	(text "Sensor 2 → PC15: Autonics PNP proximity sensor, PC817 opto input"
+		(exclude_from_sim no)
+		(at 17.78 78.74 0)
+		(effects (font (size 2 2) (bold yes)) (justify left top))
+		(uuid "0b7a89cc-a22e-5497-8742-2a117fa08be5")
+	)
+	(text "J11: 1 = +24 V (brown) through F8 100 mA PTC, 2 = sensor output (black), 3 = 0 V (blue).\nOutput ON (24 V): ≈ 2.3 mA through R34 10k + U8 LED → PC15 HIGH (3.3 V, emitter follower).\nOutput OFF, cable unplugged or broken: PC15 LOW (R35 10k pull-down).\nD19 1N4148W: reverse clamp across the opto LED. C20 100 nF / 50 V: supply decoupling + ESD.\nA shorted sensor cable trips F8 only: the other sensor and the board keep running."
+		(exclude_from_sim no)
+		(at 177.8 88.9 0)
+		(effects (font (size 1.27 1.27)) (justify left top))
+		(uuid "becbe43e-15f5-53af-b988-6ab2d5adca82")
+	)
+	(rectangle
+		(start 15.24 132.08)
+		(end 297.18 175.26)
+		(stroke (width 0) (type dash))
+		(fill (type none))
+		(uuid "b9d407df-75c3-5008-8777-c51e1da601f2")
+	)
+	(text "Sensor inputs: notes"
+		(exclude_from_sim no)
+		(at 17.78 134.62 0)
+		(effects (font (size 2 2) (bold yes)) (justify left top))
+		(uuid "5799d55d-6664-5c94-9edb-d9d6aceb5c72")
+	)
+	(text "For 3-wire PNP (sourcing) 24 V sensors, e.g. Autonics PRD08 / PR series (brown +V, black OUT, blue 0 V).\nNPN (sinking) sensors need a different input circuit.\n\nSame circuit as the MES4-Flasher sensor channels 3 / 4 (PB6 / PC15), without the INA226 supply monitors.\nGPIO budget: all 14 module pins are used (Main sheet). More sensors can use the TCA9535 expander\n(Relays 3-4 sheet), which has 12 spare inputs (P04-P17), polled over I²C.\n\nPB6: the ST bootloader enables a 25-55 kΩ pull-up on PB6 (blank chip only); with the 10k pull-down it\nreads LOW, which is harmless for an input. PC15: input only (RTC-domain pin, CIF rule 10): fine here.\nInterrupts: PB6 → EXTI6. PC15 shares EXTI15 with PA15 (INA226 ALERT): give EXTI15 to PC15 (sensor 2)\nand poll ALERT, which the INA226 latches (MASK/ENABLE LEN = 1), so no fault is missed.\nNo back-powering: the PC817 collectors run from +3V3_MOD (module finger 4), so nothing drives the\nmodule pins while it is unpowered."
+		(exclude_from_sim no)
+		(at 17.78 139.7 0)
+		(effects (font (size 1.27 1.27)) (justify left top))
+		(uuid "43909cc9-57bd-5fc0-b8d4-8d47283b4ace")
+	)
+	(junction
+		(at 58.42 48.26)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "880b7bcc-0207-5a73-a946-67a47e380d7f")
+	)
+	(junction
+		(at 58.42 104.14)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "2afed87e-b9fa-5248-86a0-b4c48fabedd3")
+	)
+	(junction
+		(at 63.5 33.02)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "8f6c015e-c876-5d18-a2a3-5d3548632edd")
+	)
+	(junction
+		(at 63.5 88.9)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "c8006a63-4a15-586b-9885-833b65175c3e")
+	)
+	(junction
+		(at 66.04 59.69)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "9e0384fe-0577-588c-b009-2b3f92c8d949")
+	)
+	(junction
+		(at 66.04 115.57)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "df7e2f84-e909-588c-9aa7-645f3caa8e08")
+	)
+	(junction
+		(at 91.44 53.34)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "07dd6d02-7d7a-5fa9-ba8f-561c6fbb1515")
+	)
+	(junction
+		(at 91.44 109.22)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "4a46a5ce-dda6-5665-8e52-d43659a31840")
+	)
+	(symbol
+		(lib_id "Connector:Screw_Terminal_01x03")
+		(at 27.94 48.26 0)
+		(mirror y)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "5453549d-8a47-5d52-b1b0-a2e491ffbaf4")
+		(property "Reference" "J10"
+			(at 25.4 46.99 0)
+			(effects (font (size 1.27 1.27)) (justify left))
+		)
+		(property "Value" "SENS1"
+			(at 25.4 49.53 0)
+			(effects (font (size 1.27 1.27)) (justify left))
+		)
+		(property "Footprint" "MES4-Carrier-EC:CONN-TH_KF250NH-3.5-3P"
+			(at 27.94 48.26 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Datasheet" "~"
+			(at 27.94 48.26 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Description" "Autonics PNP sensor 1: 1 = +24 V (brown, 100 mA PTC), 2 = output (black), 3 = 0 V (blue)"
+			(at 27.94 48.26 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C976557"
+			(at 27.94 48.26 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "7198da1d-4898-5b11-8770-99f93b94c909")
+		)
+		(pin "2"
+			(uuid "6ec67aab-7a53-5fb0-bd3f-9918c3d70bce")
+		)
+		(pin "3"
+			(uuid "69c94996-88ef-5d5d-86ba-395f330376de")
+		)
+		(instances
+			(project "MES4_Carrier_EC"
+				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/b6537ffb-dd04-5a49-82df-1cf0521a5148"
+					(reference "J10")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 63.5 36.83 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "f5d7c7fa-ec3f-5e02-b8a7-4dbb272f37fa")
+		(property "Reference" "C19"
+			(at 66.04 35.56 0)
+			(effects (font (size 1.27 1.27)) (justify left))
+		)
+		(property "Value" "100nF 50V"
+			(at 66.04 38.1 0)
+			(effects (font (size 1.27 1.27)) (justify left))
+		)
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+			(at 63.5 36.83 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Datasheet" "~"
+			(at 63.5 36.83 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Description" "sensor supply ESD / noise cap at the connector"
+			(at 63.5 36.83 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C14663"
+			(at 63.5 36.83 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "b4d975fd-65b3-5982-80b6-c0159aa56631")
+		)
+		(pin "2"
+			(uuid "fe847e83-a9e7-5ca8-aa33-a8ba77854c8c")
+		)
+		(instances
+			(project "MES4_Carrier_EC"
+				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/b6537ffb-dd04-5a49-82df-1cf0521a5148"
+					(reference "C19")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "MES4-Carrier-EC:GND_24V")
+		(at 63.5 40.64 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "69aac31d-a301-5875-8b64-929d65e4f6b4")
+		(property "Reference" "#PWR118"
+			(at 63.5 46.99 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Value" "GND_24V"
+			(at 63.5 44.45 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(pin "1"
+			(uuid "932b9c01-7657-5910-9b23-723114ded3a0")
+		)
+		(instances
+			(project "MES4_Carrier_EC"
+				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/b6537ffb-dd04-5a49-82df-1cf0521a5148"
+					(reference "#PWR118")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:Polyfuse")
+		(at 154.94 33.02 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "1eb923fe-6961-559b-b6d0-3167c817b37f")
+		(property "Reference" "F7"
+			(at 154.94 29.21 90)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Value" "100mA"
+			(at 154.94 36.83 90)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Footprint" "Fuse:Fuse_1206_3216Metric"
+			(at 154.94 33.02 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Datasheet" "~"
+			(at 154.94 33.02 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Description" "1206L010/30NR PTC 100 mA hold / 250 mA trip, 30 V: a shorted sensor cable trips only its own channel"
+			(at 154.94 33.02 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C7542926"
+			(at 154.94 33.02 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "912d89e2-cded-5af5-b457-a7aabbecdffa")
+		)
+		(pin "2"
+			(uuid "ff7f3cbc-fd5b-5eb7-8c4e-bda33c616cab")
+		)
+		(instances
+			(project "MES4_Carrier_EC"
+				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/b6537ffb-dd04-5a49-82df-1cf0521a5148"
+					(reference "F7")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+24V")
+		(at 163.83 33.02 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "f539f02c-1fd7-5857-ab31-6079566f9cb4")
+		(property "Reference" "#PWR119"
+			(at 163.83 26.67 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Value" "+24V"
+			(at 163.83 29.21 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(pin "1"
+			(uuid "4b160c36-66ca-5d62-912b-ebba09a66e0e")
+		)
+		(instances
+			(project "MES4_Carrier_EC"
+				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/b6537ffb-dd04-5a49-82df-1cf0521a5148"
+					(reference "#PWR119")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "MES4-Carrier-EC:GND_24V")
+		(at 38.1 55.88 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "7a6fb3a6-2fe4-5231-98f4-276ec6bca9bf")
+		(property "Reference" "#PWR120"
+			(at 38.1 62.23 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Value" "GND_24V"
+			(at 38.1 59.69 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(pin "1"
+			(uuid "4e6c4c14-d348-53ee-b949-4cc5da5c2350")
+		)
+		(instances
+			(project "MES4_Carrier_EC"
+				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/b6537ffb-dd04-5a49-82df-1cf0521a5148"
+					(reference "#PWR120")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 49.53 48.26 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "d9425d69-a2f6-53cb-a0e6-251718cd0bf6")
+		(property "Reference" "R32"
+			(at 49.53 43.18 90)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Value" "10k"
+			(at 49.53 45.72 90)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+			(at 49.53 48.26 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Datasheet" "~"
+			(at 49.53 48.26 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Description" "opto LED series resistor: 2.3 mA, 52 mW at 24 V (0603)"
+			(at 49.53 48.26 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C25804"
+			(at 49.53 48.26 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "a5e0b6e1-044e-5749-9927-9f64b78672aa")
+		)
+		(pin "2"
+			(uuid "9b9cc801-875f-53a8-b0ca-bf004981df9f")
+		)
+		(instances
+			(project "MES4_Carrier_EC"
+				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/b6537ffb-dd04-5a49-82df-1cf0521a5148"
+					(reference "R32")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Isolator:PC817")
+		(at 73.66 50.8 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "e3da798a-e23e-5fb2-a3c0-492b6c141c08")
+		(property "Reference" "U7"
+			(at 73.66 45.72 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Value" "PC817"
+			(at 73.66 55.88 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Footprint" "Package_DIP:SMDIP-4_W9.53mm"
+			(at 73.66 50.8 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Datasheet" "~"
+			(at 73.66 50.8 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Description" "PC817 opto: sensor 1 output (24 V) → PB6 HIGH"
+			(at 73.66 50.8 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C66405"
+			(at 73.66 50.8 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "d06489d9-b206-5907-86e5-16b96abe167c")
+		)
+		(pin "2"
+			(uuid "4ea87330-5811-50db-bdb8-389186a9fc80")
+		)
+		(pin "4"
+			(uuid "9dac9de9-b2d8-59a3-b65e-9f4aab796c33")
+		)
+		(pin "3"
+			(uuid "edaaaa59-3ca9-5912-80f2-c2084e1a0ef2")
+		)
+		(instances
+			(project "MES4_Carrier_EC"
+				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/b6537ffb-dd04-5a49-82df-1cf0521a5148"
+					(reference "U7")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:D")
+		(at 58.42 55.88 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "7c4b6816-1f08-5272-b523-eb418d0d275d")
+		(property "Reference" "D18"
+			(at 50.8 54.61 90)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Value" "1N4148W"
+			(at 50.8 57.15 90)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Footprint" "Diode_SMD:D_SOD-123"
+			(at 58.42 55.88 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Datasheet" "~"
+			(at 58.42 55.88 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Description" "reverse-voltage protection across the opto LED"
+			(at 58.42 55.88 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C81598"
+			(at 58.42 55.88 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "4cfe46f0-9120-5258-af31-8340299cbae6")
+		)
+		(pin "2"
+			(uuid "11be9fac-c5cf-570b-82c9-2c1e0f27c287")
+		)
+		(instances
+			(project "MES4_Carrier_EC"
+				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/b6537ffb-dd04-5a49-82df-1cf0521a5148"
+					(reference "D18")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "MES4-Carrier-EC:GND_24V")
+		(at 66.04 59.69 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "c0d9a1da-02b9-5057-a43a-3da662fe7ef2")
+		(property "Reference" "#PWR121"
+			(at 66.04 66.04 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Value" "GND_24V"
+			(at 66.04 63.5 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(pin "1"
+			(uuid "e1808609-c6bb-57d0-81d3-77a6c6404368")
+		)
+		(instances
+			(project "MES4_Carrier_EC"
+				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/b6537ffb-dd04-5a49-82df-1cf0521a5148"
+					(reference "#PWR121")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "MES4-Carrier-EC:+3V3_MOD")
+		(at 86.36 43.18 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "9ad23ccd-74b7-57ac-bbc1-7e81131cb649")
+		(property "Reference" "#PWR122"
+			(at 86.36 36.83 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Value" "+3V3_MOD"
+			(at 86.36 39.37 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(pin "1"
+			(uuid "6e8ec838-f32a-559c-a118-d8264ce38a25")
+		)
+		(instances
+			(project "MES4_Carrier_EC"
+				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/b6537ffb-dd04-5a49-82df-1cf0521a5148"
+					(reference "#PWR122")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 91.44 60.96 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "2d3c3f0b-7d0f-56c9-aa41-3f65055d2d63")
+		(property "Reference" "R33"
+			(at 93.98 59.69 0)
+			(effects (font (size 1.27 1.27)) (justify left))
+		)
+		(property "Value" "10k"
+			(at 93.98 62.23 0)
+			(effects (font (size 1.27 1.27)) (justify left))
+		)
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+			(at 91.44 60.96 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Datasheet" "~"
+			(at 91.44 60.96 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Description" "emitter pull-down: input reads LOW with no sensor"
+			(at 91.44 60.96 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C25744"
+			(at 91.44 60.96 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "2c349a78-a552-5e56-8506-daf8e5eae1cc")
+		)
+		(pin "2"
+			(uuid "a1954e4c-339f-5a58-be5e-5711fd6b6e60")
+		)
+		(instances
+			(project "MES4_Carrier_EC"
+				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/b6537ffb-dd04-5a49-82df-1cf0521a5148"
+					(reference "R33")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 91.44 64.77 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "0a8f186c-c11a-52a6-ae7c-637374efddb2")
+		(property "Reference" "#PWR123"
+			(at 91.44 71.12 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Value" "GND"
+			(at 91.44 68.58 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(pin "1"
+			(uuid "b4a8e038-50b3-54ed-b68a-7927fd42214c")
+		)
+		(instances
+			(project "MES4_Carrier_EC"
+				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/b6537ffb-dd04-5a49-82df-1cf0521a5148"
+					(reference "#PWR123")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector:Screw_Terminal_01x03")
+		(at 27.94 104.14 0)
+		(mirror y)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "25b99f4a-9ed7-58b2-b161-63edb0a60288")
+		(property "Reference" "J11"
+			(at 25.4 102.87 0)
+			(effects (font (size 1.27 1.27)) (justify left))
+		)
+		(property "Value" "SENS2"
+			(at 25.4 105.41 0)
+			(effects (font (size 1.27 1.27)) (justify left))
+		)
+		(property "Footprint" "MES4-Carrier-EC:CONN-TH_KF250NH-3.5-3P"
+			(at 27.94 104.14 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Datasheet" "~"
+			(at 27.94 104.14 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Description" "Autonics PNP sensor 2: 1 = +24 V (brown, 100 mA PTC), 2 = output (black), 3 = 0 V (blue)"
+			(at 27.94 104.14 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C976557"
+			(at 27.94 104.14 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "7ab05e00-8849-55a1-a593-9d5429540e6e")
+		)
+		(pin "2"
+			(uuid "8d7d0e4c-b8e6-5753-8dda-fa9d40261676")
+		)
+		(pin "3"
+			(uuid "d710998d-a59f-512b-a5dc-bb4d5c853ab8")
+		)
+		(instances
+			(project "MES4_Carrier_EC"
+				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/b6537ffb-dd04-5a49-82df-1cf0521a5148"
+					(reference "J11")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 63.5 92.71 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "fbb3bc1e-7634-506c-9cd0-b067bfedef26")
+		(property "Reference" "C20"
+			(at 66.04 91.44 0)
+			(effects (font (size 1.27 1.27)) (justify left))
+		)
+		(property "Value" "100nF 50V"
+			(at 66.04 93.98 0)
+			(effects (font (size 1.27 1.27)) (justify left))
+		)
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+			(at 63.5 92.71 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Datasheet" "~"
+			(at 63.5 92.71 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Description" "sensor supply ESD / noise cap at the connector"
+			(at 63.5 92.71 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C14663"
+			(at 63.5 92.71 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "b1dbea36-9c34-5679-9166-3484f82068c6")
+		)
+		(pin "2"
+			(uuid "52f98086-809a-571c-b6aa-04a0a0947036")
+		)
+		(instances
+			(project "MES4_Carrier_EC"
+				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/b6537ffb-dd04-5a49-82df-1cf0521a5148"
+					(reference "C20")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "MES4-Carrier-EC:GND_24V")
+		(at 63.5 96.52 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "af1ce66a-2320-5885-b013-45a7bf847ceb")
+		(property "Reference" "#PWR124"
+			(at 63.5 102.87 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Value" "GND_24V"
+			(at 63.5 100.33 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(pin "1"
+			(uuid "6af3af94-9377-5fe7-a16d-4c00da4a8ee9")
+		)
+		(instances
+			(project "MES4_Carrier_EC"
+				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/b6537ffb-dd04-5a49-82df-1cf0521a5148"
+					(reference "#PWR124")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:Polyfuse")
+		(at 154.94 88.9 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "c2eec112-a332-566e-83ca-cd6f2f53155f")
+		(property "Reference" "F8"
+			(at 154.94 85.09 90)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Value" "100mA"
+			(at 154.94 92.71 90)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Footprint" "Fuse:Fuse_1206_3216Metric"
+			(at 154.94 88.9 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Datasheet" "~"
+			(at 154.94 88.9 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Description" "1206L010/30NR PTC 100 mA hold / 250 mA trip, 30 V: a shorted sensor cable trips only its own channel"
+			(at 154.94 88.9 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C7542926"
+			(at 154.94 88.9 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "fef9cc78-5006-5242-ae7f-bcbaf40f320d")
+		)
+		(pin "2"
+			(uuid "58902ebb-06d7-59e4-8ccc-113ed3770056")
+		)
+		(instances
+			(project "MES4_Carrier_EC"
+				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/b6537ffb-dd04-5a49-82df-1cf0521a5148"
+					(reference "F8")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+24V")
+		(at 163.83 88.9 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "409a0c43-c1a9-555a-b017-eaf7e4758b31")
+		(property "Reference" "#PWR125"
+			(at 163.83 82.55 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Value" "+24V"
+			(at 163.83 85.09 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(pin "1"
+			(uuid "2c73257f-15e1-5082-bb8a-23e29f92312d")
+		)
+		(instances
+			(project "MES4_Carrier_EC"
+				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/b6537ffb-dd04-5a49-82df-1cf0521a5148"
+					(reference "#PWR125")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "MES4-Carrier-EC:GND_24V")
+		(at 38.1 111.76 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "6e4b0d75-a234-52f3-98b6-a1c7e200886d")
+		(property "Reference" "#PWR126"
+			(at 38.1 118.11 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Value" "GND_24V"
+			(at 38.1 115.57 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(pin "1"
+			(uuid "d4742f65-0ae4-5413-9833-9a538d18a427")
+		)
+		(instances
+			(project "MES4_Carrier_EC"
+				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/b6537ffb-dd04-5a49-82df-1cf0521a5148"
+					(reference "#PWR126")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 49.53 104.14 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "a5f7e468-5b33-5177-9b04-06ea16277290")
+		(property "Reference" "R34"
+			(at 49.53 99.06 90)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Value" "10k"
+			(at 49.53 101.6 90)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+			(at 49.53 104.14 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Datasheet" "~"
+			(at 49.53 104.14 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Description" "opto LED series resistor: 2.3 mA, 52 mW at 24 V (0603)"
+			(at 49.53 104.14 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C25804"
+			(at 49.53 104.14 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "c3524330-e06f-5064-8f95-00e97476ed27")
+		)
+		(pin "2"
+			(uuid "71e83bb6-801c-5a17-9398-c07141dfd817")
+		)
+		(instances
+			(project "MES4_Carrier_EC"
+				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/b6537ffb-dd04-5a49-82df-1cf0521a5148"
+					(reference "R34")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Isolator:PC817")
+		(at 73.66 106.68 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "8bdf3586-eaa0-5ea2-b25a-74278bd13206")
+		(property "Reference" "U8"
+			(at 73.66 101.6 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Value" "PC817"
+			(at 73.66 111.76 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Footprint" "Package_DIP:SMDIP-4_W9.53mm"
+			(at 73.66 106.68 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Datasheet" "~"
+			(at 73.66 106.68 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Description" "PC817 opto: sensor 2 output (24 V) → PC15 HIGH"
+			(at 73.66 106.68 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C66405"
+			(at 73.66 106.68 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "7eb4935e-cc3e-504d-8599-ed9338794c8a")
+		)
+		(pin "2"
+			(uuid "7a626289-f15f-51ee-a4d4-0656aa47e4b7")
+		)
+		(pin "4"
+			(uuid "0717e984-c5cc-5105-b16a-9371b9cca38f")
+		)
+		(pin "3"
+			(uuid "ad0f86e1-4825-5546-9b8a-3696c34da0aa")
+		)
+		(instances
+			(project "MES4_Carrier_EC"
+				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/b6537ffb-dd04-5a49-82df-1cf0521a5148"
+					(reference "U8")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:D")
+		(at 58.42 111.76 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "c4431bd8-6a83-51d7-a5bb-dfc1ac1d8f39")
+		(property "Reference" "D19"
+			(at 50.8 110.49 90)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Value" "1N4148W"
+			(at 50.8 113.03 90)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Footprint" "Diode_SMD:D_SOD-123"
+			(at 58.42 111.76 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Datasheet" "~"
+			(at 58.42 111.76 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Description" "reverse-voltage protection across the opto LED"
+			(at 58.42 111.76 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C81598"
+			(at 58.42 111.76 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "7273f91c-3752-55c1-9356-8d4f96b4f803")
+		)
+		(pin "2"
+			(uuid "60c5b7bf-aaa8-530b-9617-116aad39d95c")
+		)
+		(instances
+			(project "MES4_Carrier_EC"
+				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/b6537ffb-dd04-5a49-82df-1cf0521a5148"
+					(reference "D19")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "MES4-Carrier-EC:GND_24V")
+		(at 66.04 115.57 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "848e33e3-3363-5fd1-8903-e2d4fca07087")
+		(property "Reference" "#PWR127"
+			(at 66.04 121.92 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Value" "GND_24V"
+			(at 66.04 119.38 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(pin "1"
+			(uuid "e9c9c009-35ad-5847-b40e-eebfd600cc89")
+		)
+		(instances
+			(project "MES4_Carrier_EC"
+				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/b6537ffb-dd04-5a49-82df-1cf0521a5148"
+					(reference "#PWR127")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "MES4-Carrier-EC:+3V3_MOD")
+		(at 86.36 99.06 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "94f6d586-1498-58e4-afb5-6bed60747906")
+		(property "Reference" "#PWR128"
+			(at 86.36 92.71 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Value" "+3V3_MOD"
+			(at 86.36 95.25 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(pin "1"
+			(uuid "04e1cba1-b039-5ea7-a90f-dc573f429a3e")
+		)
+		(instances
+			(project "MES4_Carrier_EC"
+				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/b6537ffb-dd04-5a49-82df-1cf0521a5148"
+					(reference "#PWR128")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 91.44 116.84 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "bd82c2b5-c07b-540c-9843-1ce208293c69")
+		(property "Reference" "R35"
+			(at 93.98 115.57 0)
+			(effects (font (size 1.27 1.27)) (justify left))
+		)
+		(property "Value" "10k"
+			(at 93.98 118.11 0)
+			(effects (font (size 1.27 1.27)) (justify left))
+		)
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+			(at 91.44 116.84 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Datasheet" "~"
+			(at 91.44 116.84 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Description" "emitter pull-down: input reads LOW with no sensor"
+			(at 91.44 116.84 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C25744"
+			(at 91.44 116.84 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "b6da4390-70ff-5e7b-960e-b9636ba149df")
+		)
+		(pin "2"
+			(uuid "4b5fdfca-df3d-51bc-8ca7-7b02511b60ba")
+		)
+		(instances
+			(project "MES4_Carrier_EC"
+				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/b6537ffb-dd04-5a49-82df-1cf0521a5148"
+					(reference "R35")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 91.44 120.65 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "559bb35e-d52d-5bea-a3ab-f20bc685cfd8")
+		(property "Reference" "#PWR129"
+			(at 91.44 127 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Value" "GND"
+			(at 91.44 124.46 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(pin "1"
+			(uuid "5d4a4c2a-468b-5eb2-858b-4f1385ed6cf5")
+		)
+		(instances
+			(project "MES4_Carrier_EC"
+				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/b6537ffb-dd04-5a49-82df-1cf0521a5148"
+					(reference "#PWR129")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(embedded_fonts no)
+)

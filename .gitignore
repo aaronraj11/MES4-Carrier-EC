@@ -1,0 +1,16 @@
+# KiCad local / generated files
+*-backups/
+*.lck
+~*.lck
+_autosave-*
+\#auto_saved_files\#
+fp-info-cache
+*.kicad_prl
+*.bak
+.DS_Store
+
+jlcpcb/
+
+# generator
+__pycache__/
+*.pyc

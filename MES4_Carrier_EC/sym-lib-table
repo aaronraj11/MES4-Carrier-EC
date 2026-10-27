@@ -1,0 +1,4 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "MES4-Carrier-EC")(type "KiCad")(uri "${KIPRJMOD}/MES4-Carrier-EC.kicad_sym")(options "")(descr "MES4-Carrier-EC project symbols (from the MES4-Flasher)"))
+)

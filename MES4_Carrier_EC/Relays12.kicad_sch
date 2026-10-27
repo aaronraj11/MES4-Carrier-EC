@@ -1,0 +1,4403 @@
+(kicad_sch
+	(version 20250114)
+	(generator "eeschema")
+	(generator_version "9.0")
+	(uuid "5517059f-e390-53ba-869c-b93b810de02b")
+	(paper "A3")
+	(title_block
+		(title "MES4-Carrier-EC")
+		(date "2026-10-27")
+		(rev "A")
+		(company "Monkey Robotics")
+		(comment 1 "Aaron Raj Bhatti")
+		(comment 2 "Sheet 5: relay outputs 1-2 (safety light, LED DRL) with coil and load-current feedback")
+	)
+	(lib_symbols
+		(symbol "Relay:SANYOU_SRD_Form_A"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "K"
+				(at 8.89 3.81 0)
+				(effects (font (size 1.27 1.27)) (justify left))
+			)
+			(property "Value" "SANYOU_SRD_Form_A"
+				(at 8.89 1.27 0)
+				(effects (font (size 1.27 1.27)) (justify left))
+			)
+			(property "Footprint" "Relay_THT:Relay_SPST_SANYOU_SRD_Series_Form_A"
+				(at 8.89 -1.27 0)
+				(effects (font (size 1.27 1.27)) (justify left) (hide yes))
+			)
+			(property "Datasheet" "http://www.sanyourelay.ca/public/products/pdf/SRD.pdf"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "Description" "Sanyo SRD relay, Single Pole Miniature Power Relay, Closing Contact"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "ki_keywords" "Single Pole Relay SPST"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "ki_fp_filters" "Relay*SPST*SANYOU*SRD*Series*Form*A*"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(symbol "SANYOU_SRD_Form_A_0_0"
+				(polyline
+					(pts (xy 5.08 5.08) (xy 5.08 2.54) (xy 4.445 3.175) (xy 5.08 3.81))
+					(stroke (width 0) (type default))
+					(fill (type none))
+				)
+			)
+			(symbol "SANYOU_SRD_Form_A_0_1"
+				(rectangle
+					(start -10.16 5.08)
+					(end 7.62 -5.08)
+					(stroke (width 0.254) (type default))
+					(fill (type background))
+				)
+				(rectangle
+					(start -8.255 1.905)
+					(end -1.905 -1.905)
+					(stroke (width 0.254) (type default))
+					(fill (type none))
+				)
+				(polyline
+					(pts (xy -7.62 -1.905) (xy -2.54 1.905))
+					(stroke (width 0.254) (type default))
+					(fill (type none))
+				)
+				(polyline
+					(pts (xy -5.08 5.08) (xy -5.08 1.905))
+					(stroke (width 0) (type default))
+					(fill (type none))
+				)
+				(polyline
+					(pts (xy -5.08 -5.08) (xy -5.08 -1.905))
+					(stroke (width 0) (type default))
+					(fill (type none))
+				)
+				(polyline
+					(pts (xy -1.905 0) (xy -1.27 0))
+					(stroke (width 0.254) (type default))
+					(fill (type none))
+				)
+				(polyline
+					(pts (xy -0.635 0) (xy 0 0))
+					(stroke (width 0.254) (type default))
+					(fill (type none))
+				)
+				(polyline
+					(pts (xy 0.635 0) (xy 1.27 0))
+					(stroke (width 0.254) (type default))
+					(fill (type none))
+				)
+				(polyline
+					(pts (xy 1.905 0) (xy 2.54 0))
+					(stroke (width 0.254) (type default))
+					(fill (type none))
+				)
+				(polyline
+					(pts (xy 3.175 0) (xy 3.81 0))
+					(stroke (width 0.254) (type default))
+					(fill (type none))
+				)
+				(polyline
+					(pts (xy 5.08 -2.54) (xy 3.175 3.81))
+					(stroke (width 0.508) (type default))
+					(fill (type none))
+				)
+				(polyline
+					(pts (xy 5.08 -2.54) (xy 5.08 -5.08))
+					(stroke (width 0) (type default))
+					(fill (type none))
+				)
+			)
+			(symbol "SANYOU_SRD_Form_A_1_1"
+				(pin passive line
+					(at -5.08 7.62 270)
+					(length 2.54)
+					(name "~" (effects (font (size 1.27 1.27))))
+					(number "5" (effects (font (size 1.27 1.27))))
+				)
+				(pin passive line
+					(at -5.08 -7.62 90)
+					(length 2.54)
+					(name "~" (effects (font (size 1.27 1.27))))
+					(number "2" (effects (font (size 1.27 1.27))))
+				)
+				(pin passive line
+					(at 5.08 7.62 270)
+					(length 2.54)
+					(name "~" (effects (font (size 1.27 1.27))))
+					(number "3" (effects (font (size 1.27 1.27))))
+				)
+				(pin passive line
+					(at 5.08 -7.62 90)
+					(length 2.54)
+					(name "~" (effects (font (size 1.27 1.27))))
+					(number "1" (effects (font (size 1.27 1.27))))
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "MES4-Carrier-EC:+5V_24"
+			(power)
+			(pin_numbers (hide yes))
+			(pin_names (offset 0) (hide yes))
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "#PWR"
+				(at 0 -3.81 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "Value" "+5V_24"
+				(at 0 3.556 0)
+				(effects (font (size 1.27 1.27)))
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "Description" "5 V made from the 24 V input by U12 (relay coils, U11 IN1) - present only with 24 V"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "ki_keywords" "global power"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(symbol "+5V_24_0_1"
+				(polyline
+					(pts (xy -0.762 1.27) (xy 0 2.54))
+					(stroke (width 0) (type default))
+					(fill (type none))
+				)
+				(polyline
+					(pts (xy 0 2.54) (xy 0.762 1.27))
+					(stroke (width 0) (type default))
+					(fill (type none))
+				)
+				(polyline
+					(pts (xy 0 0) (xy 0 2.54))
+					(stroke (width 0) (type default))
+					(fill (type none))
+				)
+			)
+			(symbol "+5V_24_1_1"
+				(pin power_in line
+					(at 0 0 90)
+					(length 0)
+					(name "~" (effects (font (size 1.27 1.27))))
+					(number "1" (effects (font (size 1.27 1.27))))
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "Device:D"
+			(pin_numbers (hide yes))
+			(pin_names (offset 1.016) (hide yes))
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "D"
+				(at 0 2.54 0)
+				(effects (font (size 1.27 1.27)))
+			)
+			(property "Value" "D"
+				(at 0 -2.54 0)
+				(effects (font (size 1.27 1.27)))
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "Datasheet" "~"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "Description" "Diode"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "Sim.Device" "D"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "Sim.Pins" "1=K 2=A"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "ki_keywords" "diode"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "ki_fp_filters" "TO-???* *_Diode_* *SingleDiode* D_*"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(symbol "D_0_1"
+				(polyline
+					(pts (xy -1.27 1.27) (xy -1.27 -1.27))
+					(stroke (width 0.254) (type default))
+					(fill (type none))
+				)
+				(polyline
+					(pts (xy 1.27 1.27) (xy 1.27 -1.27) (xy -1.27 0) (xy 1.27 1.27))
+					(stroke (width 0.254) (type default))
+					(fill (type none))
+				)
+				(polyline
+					(pts (xy 1.27 0) (xy -1.27 0))
+					(stroke (width 0) (type default))
+					(fill (type none))
+				)
+			)
+			(symbol "D_1_1"
+				(pin passive line
+					(at -3.81 0 0)
+					(length 2.54)
+					(name "K" (effects (font (size 1.27 1.27))))
+					(number "1" (effects (font (size 1.27 1.27))))
+				)
+				(pin passive line
+					(at 3.81 0 180)
+					(length 2.54)
+					(name "A" (effects (font (size 1.27 1.27))))
+					(number "2" (effects (font (size 1.27 1.27))))
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "Transistor_FET:AO3400A"
+			(pin_names (hide yes))
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "Q"
+				(at 5.08 1.905 0)
+				(effects (font (size 1.27 1.27)) (justify left))
+			)
+			(property "Value" "AO3400A"
+				(at 5.08 0 0)
+				(effects (font (size 1.27 1.27)) (justify left))
+			)
+			(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
+				(at 5.08 -1.905 0)
+				(effects (font (size 1.27 1.27) (italic yes)) (justify left) (hide yes))
+			)
+			(property "Datasheet" "http://www.aosmd.com/pdfs/datasheet/AO3400A.pdf"
+				(at 5.08 -3.81 0)
+				(effects (font (size 1.27 1.27)) (justify left) (hide yes))
+			)
+			(property "Description" "30V Vds, 5.7A Id, N-Channel MOSFET, SOT-23"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "ki_keywords" "N-Channel MOSFET"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "ki_fp_filters" "SOT?23*"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(symbol "AO3400A_0_1"
+				(polyline
+					(pts (xy 0.254 1.905) (xy 0.254 -1.905))
+					(stroke (width 0.254) (type default))
+					(fill (type none))
+				)
+				(polyline
+					(pts (xy 0.254 0) (xy -2.54 0))
+					(stroke (width 0) (type default))
+					(fill (type none))
+				)
+				(polyline
+					(pts (xy 0.762 2.286) (xy 0.762 1.27))
+					(stroke (width 0.254) (type default))
+					(fill (type none))
+				)
+				(polyline
+					(pts (xy 0.762 0.508) (xy 0.762 -0.508))
+					(stroke (width 0.254) (type default))
+					(fill (type none))
+				)
+				(polyline
+					(pts (xy 0.762 -1.27) (xy 0.762 -2.286))
+					(stroke (width 0.254) (type default))
+					(fill (type none))
+				)
+				(polyline
+					(pts (xy 0.762 -1.778) (xy 3.302 -1.778) (xy 3.302 1.778) (xy 0.762 1.778))
+					(stroke (width 0) (type default))
+					(fill (type none))
+				)
+				(polyline
+					(pts (xy 1.016 0) (xy 2.032 0.381) (xy 2.032 -0.381) (xy 1.016 0))
+					(stroke (width 0) (type default))
+					(fill (type outline))
+				)
+				(circle
+					(center 1.651 0)
+					(radius 2.794)
+					(stroke (width 0.254) (type default))
+					(fill (type none))
+				)
+				(polyline
+					(pts (xy 2.54 2.54) (xy 2.54 1.778))
+					(stroke (width 0) (type default))
+					(fill (type none))
+				)
+				(circle
+					(center 2.54 1.778)
+					(radius 0.254)
+					(stroke (width 0) (type default))
+					(fill (type outline))
+				)
+				(circle
+					(center 2.54 -1.778)
+					(radius 0.254)
+					(stroke (width 0) (type default))
+					(fill (type outline))
+				)
+				(polyline
+					(pts (xy 2.54 -2.54) (xy 2.54 0) (xy 0.762 0))
+					(stroke (width 0) (type default))
+					(fill (type none))
+				)
+				(polyline
+					(pts (xy 2.794 0.508) (xy 2.921 0.381) (xy 3.683 0.381) (xy 3.81 0.254))
+					(stroke (width 0) (type default))
+					(fill (type none))
+				)
+				(polyline
+					(pts (xy 3.302 0.381) (xy 2.921 -0.254) (xy 3.683 -0.254) (xy 3.302 0.381))
+					(stroke (width 0) (type default))
+					(fill (type none))
+				)
+			)
+			(symbol "AO3400A_1_1"
+				(pin input line
+					(at -5.08 0 0)
+					(length 2.54)
+					(name "G" (effects (font (size 1.27 1.27))))
+					(number "1" (effects (font (size 1.27 1.27))))
+				)
+				(pin passive line
+					(at 2.54 5.08 270)
+					(length 2.54)
+					(name "D" (effects (font (size 1.27 1.27))))
+					(number "3" (effects (font (size 1.27 1.27))))
+				)
+				(pin passive line
+					(at 2.54 -5.08 90)
+					(length 2.54)
+					(name "S" (effects (font (size 1.27 1.27))))
+					(number "2" (effects (font (size 1.27 1.27))))
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "power:GND"
+			(power)
+			(pin_numbers (hide yes))
+			(pin_names (offset 0) (hide yes))
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "#PWR"
+				(at 0 -6.35 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "Value" "GND"
+				(at 0 -3.81 0)
+				(effects (font (size 1.27 1.27)))
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "ki_keywords" "global power"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(symbol "GND_0_1"
+				(polyline
+					(pts (xy 0 0) (xy 0 -1.27) (xy 1.27 -1.27) (xy 0 -2.54) (xy -1.27 -1.27) (xy 0 -1.27))
+					(stroke (width 0) (type default))
+					(fill (type none))
+				)
+			)
+			(symbol "GND_1_1"
+				(pin power_in line
+					(at 0 0 270)
+					(length 0)
+					(name "~" (effects (font (size 1.27 1.27))))
+					(number "1" (effects (font (size 1.27 1.27))))
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "Device:R"
+			(pin_numbers (hide yes))
+			(pin_names (offset 0))
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "R"
+				(at 2.032 0 90)
+				(effects (font (size 1.27 1.27)))
+			)
+			(property "Value" "R"
+				(at 0 0 90)
+				(effects (font (size 1.27 1.27)))
+			)
+			(property "Footprint" ""
+				(at -1.778 0 90)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "Datasheet" "~"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "Description" "Resistor"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "ki_keywords" "R res resistor"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "ki_fp_filters" "R_*"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(symbol "R_0_1"
+				(rectangle
+					(start -1.016 -2.54)
+					(end 1.016 2.54)
+					(stroke (width 0.254) (type default))
+					(fill (type none))
+				)
+			)
+			(symbol "R_1_1"
+				(pin passive line
+					(at 0 3.81 270)
+					(length 1.27)
+					(name "~" (effects (font (size 1.27 1.27))))
+					(number "1" (effects (font (size 1.27 1.27))))
+				)
+				(pin passive line
+					(at 0 -3.81 90)
+					(length 1.27)
+					(name "~" (effects (font (size 1.27 1.27))))
+					(number "2" (effects (font (size 1.27 1.27))))
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "Device:C"
+			(pin_numbers (hide yes))
+			(pin_names (offset 0.254))
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "C"
+				(at 0.635 2.54 0)
+				(effects (font (size 1.27 1.27)) (justify left))
+			)
+			(property "Value" "C"
+				(at 0.635 -2.54 0)
+				(effects (font (size 1.27 1.27)) (justify left))
+			)
+			(property "Footprint" ""
+				(at 0.9652 -3.81 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "Datasheet" "~"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "Description" "Unpolarized capacitor"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "ki_keywords" "cap capacitor"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "ki_fp_filters" "C_*"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(symbol "C_0_1"
+				(polyline
+					(pts (xy -2.032 0.762) (xy 2.032 0.762))
+					(stroke (width 0.508) (type default))
+					(fill (type none))
+				)
+				(polyline
+					(pts (xy -2.032 -0.762) (xy 2.032 -0.762))
+					(stroke (width 0.508) (type default))
+					(fill (type none))
+				)
+			)
+			(symbol "C_1_1"
+				(pin passive line
+					(at 0 3.81 270)
+					(length 2.794)
+					(name "~" (effects (font (size 1.27 1.27))))
+					(number "1" (effects (font (size 1.27 1.27))))
+				)
+				(pin passive line
+					(at 0 -3.81 90)
+					(length 2.794)
+					(name "~" (effects (font (size 1.27 1.27))))
+					(number "2" (effects (font (size 1.27 1.27))))
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "power:+24V"
+			(power)
+			(pin_numbers (hide yes))
+			(pin_names (offset 0) (hide yes))
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "#PWR"
+				(at 0 -3.81 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "Value" "+24V"
+				(at 0 3.556 0)
+				(effects (font (size 1.27 1.27)))
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "Description" "Power symbol creates a global label with name \"+24V\""
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "ki_keywords" "global power"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(symbol "+24V_0_1"
+				(polyline
+					(pts (xy -0.762 1.27) (xy 0 2.54))
+					(stroke (width 0) (type default))
+					(fill (type none))
+				)
+				(polyline
+					(pts (xy 0 2.54) (xy 0.762 1.27))
+					(stroke (width 0) (type default))
+					(fill (type none))
+				)
+				(polyline
+					(pts (xy 0 0) (xy 0 2.54))
+					(stroke (width 0) (type default))
+					(fill (type none))
+				)
+			)
+			(symbol "+24V_1_1"
+				(pin power_in line
+					(at 0 0 90)
+					(length 0)
+					(name "~" (effects (font (size 1.27 1.27))))
+					(number "1" (effects (font (size 1.27 1.27))))
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "Sensor_Energy:INA226"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "U"
+				(at -6.35 11.43 0)
+				(effects (font (size 1.27 1.27)))
+			)
+			(property "Value" "INA226"
+				(at 3.81 11.43 0)
+				(effects (font (size 1.27 1.27)))
+			)
+			(property "Footprint" "Package_SO:VSSOP-10_3x3mm_P0.5mm"
+				(at 20.32 -11.43 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "Datasheet" "http://www.ti.com/lit/ds/symlink/ina226.pdf"
+				(at 8.89 -2.54 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "Description" "High-Side or Low-Side Measurement, Bi-Directional Current and Power Monitor (0-36V) with I2C Compatible Interface, VSSOP-10"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "ki_keywords" "ADC I2C 16-Bit Oversampling Current Shunt"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "ki_fp_filters" "VSSOP*3x3mm*P0.5mm*"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(symbol "INA226_0_1"
+				(rectangle
+					(start 7.62 10.16)
+					(end -7.62 -10.16)
+					(stroke (width 0.254) (type default))
+					(fill (type background))
+				)
+			)
+			(symbol "INA226_1_1"
+				(pin input line
+					(at -10.16 7.62 0)
+					(length 2.54)
+					(name "Vbus" (effects (font (size 1.27 1.27))))
+					(number "8" (effects (font (size 1.27 1.27))))
+				)
+				(pin input line
+					(at -10.16 -2.54 0)
+					(length 2.54)
+					(name "Vin+" (effects (font (size 1.27 1.27))))
+					(number "10" (effects (font (size 1.27 1.27))))
+				)
+				(pin input line
+					(at -10.16 -5.08 0)
+					(length 2.54)
+					(name "Vin-" (effects (font (size 1.27 1.27))))
+					(number "9" (effects (font (size 1.27 1.27))))
+				)
+				(pin power_in line
+					(at 0 12.7 270)
+					(length 2.54)
+					(name "VS" (effects (font (size 1.27 1.27))))
+					(number "6" (effects (font (size 1.27 1.27))))
+				)
+				(pin power_in line
+					(at 0 -12.7 90)
+					(length 2.54)
+					(name "GND" (effects (font (size 1.27 1.27))))
+					(number "7" (effects (font (size 1.27 1.27))))
+				)
+				(pin input line
+					(at 10.16 7.62 180)
+					(length 2.54)
+					(name "A1" (effects (font (size 1.27 1.27))))
+					(number "1" (effects (font (size 1.27 1.27))))
+				)
+				(pin input line
+					(at 10.16 5.08 180)
+					(length 2.54)
+					(name "A0" (effects (font (size 1.27 1.27))))
+					(number "2" (effects (font (size 1.27 1.27))))
+				)
+				(pin bidirectional line
+					(at 10.16 0 180)
+					(length 2.54)
+					(name "SDA" (effects (font (size 1.27 1.27))))
+					(number "4" (effects (font (size 1.27 1.27))))
+				)
+				(pin input line
+					(at 10.16 -2.54 180)
+					(length 2.54)
+					(name "SCL" (effects (font (size 1.27 1.27))))
+					(number "5" (effects (font (size 1.27 1.27))))
+				)
+				(pin open_collector line
+					(at 10.16 -7.62 180)
+					(length 2.54)
+					(name "~{Alert}" (effects (font (size 1.27 1.27))))
+					(number "3" (effects (font (size 1.27 1.27))))
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "MES4-Carrier-EC:+3V3_MOD"
+			(power)
+			(pin_numbers (hide yes))
+			(pin_names (offset 0) (hide yes))
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "#PWR"
+				(at 0 -3.81 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "Value" "+3V3_MOD"
+				(at 0 3.556 0)
+				(effects (font (size 1.27 1.27)))
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "Description" "Module 3.3 V output (M.2 finger 4) - never driven by the carrier"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "ki_keywords" "global power"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(symbol "+3V3_MOD_0_1"
+				(polyline
+					(pts (xy -0.762 1.27) (xy 0 2.54))
+					(stroke (width 0) (type default))
+					(fill (type none))
+				)
+				(polyline
+					(pts (xy 0 2.54) (xy 0.762 1.27))
+					(stroke (width 0) (type default))
+					(fill (type none))
+				)
+				(polyline
+					(pts (xy 0 0) (xy 0 2.54))
+					(stroke (width 0) (type default))
+					(fill (type none))
+				)
+			)
+			(symbol "+3V3_MOD_1_1"
+				(pin power_in line
+					(at 0 0 90)
+					(length 0)
+					(name "~" (effects (font (size 1.27 1.27))))
+					(number "1" (effects (font (size 1.27 1.27))))
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "Device:Polyfuse"
+			(pin_numbers (hide yes))
+			(pin_names (offset 0))
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "F"
+				(at -2.54 0 90)
+				(effects (font (size 1.27 1.27)))
+			)
+			(property "Value" "Polyfuse"
+				(at 2.54 0 90)
+				(effects (font (size 1.27 1.27)))
+			)
+			(property "Footprint" ""
+				(at 1.27 -5.08 0)
+				(effects (font (size 1.27 1.27)) (justify left) (hide yes))
+			)
+			(property "Datasheet" "~"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "Description" "Resettable fuse, polymeric positive temperature coefficient"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "ki_keywords" "resettable fuse PTC PPTC polyfuse polyswitch"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "ki_fp_filters" "*polyfuse* *PTC*"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(symbol "Polyfuse_0_1"
+				(polyline
+					(pts (xy -1.524 2.54) (xy -1.524 1.524) (xy 1.524 -1.524) (xy 1.524 -2.54))
+					(stroke (width 0) (type default))
+					(fill (type none))
+				)
+				(rectangle
+					(start -0.762 2.54)
+					(end 0.762 -2.54)
+					(stroke (width 0.254) (type default))
+					(fill (type none))
+				)
+				(polyline
+					(pts (xy 0 2.54) (xy 0 -2.54))
+					(stroke (width 0) (type default))
+					(fill (type none))
+				)
+			)
+			(symbol "Polyfuse_1_1"
+				(pin passive line
+					(at 0 3.81 270)
+					(length 1.27)
+					(name "~" (effects (font (size 1.27 1.27))))
+					(number "1" (effects (font (size 1.27 1.27))))
+				)
+				(pin passive line
+					(at 0 -3.81 90)
+					(length 1.27)
+					(name "~" (effects (font (size 1.27 1.27))))
+					(number "2" (effects (font (size 1.27 1.27))))
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "Connector:Screw_Terminal_01x02"
+			(pin_names (offset 1.016) (hide yes))
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "J"
+				(at 0 2.54 0)
+				(effects (font (size 1.27 1.27)))
+			)
+			(property "Value" "Screw_Terminal_01x02"
+				(at 0 -5.08 0)
+				(effects (font (size 1.27 1.27)))
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "Datasheet" "~"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "Description" "Generic screw terminal, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "ki_keywords" "screw terminal"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "ki_fp_filters" "TerminalBlock*:*"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(symbol "Screw_Terminal_01x02_1_1"
+				(rectangle
+					(start -1.27 1.27)
+					(end 1.27 -3.81)
+					(stroke (width 0.254) (type default))
+					(fill (type background))
+				)
+				(polyline
+					(pts (xy -0.5334 0.3302) (xy 0.3302 -0.508))
+					(stroke (width 0.1524) (type default))
+					(fill (type none))
+				)
+				(polyline
+					(pts (xy -0.5334 -2.2098) (xy 0.3302 -3.048))
+					(stroke (width 0.1524) (type default))
+					(fill (type none))
+				)
+				(polyline
+					(pts (xy -0.3556 0.508) (xy 0.508 -0.3302))
+					(stroke (width 0.1524) (type default))
+					(fill (type none))
+				)
+				(polyline
+					(pts (xy -0.3556 -2.032) (xy 0.508 -2.8702))
+					(stroke (width 0.1524) (type default))
+					(fill (type none))
+				)
+				(circle
+					(center 0 0)
+					(radius 0.635)
+					(stroke (width 0.1524) (type default))
+					(fill (type none))
+				)
+				(circle
+					(center 0 -2.54)
+					(radius 0.635)
+					(stroke (width 0.1524) (type default))
+					(fill (type none))
+				)
+				(pin passive line
+					(at -5.08 0 0)
+					(length 3.81)
+					(name "Pin_1" (effects (font (size 1.27 1.27))))
+					(number "1" (effects (font (size 1.27 1.27))))
+				)
+				(pin passive line
+					(at -5.08 -2.54 0)
+					(length 3.81)
+					(name "Pin_2" (effects (font (size 1.27 1.27))))
+					(number "2" (effects (font (size 1.27 1.27))))
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "Device:D_Schottky"
+			(pin_numbers (hide yes))
+			(pin_names (offset 1.016) (hide yes))
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "D"
+				(at 0 2.54 0)
+				(effects (font (size 1.27 1.27)))
+			)
+			(property "Value" "D_Schottky"
+				(at 0 -2.54 0)
+				(effects (font (size 1.27 1.27)))
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "Datasheet" "~"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "Description" "Schottky diode"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "ki_keywords" "diode Schottky"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "ki_fp_filters" "TO-???* *_Diode_* *SingleDiode* D_*"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(symbol "D_Schottky_0_1"
+				(polyline
+					(pts (xy -1.905 0.635) (xy -1.905 1.27) (xy -1.27 1.27) (xy -1.27 -1.27) (xy -0.635 -1.27) (xy -0.635 -0.635))
+					(stroke (width 0.254) (type default))
+					(fill (type none))
+				)
+				(polyline
+					(pts (xy 1.27 1.27) (xy 1.27 -1.27) (xy -1.27 0) (xy 1.27 1.27))
+					(stroke (width 0.254) (type default))
+					(fill (type none))
+				)
+				(polyline
+					(pts (xy 1.27 0) (xy -1.27 0))
+					(stroke (width 0) (type default))
+					(fill (type none))
+				)
+			)
+			(symbol "D_Schottky_1_1"
+				(pin passive line
+					(at -3.81 0 0)
+					(length 2.54)
+					(name "K" (effects (font (size 1.27 1.27))))
+					(number "1" (effects (font (size 1.27 1.27))))
+				)
+				(pin passive line
+					(at 3.81 0 180)
+					(length 2.54)
+					(name "A" (effects (font (size 1.27 1.27))))
+					(number "2" (effects (font (size 1.27 1.27))))
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "MES4-Carrier-EC:GND_24V"
+			(power)
+			(pin_numbers (hide yes))
+			(pin_names (offset 0) (hide yes))
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "#PWR"
+				(at 0 -5.08 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "Value" "GND_24V"
+				(at 0 -3.302 0)
+				(effects (font (size 1.27 1.27)))
+			)
+			(property "Footprint" ""
+				(at 0 -1.27 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "Datasheet" ""
+				(at 0 -1.27 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "Description" "24 V side return (sensors, relay loads) - isolated from the logic GND"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "ki_keywords" "global ground"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(symbol "GND_24V_0_1"
+				(polyline
+					(pts (xy -1.016 -1.27) (xy -1.27 -2.032) (xy -1.27 -2.032))
+					(stroke (width 0.2032) (type default))
+					(fill (type none))
+				)
+				(polyline
+					(pts (xy -0.508 -1.27) (xy -0.762 -2.032) (xy -0.762 -2.032))
+					(stroke (width 0.2032) (type default))
+					(fill (type none))
+				)
+				(polyline
+					(pts (xy 0 -1.27) (xy 0 0))
+					(stroke (width 0) (type default))
+					(fill (type none))
+				)
+				(polyline
+					(pts (xy 0 -1.27) (xy -0.254 -2.032) (xy -0.254 -2.032))
+					(stroke (width 0.2032) (type default))
+					(fill (type none))
+				)
+				(polyline
+					(pts (xy 0.508 -1.27) (xy 0.254 -2.032) (xy 0.254 -2.032))
+					(stroke (width 0.2032) (type default))
+					(fill (type none))
+				)
+				(polyline
+					(pts (xy 1.016 -1.27) (xy -1.016 -1.27) (xy -1.016 -1.27))
+					(stroke (width 0.2032) (type default))
+					(fill (type none))
+				)
+				(polyline
+					(pts (xy 1.016 -1.27) (xy 0.762 -2.032) (xy 0.762 -2.032) (xy 0.762 -2.032))
+					(stroke (width 0.2032) (type default))
+					(fill (type none))
+				)
+			)
+			(symbol "GND_24V_1_1"
+				(pin power_in line
+					(at 0 0 270)
+					(length 0)
+					(name "~" (effects (font (size 1.27 1.27))))
+					(number "1" (effects (font (size 1.27 1.27))))
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "Device:LED"
+			(pin_numbers (hide yes))
+			(pin_names (offset 1.016) (hide yes))
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "D"
+				(at 0 2.54 0)
+				(effects (font (size 1.27 1.27)))
+			)
+			(property "Value" "LED"
+				(at 0 -2.54 0)
+				(effects (font (size 1.27 1.27)))
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "Datasheet" "~"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "Description" "Light emitting diode"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "Sim.Pins" "1=K 2=A"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "ki_keywords" "LED diode"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(property "ki_fp_filters" "LED* LED_SMD:* LED_THT:*"
+				(at 0 0 0)
+				(effects (font (size 1.27 1.27)) (hide yes))
+			)
+			(symbol "LED_0_1"
+				(polyline
+					(pts (xy -3.048 -0.762) (xy -4.572 -2.286) (xy -3.81 -2.286) (xy -4.572 -2.286) (xy -4.572 -1.524))
+					(stroke (width 0) (type default))
+					(fill (type none))
+				)
+				(polyline
+					(pts (xy -1.778 -0.762) (xy -3.302 -2.286) (xy -2.54 -2.286) (xy -3.302 -2.286) (xy -3.302 -1.524))
+					(stroke (width 0) (type default))
+					(fill (type none))
+				)
+				(polyline
+					(pts (xy -1.27 0) (xy 1.27 0))
+					(stroke (width 0) (type default))
+					(fill (type none))
+				)
+				(polyline
+					(pts (xy -1.27 -1.27) (xy -1.27 1.27))
+					(stroke (width 0.254) (type default))
+					(fill (type none))
+				)
+				(polyline
+					(pts (xy 1.27 -1.27) (xy 1.27 1.27) (xy -1.27 0) (xy 1.27 -1.27))
+					(stroke (width 0.254) (type default))
+					(fill (type none))
+				)
+			)
+			(symbol "LED_1_1"
+				(pin passive line
+					(at -3.81 0 0)
+					(length 2.54)
+					(name "K" (effects (font (size 1.27 1.27))))
+					(number "1" (effects (font (size 1.27 1.27))))
+				)
+				(pin passive line
+					(at 3.81 0 180)
+					(length 2.54)
+					(name "A" (effects (font (size 1.27 1.27))))
+					(number "2" (effects (font (size 1.27 1.27))))
+				)
+			)
+			(embedded_fonts no)
+		)
+	)
+	(rectangle
+		(start 15.24 20.32)
+		(end 106.68 250.19)
+		(stroke (width 0) (type dash))
+		(fill (type none))
+		(uuid "067b6bd8-0697-52cc-ad69-e18eda10063d")
+	)
+	(rectangle
+		(start 109.22 20.32)
+		(end 403.86 121.92)
+		(stroke (width 0) (type dash))
+		(fill (type none))
+		(uuid "37de2952-d921-549a-9b1c-627c8953fb95")
+	)
+	(wire
+		(pts (xy 167.64 58.42) (xy 167.64 53.34))
+		(stroke (width 0) (type default))
+		(uuid "3ca7d9ca-ea09-58d6-b2bd-57bf9cf71ac1")
+	)
+	(wire
+		(pts (xy 167.64 53.34) (xy 167.64 50.80))
+		(stroke (width 0) (type default))
+		(uuid "58d3cd48-b854-5249-a040-6f5c34a41643")
+	)
+	(wire
+		(pts (xy 167.64 53.34) (xy 160.02 53.34))
+		(stroke (width 0) (type default))
+		(uuid "1dc24018-a929-51fb-bff5-baafe4e71b84")
+	)
+	(wire
+		(pts (xy 160.02 53.34) (xy 160.02 62.23))
+		(stroke (width 0) (type default))
+		(uuid "a384365f-9a13-5d5d-a401-35900fbb04d3")
+	)
+	(wire
+		(pts (xy 160.02 69.85) (xy 160.02 81.28))
+		(stroke (width 0) (type default))
+		(uuid "01c6209f-46ce-5a49-ac6a-ff9bae0887bd")
+	)
+	(wire
+		(pts (xy 160.02 81.28) (xy 167.64 81.28))
+		(stroke (width 0) (type default))
+		(uuid "7c55db2e-bf12-50de-8e28-8d080b0fa4cb")
+	)
+	(wire
+		(pts (xy 167.64 73.66) (xy 167.64 81.28))
+		(stroke (width 0) (type default))
+		(uuid "a06b1341-09c2-5db6-b4af-815186e5a255")
+	)
+	(wire
+		(pts (xy 167.64 81.28) (xy 167.64 96.52))
+		(stroke (width 0) (type default))
+		(uuid "2bd22da8-9202-53d6-8003-8bf1d4549edf")
+	)
+	(wire
+		(pts (xy 151.13 101.60) (xy 154.94 101.60))
+		(stroke (width 0) (type default))
+		(uuid "7477a65f-7d30-5680-a66c-31f3c34f4e64")
+	)
+	(wire
+		(pts (xy 154.94 101.60) (xy 160.02 101.60))
+		(stroke (width 0) (type default))
+		(uuid "ae213ed7-2a1a-5e66-aa89-941b5c927419")
+	)
+	(wire
+		(pts (xy 154.94 101.60) (xy 154.94 105.41))
+		(stroke (width 0) (type default))
+		(uuid "4e69a9ef-06d8-5918-b338-f642a7cd3c08")
+	)
+	(global_label "PA8"
+		(shape input)
+		(at 134.62 101.60 180)
+		(fields_autoplaced yes)
+		(effects (font (size 1.27 1.27)) (justify right))
+		(uuid "3dfbc028-b48d-50fa-b12e-e234a4d7eac2")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 134.62 101.60 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+	)
+	(wire
+		(pts (xy 134.62 101.60) (xy 143.51 101.60))
+		(stroke (width 0) (type default))
+		(uuid "dfed622c-8e76-5c5a-b256-38577fe7bcac")
+	)
+	(wire
+		(pts (xy 160.02 81.28) (xy 153.67 81.28))
+		(stroke (width 0) (type default))
+		(uuid "19e27888-606a-5fdd-9455-24f2eba91f90")
+	)
+	(wire
+		(pts (xy 146.05 81.28) (xy 139.70 81.28))
+		(stroke (width 0) (type default))
+		(uuid "0f603003-6784-5a74-a971-55cc53928c10")
+	)
+	(wire
+		(pts (xy 139.70 81.28) (xy 132.08 81.28))
+		(stroke (width 0) (type default))
+		(uuid "92452d7f-c678-53e2-83b7-204776505bb3")
+	)
+	(wire
+		(pts (xy 132.08 81.28) (xy 124.46 81.28))
+		(stroke (width 0) (type default))
+		(uuid "4762f0cd-0781-5d35-ad5b-6e7193564e9c")
+	)
+	(global_label "RLY1_FB"
+		(shape output)
+		(at 124.46 81.28 180)
+		(fields_autoplaced yes)
+		(effects (font (size 1.27 1.27)) (justify right))
+		(uuid "0ff2a2e9-48fc-5a21-8b7f-4e782c8ee4c2")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 124.46 81.28 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+	)
+	(wire
+		(pts (xy 139.70 81.28) (xy 139.70 85.09))
+		(stroke (width 0) (type default))
+		(uuid "e3732366-6729-5d74-a316-87fee321fc83")
+	)
+	(wire
+		(pts (xy 132.08 81.28) (xy 132.08 85.09))
+		(stroke (width 0) (type default))
+		(uuid "11f59930-65bf-5b6b-ac8d-e2d612a0e79a")
+	)
+	(wire
+		(pts (xy 177.80 73.66) (xy 189.23 73.66))
+		(stroke (width 0) (type default))
+		(uuid "c3d026b8-6550-51d3-97e9-35a08d4f9fd2")
+	)
+	(wire
+		(pts (xy 196.85 73.66) (xy 203.20 73.66))
+		(stroke (width 0) (type default))
+		(uuid "7feb90ec-1ef2-5f2f-81a7-6568b5be0324")
+	)
+	(wire
+		(pts (xy 203.20 73.66) (xy 203.20 68.58))
+		(stroke (width 0) (type default))
+		(uuid "39b31d26-bf5d-5613-b244-24f246e2eff0")
+	)
+	(wire
+		(pts (xy 203.20 73.66) (xy 203.20 88.90))
+		(stroke (width 0) (type default))
+		(uuid "c770600b-13d5-521a-83a5-a4d2423c8c5f")
+	)
+	(wire
+		(pts (xy 203.20 88.90) (xy 203.20 99.06))
+		(stroke (width 0) (type default))
+		(uuid "becb6182-2dbf-5ddc-b856-99d4d2754d84")
+	)
+	(wire
+		(pts (xy 203.20 99.06) (xy 215.90 99.06))
+		(stroke (width 0) (type default))
+		(uuid "6d9d22e1-7867-5275-9d98-1bcce885975c")
+	)
+	(wire
+		(pts (xy 203.20 88.90) (xy 215.90 88.90))
+		(stroke (width 0) (type default))
+		(uuid "6808bef4-603f-5ed4-86a4-169a2b67d070")
+	)
+	(wire
+		(pts (xy 189.23 73.66) (xy 189.23 101.60))
+		(stroke (width 0) (type default))
+		(uuid "9f91f063-fea5-57d4-8407-0dde0c81da42")
+	)
+	(wire
+		(pts (xy 189.23 101.60) (xy 215.90 101.60))
+		(stroke (width 0) (type default))
+		(uuid "6c3dbe2e-ab0a-5e93-80a5-09cd27190a7f")
+	)
+	(wire
+		(pts (xy 226.06 83.82) (xy 226.06 78.74))
+		(stroke (width 0) (type default))
+		(uuid "d9c117e6-fb2b-56a0-ab36-8b690d151161")
+	)
+	(wire
+		(pts (xy 226.06 78.74) (xy 229.87 78.74))
+		(stroke (width 0) (type default))
+		(uuid "b3b88f52-e61d-56bc-8a9a-995f4ea31693")
+	)
+	(wire
+		(pts (xy 236.22 88.90) (xy 238.76 88.90))
+		(stroke (width 0) (type default))
+		(uuid "eb85e464-16e3-5ca1-92c2-8be0c6c9976a")
+	)
+	(wire
+		(pts (xy 236.22 91.44) (xy 243.84 91.44))
+		(stroke (width 0) (type default))
+		(uuid "79c2c43b-e4bb-5113-a6a2-c1df3f90cd1e")
+	)
+	(wire
+		(pts (xy 236.22 96.52) (xy 243.84 96.52))
+		(stroke (width 0) (type default))
+		(uuid "1f1f3688-c828-537e-9b60-5a953bb717d5")
+	)
+	(global_label "I2C1_SDA"
+		(shape bidirectional)
+		(at 243.84 96.52 0)
+		(fields_autoplaced yes)
+		(effects (font (size 1.27 1.27)) (justify left))
+		(uuid "f0048172-2962-58a8-9f46-e71f21f3a149")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 243.84 96.52 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+	)
+	(wire
+		(pts (xy 236.22 99.06) (xy 243.84 99.06))
+		(stroke (width 0) (type default))
+		(uuid "6b8c399a-d989-5ee8-a059-2d16368ef5e0")
+	)
+	(global_label "I2C1_SCL"
+		(shape input)
+		(at 243.84 99.06 0)
+		(fields_autoplaced yes)
+		(effects (font (size 1.27 1.27)) (justify left))
+		(uuid "58d57730-3f0b-5899-8b1f-25ebfecbe5e6")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 243.84 99.06 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+	)
+	(wire
+		(pts (xy 236.22 104.14) (xy 243.84 104.14))
+		(stroke (width 0) (type default))
+		(uuid "8bbd5fa7-ed76-5a70-9063-eeed6437395f")
+	)
+	(global_label "PA15"
+		(shape output)
+		(at 243.84 104.14 0)
+		(fields_autoplaced yes)
+		(effects (font (size 1.27 1.27)) (justify left))
+		(uuid "2edc01dc-06dd-5b69-88aa-5d8bd4225b11")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 243.84 104.14 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+	)
+	(wire
+		(pts (xy 177.80 58.42) (xy 181.61 58.42))
+		(stroke (width 0) (type default))
+		(uuid "07e403be-a05f-54f3-bac5-1cc4b6fb9c7b")
+	)
+	(wire
+		(pts (xy 189.23 58.42) (xy 195.58 58.42))
+		(stroke (width 0) (type default))
+		(uuid "0aef37d0-0d05-5fba-828b-b8c5e5f5ea32")
+	)
+	(wire
+		(pts (xy 195.58 58.42) (xy 269.24 58.42))
+		(stroke (width 0) (type default))
+		(uuid "abdc5da5-c4b8-5a59-8cea-3fded3345949")
+	)
+	(wire
+		(pts (xy 269.24 58.42) (xy 287.02 58.42))
+		(stroke (width 0) (type default))
+		(uuid "a880af75-940e-51b3-a44b-06fe3fb016e6")
+	)
+	(wire
+		(pts (xy 287.02 58.42) (xy 320.04 58.42))
+		(stroke (width 0) (type default))
+		(uuid "b12b4899-3605-5cb6-9330-9a64fe21acb7")
+	)
+	(label "RLY1_OUT"
+		(at 195.58 58.42 0)
+		(fields_autoplaced yes)
+		(effects (font (size 1.27 1.27)) (justify left bottom))
+		(uuid "d7c5dda7-98c5-5a2c-83b8-55db430844ac")
+	)
+	(wire
+		(pts (xy 269.24 58.42) (xy 269.24 62.23))
+		(stroke (width 0) (type default))
+		(uuid "204741b8-1271-5f2d-865a-236d31ed6086")
+	)
+	(wire
+		(pts (xy 287.02 58.42) (xy 287.02 62.23))
+		(stroke (width 0) (type default))
+		(uuid "22dc0311-41f7-5d5f-84d7-2d70ef892955")
+	)
+	(wire
+		(pts (xy 287.02 69.85) (xy 287.02 73.66))
+		(stroke (width 0) (type default))
+		(uuid "3a89ea87-0b98-5832-9a19-b41a72e7b99c")
+	)
+	(wire
+		(pts (xy 320.04 60.96) (xy 307.34 60.96))
+		(stroke (width 0) (type default))
+		(uuid "f6467acb-9776-5bb8-b02e-a3edc46a5328")
+	)
+	(rectangle
+		(start 109.22 124.46)
+		(end 403.86 226.06)
+		(stroke (width 0) (type dash))
+		(fill (type none))
+		(uuid "67878da7-9df1-5bcd-a560-d5ea14ea6a42")
+	)
+	(wire
+		(pts (xy 167.64 162.56) (xy 167.64 157.48))
+		(stroke (width 0) (type default))
+		(uuid "ea908daf-80ba-532c-bbee-4885451ff051")
+	)
+	(wire
+		(pts (xy 167.64 157.48) (xy 167.64 154.94))
+		(stroke (width 0) (type default))
+		(uuid "9ee43852-6dd6-52e3-a6eb-a36782135759")
+	)
+	(wire
+		(pts (xy 167.64 157.48) (xy 160.02 157.48))
+		(stroke (width 0) (type default))
+		(uuid "1f6e371a-9a0c-5732-9337-bc2694eb743c")
+	)
+	(wire
+		(pts (xy 160.02 157.48) (xy 160.02 166.37))
+		(stroke (width 0) (type default))
+		(uuid "abd2850e-1ca9-5a4f-9461-4c4393ff18ed")
+	)
+	(wire
+		(pts (xy 160.02 173.99) (xy 160.02 185.42))
+		(stroke (width 0) (type default))
+		(uuid "b80c7d8f-f288-5350-a2ab-1e042a18f732")
+	)
+	(wire
+		(pts (xy 160.02 185.42) (xy 167.64 185.42))
+		(stroke (width 0) (type default))
+		(uuid "712c4589-0c02-531d-a7bf-1df1c1ae6ac1")
+	)
+	(wire
+		(pts (xy 167.64 177.80) (xy 167.64 185.42))
+		(stroke (width 0) (type default))
+		(uuid "96acbdaf-e896-5c03-a16d-61724cb1a711")
+	)
+	(wire
+		(pts (xy 167.64 185.42) (xy 167.64 200.66))
+		(stroke (width 0) (type default))
+		(uuid "0ce72bc5-88c2-5225-a970-e89b330d4d7d")
+	)
+	(wire
+		(pts (xy 151.13 205.74) (xy 154.94 205.74))
+		(stroke (width 0) (type default))
+		(uuid "e5c13461-c269-5ace-b455-cf0712ee6251")
+	)
+	(wire
+		(pts (xy 154.94 205.74) (xy 160.02 205.74))
+		(stroke (width 0) (type default))
+		(uuid "79d7e889-26f7-5068-9f85-40867988354c")
+	)
+	(wire
+		(pts (xy 154.94 205.74) (xy 154.94 209.55))
+		(stroke (width 0) (type default))
+		(uuid "4009dc19-06f4-5e87-9b25-b3ab35bda39f")
+	)
+	(global_label "PC6"
+		(shape input)
+		(at 134.62 205.74 180)
+		(fields_autoplaced yes)
+		(effects (font (size 1.27 1.27)) (justify right))
+		(uuid "36ca4706-ed7b-55c5-90a1-1490cc0979c7")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 134.62 205.74 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+	)
+	(wire
+		(pts (xy 134.62 205.74) (xy 143.51 205.74))
+		(stroke (width 0) (type default))
+		(uuid "a62ddb74-e029-5b3f-a438-ad044c604b33")
+	)
+	(wire
+		(pts (xy 160.02 185.42) (xy 153.67 185.42))
+		(stroke (width 0) (type default))
+		(uuid "bf2b6cd4-a554-59ec-bcb2-490baaaabdea")
+	)
+	(wire
+		(pts (xy 146.05 185.42) (xy 139.70 185.42))
+		(stroke (width 0) (type default))
+		(uuid "da81cec5-5808-5c03-8a25-22953f81f416")
+	)
+	(wire
+		(pts (xy 139.70 185.42) (xy 132.08 185.42))
+		(stroke (width 0) (type default))
+		(uuid "aa92daf7-7241-58e1-80c3-b35c26912da2")
+	)
+	(wire
+		(pts (xy 132.08 185.42) (xy 124.46 185.42))
+		(stroke (width 0) (type default))
+		(uuid "5d040bb7-8a31-5e2b-aa22-801833654655")
+	)
+	(global_label "RLY2_FB"
+		(shape output)
+		(at 124.46 185.42 180)
+		(fields_autoplaced yes)
+		(effects (font (size 1.27 1.27)) (justify right))
+		(uuid "c45656f7-c714-5da3-9dc8-a97fb154fe19")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 124.46 185.42 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+	)
+	(wire
+		(pts (xy 139.70 185.42) (xy 139.70 189.23))
+		(stroke (width 0) (type default))
+		(uuid "3478cfee-918e-5561-94ac-15c399577c05")
+	)
+	(wire
+		(pts (xy 132.08 185.42) (xy 132.08 189.23))
+		(stroke (width 0) (type default))
+		(uuid "e2362186-dedf-57d5-9f14-f7ea9556f25b")
+	)
+	(wire
+		(pts (xy 177.80 177.80) (xy 189.23 177.80))
+		(stroke (width 0) (type default))
+		(uuid "578490eb-2042-55cb-8a40-b014592a5a46")
+	)
+	(wire
+		(pts (xy 196.85 177.80) (xy 203.20 177.80))
+		(stroke (width 0) (type default))
+		(uuid "27c8d488-bb38-50fb-8cf8-bef6b2f07397")
+	)
+	(wire
+		(pts (xy 203.20 177.80) (xy 203.20 172.72))
+		(stroke (width 0) (type default))
+		(uuid "f91c092f-609b-5cd0-9587-d24a0c77103f")
+	)
+	(wire
+		(pts (xy 203.20 177.80) (xy 203.20 193.04))
+		(stroke (width 0) (type default))
+		(uuid "eb1e52bf-fb9f-53b9-b869-77cdce73dbca")
+	)
+	(wire
+		(pts (xy 203.20 193.04) (xy 203.20 203.20))
+		(stroke (width 0) (type default))
+		(uuid "f55c9a4e-fa60-5c89-8d47-a4bd2df59f63")
+	)
+	(wire
+		(pts (xy 203.20 203.20) (xy 215.90 203.20))
+		(stroke (width 0) (type default))
+		(uuid "c872c3c7-b50b-5166-8d85-8089382c0926")
+	)
+	(wire
+		(pts (xy 203.20 193.04) (xy 215.90 193.04))
+		(stroke (width 0) (type default))
+		(uuid "c94b16e5-7315-512b-9de3-71d9bc9cf05b")
+	)
+	(wire
+		(pts (xy 189.23 177.80) (xy 189.23 205.74))
+		(stroke (width 0) (type default))
+		(uuid "23768a65-855a-5778-b417-7615bea2b073")
+	)
+	(wire
+		(pts (xy 189.23 205.74) (xy 215.90 205.74))
+		(stroke (width 0) (type default))
+		(uuid "58dbf773-43f4-5186-81f7-feee3af7deb4")
+	)
+	(wire
+		(pts (xy 226.06 187.96) (xy 226.06 182.88))
+		(stroke (width 0) (type default))
+		(uuid "abe58406-36d8-5b99-a398-cf17aebe64b2")
+	)
+	(wire
+		(pts (xy 226.06 182.88) (xy 229.87 182.88))
+		(stroke (width 0) (type default))
+		(uuid "a928fc9a-b0f4-5d91-8b29-0381ad63c680")
+	)
+	(wire
+		(pts (xy 236.22 193.04) (xy 238.76 193.04))
+		(stroke (width 0) (type default))
+		(uuid "93a130ca-c46a-5f4d-9d98-eb95986d56ae")
+	)
+	(wire
+		(pts (xy 236.22 195.58) (xy 243.84 195.58))
+		(stroke (width 0) (type default))
+		(uuid "be7b0cb9-d1fe-515e-80fb-b6e155b1e60b")
+	)
+	(wire
+		(pts (xy 236.22 200.66) (xy 243.84 200.66))
+		(stroke (width 0) (type default))
+		(uuid "6fc57d4e-96d4-52b2-9cb7-877428e97be2")
+	)
+	(global_label "I2C1_SDA"
+		(shape bidirectional)
+		(at 243.84 200.66 0)
+		(fields_autoplaced yes)
+		(effects (font (size 1.27 1.27)) (justify left))
+		(uuid "3f3613b5-8066-5fb2-8d24-e040176c3c40")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 243.84 200.66 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+	)
+	(wire
+		(pts (xy 236.22 203.20) (xy 243.84 203.20))
+		(stroke (width 0) (type default))
+		(uuid "73a13d92-867b-5c10-a81a-00a69ef8c829")
+	)
+	(global_label "I2C1_SCL"
+		(shape input)
+		(at 243.84 203.20 0)
+		(fields_autoplaced yes)
+		(effects (font (size 1.27 1.27)) (justify left))
+		(uuid "10320e03-5e70-5462-9184-6080411b5886")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 243.84 203.20 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+	)
+	(wire
+		(pts (xy 236.22 208.28) (xy 243.84 208.28))
+		(stroke (width 0) (type default))
+		(uuid "eba1d3d5-e44a-5520-9d67-72468ba9b21b")
+	)
+	(global_label "PA15"
+		(shape output)
+		(at 243.84 208.28 0)
+		(fields_autoplaced yes)
+		(effects (font (size 1.27 1.27)) (justify left))
+		(uuid "93a4f153-6199-56a7-88bf-c95823c27ee3")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 243.84 208.28 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+	)
+	(wire
+		(pts (xy 177.80 162.56) (xy 181.61 162.56))
+		(stroke (width 0) (type default))
+		(uuid "b360f2eb-7ddf-563d-bf0c-a3be5ab84428")
+	)
+	(wire
+		(pts (xy 189.23 162.56) (xy 195.58 162.56))
+		(stroke (width 0) (type default))
+		(uuid "eb54ba14-fff2-5cea-820a-4114d6035d1b")
+	)
+	(wire
+		(pts (xy 195.58 162.56) (xy 269.24 162.56))
+		(stroke (width 0) (type default))
+		(uuid "177d93cf-9227-5c6c-92d1-53fa0ed20a7a")
+	)
+	(wire
+		(pts (xy 269.24 162.56) (xy 287.02 162.56))
+		(stroke (width 0) (type default))
+		(uuid "70229abf-45b0-5583-a316-d762e2f37aa8")
+	)
+	(wire
+		(pts (xy 287.02 162.56) (xy 320.04 162.56))
+		(stroke (width 0) (type default))
+		(uuid "61347870-48e3-5b00-98e1-30c68b80b5d0")
+	)
+	(label "RLY2_OUT"
+		(at 195.58 162.56 0)
+		(fields_autoplaced yes)
+		(effects (font (size 1.27 1.27)) (justify left bottom))
+		(uuid "72177a3d-be7f-54fe-9244-b5db1a8d4242")
+	)
+	(wire
+		(pts (xy 269.24 162.56) (xy 269.24 166.37))
+		(stroke (width 0) (type default))
+		(uuid "8d3a6971-06ea-55ce-8b42-6ff723d1e408")
+	)
+	(wire
+		(pts (xy 287.02 162.56) (xy 287.02 166.37))
+		(stroke (width 0) (type default))
+		(uuid "d56541a7-67bf-51dd-9bc6-168d96ef471a")
+	)
+	(wire
+		(pts (xy 287.02 173.99) (xy 287.02 177.80))
+		(stroke (width 0) (type default))
+		(uuid "49001abe-6fd7-5d28-9a82-214b8b2ef558")
+	)
+	(wire
+		(pts (xy 320.04 165.10) (xy 307.34 165.10))
+		(stroke (width 0) (type default))
+		(uuid "9034ae44-bada-5293-9da3-0741fdc1cd08")
+	)
+	(text "Relay 1 (safety light): drive PA8, coil feedback RLY1_FB, INA226 U2 at 0x40"
+		(exclude_from_sim no)
+		(at 111.76 22.86 0)
+		(effects (font (size 2 2) (bold yes)) (justify left top))
+		(uuid "7683d40f-701b-5f65-bc09-5226ea984d6b")
+	)
+	(text "Coil feedback (RLY1_FB, TCA9535 P00): HIGH (3.0 V) = coil off and intact, LOW = energised.\nINA226 0x40 (A1 = GND, A0 = GND): load current (30 mΩ, LSB 100 µA) + 24 V rail; ALERT → PA15.\nLED4: output ON; its 6.7 mA also lets the INA226 see the contact close with no load.\nF3: 3A hold PTC, so a shorted output trips only this channel. D12: load flyback.\nQ2 AO3400A: R11 100 Ω gate, R12 100k pull-down = OFF in reset (CIF §7a)."
+		(exclude_from_sim no)
+		(at 269.24 91.44 0)
+		(effects (font (size 1.27 1.27)) (justify left top))
+		(uuid "ad67e461-831d-5a02-8a1f-41ce3fc259a9")
+	)
+	(text "Relay 2 (LED DRL): drive PC6, coil feedback RLY2_FB, INA226 U3 at 0x41"
+		(exclude_from_sim no)
+		(at 111.76 127 0)
+		(effects (font (size 2 2) (bold yes)) (justify left top))
+		(uuid "d4ca61a6-ff0a-5344-8ff0-1ef84763d488")
+	)
+	(text "Coil feedback (RLY2_FB, TCA9535 P01): HIGH (3.0 V) = coil off and intact, LOW = energised.\nINA226 0x41 (A1 = GND, A0 = VS): load current (30 mΩ, LSB 100 µA) + 24 V rail; ALERT → PA15.\nLED5: output ON; its 6.7 mA also lets the INA226 see the contact close with no load.\nF4: 3A hold PTC, so a shorted output trips only this channel. D13: load flyback.\nQ3 AO3400A: R16 100 Ω gate, R17 100k pull-down = OFF in reset (CIF §7a)."
+		(exclude_from_sim no)
+		(at 269.24 195.58 0)
+		(effects (font (size 1.27 1.27)) (justify left top))
+		(uuid "afcac8ef-15db-5b2e-96a3-2fd60333efb1")
+	)
+	(rectangle
+		(start 15.24 20.32)
+		(end 106.68 250.19)
+		(stroke (width 0) (type dash))
+		(fill (type none))
+		(uuid "4a249ea4-de04-50ff-801b-8f398a8df355")
+	)
+	(text "Relay diagnosis (CIF §7b)"
+		(exclude_from_sim no)
+		(at 17.78 22.86 0)
+		(effects (font (size 2 2) (bold yes)) (justify left top))
+		(uuid "fac79a88-251c-5cd8-9a46-be94b501d52d")
+	)
+	(text "Coil supply = +5V_24 (U1 DC/DC, Power sheet).\nRead ≥ 30 ms after switching.\n\nOFF, FB HIGH, I ≈ 0 → OK, relay off\nOFF, FB LOW → open coil, no +5V_24\n   or shorted driver\nOFF, FB HIGH, I > 5 mA → contacts welded\nON, FB LOW, I in window → OK (LED 6.7 mA + load)\nON, FB HIGH → driver or GPIO not switching\nON, FB LOW, I ≈ 0 → contact not closing,\n   output PTC or input fuse open, or no 24 V\nON, I over limit → short / stall (ALERT → PA15)\nany, VBUS < 20 V → 24 V supply fault\n\nFB = coil feedback: 10k / 15k divider + 10 nF\ninto the TCA9535 expander (I²C1 0x20, P00-P03,\nRelays 3-4 sheet): 3.0 V when the coil is off\nand intact, ~0 V when energised, ≈ 3.5 V at the\nturn-off peak (inputs are 5.5 V-tolerant).\nRead input port 0 (register 0x00) over I²C.\nI = INA226 load current, VBUS = 24 V rail.\n\nINA226 (30 mΩ, CIF §6a): CONFIG 0x4327,\nCAL 1707 (LSB 100 µA, FS 2.73 A),\nMASK/ENABLE 0x8001 (SOL, latched),\nALERT limit 30000 = 2.5 A default; set each\nchannel's value from the CANopen dictionary.\n\"Current present\" threshold 5 mA.\nOn ALERT LOW: read MASK/ENABLE of each INA226\n(AFF bit 4) to find the channel; the read also\nclears the latch. Switch it OFF, report on CAN."
+		(exclude_from_sim no)
+		(at 17.78 27.94 0)
+		(effects (font (size 1.27 1.27)) (justify left top))
+		(uuid "de0939b9-bc1a-55f2-86a5-cc86135235e6")
+	)
+	(junction
+		(at 132.08 81.28)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "62ec58d8-60c4-5903-ae69-0a5675a562b3")
+	)
+	(junction
+		(at 132.08 185.42)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "1e28a289-5b5d-5ca6-b3f1-a3d084a8e476")
+	)
+	(junction
+		(at 139.7 81.28)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "e527b085-c086-512e-9d97-30aeff31c546")
+	)
+	(junction
+		(at 139.7 185.42)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "650361ed-4206-5a2f-a9cc-86bab370a061")
+	)
+	(junction
+		(at 154.94 101.6)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "5f61ca21-1837-5fd7-8094-28e0ded8ea28")
+	)
+	(junction
+		(at 154.94 205.74)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "2de201c7-ea53-5aea-bf54-9c13b4921e5e")
+	)
+	(junction
+		(at 160.02 81.28)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "f3560480-52a1-55e9-8dc2-eb76c83980f2")
+	)
+	(junction
+		(at 160.02 185.42)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "20e52907-92be-5d01-a65a-b4a865b29086")
+	)
+	(junction
+		(at 167.64 53.34)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "aa4975b8-0189-51cd-994e-97934168a75d")
+	)
+	(junction
+		(at 167.64 81.28)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "807988fa-739d-5000-a07a-b3e81a88e984")
+	)
+	(junction
+		(at 167.64 157.48)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "a6e91ff8-8b85-5545-bc3c-78e17ec6dc84")
+	)
+	(junction
+		(at 167.64 185.42)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "8432fe43-73ee-52be-aa23-1383d3357d3d")
+	)
+	(junction
+		(at 189.23 73.66)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "df1f28f9-1f3e-5090-bdf5-3710c84a9ff6")
+	)
+	(junction
+		(at 189.23 177.8)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "c5f985c5-55f2-5a10-a5b9-9bd1a46d8356")
+	)
+	(junction
+		(at 203.2 73.66)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "b8c6fb39-a904-5ed4-bf87-110ca611f6c7")
+	)
+	(junction
+		(at 203.2 88.9)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "f282ad68-2bfc-5236-9802-0f32c69dddd4")
+	)
+	(junction
+		(at 203.2 177.8)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "080388ce-8e0a-5bfe-b940-947555139651")
+	)
+	(junction
+		(at 203.2 193.04)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "ed95acda-701e-53b6-a67a-15018ed80913")
+	)
+	(junction
+		(at 226.06 78.74)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "a195fbbc-6a72-55d2-908b-f1cab021cb97")
+	)
+	(junction
+		(at 226.06 182.88)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "438f5aad-67fd-5f91-adb4-579a2a4fcf11")
+	)
+	(junction
+		(at 269.24 58.42)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "48a88583-a4ec-5369-8df5-16981f773fa2")
+	)
+	(junction
+		(at 269.24 162.56)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "d21a453a-62d9-53c5-b339-a38fb4de0f46")
+	)
+	(junction
+		(at 287.02 58.42)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "7451dee3-17a1-53a0-a8f9-206cf166987d")
+	)
+	(junction
+		(at 287.02 162.56)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "f6c612d5-6125-5089-8665-56eb4007806b")
+	)
+	(symbol
+		(lib_id "Relay:SANYOU_SRD_Form_A")
+		(at 172.72 66.04 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "0cffe36d-fe59-5d8e-8143-21f4bdc7d5ea")
+		(property "Reference" "K1"
+			(at 180.34 64.77 0)
+			(effects (font (size 1.27 1.27)) (justify left))
+		)
+		(property "Value" "SRD-5VDC-SL-A"
+			(at 180.34 67.31 0)
+			(effects (font (size 1.27 1.27)) (justify left))
+		)
+		(property "Footprint" "Relay_THT:Relay_SPST_SANYOU_SRD_Series_Form_A"
+			(at 172.72 66.04 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Datasheet" "~"
+			(at 172.72 66.04 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Description" "relay 1 (safety light), SRD-5VDC-SL-A, 5 V coil, SPST-NO 10 A"
+			(at 172.72 66.04 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C140615"
+			(at 172.72 66.04 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "5"
+			(uuid "9bd9a566-26c6-57e1-9cf6-bfc0c7257ddf")
+		)
+		(pin "2"
+			(uuid "7c01e55e-d65b-558b-acab-22bddaa0eb80")
+		)
+		(pin "3"
+			(uuid "374088ae-a7d6-555e-acf3-b1080fa12628")
+		)
+		(pin "1"
+			(uuid "04cbf92c-7a7d-5a8d-b33f-6c96164862f8")
+		)
+		(instances
+			(project "MES4_Carrier_EC"
+				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/e428b7c7-06b0-568c-b022-37affa8fc2f1"
+					(reference "K1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "MES4-Carrier-EC:+5V_24")
+		(at 167.64 50.80 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "bcace77b-9c55-56a8-998f-6dc051ca5952")
+		(property "Reference" "#PWR058"
+			(at 167.64 44.45 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Value" "+5V_24"
+			(at 167.64 46.99 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(pin "1"
+			(uuid "1aa0e4ec-1e13-5058-ac2b-61dc6397426c")
+		)
+		(instances
+			(project "MES4_Carrier_EC"
+				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/e428b7c7-06b0-568c-b022-37affa8fc2f1"
+					(reference "#PWR058")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:D")
+		(at 160.02 66.04 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "7fb1a146-7e9d-58bf-91e9-331693e2b147")
+		(property "Reference" "D10"
+			(at 152.40 64.77 90)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Value" "1N4148W"
+			(at 152.40 67.31 90)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Footprint" "Diode_SMD:D_SOD-123"
+			(at 160.02 66.04 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Datasheet" "~"
+			(at 160.02 66.04 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Description" "coil flyback diode"
+			(at 160.02 66.04 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C81598"
+			(at 160.02 66.04 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "21503ea7-531a-5b48-8c1d-0e937bd544d0")
+		)
+		(pin "2"
+			(uuid "151fe96d-1d07-5b60-b85f-0c9ca251f6a4")
+		)
+		(instances
+			(project "MES4_Carrier_EC"
+				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/e428b7c7-06b0-568c-b022-37affa8fc2f1"
+					(reference "D10")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Transistor_FET:AO3400A")
+		(at 165.10 101.60 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "4a06706c-0b75-5f4e-b31e-223b32b07da8")
+		(property "Reference" "Q2"
+			(at 170.18 100.33 0)
+			(effects (font (size 1.27 1.27)) (justify left))
+		)
+		(property "Value" "AO3400A"
+			(at 170.18 102.87 0)
+			(effects (font (size 1.27 1.27)) (justify left))
+		)
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
+			(at 165.10 101.60 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Datasheet" "http://www.aosmd.com/pdfs/datasheet/AO3400A.pdf"
+			(at 165.10 101.60 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Description" "relay 1 coil driver, N-MOSFET 30 V 5.7 A (CIF §7a)"
+			(at 165.10 101.60 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C20917"
+			(at 165.10 101.60 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "d812da66-af14-580d-9a1d-f90e9ca2c4c2")
+		)
+		(pin "3"
+			(uuid "908e47cd-a498-55b3-9518-355126dffeb2")
+		)
+		(pin "2"
+			(uuid "75f81298-16e6-5e70-b522-056f42928fc5")
+		)
+		(instances
+			(project "MES4_Carrier_EC"
+				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/e428b7c7-06b0-568c-b022-37affa8fc2f1"
+					(reference "Q2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 167.64 106.68 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "6408d53c-45cc-5ddb-8280-5f2f2a99484c")
+		(property "Reference" "#PWR059"
+			(at 167.64 113.03 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Value" "GND"
+			(at 167.64 110.49 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(pin "1"
+			(uuid "f18fad35-90d5-5939-9f67-a3ddbf77b599")
+		)
+		(instances
+			(project "MES4_Carrier_EC"
+				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/e428b7c7-06b0-568c-b022-37affa8fc2f1"
+					(reference "#PWR059")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 147.32 101.60 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "d513fa6b-688d-5edb-9a5d-2a6a3c26a755")
+		(property "Reference" "R11"
+			(at 147.32 97.79 90)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Value" "100Ω"
+			(at 147.32 105.41 90)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+			(at 147.32 101.60 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Datasheet" "~"
+			(at 147.32 101.60 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Description" "AO3400A gate series resistor (CIF §7a)"
+			(at 147.32 101.60 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C25076"
+			(at 147.32 101.60 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "dbd7d041-20fe-580f-b18b-33948d6b5e02")
+		)
+		(pin "2"
+			(uuid "300ce418-0a30-5fa9-95cc-5a6dd4169ae8")
+		)
+		(instances
+			(project "MES4_Carrier_EC"
+				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/e428b7c7-06b0-568c-b022-37affa8fc2f1"
+					(reference "R11")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 154.94 109.22 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "a84a7f3e-9ee0-5533-96f3-b2aa0aef0388")
+		(property "Reference" "R12"
+			(at 152.40 107.95 0)
+			(effects (font (size 1.27 1.27)) (justify right))
+		)
+		(property "Value" "100k"
+			(at 152.40 110.49 0)
+			(effects (font (size 1.27 1.27)) (justify right))
+		)
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+			(at 154.94 109.22 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Datasheet" "~"
+			(at 154.94 109.22 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Description" "gate pull-down: relay 1 OFF during reset / boot (CIF §4a, §7a)"
+			(at 154.94 109.22 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C25741"
+			(at 154.94 109.22 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "1855288f-e6f4-5739-a791-b702ff5890b5")
+		)
+		(pin "2"
+			(uuid "e0119dc7-374b-59de-b48f-0b33938ba1c0")
+		)
+		(instances
+			(project "MES4_Carrier_EC"
+				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/e428b7c7-06b0-568c-b022-37affa8fc2f1"
+					(reference "R12")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 154.94 113.03 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "f8aaab26-11cd-5508-a4f2-837db9e28171")
+		(property "Reference" "#PWR060"
+			(at 154.94 119.38 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Value" "GND"
+			(at 154.94 116.84 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(pin "1"
+			(uuid "27657650-9df3-5d84-82db-c7b4b4e977d9")
+		)
+		(instances
+			(project "MES4_Carrier_EC"
+				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/e428b7c7-06b0-568c-b022-37affa8fc2f1"
+					(reference "#PWR060")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 149.86 81.28 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "ceb70a12-99a1-59f6-8dc9-73d544841433")
+		(property "Reference" "R9"
+			(at 149.86 77.47 90)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Value" "10k"
+			(at 149.86 85.09 90)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+			(at 149.86 81.28 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Datasheet" "~"
+			(at 149.86 81.28 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Description" "coil readback divider top (CIF §7a option A)"
+			(at 149.86 81.28 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C25744"
+			(at 149.86 81.28 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "2b2dbdcb-a253-50c8-8a85-373e8e4f1848")
+		)
+		(pin "2"
+			(uuid "fabb08a9-67ee-56e9-a285-1922707e7138")
+		)
+		(instances
+			(project "MES4_Carrier_EC"
+				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/e428b7c7-06b0-568c-b022-37affa8fc2f1"
+					(reference "R9")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 139.70 88.90 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "7c3a9b1d-4524-5f14-ae05-0521ebd35532")
+		(property "Reference" "R10"
+			(at 142.24 87.63 0)
+			(effects (font (size 1.27 1.27)) (justify left))
+		)
+		(property "Value" "15k"
+			(at 142.24 90.17 0)
+			(effects (font (size 1.27 1.27)) (justify left))
+		)
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+			(at 139.70 88.90 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Datasheet" "~"
+			(at 139.70 88.90 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Description" "coil readback divider bottom: 3.0 V = coil off, ~0 V = energised"
+			(at 139.70 88.90 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C25756"
+			(at 139.70 88.90 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "eea294ed-9352-5a77-b38d-4eface2e08ff")
+		)
+		(pin "2"
+			(uuid "b430a296-76a1-5fa3-8c9e-cfc1b3c80681")
+		)
+		(instances
+			(project "MES4_Carrier_EC"
+				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/e428b7c7-06b0-568c-b022-37affa8fc2f1"
+					(reference "R10")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 139.70 92.71 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "83149d50-1d2c-5e13-82c4-05461ddb2960")
+		(property "Reference" "#PWR061"
+			(at 139.70 99.06 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Value" "GND"
+			(at 139.70 96.52 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(pin "1"
+			(uuid "ccd95e21-f125-549b-bb0c-0c474edf2c90")
+		)
+		(instances
+			(project "MES4_Carrier_EC"
+				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/e428b7c7-06b0-568c-b022-37affa8fc2f1"
+					(reference "#PWR061")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 132.08 88.90 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "c9610f11-93da-5d12-84fe-92982a31716f")
+		(property "Reference" "C10"
+			(at 129.54 87.63 0)
+			(effects (font (size 1.27 1.27)) (justify right))
+		)
+		(property "Value" "10nF"
+			(at 129.54 90.17 0)
+			(effects (font (size 1.27 1.27)) (justify right))
+		)
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+			(at 132.08 88.90 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Datasheet" "~"
+			(at 132.08 88.90 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Description" "coil readback filter (turn-off spike)"
+			(at 132.08 88.90 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C15195"
+			(at 132.08 88.90 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "a8fc9d51-b2ec-5af4-951b-70cb6d4e8f2c")
+		)
+		(pin "2"
+			(uuid "515111b9-1618-5e91-b3dd-c63ed58e8960")
+		)
+		(instances
+			(project "MES4_Carrier_EC"
+				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/e428b7c7-06b0-568c-b022-37affa8fc2f1"
+					(reference "C10")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 132.08 92.71 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "52a4bae0-4558-5857-b4e1-fdc55d568aec")
+		(property "Reference" "#PWR062"
+			(at 132.08 99.06 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Value" "GND"
+			(at 132.08 96.52 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(pin "1"
+			(uuid "24ceac5a-6087-597e-a24c-dbcbd4d82825")
+		)
+		(instances
+			(project "MES4_Carrier_EC"
+				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/e428b7c7-06b0-568c-b022-37affa8fc2f1"
+					(reference "#PWR062")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 193.04 73.66 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "2e45f497-e2c8-5383-85f9-f339bfb81438")
+		(property "Reference" "R8"
+			(at 193.04 69.85 90)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Value" "30mΩ"
+			(at 193.04 77.47 90)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
+			(at 193.04 73.66 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Datasheet" "~"
+			(at 193.04 73.66 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Description" "load-current shunt 30 mΩ 1 % 1 W, before the relay contact (CIF §7a option C)"
+			(at 193.04 73.66 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C5375399"
+			(at 193.04 73.66 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "936f6899-7676-5436-8cb3-fe0c0777133a")
+		)
+		(pin "2"
+			(uuid "b5c0c098-551e-5229-b66c-3146ba10ff2d")
+		)
+		(instances
+			(project "MES4_Carrier_EC"
+				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/e428b7c7-06b0-568c-b022-37affa8fc2f1"
+					(reference "R8")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+24V")
+		(at 203.20 68.58 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "4df2ebd0-e073-5abc-8c11-5b50137f47e3")
+		(property "Reference" "#PWR063"
+			(at 203.20 62.23 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Value" "+24V"
+			(at 203.20 64.77 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(pin "1"
+			(uuid "52a81cb3-8bbe-5ed0-866d-eb431274a7ec")
+		)
+		(instances
+			(project "MES4_Carrier_EC"
+				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/e428b7c7-06b0-568c-b022-37affa8fc2f1"
+					(reference "#PWR063")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Sensor_Energy:INA226")
+		(at 226.06 96.52 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "e203825b-fab1-5b0b-86bb-fc03fad880e0")
+		(property "Reference" "U2"
+			(at 231.14 110.49 0)
+			(effects (font (size 1.27 1.27)) (justify left))
+		)
+		(property "Value" "INA226"
+			(at 231.14 113.03 0)
+			(effects (font (size 1.27 1.27)) (justify left))
+		)
+		(property "Footprint" "Package_SO:VSSOP-10_3x3mm_P0.5mm"
+			(at 226.06 96.52 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Datasheet" "~"
+			(at 226.06 96.52 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Description" "INA226, I²C 0x40: relay 1 (safety light) load current + 24 V rail (CIF §6a)"
+			(at 226.06 96.52 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C49851"
+			(at 226.06 96.52 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "8"
+			(uuid "7e743918-04b0-56ca-9267-a85ccf0aa9eb")
+		)
+		(pin "10"
+			(uuid "77706d73-96a2-5fd4-89db-edabcb5a4b06")
+		)
+		(pin "9"
+			(uuid "f3ef7488-3450-53f5-b659-397352e2d655")
+		)
+		(pin "6"
+			(uuid "0f86ab80-5622-58d8-80ba-a951774ac3fc")
+		)
+		(pin "7"
+			(uuid "54213130-f0aa-5dae-883e-f24fb5edb43d")
+		)
+		(pin "1"
+			(uuid "aa0fea13-cf66-5abd-8136-558abc9123f9")
+		)
+		(pin "2"
+			(uuid "b405d5eb-f736-5a77-a91e-eb323c35dc69")
+		)
+		(pin "4"
+			(uuid "147ac795-f61f-5a1b-8945-c3f65527ccad")
+		)
+		(pin "5"
+			(uuid "ff013c8d-3afd-5368-a20f-0809397af183")
+		)
+		(pin "3"
+			(uuid "6a759636-861f-52b9-ba06-bfeb9ea72a46")
+		)
+		(instances
+			(project "MES4_Carrier_EC"
+				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/e428b7c7-06b0-568c-b022-37affa8fc2f1"
+					(reference "U2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "MES4-Carrier-EC:+3V3_MOD")
+		(at 226.06 78.74 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "d41572de-acf8-59c0-87cc-772b8535a02d")
+		(property "Reference" "#PWR064"
+			(at 226.06 72.39 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Value" "+3V3_MOD"
+			(at 226.06 74.93 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(pin "1"
+			(uuid "e8511550-517d-5d23-abf9-958da4876a9f")
+		)
+		(instances
+			(project "MES4_Carrier_EC"
+				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/e428b7c7-06b0-568c-b022-37affa8fc2f1"
+					(reference "#PWR064")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 233.68 78.74 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "4ee47fec-f986-5d3f-bec7-6fa8aba55435")
+		(property "Reference" "C12"
+			(at 233.68 74.93 90)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Value" "100nF"
+			(at 233.68 82.55 90)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+			(at 233.68 78.74 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Datasheet" "~"
+			(at 233.68 78.74 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Description" "INA226 VS decoupling"
+			(at 233.68 78.74 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C1525"
+			(at 233.68 78.74 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "501e1a7b-ddb0-528d-8197-ba88ca811599")
+		)
+		(pin "2"
+			(uuid "bd86db92-0fbb-537e-a498-390c09d7a7ed")
+		)
+		(instances
+			(project "MES4_Carrier_EC"
+				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/e428b7c7-06b0-568c-b022-37affa8fc2f1"
+					(reference "C12")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 237.49 78.74 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "36b1c442-4f12-5b9f-9093-c5e476d729db")
+		(property "Reference" "#PWR065"
+			(at 237.49 78.74 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Value" "GND"
+			(at 242.44 78.74 90)
+			(effects (font (size 1.27 1.27)))
+		)
+		(pin "1"
+			(uuid "263ac399-7f48-5df2-8bf2-c18d3b922dbb")
+		)
+		(instances
+			(project "MES4_Carrier_EC"
+				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/e428b7c7-06b0-568c-b022-37affa8fc2f1"
+					(reference "#PWR065")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 226.06 109.22 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "7b104a09-dd65-577c-932c-d0e7348a5be3")
+		(property "Reference" "#PWR066"
+			(at 226.06 115.57 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Value" "GND"
+			(at 226.06 113.03 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(pin "1"
+			(uuid "2045aad4-f316-5dbb-b16e-c8eb80d774fa")
+		)
+		(instances
+			(project "MES4_Carrier_EC"
+				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/e428b7c7-06b0-568c-b022-37affa8fc2f1"
+					(reference "#PWR066")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:Polyfuse")
+		(at 185.42 58.42 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "3ba9509e-ef02-51b2-bfa9-b23095a4aa14")
+		(property "Reference" "F3"
+			(at 182.88 54.61 90)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Value" "3A"
+			(at 189.23 54.61 90)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Footprint" "Fuse:Fuse_2920_7451Metric"
+			(at 185.42 58.42 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Datasheet" "~"
+			(at 185.42 58.42 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Description" "relay 1 output PTC: a shorted output trips only this channel"
+			(at 185.42 58.42 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C22435908"
+			(at 185.42 58.42 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "a640f849-3460-5265-9d2e-ef71ad27d935")
+		)
+		(pin "2"
+			(uuid "6a547d50-7291-53ff-acd9-50ef4cbca1ea")
+		)
+		(instances
+			(project "MES4_Carrier_EC"
+				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/e428b7c7-06b0-568c-b022-37affa8fc2f1"
+					(reference "F3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector:Screw_Terminal_01x02")
+		(at 325.12 58.42 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "228e4750-a70a-59c4-a882-9e27bfe055ca")
+		(property "Reference" "J6"
+			(at 327.66 57.15 0)
+			(effects (font (size 1.27 1.27)) (justify left))
+		)
+		(property "Value" "RLY1 OUT"
+			(at 327.66 59.69 0)
+			(effects (font (size 1.27 1.27)) (justify left))
+		)
+		(property "Footprint" "MES4-Carrier-EC:CONN-TH_KF250NH-3.5-2P"
+			(at 325.12 58.42 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Datasheet" "~"
+			(at 325.12 58.42 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Description" "relay 1 (safety light) output: 1 = switched +24 V, 2 = GND_24V (KF250NH 3.5 mm push-in)"
+			(at 325.12 58.42 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C976556"
+			(at 325.12 58.42 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "b2030f33-aae8-50e3-b0aa-6b7cff4b7ad3")
+		)
+		(pin "2"
+			(uuid "f084da48-d8cb-5c65-bf12-c4236c5ca543")
+		)
+		(instances
+			(project "MES4_Carrier_EC"
+				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/e428b7c7-06b0-568c-b022-37affa8fc2f1"
+					(reference "J6")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:D_Schottky")
+		(at 269.24 66.04 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "2471a420-0dcf-53cd-ae31-4c747484a9b6")
+		(property "Reference" "D12"
+			(at 262.89 64.77 90)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Value" "SS34"
+			(at 262.89 67.31 90)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Footprint" "Diode_SMD:D_SMA"
+			(at 269.24 66.04 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Datasheet" "~"
+			(at 269.24 66.04 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Description" "output flyback for inductive loads (3 A 40 V)"
+			(at 269.24 66.04 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C8678"
+			(at 269.24 66.04 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "45df386b-374e-5e72-b2be-b333ce9ccdb7")
+		)
+		(pin "2"
+			(uuid "ace9c4dc-da3b-52dc-8cad-681b0639e8ed")
+		)
+		(instances
+			(project "MES4_Carrier_EC"
+				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/e428b7c7-06b0-568c-b022-37affa8fc2f1"
+					(reference "D12")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "MES4-Carrier-EC:GND_24V")
+		(at 269.24 69.85 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "4a3edee5-77a7-54f1-879f-72b9b9259ff8")
+		(property "Reference" "#PWR067"
+			(at 269.24 76.20 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Value" "GND_24V"
+			(at 269.24 73.66 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(pin "1"
+			(uuid "59ed850a-0068-539d-97fb-e4cdd3150470")
+		)
+		(instances
+			(project "MES4_Carrier_EC"
+				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/e428b7c7-06b0-568c-b022-37affa8fc2f1"
+					(reference "#PWR067")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 287.02 66.04 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "940e4b19-75a4-5ea8-9241-38eb3bf70d56")
+		(property "Reference" "R18"
+			(at 289.56 64.77 0)
+			(effects (font (size 1.27 1.27)) (justify left))
+		)
+		(property "Value" "3.3k"
+			(at 289.56 67.31 0)
+			(effects (font (size 1.27 1.27)) (justify left))
+		)
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
+			(at 287.02 66.04 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Datasheet" "~"
+			(at 287.02 66.04 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Description" "output LED resistor: 6.7 mA, 0.15 W in a 0.25 W 1206"
+			(at 287.02 66.04 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C26032"
+			(at 287.02 66.04 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "935eb30f-7215-523d-97e3-91cac4982b42")
+		)
+		(pin "2"
+			(uuid "b87c2586-1aaf-5217-8069-f374d59aa6c8")
+		)
+		(instances
+			(project "MES4_Carrier_EC"
+				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/e428b7c7-06b0-568c-b022-37affa8fc2f1"
+					(reference "R18")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:LED")
+		(at 287.02 77.47 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "c2bfe5fc-4b81-5766-a4d2-83ca422a741b")
+		(property "Reference" "LED4"
+			(at 292.10 76.20 90)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Value" "Yellow"
+			(at 292.10 78.74 90)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Footprint" "LED_SMD:LED_0805_2012Metric"
+			(at 287.02 77.47 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Datasheet" "~"
+			(at 287.02 77.47 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Description" "relay 1 output ON; also an 8 mA minimum load so the INA226 sees contact closure with nothing connected"
+			(at 287.02 77.47 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C2296"
+			(at 287.02 77.47 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "2262b7d9-96d9-5321-99fa-fad4bbed5225")
+		)
+		(pin "2"
+			(uuid "255174b7-8739-589c-93d8-860bc18bfa64")
+		)
+		(instances
+			(project "MES4_Carrier_EC"
+				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/e428b7c7-06b0-568c-b022-37affa8fc2f1"
+					(reference "LED4")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "MES4-Carrier-EC:GND_24V")
+		(at 287.02 81.28 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "af07835c-89b0-573f-8cf9-c4dc2a9dd63a")
+		(property "Reference" "#PWR068"
+			(at 287.02 87.63 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Value" "GND_24V"
+			(at 287.02 85.09 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(pin "1"
+			(uuid "f9790751-c3df-568d-a93f-3981e7901a2b")
+		)
+		(instances
+			(project "MES4_Carrier_EC"
+				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/e428b7c7-06b0-568c-b022-37affa8fc2f1"
+					(reference "#PWR068")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "MES4-Carrier-EC:GND_24V")
+		(at 307.34 60.96 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "3e7775e5-122f-5d6c-a18b-081fc21d3da5")
+		(property "Reference" "#PWR069"
+			(at 307.34 67.31 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Value" "GND_24V"
+			(at 307.34 64.77 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(pin "1"
+			(uuid "a1331e93-b81d-554e-b6ad-b4314794630a")
+		)
+		(instances
+			(project "MES4_Carrier_EC"
+				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/e428b7c7-06b0-568c-b022-37affa8fc2f1"
+					(reference "#PWR069")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Relay:SANYOU_SRD_Form_A")
+		(at 172.72 170.18 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "a20ebffe-95d4-55b9-acf5-ad9b77d029e1")
+		(property "Reference" "K2"
+			(at 180.34 168.91 0)
+			(effects (font (size 1.27 1.27)) (justify left))
+		)
+		(property "Value" "SRD-5VDC-SL-A"
+			(at 180.34 171.45 0)
+			(effects (font (size 1.27 1.27)) (justify left))
+		)
+		(property "Footprint" "Relay_THT:Relay_SPST_SANYOU_SRD_Series_Form_A"
+			(at 172.72 170.18 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Datasheet" "~"
+			(at 172.72 170.18 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Description" "relay 2 (LED DRL), SRD-5VDC-SL-A, 5 V coil, SPST-NO 10 A"
+			(at 172.72 170.18 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C140615"
+			(at 172.72 170.18 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "5"
+			(uuid "804e0a4e-f381-514c-a8e6-ee209f0a0774")
+		)
+		(pin "2"
+			(uuid "62b1dbe4-6e24-505c-bee1-13df43d56559")
+		)
+		(pin "3"
+			(uuid "bfc021a5-249d-5628-b385-74ff0629988c")
+		)
+		(pin "1"
+			(uuid "aff4418a-0503-525f-9473-0e1812c68a2c")
+		)
+		(instances
+			(project "MES4_Carrier_EC"
+				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/e428b7c7-06b0-568c-b022-37affa8fc2f1"
+					(reference "K2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "MES4-Carrier-EC:+5V_24")
+		(at 167.64 154.94 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "d2660cdb-0a11-53d2-a85b-6de82b28d6c8")
+		(property "Reference" "#PWR070"
+			(at 167.64 148.59 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Value" "+5V_24"
+			(at 167.64 151.13 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(pin "1"
+			(uuid "47d1a729-2bdc-5c94-8db5-e19a118e91bf")
+		)
+		(instances
+			(project "MES4_Carrier_EC"
+				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/e428b7c7-06b0-568c-b022-37affa8fc2f1"
+					(reference "#PWR070")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:D")
+		(at 160.02 170.18 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "7a650f5f-7407-5caf-81cc-a35031438f12")
+		(property "Reference" "D11"
+			(at 152.40 168.91 90)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Value" "1N4148W"
+			(at 152.40 171.45 90)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Footprint" "Diode_SMD:D_SOD-123"
+			(at 160.02 170.18 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Datasheet" "~"
+			(at 160.02 170.18 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Description" "coil flyback diode"
+			(at 160.02 170.18 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C81598"
+			(at 160.02 170.18 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "3fb68083-ad9c-5c9e-b931-c76914315f8e")
+		)
+		(pin "2"
+			(uuid "97b2f054-a27c-556e-81d9-c2e64bea25ae")
+		)
+		(instances
+			(project "MES4_Carrier_EC"
+				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/e428b7c7-06b0-568c-b022-37affa8fc2f1"
+					(reference "D11")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Transistor_FET:AO3400A")
+		(at 165.10 205.74 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "c81f7e1f-bf97-5b2f-b9ec-7ec883f2ef29")
+		(property "Reference" "Q3"
+			(at 170.18 204.47 0)
+			(effects (font (size 1.27 1.27)) (justify left))
+		)
+		(property "Value" "AO3400A"
+			(at 170.18 207.01 0)
+			(effects (font (size 1.27 1.27)) (justify left))
+		)
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
+			(at 165.10 205.74 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Datasheet" "http://www.aosmd.com/pdfs/datasheet/AO3400A.pdf"
+			(at 165.10 205.74 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Description" "relay 2 coil driver, N-MOSFET 30 V 5.7 A (CIF §7a)"
+			(at 165.10 205.74 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C20917"
+			(at 165.10 205.74 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "603b168d-3e72-57c6-8f09-e5622303074a")
+		)
+		(pin "3"
+			(uuid "0af9e88a-62be-5b64-9423-d47f230ce6ba")
+		)
+		(pin "2"
+			(uuid "0cf7a093-6fe8-565a-88c3-ba8c3e591f6e")
+		)
+		(instances
+			(project "MES4_Carrier_EC"
+				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/e428b7c7-06b0-568c-b022-37affa8fc2f1"
+					(reference "Q3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 167.64 210.82 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "2bcf0150-f919-52b6-a4be-b6662fb190c2")
+		(property "Reference" "#PWR071"
+			(at 167.64 217.17 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Value" "GND"
+			(at 167.64 214.63 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(pin "1"
+			(uuid "0b7e7363-061f-527c-80f5-9195d014e6a4")
+		)
+		(instances
+			(project "MES4_Carrier_EC"
+				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/e428b7c7-06b0-568c-b022-37affa8fc2f1"
+					(reference "#PWR071")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 147.32 205.74 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "f7e10bd9-cf75-597a-a816-55e81c69801f")
+		(property "Reference" "R16"
+			(at 147.32 201.93 90)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Value" "100Ω"
+			(at 147.32 209.55 90)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+			(at 147.32 205.74 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Datasheet" "~"
+			(at 147.32 205.74 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Description" "AO3400A gate series resistor (CIF §7a)"
+			(at 147.32 205.74 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C25076"
+			(at 147.32 205.74 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "09544d34-95bc-5c3f-90ab-5d87fa9ca969")
+		)
+		(pin "2"
+			(uuid "ed6999ba-5b16-5a72-9ff3-e2458844cca9")
+		)
+		(instances
+			(project "MES4_Carrier_EC"
+				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/e428b7c7-06b0-568c-b022-37affa8fc2f1"
+					(reference "R16")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 154.94 213.36 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "c5e64912-98ef-585b-952d-f1f236e3c1bf")
+		(property "Reference" "R17"
+			(at 152.40 212.09 0)
+			(effects (font (size 1.27 1.27)) (justify right))
+		)
+		(property "Value" "100k"
+			(at 152.40 214.63 0)
+			(effects (font (size 1.27 1.27)) (justify right))
+		)
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+			(at 154.94 213.36 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Datasheet" "~"
+			(at 154.94 213.36 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Description" "gate pull-down: relay 2 OFF during reset / boot (CIF §4a, §7a)"
+			(at 154.94 213.36 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C25741"
+			(at 154.94 213.36 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "04bf9640-82f6-501f-8cdf-c7405c558e7a")
+		)
+		(pin "2"
+			(uuid "29a3f99d-c248-5a34-ac6a-4bc3269ad845")
+		)
+		(instances
+			(project "MES4_Carrier_EC"
+				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/e428b7c7-06b0-568c-b022-37affa8fc2f1"
+					(reference "R17")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 154.94 217.17 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "af537020-e34e-5954-aeff-9faa49eb1d35")
+		(property "Reference" "#PWR072"
+			(at 154.94 223.52 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Value" "GND"
+			(at 154.94 220.98 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(pin "1"
+			(uuid "467dabeb-4fa0-5aed-9f45-507dbd63e091")
+		)
+		(instances
+			(project "MES4_Carrier_EC"
+				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/e428b7c7-06b0-568c-b022-37affa8fc2f1"
+					(reference "#PWR072")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 149.86 185.42 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "2577ef78-9a31-59fd-a1ad-454150ba1bb9")
+		(property "Reference" "R14"
+			(at 149.86 181.61 90)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Value" "10k"
+			(at 149.86 189.23 90)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+			(at 149.86 185.42 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Datasheet" "~"
+			(at 149.86 185.42 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Description" "coil readback divider top (CIF §7a option A)"
+			(at 149.86 185.42 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C25744"
+			(at 149.86 185.42 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "9d758c2e-35cc-5f4f-a72b-c121a3b18a45")
+		)
+		(pin "2"
+			(uuid "293346ae-57a9-538b-b79a-ef8e92ee4ab5")
+		)
+		(instances
+			(project "MES4_Carrier_EC"
+				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/e428b7c7-06b0-568c-b022-37affa8fc2f1"
+					(reference "R14")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 139.70 193.04 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "85b773af-8a1c-5f9e-9e6a-c27e307b7d21")
+		(property "Reference" "R15"
+			(at 142.24 191.77 0)
+			(effects (font (size 1.27 1.27)) (justify left))
+		)
+		(property "Value" "15k"
+			(at 142.24 194.31 0)
+			(effects (font (size 1.27 1.27)) (justify left))
+		)
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+			(at 139.70 193.04 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Datasheet" "~"
+			(at 139.70 193.04 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Description" "coil readback divider bottom: 3.0 V = coil off, ~0 V = energised"
+			(at 139.70 193.04 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C25756"
+			(at 139.70 193.04 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "a327d916-d35c-52cf-a427-773261346ad2")
+		)
+		(pin "2"
+			(uuid "56f7cac4-a765-5241-84f5-b9e4c7c4efcb")
+		)
+		(instances
+			(project "MES4_Carrier_EC"
+				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/e428b7c7-06b0-568c-b022-37affa8fc2f1"
+					(reference "R15")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 139.70 196.85 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "75707523-443d-5005-90f8-0049ead1c2f8")
+		(property "Reference" "#PWR073"
+			(at 139.70 203.20 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Value" "GND"
+			(at 139.70 200.66 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(pin "1"
+			(uuid "c7ec71c2-bb0c-53b3-91af-05444e67f807")
+		)
+		(instances
+			(project "MES4_Carrier_EC"
+				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/e428b7c7-06b0-568c-b022-37affa8fc2f1"
+					(reference "#PWR073")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 132.08 193.04 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "979d0053-a4c1-564c-81c2-a3177354359e")
+		(property "Reference" "C11"
+			(at 129.54 191.77 0)
+			(effects (font (size 1.27 1.27)) (justify right))
+		)
+		(property "Value" "10nF"
+			(at 129.54 194.31 0)
+			(effects (font (size 1.27 1.27)) (justify right))
+		)
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+			(at 132.08 193.04 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Datasheet" "~"
+			(at 132.08 193.04 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Description" "coil readback filter (turn-off spike)"
+			(at 132.08 193.04 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C15195"
+			(at 132.08 193.04 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "b5417b5d-a0cb-5658-b1e3-a9019233d80c")
+		)
+		(pin "2"
+			(uuid "cbe5405f-8ac5-5028-b06b-0b63723fdb34")
+		)
+		(instances
+			(project "MES4_Carrier_EC"
+				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/e428b7c7-06b0-568c-b022-37affa8fc2f1"
+					(reference "C11")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 132.08 196.85 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "b493d1f1-011f-508d-90a2-6ab8226b9bd2")
+		(property "Reference" "#PWR074"
+			(at 132.08 203.20 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Value" "GND"
+			(at 132.08 200.66 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(pin "1"
+			(uuid "5cd629db-3881-5bdc-a1a2-a341df8eec03")
+		)
+		(instances
+			(project "MES4_Carrier_EC"
+				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/e428b7c7-06b0-568c-b022-37affa8fc2f1"
+					(reference "#PWR074")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 193.04 177.80 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "af6222dd-a826-5a5d-9460-133691b9a4f0")
+		(property "Reference" "R13"
+			(at 193.04 173.99 90)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Value" "30mΩ"
+			(at 193.04 181.61 90)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
+			(at 193.04 177.80 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Datasheet" "~"
+			(at 193.04 177.80 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Description" "load-current shunt 30 mΩ 1 % 1 W, before the relay contact (CIF §7a option C)"
+			(at 193.04 177.80 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C5375399"
+			(at 193.04 177.80 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "70243f76-a707-585b-86d5-acdaaab81ff4")
+		)
+		(pin "2"
+			(uuid "3e7b6f80-4863-5fde-ab37-b3a32ebb33b5")
+		)
+		(instances
+			(project "MES4_Carrier_EC"
+				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/e428b7c7-06b0-568c-b022-37affa8fc2f1"
+					(reference "R13")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+24V")
+		(at 203.20 172.72 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "66f0cbfc-d186-5ef3-ac20-9c4a6f52b8b0")
+		(property "Reference" "#PWR075"
+			(at 203.20 166.37 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Value" "+24V"
+			(at 203.20 168.91 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(pin "1"
+			(uuid "842442ac-99c4-5fb1-ab66-e1dd83e9686a")
+		)
+		(instances
+			(project "MES4_Carrier_EC"
+				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/e428b7c7-06b0-568c-b022-37affa8fc2f1"
+					(reference "#PWR075")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Sensor_Energy:INA226")
+		(at 226.06 200.66 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "83c717b5-ef30-5f2d-b83d-188986ef4d8e")
+		(property "Reference" "U3"
+			(at 231.14 214.63 0)
+			(effects (font (size 1.27 1.27)) (justify left))
+		)
+		(property "Value" "INA226"
+			(at 231.14 217.17 0)
+			(effects (font (size 1.27 1.27)) (justify left))
+		)
+		(property "Footprint" "Package_SO:VSSOP-10_3x3mm_P0.5mm"
+			(at 226.06 200.66 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Datasheet" "~"
+			(at 226.06 200.66 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Description" "INA226, I²C 0x41: relay 2 (LED DRL) load current + 24 V rail (CIF §6a)"
+			(at 226.06 200.66 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C49851"
+			(at 226.06 200.66 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "8"
+			(uuid "e820b338-73ec-582d-9d2b-b7fb6ad5e03f")
+		)
+		(pin "10"
+			(uuid "691fcf04-aedf-58d0-a402-22c619eae516")
+		)
+		(pin "9"
+			(uuid "865c43c5-b468-5a9a-b1b3-51f6074763c3")
+		)
+		(pin "6"
+			(uuid "7f38ef77-ffe1-5842-a713-5b734b693564")
+		)
+		(pin "7"
+			(uuid "a5f4c2c2-4d56-5b44-ba2d-b442e1a9a2aa")
+		)
+		(pin "1"
+			(uuid "a0583303-ecbe-5a3f-88da-218a36364cff")
+		)
+		(pin "2"
+			(uuid "5f31cccc-6705-5783-a939-5f8ea94f7d7a")
+		)
+		(pin "4"
+			(uuid "cf975b8c-e632-5d52-b43e-eba1fcbd4789")
+		)
+		(pin "5"
+			(uuid "a0fc8466-7dc7-59dc-8702-0053050470d6")
+		)
+		(pin "3"
+			(uuid "cf9da120-f823-5e1e-8072-6a69c5327798")
+		)
+		(instances
+			(project "MES4_Carrier_EC"
+				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/e428b7c7-06b0-568c-b022-37affa8fc2f1"
+					(reference "U3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "MES4-Carrier-EC:+3V3_MOD")
+		(at 226.06 182.88 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "903c440f-e1b2-538e-96c4-e2cca0a4c880")
+		(property "Reference" "#PWR076"
+			(at 226.06 176.53 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Value" "+3V3_MOD"
+			(at 226.06 179.07 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(pin "1"
+			(uuid "468969ae-c85e-545f-b2ea-593c94e937ad")
+		)
+		(instances
+			(project "MES4_Carrier_EC"
+				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/e428b7c7-06b0-568c-b022-37affa8fc2f1"
+					(reference "#PWR076")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 233.68 182.88 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "6b1151ff-8b8f-5331-b9c4-227e7ddedb08")
+		(property "Reference" "C13"
+			(at 233.68 179.07 90)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Value" "100nF"
+			(at 233.68 186.69 90)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+			(at 233.68 182.88 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Datasheet" "~"
+			(at 233.68 182.88 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Description" "INA226 VS decoupling"
+			(at 233.68 182.88 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C1525"
+			(at 233.68 182.88 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "b21beed7-60c9-5f66-b5c7-5c51285095c7")
+		)
+		(pin "2"
+			(uuid "d1201bf5-3ba1-53c0-b060-9633a8d78a33")
+		)
+		(instances
+			(project "MES4_Carrier_EC"
+				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/e428b7c7-06b0-568c-b022-37affa8fc2f1"
+					(reference "C13")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 237.49 182.88 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "41f9cfba-abe3-59c4-ad2f-171ec6b881b6")
+		(property "Reference" "#PWR077"
+			(at 237.49 182.88 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Value" "GND"
+			(at 242.44 182.88 90)
+			(effects (font (size 1.27 1.27)))
+		)
+		(pin "1"
+			(uuid "992e49a4-5fc4-5c08-9ba2-282adb51cfa3")
+		)
+		(instances
+			(project "MES4_Carrier_EC"
+				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/e428b7c7-06b0-568c-b022-37affa8fc2f1"
+					(reference "#PWR077")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 226.06 213.36 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "2828edbe-51a5-5660-9a11-9e668137df9e")
+		(property "Reference" "#PWR078"
+			(at 226.06 219.71 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Value" "GND"
+			(at 226.06 217.17 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(pin "1"
+			(uuid "33047113-ddc2-5a9d-8be1-07a4dcd49550")
+		)
+		(instances
+			(project "MES4_Carrier_EC"
+				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/e428b7c7-06b0-568c-b022-37affa8fc2f1"
+					(reference "#PWR078")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:Polyfuse")
+		(at 185.42 162.56 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "8a868f51-308d-5383-baf8-db558e4b031c")
+		(property "Reference" "F4"
+			(at 182.88 158.75 90)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Value" "3A"
+			(at 189.23 158.75 90)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Footprint" "Fuse:Fuse_2920_7451Metric"
+			(at 185.42 162.56 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Datasheet" "~"
+			(at 185.42 162.56 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Description" "relay 2 output PTC: a shorted output trips only this channel"
+			(at 185.42 162.56 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C22435908"
+			(at 185.42 162.56 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "d3989597-a409-5e3d-a0a5-3e54542eb454")
+		)
+		(pin "2"
+			(uuid "a96fab67-c438-5c32-8f1c-de2696d07891")
+		)
+		(instances
+			(project "MES4_Carrier_EC"
+				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/e428b7c7-06b0-568c-b022-37affa8fc2f1"
+					(reference "F4")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Connector:Screw_Terminal_01x02")
+		(at 325.12 162.56 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "c600dcb5-5459-5f2b-af02-e8ab03023578")
+		(property "Reference" "J7"
+			(at 327.66 161.29 0)
+			(effects (font (size 1.27 1.27)) (justify left))
+		)
+		(property "Value" "RLY2 OUT"
+			(at 327.66 163.83 0)
+			(effects (font (size 1.27 1.27)) (justify left))
+		)
+		(property "Footprint" "MES4-Carrier-EC:CONN-TH_KF250NH-3.5-2P"
+			(at 325.12 162.56 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Datasheet" "~"
+			(at 325.12 162.56 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Description" "relay 2 (LED DRL) output: 1 = switched +24 V, 2 = GND_24V (KF250NH 3.5 mm push-in)"
+			(at 325.12 162.56 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C976556"
+			(at 325.12 162.56 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "7958dd7b-edac-5095-b015-93c8a0dde679")
+		)
+		(pin "2"
+			(uuid "7b4ab8fc-6fb1-5f1d-b377-977dff54159d")
+		)
+		(instances
+			(project "MES4_Carrier_EC"
+				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/e428b7c7-06b0-568c-b022-37affa8fc2f1"
+					(reference "J7")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:D_Schottky")
+		(at 269.24 170.18 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "e2c6ce48-564a-5ede-839f-369a8b4a0916")
+		(property "Reference" "D13"
+			(at 262.89 168.91 90)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Value" "SS34"
+			(at 262.89 171.45 90)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Footprint" "Diode_SMD:D_SMA"
+			(at 269.24 170.18 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Datasheet" "~"
+			(at 269.24 170.18 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Description" "output flyback for inductive loads (3 A 40 V)"
+			(at 269.24 170.18 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C8678"
+			(at 269.24 170.18 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "84f9d438-389f-594b-92ce-8e0861512ed9")
+		)
+		(pin "2"
+			(uuid "90209a6b-2729-5065-b7d7-402c396fc656")
+		)
+		(instances
+			(project "MES4_Carrier_EC"
+				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/e428b7c7-06b0-568c-b022-37affa8fc2f1"
+					(reference "D13")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "MES4-Carrier-EC:GND_24V")
+		(at 269.24 173.99 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "5e83fab5-f231-535b-b0f7-a8f370efcedd")
+		(property "Reference" "#PWR079"
+			(at 269.24 180.34 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Value" "GND_24V"
+			(at 269.24 177.80 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(pin "1"
+			(uuid "acf18625-e444-5ce3-81ce-b7f7dbd9e100")
+		)
+		(instances
+			(project "MES4_Carrier_EC"
+				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/e428b7c7-06b0-568c-b022-37affa8fc2f1"
+					(reference "#PWR079")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 287.02 170.18 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "5a91c509-39b5-5788-95f5-9b05bb3609a7")
+		(property "Reference" "R19"
+			(at 289.56 168.91 0)
+			(effects (font (size 1.27 1.27)) (justify left))
+		)
+		(property "Value" "3.3k"
+			(at 289.56 171.45 0)
+			(effects (font (size 1.27 1.27)) (justify left))
+		)
+		(property "Footprint" "Resistor_SMD:R_1206_3216Metric"
+			(at 287.02 170.18 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Datasheet" "~"
+			(at 287.02 170.18 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Description" "output LED resistor: 6.7 mA, 0.15 W in a 0.25 W 1206"
+			(at 287.02 170.18 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C26032"
+			(at 287.02 170.18 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "31699a96-207e-594c-953d-de0d53f93b21")
+		)
+		(pin "2"
+			(uuid "cd55618d-5b53-52f1-b3c4-dd4a6e2bc64f")
+		)
+		(instances
+			(project "MES4_Carrier_EC"
+				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/e428b7c7-06b0-568c-b022-37affa8fc2f1"
+					(reference "R19")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:LED")
+		(at 287.02 181.61 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "953f411e-0752-54af-a619-64bde06d4ee6")
+		(property "Reference" "LED5"
+			(at 292.10 180.34 90)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Value" "Yellow"
+			(at 292.10 182.88 90)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Footprint" "LED_SMD:LED_0805_2012Metric"
+			(at 287.02 181.61 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Datasheet" "~"
+			(at 287.02 181.61 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Description" "relay 2 output ON; also an 8 mA minimum load so the INA226 sees contact closure with nothing connected"
+			(at 287.02 181.61 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C2296"
+			(at 287.02 181.61 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "f767043f-28e6-5736-925d-ae79c557a6ac")
+		)
+		(pin "2"
+			(uuid "9b2e8d81-9e92-575d-b4ed-74509241048c")
+		)
+		(instances
+			(project "MES4_Carrier_EC"
+				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/e428b7c7-06b0-568c-b022-37affa8fc2f1"
+					(reference "LED5")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "MES4-Carrier-EC:GND_24V")
+		(at 287.02 185.42 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "e6b00678-7f6f-5b45-a07c-7af9212743bb")
+		(property "Reference" "#PWR080"
+			(at 287.02 191.77 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Value" "GND_24V"
+			(at 287.02 189.23 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(pin "1"
+			(uuid "aa287592-cb87-56e7-9bb7-00aedc77dec3")
+		)
+		(instances
+			(project "MES4_Carrier_EC"
+				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/e428b7c7-06b0-568c-b022-37affa8fc2f1"
+					(reference "#PWR080")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "MES4-Carrier-EC:GND_24V")
+		(at 307.34 165.10 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "d63e98b8-e156-5741-8c23-674f4b7c73ae")
+		(property "Reference" "#PWR081"
+			(at 307.34 171.45 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Value" "GND_24V"
+			(at 307.34 168.91 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(pin "1"
+			(uuid "8d1e01f6-be96-5a82-b811-e6c964653762")
+		)
+		(instances
+			(project "MES4_Carrier_EC"
+				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/e428b7c7-06b0-568c-b022-37affa8fc2f1"
+					(reference "#PWR081")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 238.76 88.9 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "6aa9b9f3-d418-5ed4-b66c-52ab285b0714")
+		(property "Reference" "#PWR082"
+			(at 238.76 88.9 90)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Value" "GND"
+			(at 243.71 88.9 90)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Footprint" ""
+			(at 238.76 88.9 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Datasheet" "~"
+			(at 238.76 88.9 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Description" ""
+			(at 238.76 88.9 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "e84b92c3-3cc1-59d6-9753-8176d730722f")
+		)
+		(instances
+			(project "MES4_Carrier_EC"
+				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/e428b7c7-06b0-568c-b022-37affa8fc2f1"
+					(reference "#PWR082")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 243.84 91.44 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "4740183f-5056-56ff-95ca-abb888db52d7")
+		(property "Reference" "#PWR083"
+			(at 243.84 91.44 90)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Value" "GND"
+			(at 248.79 91.44 90)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Footprint" ""
+			(at 243.84 91.44 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Datasheet" "~"
+			(at 243.84 91.44 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Description" ""
+			(at 243.84 91.44 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "86d171c6-225f-5719-9076-a0a90b574428")
+		)
+		(instances
+			(project "MES4_Carrier_EC"
+				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/e428b7c7-06b0-568c-b022-37affa8fc2f1"
+					(reference "#PWR083")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 238.76 193.04 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "01e13a31-a120-5560-8ce8-2d466a97c9da")
+		(property "Reference" "#PWR084"
+			(at 238.76 193.04 90)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Value" "GND"
+			(at 243.71 193.04 90)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Footprint" ""
+			(at 238.76 193.04 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Datasheet" "~"
+			(at 238.76 193.04 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Description" ""
+			(at 238.76 193.04 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "c0fa89ad-6d17-5514-b778-3ee2fd923f36")
+		)
+		(instances
+			(project "MES4_Carrier_EC"
+				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/e428b7c7-06b0-568c-b022-37affa8fc2f1"
+					(reference "#PWR084")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "MES4-Carrier-EC:+3V3_MOD")
+		(at 243.84 195.58 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "5d7def4f-8495-5353-ba5c-0628a5100dab")
+		(property "Reference" "#PWR085"
+			(at 243.84 195.58 90)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Value" "+3V3_MOD"
+			(at 251.54 195.58 90)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Footprint" ""
+			(at 243.84 195.58 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Datasheet" "~"
+			(at 243.84 195.58 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Description" ""
+			(at 243.84 195.58 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "4d8f8b94-d895-51bf-8cb1-1e33ac2dc6ef")
+		)
+		(instances
+			(project "MES4_Carrier_EC"
+				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/e428b7c7-06b0-568c-b022-37affa8fc2f1"
+					(reference "#PWR085")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(embedded_fonts no)
+)

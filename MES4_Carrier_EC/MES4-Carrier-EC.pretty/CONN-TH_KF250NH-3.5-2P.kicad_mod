@@ -1,0 +1,278 @@
+(footprint "CONN-TH_KF250NH-3.5-2P"
+	(version 20241229)
+	(generator "pcbnew")
+	(generator_version "9.0")
+	(layer "F.Cu")
+	(descr "KF250NH-3.5-2P spring-clamp terminal block, 2 pins, 3.5 mm pitch, THT (LCSC C976556)")
+	(property "Reference" "REF**"
+		(at 0 -4 0)
+		(layer "F.SilkS")
+		(uuid "0a81a8c6-e073-4989-80b5-5c893e475e10")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Value" "CONN-TH_KF250NH-3.5-2P"
+		(at 0 4 0)
+		(layer "F.Fab")
+		(uuid "a62c2d81-01d0-4f73-aa26-2e1eea6cdfdf")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "efa90ad3-9ee5-4c0f-99a7-95fe0374c139")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "0a30c088-4ca5-4443-8b0c-b47fa62b3dd0")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "LCSC Part" "C976556"
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "84d34b77-94d0-4567-9a9e-42d8b4a579ca")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(attr through_hole)
+	(fp_line
+		(start -4.05 -4.3)
+		(end 3.55 -4.3)
+		(stroke
+			(width 0.25)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "e9ef92e7-4b46-46da-ae95-6d191e1f9ea0")
+	)
+	(fp_line
+		(start -4.05 -1.24)
+		(end -2.36 -1.24)
+		(stroke
+			(width 0.25)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "fd58eee2-f2f3-4204-ae46-d31699ddce58")
+	)
+	(fp_line
+		(start -4.05 0.71)
+		(end -2.93 0.71)
+		(stroke
+			(width 0.25)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "779d1c02-b8e0-45d8-aaba-a9006e62548f")
+	)
+	(fp_line
+		(start -4.05 5.7)
+		(end -4.05 -4.3)
+		(stroke
+			(width 0.25)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "a5dc3f54-6a8a-4891-b83f-41098f9842dc")
+	)
+	(fp_line
+		(start -4.05 5.7)
+		(end 3.55 5.7)
+		(stroke
+			(width 0.25)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "9426ef9a-551d-4884-af48-dccdb4a63462")
+	)
+	(fp_line
+		(start -1.14 -1.24)
+		(end 1.14 -1.24)
+		(stroke
+			(width 0.25)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "ec122fcf-505e-4d04-95de-52a1da9d92f8")
+	)
+	(fp_line
+		(start -0.57 0.71)
+		(end 0.57 0.71)
+		(stroke
+			(width 0.25)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "73a7ff8e-4aff-4674-8b43-8ee55bcf4976")
+	)
+	(fp_line
+		(start 2.36 -1.24)
+		(end 3.55 -1.24)
+		(stroke
+			(width 0.25)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "1de2f368-8105-4bd4-b860-d0353fb68f04")
+	)
+	(fp_line
+		(start 2.93 0.71)
+		(end 3.55 0.71)
+		(stroke
+			(width 0.25)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "133bf2c3-e102-4e11-9521-16da3a8e49d5")
+	)
+	(fp_line
+		(start 3.55 5.7)
+		(end 3.55 -4.3)
+		(stroke
+			(width 0.25)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "b76347e4-7bce-472e-bb61-d2129d41f61d")
+	)
+	(fp_circle
+		(center -4.18 5.83)
+		(end -4.15 5.83)
+		(stroke
+			(width 0.06)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.SilkS")
+		(uuid "db28bafd-1a66-4d8e-a563-d5b9d511b98a")
+	)
+	(fp_line
+		(start -4.18 -4.43)
+		(end 3.68 -4.43)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "fac9515b-1c2b-4dc7-a73d-5829a07d824a")
+	)
+	(fp_line
+		(start -4.18 5.83)
+		(end -4.18 -4.43)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "b3d25d01-f0ae-4432-9ba2-185501e9d400")
+	)
+	(fp_line
+		(start 3.68 -4.43)
+		(end 3.68 5.83)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "b3f9ae1a-8ac9-4931-8207-c7929fc3a889")
+	)
+	(fp_line
+		(start 3.68 5.83)
+		(end -4.18 5.83)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "e5991a5d-c7dd-4f8b-827d-215074bb9d36")
+	)
+	(fp_circle
+		(center -1.75 0)
+		(end -1.42 0)
+		(stroke
+			(width 0.65)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.Fab")
+		(uuid "0fc0f323-738f-4766-90f6-616c411bfc40")
+	)
+	(fp_circle
+		(center 1.75 0)
+		(end 2.08 0)
+		(stroke
+			(width 0.65)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.Fab")
+		(uuid "b3bf7e25-7bf3-4a09-af60-807ed1d358c2")
+	)
+	(fp_text user "${REFERENCE}"
+		(at 0 0 0)
+		(layer "F.Fab")
+		(uuid "a454a826-bacb-4118-94d8-efa0a5bb444c")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(pad "1" thru_hole circle
+		(at -1.75 0)
+		(size 2.3 2.3)
+		(drill 1.500022)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "221676c1-45b1-4b45-a016-3b21d6f98569")
+	)
+	(pad "2" thru_hole circle
+		(at 1.75 0)
+		(size 2.3 2.3)
+		(drill 1.500022)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "f479e023-eeb8-48e8-908e-c8f7459d386e")
+	)
+	(embedded_fonts no)
+	(model "${KIPRJMOD}/MES4-Carrier-EC.3dshapes/CONN-TH_KF250NH-3.5-2P.wrl"
+		(offset
+			(xyz 0 0 0)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz 0 0 0)
+		)
+	)
+)

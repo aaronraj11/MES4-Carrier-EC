@@ -1,0 +1,194 @@
+(footprint "SW_SMD_TS-1088_4x3mm"
+	(version 20241229)
+	(generator "pcbnew")
+	(generator_version "9.0")
+	(layer "F.Cu")
+	(descr "Tactile switch TS-1088-AR02016 3.9 x 3.0 mm SMD (LCSC C720477)")
+	(property "Reference" "REF**"
+		(at 0 -4 0)
+		(layer "F.SilkS")
+		(uuid "0021b101-27b3-4534-bf96-b48f4fcc32d0")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Value" "SW_SMD_TS-1088_4x3mm"
+		(at 0 4 0)
+		(layer "F.Fab")
+		(uuid "d3f1e587-ef8f-4162-bf80-f1e9e9ea442a")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "c10a861a-1dbc-4432-907f-5eab572a6c9a")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "3e964107-659a-4a6c-b775-9e291d470c73")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "LCSC Part" "C720477"
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "b1ab96b8-6c13-403d-a69f-53f32fa05594")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(attr smd)
+	(fp_line
+		(start -2.03 -1.54)
+		(end -2.03 -1.11)
+		(stroke
+			(width 0.15)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "0beb984c-61f0-4b2c-88a8-f7fb9e17bd60")
+	)
+	(fp_line
+		(start -2.03 1.54)
+		(end -2.03 1.11)
+		(stroke
+			(width 0.15)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "32a475d7-cd46-4ff6-ba72-a79850748f66")
+	)
+	(fp_line
+		(start 2.03 -1.54)
+		(end -2.03 -1.54)
+		(stroke
+			(width 0.15)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "bd3db0eb-0786-4791-8874-48607ed2d1b6")
+	)
+	(fp_line
+		(start 2.03 -1.54)
+		(end 2.03 -1.11)
+		(stroke
+			(width 0.15)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "8c5e7c73-1f42-4cf2-b8d9-459ad036bf39")
+	)
+	(fp_line
+		(start 2.03 1.11)
+		(end 2.03 1.54)
+		(stroke
+			(width 0.15)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "6a7eaa79-ac6c-415e-a719-40df8cbc872c")
+	)
+	(fp_line
+		(start 2.03 1.54)
+		(end -2.03 1.54)
+		(stroke
+			(width 0.15)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "4c7a2695-78e1-4041-bbfd-18938fa74258")
+	)
+	(fp_circle
+		(center 0 0)
+		(end 0.9 0)
+		(stroke
+			(width 0.25)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.SilkS")
+		(uuid "fb473407-0654-49d9-9122-1f05edf607b7")
+	)
+	(fp_circle
+		(center 2.5 -1.47)
+		(end 2.53 -1.47)
+		(stroke
+			(width 0.06)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.SilkS")
+		(uuid "cd11cfb6-884c-4261-b427-0d44842b73d5")
+	)
+	(fp_rect
+		(start -3.05 -1.75)
+		(end 3.05 1.75)
+		(stroke
+			(width 0.05)
+			(type default)
+		)
+		(fill no)
+		(layer "F.CrtYd")
+		(uuid "2f6fb932-64e4-43f2-b12a-1287046b8f77")
+	)
+	(fp_text user "${REFERENCE}"
+		(at 0 0 0)
+		(layer "F.Fab")
+		(uuid "96123ab5-ff1f-4812-959e-012bf07d60f7")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(pad "1" smd rect
+		(at -2.18 0)
+		(size 1.23 1.86)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "0be6ed9b-2180-4cf0-b7cd-0fd9d91d05f2")
+	)
+	(pad "2" smd rect
+		(at 2.18 0)
+		(size 1.23 1.86)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "810b337c-c4bf-4c30-8915-caddf5453123")
+	)
+	(embedded_fonts no)
+	(model "${KIPRJMOD}/MES4-Carrier-EC.3dshapes/SW-SMD_L3.9-W2.9-H2.0-LS4.8.wrl"
+		(offset
+			(xyz 0 0 0)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz 0 0 0)
+		)
+	)
+)
