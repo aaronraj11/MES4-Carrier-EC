@@ -13,6 +13,7 @@ import aux_parts as AP
 FL = '/Users/aaron/Desktop/MES4 Ecosystem/MES4-Flasher/'
 OUT = '/Users/aaron/Desktop/MES4 Ecosystem/MES4-Carrier-EC/MES4_Carrier_EC/'
 TITLE, DATE, REV, COMPANY, AUTHOR = 'MES4-Carrier-EC', '2026-10-27', 'A', 'Monkey Robotics', 'Aaron Raj Bhatti'
+GPS_MOUNT = False   # simpleRTK4 Dual mount standoffs over the FE-URT-2 (left out for now)
 
 
 # ---------------------------------------------------------------- Flasher part fields
@@ -761,17 +762,21 @@ def aux_sheet():
         sh.part('Mechanical:MountingHole', 'H', 'M3 standoff 2mm', (215.90 + 10.16 * i, 243.84),
                 fp=B.LIBNAME + ':' + AP.FP_SO2, lcsc='C5301780', tag='H_FE%d' % (i + 1), fields='right', hide_value=True,
                 desc='FE-URT-2 mount: M3 x 2 mm SMD standoff (YIYUAN SMTSOM320BTR), not connected')
-    # GPS (ArduSimple simpleRTK4 Dual) stacked above the FE-URT-2: its left-bottom, left-top and right holes
-    for i in range(3):
-        sh.part('Mechanical:MountingHole', 'H', 'M3 standoff 6.5mm', (256.54 + 10.16 * i, 243.84),
-                fp=B.LIBNAME + ':' + AP.FP_SO65, lcsc='C5301796', tag='H_GPS%d' % (i + 1), fields='right', hide_value=True,
-                desc='GPS mount: M3 x 6.5 mm SMD standoff (YIYUAN SMTSOM365BTR) + M3 x 12 mm male-female spacer, not connected')
+    # GPS (ArduSimple simpleRTK4 Dual) stacked above the FE-URT-2: its left-bottom, left-top and right holes.
+    # Off for now (GPS_MOUNT): the RTK mount is left out of this revision.
+    if GPS_MOUNT:
+        for i in range(3):
+            sh.part('Mechanical:MountingHole', 'H', 'M3 standoff 6.5mm', (256.54 + 10.16 * i, 243.84),
+                    fp=B.LIBNAME + ':' + AP.FP_SO65, lcsc='C5301796', tag='H_GPS%d' % (i + 1), fields='right',
+                    hide_value=True, desc='GPS mount: M3 x 6.5 mm SMD standoff (YIYUAN SMTSOM365BTR) + M3 x 12 mm '
+                                          'male-female spacer, not connected')
     sh.text('FE-URT-2 mount: {H_FE1}-{H_FE4} M3 x 2 mm SMD standoffs (SMTSOM320BTR)\n'
-            'on its 48.5 x 28.7 mm holes, M3 screws from the top. No parts under it.\n'
-            'GPS (ArduSimple simpleRTK4 Dual) stacked above it: {H_GPS1}-{H_GPS3} M3 x 6.5 mm\n'
-            'SMD standoffs (SMTSOM365BTR) + M3 x 12 mm male-female spacers (fitted by\n'
-            'hand) on its left-bottom, left-top and right holes; underside 18.5 mm up.\n'
-            'The RTK is powered from its own GPS USB-C. Standoffs not connected.', (210.82, 226.06))
+            'on its 48.5 x 28.7 mm holes, M3 screws from the top. No parts under it.\n' +
+            ('GPS (ArduSimple simpleRTK4 Dual) stacked above it: {H_GPS1}-{H_GPS3} M3 x 6.5 mm\n'
+             'SMD standoffs (SMTSOM365BTR) + M3 x 12 mm male-female spacers (fitted by\n'
+             'hand) on its left-bottom, left-top and right holes; underside 18.5 mm up.\n'
+             'The RTK is powered from its own GPS USB-C. ' if GPS_MOUNT else '') +
+            'Standoffs not connected.', (210.82, 226.06))
     B._uuid_counter[0] = saved
     return sh
 

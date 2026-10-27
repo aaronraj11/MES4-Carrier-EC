@@ -2158,11 +2158,11 @@
 		(effects (font (size 1.27 1.27)) (justify left top))
 		(uuid "3e18fcd4-13d8-555f-85b1-4df8d0c68f07")
 	)
-	(text "FE-URT-2 mount: H6-H9 M3 x 2 mm SMD standoffs (SMTSOM320BTR)\non its 48.5 x 28.7 mm holes, M3 screws from the top. No parts under it.\nGPS (ArduSimple simpleRTK4 Dual) stacked above it: H10-H12 M3 x 6.5 mm\nSMD standoffs (SMTSOM365BTR) + M3 x 12 mm male-female spacers (fitted by\nhand) on its left-bottom, left-top and right holes; underside 18.5 mm up.\nThe RTK is powered from its own GPS USB-C. Standoffs not connected."
+	(text "FE-URT-2 mount: H6-H9 M3 x 2 mm SMD standoffs (SMTSOM320BTR)\non its 48.5 x 28.7 mm holes, M3 screws from the top. No parts under it.\nStandoffs not connected."
 		(exclude_from_sim no)
 		(at 210.82 226.06 0)
 		(effects (font (size 1.27 1.27)) (justify left top))
-		(uuid "0a1b3243-1cbd-592b-883d-705319490310")
+		(uuid "d86bf803-0de8-5912-9aa9-0029a8a221ee")
 	)
 	(junction
 		(at 35.56 132.08)
@@ -5551,132 +5551,6 @@
 			(project "MES4_Carrier_EC"
 				(path "/0d8fbf0e-dd62-5be6-8889-307c6423adb0/564e9a93-7402-5291-998d-8aa4e1f40b1f"
 					(reference "H9")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Mechanical:MountingHole")
-		(at 256.54 243.84 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "32caa954-2e5f-5231-ad96-897507476e9c")
-		(property "Reference" "H10"
-			(at 259.08 242.57 0)
-			(effects (font (size 1.27 1.27)) (justify left))
-		)
-		(property "Value" "M3 standoff 6.5mm"
-			(at 259.08 245.11 0)
-			(effects (font (size 1.27 1.27)) (justify left) (hide yes))
-		)
-		(property "Footprint" "MES4-Carrier-EC:Standoff_SMD_M3_H6.5mm_SMTSOM365BTR"
-			(at 256.54 243.84 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(property "Datasheet" "~"
-			(at 256.54 243.84 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(property "Description" "GPS mount: M3 x 6.5 mm SMD standoff (YIYUAN SMTSOM365BTR) + M3 x 12 mm male-female spacer, not connected"
-			(at 256.54 243.84 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(property "LCSC" "C5301796"
-			(at 256.54 243.84 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(instances
-			(project "MES4_Carrier_EC"
-				(path "/0d8fbf0e-dd62-5be6-8889-307c6423adb0/564e9a93-7402-5291-998d-8aa4e1f40b1f"
-					(reference "H10")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Mechanical:MountingHole")
-		(at 266.7 243.84 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "d4845f3a-37d5-5440-8449-9d8657441efd")
-		(property "Reference" "H11"
-			(at 269.24 242.57 0)
-			(effects (font (size 1.27 1.27)) (justify left))
-		)
-		(property "Value" "M3 standoff 6.5mm"
-			(at 269.24 245.11 0)
-			(effects (font (size 1.27 1.27)) (justify left) (hide yes))
-		)
-		(property "Footprint" "MES4-Carrier-EC:Standoff_SMD_M3_H6.5mm_SMTSOM365BTR"
-			(at 266.7 243.84 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(property "Datasheet" "~"
-			(at 266.7 243.84 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(property "Description" "GPS mount: M3 x 6.5 mm SMD standoff (YIYUAN SMTSOM365BTR) + M3 x 12 mm male-female spacer, not connected"
-			(at 266.7 243.84 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(property "LCSC" "C5301796"
-			(at 266.7 243.84 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(instances
-			(project "MES4_Carrier_EC"
-				(path "/0d8fbf0e-dd62-5be6-8889-307c6423adb0/564e9a93-7402-5291-998d-8aa4e1f40b1f"
-					(reference "H11")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Mechanical:MountingHole")
-		(at 276.86 243.84 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "a317d8fb-a77a-50ee-bb75-aaaa462519a9")
-		(property "Reference" "H12"
-			(at 279.4 242.57 0)
-			(effects (font (size 1.27 1.27)) (justify left))
-		)
-		(property "Value" "M3 standoff 6.5mm"
-			(at 279.4 245.11 0)
-			(effects (font (size 1.27 1.27)) (justify left) (hide yes))
-		)
-		(property "Footprint" "MES4-Carrier-EC:Standoff_SMD_M3_H6.5mm_SMTSOM365BTR"
-			(at 276.86 243.84 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(property "Datasheet" "~"
-			(at 276.86 243.84 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(property "Description" "GPS mount: M3 x 6.5 mm SMD standoff (YIYUAN SMTSOM365BTR) + M3 x 12 mm male-female spacer, not connected"
-			(at 276.86 243.84 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(property "LCSC" "C5301796"
-			(at 276.86 243.84 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(instances
-			(project "MES4_Carrier_EC"
-				(path "/0d8fbf0e-dd62-5be6-8889-307c6423adb0/564e9a93-7402-5291-998d-8aa4e1f40b1f"
-					(reference "H12")
 					(unit 1)
 				)
 			)
