@@ -38,10 +38,7 @@ NEWP = {
                      desc='URB2405LD-20WR3 input capacitor (datasheet C1 47-100 uF)'),
     'C_SCR_OUT': dict(lib='Device:C', value='22uF 25V', fp='Capacitor_SMD:C_0805_2012Metric', lcsc='C45783',
                       desc='5 V screen output capacitor (datasheet C2 / C3 10-22 uF)'),
-    # ---- relay coil feedback expander + door servo (FE-URT-2, as on the MES2 Harvester)
-    'U_EXP': dict(lib='MES4-Carrier-EC:TCA9535PWR', value='TCA9535PWR', fp='Package_SO:TSSOP-24_4.4x7.8mm_P0.65mm',
-                  lcsc='C130204', ds='https://www.ti.com/lit/ds/symlink/tca9535.pdf',
-                  desc='relay coil feedback expander, TI TCA9535PWR, I2C1 0x20 (A2..A0 = GND), INT to PA0'),
+    # ---- door servo (FE-URT-2, as on the MES2 Harvester)
     'J_SRVU': dict(lib='Connector:Screw_Terminal_01x04', value='SERVO UART', fp='MES4-Carrier-EC:CONN-TH_KF250NH-3.5-4P',
                    lcsc='C976558', desc='FE-URT-2 UART interface (as CN13 on the MES2 Harvester): 1 GND, 2 +5 V, '
                                         '3 RX (into the module, PA3), 4 TX (from the module, PA2); KF250NH 3.5 mm push-in'),
@@ -49,12 +46,4 @@ NEWP = {
     'K_WINCH': dict(lib='MES4-Carrier-EC:IM03GR', value='IM03GR', fp='MES4-Carrier-EC:RELAY-SMD_IMXXGR', lcsc='C2153100',
                     ds='https://www.lcsc.com/product-detail/C2153100.html',
                     desc='winch direction relay, TE IM03GR: 5 V coil 28 mA, DPDT 2 A / 220 VDC (as on the MES2_Extension)'),
-    # ---- servo UART: I2C-UART bridge (keeps the MES4 standard GPIO map)
-    'U_BRG': dict(lib='Interface_UART:SC16IS740', value='SC16IS740IPW', fp='Package_SO:TSSOP-16_4.4x5mm_P0.65mm',
-                  lcsc='C407851', ds='https://www.nxp.com/docs/en/data-sheet/SC16IS740_750_760.pdf',
-                  desc='servo UART: NXP SC16IS740IPW,128 I2C-UART bridge, I2C1 0x48 (A1 = A0 = VDD), 16 MHz crystal'),
-    'Y_BRG': dict(lib='Device:Crystal_GND24', value='16MHz', fp='Crystal:Crystal_SMD_3225-4Pin_3.2x2.5mm', lcsc='C13738',
-                  desc='SC16IS740 crystal, YXC X322516MLB4SI: 16 MHz +/-10 ppm, CL 9 pF (1 Mbit/s = 16 MHz / 16 exactly)'),
-    'C_XT': dict(lib='Device:C', value='12pF', fp='Capacitor_SMD:C_0402_1005Metric', lcsc='C1547',
-                 desc='crystal load capacitor, 12 pF C0G 0402 (2 x (9 pF - ~3 pF stray))'),
 }

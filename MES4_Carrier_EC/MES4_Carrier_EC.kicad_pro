@@ -717,7 +717,7 @@
   },
   "sheets": [
     [
-      "86b406aa-a59b-5773-8968-b904bb1c5afe",
+      "20e873b0-a362-5816-a506-9e1cffc294d3",
       "Root"
     ],
     [
@@ -737,23 +737,23 @@
       "Relays1-2"
     ],
     [
-      "7143f9d6-b86c-5c8a-bc05-f49720af027c",
+      "761a0ad6-718e-5dd4-a056-174aade9268d",
       "Relays3-4"
     ],
     [
-      "27f228f7-dfca-5728-a808-430c076f6f76",
+      "d2afada6-de87-5912-97f5-b42fa3dcc378",
       "Sensors"
     ],
     [
-      "ca20b79a-7248-5ff1-81e2-3eff5288afc0",
+      "7a923097-dc8d-55bd-9fc1-856d492ab900",
       "LoadCell"
     ],
     [
-      "aa610d8a-c972-538f-86b0-92f6eddab99a",
+      "3d5a074b-88ea-5b07-b9d6-caba1f0d7d7e",
       "AuxPower"
     ],
     [
-      "79010ff8-fce8-5b12-afd3-576dc28e35c7",
+      "0959b9ec-5a3a-5f07-b996-83d523c173ff",
       "Winch"
     ]
   ],

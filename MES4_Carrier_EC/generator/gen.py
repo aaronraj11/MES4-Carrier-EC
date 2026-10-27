@@ -93,15 +93,16 @@ def set_strap(sh, pin_xy, sym_xy, net):
 
 # ---------------------------------------------------------------- relay sheets (template: Flasher Relays)
 CH = {
-    1: dict(drv='PA8', fb='PA0', addr='0x40', a1='GND', a0='GND', load='safety light'),
-    2: dict(drv='PC6', fb='PA1', addr='0x41', a1='GND', a0='+3V3_MOD', load='LED DRL'),
-    3: dict(drv='PB3', fb='PA2', addr='0x44', a1='+3V3_MOD', a0='GND', load='battery stopper'),
-    4: dict(drv='PA7', fb='PA3', addr='0x45', a1='+3V3_MOD', a0='+3V3_MOD', load='spare'),
+    1: dict(drv='PA8', addr='0x40', a1='GND', a0='GND', load='safety light'),
+    2: dict(drv='PC6', addr='0x41', a1='GND', a0='+3V3_MOD', load='LED DRL'),
+    3: dict(drv='PB3', addr='0x44', a1='+3V3_MOD', a0='GND', load='battery stopper'),
+    4: dict(drv='PA7', addr='0x45', a1='+3V3_MOD', a0='+3V3_MOD', load='spare'),
 }
+# fb: the Flasher's coil-feedback divider (10k / 15k + 10 nF), removed here: PA0-PA3 drive the winch and servo UART
 TPL = [dict(Q='Q1', RB='R8', RPD='R10', F='F7', U='U5', K='K1', J='J9', LED='LED3', RLED='R27', DL='D27',
-            drv='PA8', fb='PA0', out='RLY1_OUT', y0=20.32, y1=121.92),
+            drv='PA8', fb='PA0', fb_parts=('R23', 'R25', 'C6'), out='RLY1_OUT', y0=20.32, y1=121.92),
        dict(Q='Q2', RB='R9', RPD='R11', F='F8', U='U6', K='K2', J='J10', LED='LED4', RLED='R28', DL='D28',
-            drv='PC6', fb='PA1', out='RLY2_OUT', y0=124.46, y1=226.06)]
+            drv='PC6', fb='PA1', fb_parts=('R24', 'R26', 'C7'), out='RLY2_OUT', y0=124.46, y1=226.06)]
 
 
 def relay_sheet(name, file, page, chans, comment):
@@ -127,7 +128,8 @@ def relay_sheet(name, file, page, chans, comment):
         g(t['K']).set('Description', 'relay %d (%s), SRD-5VDC-SL-A, 5 V coil, SPST-NO 10 A' % (n, c['load']))
         region = (100, t['y0'], 420, t['y1'])
         relabel(sh, t['drv'], c['drv'], region=region)
-        relabel(sh, t['fb'], c['fb'], region=region)
+        sh.remove_parts(['old:' + r for r in t['fb_parts']])
+        sh.items = [it for it in sh.items if not (it[0] in ('label', 'global_label') and it[1] == t['fb'])]
         relabel(sh, t['out'], 'RLY%d_OUT' % n, region=region)
         X, Y, _ = g(t['U']).at
         set_strap(sh, None, (R2(X + 12.70), R2(Y - 7.62)), c['a1'])
@@ -135,37 +137,36 @@ def relay_sheet(name, file, page, chans, comment):
         # retag for the note templates
         for k in ('Q', 'RB', 'RPD', 'F', 'U', 'K', 'J', 'LED', 'RLED', 'DL'):
             g(t[k]).tag = 'ch%d:%s' % (n, k)
-        sh.text('Relay %d (%s): drive %s, coil feedback %s, INA226 {ch%d:U} at %s'
-                % (n, c['load'], c['drv'], c['fb'], n, c['addr']), (111.76, t['y0'] + 2.54), size=2, bold=True)
-        sh.text('Coil feedback (%s): HIGH (3.0 V) = coil off and intact, LOW = energised.\n'
+        sh.text('Relay %d (%s): drive %s, INA226 {ch%d:U} at %s'
+                % (n, c['load'], c['drv'], n, c['addr']), (111.76, t['y0'] + 2.54), size=2, bold=True)
+        sh.text('No coil feedback: PA0-PA3 drive the winch and the servo UART; the INA226 does the diagnosis.\n'
                 'INA226 %s (A1 = %s, A0 = %s): load current (30 mΩ, LSB 100 µA) + 24 V rail; ALERT → PA15.\n'
                 '{ch%d:LED}: output ON; its 6.7 mA also lets the INA226 see the contact close with no load.\n'
                 '{ch%d:F}: %s hold PTC, so a shorted output trips only this channel. {ch%d:DL}: load flyback.\n'
                 '{ch%d:Q} AO3400A: {ch%d:RB} 100 Ω gate, {ch%d:RPD} 100k pull-down = OFF in reset (CIF §7a).'
-                % (c['fb'], c['addr'], c['a1'].replace('+3V3_MOD', 'VS'), c['a0'].replace('+3V3_MOD', 'VS'),
+                % (c['addr'], c['a1'].replace('+3V3_MOD', 'VS'), c['a0'].replace('+3V3_MOD', 'VS'),
                    n, n, fch['value'], n, n, n, n), (269.24, t['y0'] + 71.12))
+    sh.clean()
     return sh
 
 
-RELAY_DIAG = ('Relay diagnosis (CIF §7b)', (
+RELAY_DIAG = ('Relay diagnosis (CIF §7b, INA226 only)', (
     'Coil supply = +5V_24 (U? DC/DC, Power sheet).\n'
     'Read ≥ 30 ms after switching.\n\n'
-    'OFF, FB HIGH, I ≈ 0 → OK, relay off\n'
-    'OFF, FB LOW → open coil, no +5V_24\n'
-    '   or shorted driver\n'
-    'OFF, FB HIGH, I > 5 mA → contacts welded\n'
-    'ON, FB LOW, I in window → OK (LED 6.7 mA + load)\n'
-    'ON, FB HIGH → driver or GPIO not switching\n'
-    'ON, FB LOW, I ≈ 0 → contact not closing,\n'
+    'OFF, I ≈ 0 → OK, relay off\n'
+    'OFF, I > 5 mA → contacts welded or driver\n'
+    '   shorted\n'
+    'ON, I in window → OK (LED 6.7 mA + load)\n'
+    'ON, I ≈ 0 → relay not closing: open coil,\n'
+    '   driver or GPIO, no +5V_24, contact,\n'
     '   output PTC or input fuse open, or no 24 V\n'
     'ON, I over limit → short / stall (ALERT → PA15)\n'
     'any, VBUS < 20 V → 24 V supply fault\n\n'
-    'FB = coil feedback: 10k / 15k divider + 10 nF\n'
-    'into PA0-PA3 (CH1-CH4, CIF §2c): 3.0 V when the\n'
-    'coil is off and intact, ~0 V when energised,\n'
-    '≈ 3.5 V at the turn-off peak: fine on PA0-PA3\n'
-    '(5 V-tolerant), never move it to PA4 / PA5.\n'
-    'ADC-capable: firmware can also read the voltage.\n'
+    'No coil feedback on this board (differs from\n'
+    'CIF §2c / §7a): PA0 / PA1 drive the winch and\n'
+    'PA2 / PA3 are the servo UART (USART2). So an\n'
+    'open coil or a dead driver looks the same as a\n'
+    'contact that does not close: "ON, I ≈ 0".\n'
     'I = INA226 load current, VBUS = 24 V rail.\n\n'
     'INA226 (30 mΩ, CIF §6a): CONFIG 0x4327,\n'
     'CAL 1707 (LSB 100 µA, FS 2.73 A),\n'
@@ -341,29 +342,29 @@ def main_sheet():
       'PC6   finger 29  out  relay 2 drive, LED DRL ({Relays1-2/ch2:Q})\n'
       'PB3   finger 61  out  relay 3 drive, battery stopper ({Relays3-4/ch3:Q})\n'
       'PA7   finger 35  out  relay 4 drive, spare ({Relays3-4/ch4:Q})\n'
-      'PA0   finger 49  in   relay 1 coil feedback (10k / 15k divider + 10 nF)\n'
-      'PA1   finger 47  in   relay 2 coil feedback\n'
-      'PA2   finger 45  in   relay 3 coil feedback\n'
-      'PA3   finger 43  in   relay 4 coil feedback\n'
+      'PA0   finger 49  out  winch CLK relay ({Winch/K_CLK})\n'
+      'PA1   finger 47  out  winch ACLK relay ({Winch/K_ACLK})\n'
+      'PA2   finger 45  out  door servo UART TX, USART2 ({AuxPower/J_SRVU} pin 4)\n'
+      'PA3   finger 43  in   door servo UART RX, USART2 ({AuxPower/J_SRVU} pin 3)\n'
       'PA15  finger 63  in   INA226 ALERT, all four wire-OR ({R20} 10k pull-up)\n'
       'PA4   finger 41  in   ADS1232 DRDY/DOUT ({LoadCell/lc:U13})\n'
       'PA5   finger 39  out  ADS1232 SCLK (100k pull-down)\n'
       'PA6   finger 37  out  ADS1232 PDWN (100k pull-down)\n'
       'PB6   finger 59  in   Autonics sensor 1 ({Sensors/s1:U} PC817)\n'
       'PC15  finger 51  in   Autonics sensor 2 ({Sensors/s2:U} PC817)\n'
-      'I²C1 SDA / SCL  fingers 53 / 55: INA226 0x40 / 0x41 / 0x44 / 0x45, SC16IS740 0x48 (servo UART)\n'
+      'I²C1 SDA / SCL  fingers 53 / 55: INA226 0x40 / 0x41 / 0x44 / 0x45\n'
       'Not used: USB 23 / 25 (open, CIF rule 8). VCP TX / RX: STDC14 only.\n'
-      'Matches the MES4-CIF §2c GPIO table (the MES4 standard). The winch and servo use I²C1,\n'
-      'not module pins. TODO: winch on TCA9535 outputs (HANDOFF.md step 2).', (17.78, 30.48))
+      'Differs from MES4-CIF §2c: no relay coil feedback (PA0-PA3), so those four pins\n'
+      'drive the winch and the servo UART. Relay diagnosis uses the INA226s only.', (17.78, 30.48))
     T('Links to the other pages', (17.78, 109.22), size=2, bold=True)
     T('Page 1: block diagram and page list.\n'
       'Page 3 CAN: DB9 male to the IPC + 1x4 RJ45, ESD.\n'
       'Page 4 Power: XT30 24 V input, fuse, reverse-polarity FET, TVS, noise filter, 24 V → 5 V.\n'
-      'Pages 5-6 Relays: PA8 / PC6 / PB3 / PA7 drive, PA0-PA3 coil feedback, 4 × INA226.\n'
+      'Pages 5-6 Relays: PA8 / PC6 / PB3 / PA7 drive, 4 × INA226 (no coil feedback).\n'
       'Page 7 Sensors: PB6 / PC15 (two Autonics PNP sensors).\n'
       'Page 8 LoadCell: PA4 DRDY, PA5 SCLK, PA6 PDWN.\n'
-      'Page 9 AuxPower: IMU 9 V (MES3.1), screen USB-C 5 V / 3 A, door servo (FE-URT-2, UART via the I²C bridge).\n'
-      'Page 10 Winch: CLK / ACLK direction relays (TODO: TCA9535 drive) + SC16IS740 servo UART bridge (I²C 0x48).\n'
+      'Page 9 AuxPower: IMU 9 V (MES3.1), screen USB-C 5 V / 3 A, door servo (FE-URT-2, USART2 PA2 / PA3).\n'
+      'Page 10 Winch: CLK / ACLK direction relays on PA0 / PA1, with a hardware interlock.\n'
       'Signals shared between pages are global labels.', (17.78, 115.57))
     T('MES4-MCU module socket (TE 2199230-3, M.2 B-key 4.2 mm)', (17.78, 160.02), size=2, bold=True)
     T('Odd fingers (card top) on the left, power on the right.\n+5V = fingers 20 + 22. GND = all other fingers + the\n'
@@ -673,9 +674,9 @@ def aux_sheet():
     sh.wire(f5.p('2'), (129.54, 205.74), c5.p('1'), (144.78, 205.74))
     sh.label('+5V_SRV', (129.54, 205.74))
     gl(c5.p('2'))
-    # UART (USART2): 100 Ω series + H5VSD3B ESD at the connector (CIF rule 8), RX pull-up for an idle line
+    # UART (USART2, PA2 TX / PA3 RX): 100 Ω series + H5VSD3B ESD at the connector (CIF rule 8), RX pull-up for an idle line
     yr, yt = 226.06, 238.76
-    sh.glabel('SRV_UART_RX', (160.02, yr), 180)
+    sh.glabel('PA3', (160.02, yr), 180)
     rpu = fpart(sh, 'R10', (165.10, yr - 3.81), tag='R_SRVPU', value='10k', fields='left',
                 desc='servo RX pull-up: idle HIGH with the FE-URT-2 unplugged')
     sh.pwr('+3V3_MOD', rpu.p('1'))
@@ -686,7 +687,7 @@ def aux_sheet():
     sh.wire(rr.p('2'), dr.p('A1'), (198.12, yr))
     sh.label('SRV_RX', (198.12, yr))
     gl(dr.p('A2'))
-    sh.glabel('SRV_UART_TX', (160.02, yt), 180)
+    sh.glabel('PA2', (160.02, yt), 180)
     rt = fpart(sh, 'R36', (177.80, yt), rot=90, tag='R_SRVTX', desc='servo TX series resistor (CIF rule 8: 22-100 Ω)')
     dt = fpart(sh, 'D2', (190.50, yt + 3.81), rot=270, tag='D_SRVTX', fields='right',
                desc='servo TX ESD, H5VSD3B (5 V, 1.5 pF)')
@@ -705,13 +706,14 @@ def aux_sheet():
             'as CN5 / CN13 on the MES2 Harvester, so its cables fit.\n'
             'The FE-URT-2 turns the UART into the Feetech half-duplex\n'
             'servo bus and passes the 24 V on to the servos.\n'
-            'UART from the SC16IS740 I²C bridge (Winch\n'
-            'sheet, 0x48): TX → pin 4, pin 3 → RX.\n'
+            'UART on module USART2: PA2 TX → pin 4,\n'
+            'pin 3 → PA3 RX (5 V-tolerant).\n'
             '{F_SRV} 3 A PTC on the servo 24 V. {F_SRV5} 1.1 A PTC on the\n'
             'FE-URT-2 5 V, fed from the screen converter so a\n'
             'servo-side short can\'t pull down the module supply.\n'
             '24 V only for 24 V servo types.\n'
-            'No module GPIO used (MES4 standard pin map).', (294.64, 198.12))
+            'Blank chip: the ST bootloader probes PA2 / PA3, so flash\n'
+            'over SWD first (the normal flow).', (294.64, 198.12))
     return sh
 
 
@@ -722,7 +724,7 @@ def winch_sheet():
                'Sheet 10: winch direction relays (IM03GR, as on the MES2_Extension) with hardware interlock', 10)
     sh.box(15.24, 20.32, 199.39, 147.32, 'Winch direction relays (as U1 / U2 on the MES2_Extension)')
     out = {}
-    for name, y0 in (('CLK', 60.96), ('ACLK', 111.76)):
+    for name, gpio, y0 in (('CLK', 'PA0', 60.96), ('ACLK', 'PA1', 111.76)):
         tag = 'K_' + name
         kr = npart(sh, 'K_WINCH', 'K', (101.60, y0), tag=tag, fields=((-7.62, -12.70), (-7.62, -15.24), 'left'),
                    desc='winch %s relay, TE IM03GR (5 V coil 28 mA, DPDT 2 A / 220 VDC)' % name)
@@ -748,7 +750,8 @@ def winch_sheet():
         setf(rp, lcsc='C25741')
         sh.wire(rg.p('2'), rp.p('1'), g)
         sh.pwr('GND', rp.p('2'))
-        sh.nc(rg.p('1'))  # not driven until the TCA9535 takes over (HANDOFF.md step 2)
+        sh.wire((g[0] - 25.40, g[1]), rg.p('1'))
+        sh.glabel(gpio, (g[0] - 25.40, g[1]), 180)
         out[name] = kr
     # contacts: each direction's common passes through the other relay's NC (pole 2) = interlock
     kc, ka = out['CLK'], out['ACLK']
@@ -774,62 +777,12 @@ def winch_sheet():
             '{J_WINCH} pin 2 (COM): pin 1 = CLK, pin 3 = ACLK. They are not rated for the winch motor current.\n'
             'TE terminal assignment: coil 1 (+) / 8 (-); pole 1: 3 COM, 2 NC, 4 NO; pole 2: 6 COM, 7 NC, 5 NO.\n\n'
             'Drivers as on the relay sheets (CIF §7a): AO3400A, 100 Ω gate, 100k pull-down, so both relays are OFF\n'
-            'during reset and boot (the gate inputs float then). The Extension used 2SC2884 transistors without a pull-down.\n\n'
+            'during reset and boot (PA0 / PA1 float then). The Extension used 2SC2884 transistors without a pull-down.\n\n'
             'Hardware interlock (new, uses the spare second pole): CLK closes COM → ILK_CLK → {K_CLK} NO1 → CLK only\n'
             'while {K_ACLK} rests (its NC2 feeds ILK_CLK), and the same the other way. If both relays are energised, both\n'
             'outputs stay open, so the winch can never see both directions at once. Firmware still drives only one.\n\n'
-            'TODO (HANDOFF.md step 2): the gate resistors are not driven yet. PA0 / PA1 went back to relay coil feedback\n'
-            '(MES4 standard); the winch moves to TCA9535 outputs + KAQY214S photoMOS relays.', (17.78, 156.21))
-    # ---- servo UART: SC16IS740 I2C-UART bridge (no module GPIO needed)
-    sh.box(201.93, 20.32, 403.86, 147.32, 'Servo UART: SC16IS740 I²C-UART bridge (I²C1 0x48)')
-    u = npart(sh, 'U_BRG', 'U', (279.40, 76.20), fields=((-12.70, -20.32), (5.08, 20.32), 'left'))
-    vdd = u.p('VDD')
-    sh.wire(vdd, (vdd[0], vdd[1] - 2.54), (vdd[0], vdd[1] - 5.08))
-    sh.pwr('+3V3_MOD', (vdd[0], vdd[1] - 5.08))
-    cb = fpart(sh, 'C4', (vdd[0] + 5.08, vdd[1] - 2.54), rot=90, tag='C_BRG', desc='SC16IS740 VDD bypass')
-    sh.wire((vdd[0], vdd[1] - 2.54), cb.p('1'))
-    sh.pwr('GND', cb.p('2'), 90)
-    sh.pwr('GND', u.p('VSS'))
-    for n in ('I2C/~{SPI}', 'A0/~{CS}', 'A1/SI'):  # I2C mode, A1 = A0 = VDD -> 0x48
-        pp = u.p(n)
-        sh.wire(pp, (pp[0] - 5.08, pp[1]))
-        sh.pwr('+3V3_MOD', (pp[0] - 5.08, pp[1]), 90)
-    rs = u.p('~{RESET}')
-    sh.wire(rs, (rs[0] - 10.16, rs[1]))
-    rr = fpart(sh, 'R10', (rs[0] - 10.16, rs[1] - 3.81), tag='R_BRGRST', value='10k', fields='left',
-               desc='SC16IS740 RESET pull-up (firmware uses the IOControl soft reset)')
-    sh.pwr('+3V3_MOD', rr.p('1'))
-    for n, lab in (('SCL/SCLK', 'I2C1_SCL'), ('SDA', 'I2C1_SDA')):
-        pp = u.p(n)
-        sh.wire(pp, (pp[0] - 10.16, pp[1]))
-        sh.glabel(lab, (pp[0] - 10.16, pp[1]), 180)
-    for n in ('SO', '~{IRQ}', '~{RTS}'):
-        sh.nc(u.p(n))
-    ct = u.p('~{CTS}')
-    sh.wire(ct, (ct[0] + 2.54, ct[1]))
-    sh.pwr('GND', (ct[0] + 2.54, ct[1]), 90)
-    for n, lab in (('TX', 'SRV_UART_TX'), ('RX', 'SRV_UART_RX')):
-        pp = u.p(n)
-        sh.wire(pp, (pp[0] + 12.70, pp[1]))
-        sh.glabel(lab, (pp[0] + 12.70, pp[1]), 0)
-    # 16 MHz crystal + 12 pF load caps
-    y = npart(sh, 'Y_BRG', 'Y', (254.00, 106.68), tag='Y_BRG', fields=((5.08, -5.08), (5.08, -2.54), 'left'))
-    x1, x2 = u.p('XTAL1'), u.p('XTAL2')
-    sh.wire(x1, (241.30, x1[1]), (241.30, y.p('1')[1]), y.p('1'))
-    sh.wire(x2, (x2[0], y.p('3')[1]), y.p('3'))
-    ca = npart(sh, 'C_XT', 'C', (241.30, 110.49), tag='C_XT1', fields='left')
-    cc = npart(sh, 'C_XT', 'C', (x2[0], 110.49), tag='C_XT2')
-    sh.pwr('GND', ca.p('2'))
-    sh.pwr('GND', cc.p('2'))
-    sh.pwr('GND', y.p('2'), 180)
-    sh.pwr('GND', y.p('4'))
-    sh.text('{U_BRG} NXP SC16IS740IPW: I²C1 slave at 0x48 (A1 = A0 = VDD; INA226s 0x40-0x45, TCA9535 0x20).\n'
-            'TX / RX → servo UART terminal (AuxPower sheet, 100 Ω + ESD there) → FE-URT-2.\n'
-            '{Y_BRG} 16 MHz (CL 9 pF) + {C_XT1} / {C_XT2} 12 pF: baud = 16 MHz / (16 × divisor):\n'
-            '1 Mbit/s (Feetech default, divisor 1), 500k (2), 250k (4) are exact.\n'
-            'IRQ not connected (no module pin free): poll the LSR / RXLVL registers.\n'
-            'CTS tied low (always clear), RTS open, RESET pulled up (soft reset via IOControl).\n'
-            'Uses no module GPIO, so the MES4 standard pin map stays intact.', (204.47, 121.92))
+            'PA0 / PA1 are relay 1 / 2 coil feedback in the MES4-CIF §2c table. This board drops the coil feedback\n'
+            'to free them for the winch (E-Crawler GPIO budget).', (17.78, 156.21))
     return sh
 
 
@@ -997,49 +950,6 @@ def power_sheet():
     return sh
 
 
-def add_expander(sh):
-    """TCA9535 coil-feedback expander in the Relays 3-4 sheet's left column."""
-    B.register_symbol(AP.tca9535_symbol())
-    for it in sh.items:  # the template's left notes column ends above the expander
-        if it[0] == 'rectangle' and float(first(it, 'start')[1]) == 15.24 and float(first(it, 'end')[2]) > 240:
-            first(it, 'end')[2] = 138.43
-    sh.box(15.24, 140.97, 106.68, 250.19, 'Coil feedback expander (I²C1 0x20)')
-    u = npart(sh, 'U_EXP', 'U', (55.88, 190.50), fields=((-12.70, -27.94), (5.08, 27.94), 'left'))
-    # supply + decoupling
-    vdd = u.p('VDD')
-    sh.wire(vdd, (vdd[0], vdd[1] - 2.54), (vdd[0], vdd[1] - 5.08))
-    sh.pwr('+3V3_MOD', (vdd[0], vdd[1] - 5.08))
-    c = fpart(sh, 'C4', (vdd[0] + 5.08, vdd[1] - 2.54), rot=90, tag='C_EXP', desc='TCA9535 VCC bypass')
-    sh.wire((vdd[0], vdd[1] - 2.54), c.p('1'))
-    sh.pwr('GND', c.p('2'), 90)
-    sh.pwr('GND', u.p('VSS'))
-    # address 0x20: A2 / A1 / A0 = GND
-    xs = u.p('A0')[0] - 2.54
-    for n in ('A0', 'A1', 'A2'):
-        sh.wire(u.p(n), (xs, u.p(n)[1]))
-    sh.wire((xs, u.p('A0')[1]), (xs, u.p('A1')[1]), (xs, u.p('A2')[1]), (xs, u.p('A2')[1] + 2.54))
-    sh.pwr('GND', (xs, u.p('A2')[1] + 2.54))
-    # I2C + INT
-    for n, lab in (('SCL', 'I2C1_SCL'), ('SDA', 'I2C1_SDA')):
-        sh.wire(u.p(n), (u.p(n)[0] - 7.62, u.p(n)[1]))
-        sh.glabel(lab, (u.p(n)[0] - 7.62, u.p(n)[1]), 180)
-    sh.nc(u.p('~{INT}'))  # PA0 now drives the winch: the expander is polled
-    # inputs: relay coil feedback on P00-P03, the rest spare
-    for k in range(4):
-        pp = u.p('IO0_%d' % k)
-        sh.wire(pp, (pp[0] + 7.62, pp[1]))
-        sh.glabel('RLY%d_FB' % (k + 1), (pp[0] + 7.62, pp[1]), 0)
-    for n in ['IO0_%d' % k for k in range(4, 8)] + ['IO1_%d' % k for k in range(8)]:
-        sh.nc(u.p(n))
-    sh.text('{U_EXP} TCA9535PWR: A2 / A1 / A0 = GND → I²C1 0x20 (no clash with\n'
-            'the INA226s at 0x40-0x45). P00-P03 = relay 1-4 coil feedback\n'
-            '(10k / 15k + 10 nF dividers, 3.0 V = coil off; inputs 5.5 V-tolerant).\n'
-            'INT not connected: PA0 drives the winch, so poll the expander.\n'
-            'P04-P17 spare (12 inputs for later): no internal pull-ups, so set\n'
-            'them as outputs, LOW, at start-up. Read input port 0 (reg 0x00)\n'
-            '≥ 30 ms after switching a relay (CIF §7b).', (17.78, 226.06))
-
-
 # ---------------------------------------------------------------- root page: block diagram + sheets
 RED, ORA, BLU, GRY = (200, 30, 30), (225, 115, 0), (30, 80, 200), (110, 110, 110)
 
@@ -1109,13 +1019,13 @@ def root_items(sh, sheets):
           'Hold-down: {Main/H5} M3 standoff.\n\n'
           'No hot-plug: unplug the XT30\nbefore fitting a module.')
     block(205.74, 40.64, 297.18, 106.68, RED, (222, 242, 222), '4 relay outputs (CIF §7)',
-          '1 safety light: PA8 drive, PA0 FB, INA226 0x40\n'
-          '2 LED DRL: PC6 drive, PA1 FB, 0x41\n'
-          '3 battery stopper: PB3 drive, PA2 FB, 0x44\n'
-          '4 spare: PA7 drive, PA3 FB, 0x45\n\n'
+          '1 safety light: PA8 drive, INA226 0x40\n'
+          '2 LED DRL: PC6 drive, INA226 0x41\n'
+          '3 battery stopper: PB3 drive, INA226 0x44\n'
+          '4 spare: PA7 drive, INA226 0x45\n\n'
           'GPIO → 100 Ω → AO3400A → 5 V coil\n(SRD-5VDC-SL-A, on +5V_24).\n'
           '+24V → 30 mΩ shunt → contact →\n{F_CH_VALUE} PTC → output (2 A continuous).\n'
-          'Coil feedback 10k / 15k → PA0-PA3.\n'
+          'No coil feedback (pins used elsewhere).\n'
           'INA226 per channel: load current +\n24 V rail, ALERT → PA15.')
     block(205.74, 116.84, 297.18, 147.32, RED, (222, 242, 222), '2 Autonics sensor inputs',
           '+24V → 100 mA PTC → sensor supply.\n'
@@ -1139,10 +1049,10 @@ def root_items(sh, sheets):
           'Own L pi filter from +24V.\n'
           '{AuxPower/U_IMU} URB2409S-10WR3 → 9 V →\n{AuxPower/SW_IMU} switch → {AuxPower/J_IMU} IMU terminal\n(as on the MES3.1 carrier).\n'
           '{AuxPower/U_SCR} URB2405LD-20WR3 → 5 V 4 A\n→ 3 A PTC → {AuxPower/J_USB} USB-C (Rp 10k:\n5 V / 3 A) → ARZOPA Z1C screen.\n'
-          'Door servo (FE-URT-2): {AuxPower/J_SRVP} 24 V\n+ {AuxPower/J_SRVU} UART via the I²C bridge.')
+          'Door servo (FE-URT-2): {AuxPower/J_SRVP} 24 V\n+ {AuxPower/J_SRVU} UART (USART2).')
     line([(302.26, 132.08), (302.26, 157.48)], RED)
     block(309.88, 40.64, 403.86, 96.52, GRY, (238, 238, 238), 'Winch control (page 10)',
-          'Two IM03GR relays, as on the\nMES2_Extension (AO3400A drivers).\nTODO: drive from a TCA9535 on\nI²C1 (PA0 / PA1 are coil FB).\n'
+          'Two IM03GR relays, as on the\nMES2_Extension: PA0 → CLK,\nPA1 → ACLK (AO3400A drivers).\n'
           'Contacts switch the 48 V winch\ncontroller\'s direction inputs.\n'
           'Hardware interlock: both on =\nboth open.')
     arrow([(302.26, 157.48), (309.88, 157.48)], RED)
@@ -1152,8 +1062,6 @@ def root_items(sh, sheets):
     txt('CAN', 86.36, 186.69, 1.6, False, BLU)
     arrow([(182.88, 63.50), (205.74, 63.50)], BLU)
     txt('PA8 / PC6 /\nPB3 / PA7', 185.42, 56.52, 1.6, False, BLU)
-    arrow([(205.74, 81.28), (182.88, 81.28)], BLU)
-    txt('coil FB\nPA0-PA3', 185.42, 74.93, 1.6, False, BLU)
     arrow([(182.88, 96.52), (205.74, 96.52)], BLU, both=True)
     txt('I²C1 + PA15', 185.42, 92.71, 1.6, False, BLU)
     arrow([(205.74, 132.08), (182.88, 132.08)], BLU)
@@ -1164,9 +1072,9 @@ def root_items(sh, sheets):
     rect(17.78, 213.36, 248.92, 248.92, (60, 60, 60), (250, 250, 250))
     txt('Notes', 20.32, 215.65, 2.2, True)
     txt('E-Crawler carrier for one MES4-MCU module (MES4-CIF rev A-d6). Circuits taken from the MES4-Flasher: PC817 sensor inputs,\n'
-        'ADS1232 load cell, relay channels (driver, coil feedback, INA226) and the XT30 / URB2405S 24 V input.\n'
-        'GPIO budget: 4 relay drives + 4 coil feedbacks + ALERT + 3 ADS1232 + 2 sensors = 14, as in the MES4-CIF §2c table.\n'
-        'Servo UART (SC16IS740) and, next, the winch (TCA9535) run on I²C1, so they need no module pins.\n'
+        'ADS1232 load cell, relay channels (driver, INA226) and the XT30 / URB2405S 24 V input.\n'
+        'GPIO budget: 4 relay drives + ALERT + 3 ADS1232 + 2 sensors + winch (2) + servo USART2 (2) = 14.\n'
+        'Differs from the MES4-CIF §2c table: no relay coil feedback, so PA0-PA3 drive the winch and the servo UART.\n'
         'Relay drive per CIF §7a (AO3400A, 100 Ω, 100k pull-down); the Flasher uses a 2SC2884 BJT for the same job.\n'
         'No hot-plug: unplug the 24 V XT30 before inserting or removing the module.\n'
         'Pages: Main (2), CAN (3), Power (4), Relays 1-2 (5), Relays 3-4 (6), Sensors (7), LoadCell (8), AuxPower (9), Winch (10).', 20.32, 221.0)
@@ -1192,9 +1100,9 @@ def sheet_symbol(sh, x, y, root_uuid, w=38.10, h=7.62):
 def main():
     sheets = [main_sheet(), can_sheet(), power_sheet(),
               relay_sheet('Relays1-2', 'Relays12.kicad_sch', 5, [1, 2],
-                          'Sheet 5: relay outputs 1-2 (safety light, LED DRL) with coil and load-current feedback'),
+                          'Sheet 5: relay outputs 1-2 (safety light, LED DRL) with load-current feedback (INA226)'),
               relay_sheet('Relays3-4', 'Relays34.kicad_sch', 6, [3, 4],
-                          'Sheet 6: relay outputs 3-4 (battery stopper, spare) with coil and load-current feedback'),
+                          'Sheet 6: relay outputs 3-4 (battery stopper, spare) with load-current feedback (INA226)'),
               sensor_sheet(), loadcell_sheet(), aux_sheet(), winch_sheet()]
     S = {s.name: s for s in sheets}
     S['Relays1-2'].box(15.24, 20.32, 106.68, 250.19)
