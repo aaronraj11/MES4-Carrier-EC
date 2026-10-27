@@ -365,6 +365,7 @@ def main_sheet():
       'Page 8 LoadCell: PA4 DRDY, PA5 SCLK, PA6 PDWN.\n'
       'Page 9 AuxPower: IMU 9 V (MES3.1), screen USB-C 5 V / 3 A, door servo (FE-URT-2, USART2 PA2 / PA3).\n'
       'Page 10 Winch: CLK / ACLK direction relays on PA0 / PA1, with a hardware interlock.\n'
+      'Page 11 Pinout: every module finger, its STM32 pin and what this carrier connects to it.\n'
       'Signals shared between pages are global labels.', (17.78, 115.57))
     T('MES4-MCU module socket (TE 2199230-3, M.2 B-key 4.2 mm)', (17.78, 160.02), size=2, bold=True)
     T('Odd fingers (card top) on the left, power on the right.\n+5V = fingers 20 + 22. GND = all other fingers + the\n'
@@ -708,6 +709,10 @@ def aux_sheet():
             'servo bus and passes the 24 V on to the servos.\n'
             'UART on module USART2: PA2 TX → pin 4,\n'
             'pin 3 → PA3 RX (5 V-tolerant).\n'
+            'Set the FE-URT-2 level switch to 3.3 V (not 5 V):\n'
+            'it only sets the UART levels, the servo 24 V is\n'
+            'unchanged. At 5 V its TX exceeds PA3\'s limit while\n'
+            'the module is unpowered and back-feeds the 3V3 via {R_SRVPU}.\n'
             '{F_SRV} 3 A PTC on the servo 24 V. {F_SRV5} 1.1 A PTC on the\n'
             'FE-URT-2 5 V, fed from the screen converter so a\n'
             'servo-side short can\'t pull down the module supply.\n'
@@ -783,6 +788,103 @@ def winch_sheet():
             'outputs stay open, so the winch can never see both directions at once. Firmware still drives only one.\n\n'
             'PA0 / PA1 are relay 1 / 2 coil feedback in the MES4-CIF §2c table. This board drops the coil feedback\n'
             'to free them for the winch (E-Crawler GPIO budget).', (17.78, 156.21))
+    return sh
+
+
+# ---------------------------------------------------------------- module pinout table (new)
+# Function colours and table style copied from the MES4-MCU "U1 PIN MAP" (MCU.kicad_sch) and the M.2 finger tables
+FN = {'GPIO': (232, 232, 232), 'POWER': (255, 205, 205), 'CAN': (200, 240, 200), 'UART': (200, 230, 255),
+      'I2C': (225, 245, 190), 'DEBUG': (205, 215, 255), 'RESET': (225, 205, 255), 'USB': (190, 240, 240),
+      'GND': (205, 205, 205)}
+GROUP, FINGER = (150, 190, 255), (215, 230, 255)
+DEV = (255, 245, 170)  # MES4-CIF §2c cell when this board differs from the standard
+
+
+def pinout_sheet():
+    sh = Sheet('Pinout', 'Pinout.kicad_sch',
+               'Sheet 11: MES4-MCU module pinout and what this carrier connects to each finger', 11)
+    sh.text('J1 FINGER MAP — what every MES4-MCU finger does on this carrier', (24.13, 22.86), size=2, bold=True)
+    rly = lambda n, sheet: '{%s/ch%d:Q} AO3400A, {%s/ch%d:RB} 100 Ω, {%s/ch%d:RPD} 100k' % ((sheet, n) * 3)
+    st = lambda std, dev=False: (std, DEV) if dev else std
+
+    def row(f, port, net, fn, to, parts, std, notes, dev=False):
+        return [(f, FINGER), port, net, (fn, FN[fn]), to, parts, st(std, dev), notes]
+
+    head = ['Finger', 'Port', 'Net / signal', 'Function', 'Connected to (this carrier)', 'Carrier parts',
+            'MES4-CIF §2c', 'Notes']
+    grp = lambda t: [t] + [''] * 7
+    rows = [head, grp('SMALL FINGER GROUP  1–11  ·  CAN + debug'),
+        row('1', '—', 'CANH', 'CAN', 'DB9 pin 3, RJ45 pin 1 (all 4 ports)',
+            '{CAN/J_DB9}, {CAN/J_RJ}, ESD {CAN/D_DB9} / {CAN/D_RJ}', 'CANH',
+            'Transceiver + 120 Ω terminator (JP1) are on the module'),
+        row('3', '—', 'CANL', 'CAN', 'DB9 pin 5, RJ45 pin 2', 'as CANH', 'CANL', 'No 24 V on any CAN connector'),
+        row('4', '—', '+3V3', 'POWER', 'M.2 4 → +3V3_MOD: INA226s, ADS1232 DVDD, PC817s, pull-ups',
+            '{Main/LED2} green, {Main/J3} VTref', '+3V3 out', '≤ 50 mA allowed; this carrier draws ≈ 7 mA worst case'),
+        row('6', 'PA9', 'VCP_TX', 'UART', 'M.2 6 → ST-Link T_VCP_TX (STDC14 pin 14)', '{Main/J3}, H5VSD3B ESD',
+            'VCP_TX', 'USART1 TX: ST-Link VCP + bootloader UART'),
+        row('7', 'PA13', 'SWDIO', 'DEBUG', 'M.2 7 → ST-Link SWDIO (STDC14 pin 4)', '{Main/J3}, H5VSD3B ESD', 'SWDIO',
+            'Do not reuse as GPIO'),
+        row('8', 'PA10', 'VCP_RX', 'UART', 'M.2 8 ← ST-Link T_VCP_RX (STDC14 pin 13)', '{Main/J3}, H5VSD3B ESD',
+            'VCP_RX', 'USART1 RX'),
+        row('9', 'PA14', 'SWCLK', 'DEBUG', 'M.2 9 → ST-Link SWCLK (STDC14 pin 6)', '{Main/J3}, H5VSD3B ESD', 'SWCLK',
+            'Shared with BOOT0, ignored by the module: no BOOT button'),
+        row('11', 'PF2', 'NRST', 'RESET', 'ST-Link NRST (STDC14 pin 12) + reset button', '{Main/J3}, {Main/SW1}',
+            'NRST', 'Pull LOW only; no capacitor or pull-up here (100 nF on the module)'),
+        row('2, 5, 10', '—', 'GND', 'GND', 'GND plane', '—', 'GND', ''),
+        grp('LARGE FINGER GROUP  20–75  ·  power + GPIO'),
+        row('20, 22', '—', '+5V', 'POWER', 'Module supply from +5V_24',
+            '{Power/F_MOD} 1.1 A PTC + {Power/FB_5V} ferrite pi filter', '+5V in', 'Module window 4.75–5.5 V'),
+        row('23', 'PA12', 'USB_DP', 'USB', 'Not connected', '—', 'not used', 'CIF rule 8: leave open'),
+        row('25', 'PA11', 'USB_DN', 'USB', 'Not connected', '—', 'not used', 'CIF rule 8: leave open'),
+        row('29', 'PC6', 'PC6', 'GPIO', 'Relay 2 drive, LED DRL (out)', rly(2, 'Relays1-2'), 'Relay CH2 drive', ''),
+        row('31', 'PA8', 'PA8', 'GPIO', 'Relay 1 drive, safety light (out)', rly(1, 'Relays1-2'), 'Relay CH1 drive',
+            'May read LOW in reset (UCPD pull-down) until the UCPD1_STROBE write (FW)'),
+        row('35', 'PA7', 'PA7', 'GPIO', 'Relay 4 drive, spare (out)', rly(4, 'Relays3-4'), 'Relay CH4 drive',
+            'Bootloader pulls it LOW on a blank chip: relay stays off'),
+        row('37', 'PA6', 'PA6', 'GPIO', 'ADS1232 PDWN (out, 100k pull-down)', '{LoadCell/lc:U13} ADS1232',
+            'ADS1232 PDWN', 'ADC held off in reset'),
+        row('39', 'PA5', 'PA5', 'GPIO', 'ADS1232 SCLK (out, 100k pull-down)', '{LoadCell/lc:U13} ADS1232',
+            'ADS1232 SCLK', 'TT pin: 3.6 V max'),
+        row('41', 'PA4', 'PA4', 'GPIO', 'ADS1232 DRDY / DOUT (in, 100 Ω)', '{LoadCell/lc:U13} ADS1232',
+            'ADS1232 DRDY', 'TT pin: 3.6 V max (DVDD = 3V3). Bit-banged read: DOUT is not on SPI1 MISO'),
+        row('43', 'PA3', 'PA3', 'UART', 'USART2 RX ← J17 pin 3, door servo (FE-URT-2)',
+            '{AuxPower/J_SRVU}, {AuxPower/R_SRVRX} 100 Ω, {AuxPower/R_SRVPU} 10k pull-up, {AuxPower/D_SRVRX}',
+            'Relay CH4 coil FB', 'Differs from CIF. FE-URT-2 must be set to 3.3 V levels', dev=True),
+        row('45', 'PA2', 'PA2', 'UART', 'USART2 TX → J17 pin 4, door servo (FE-URT-2)',
+            '{AuxPower/J_SRVU}, {AuxPower/R_SRVTX} 100 Ω, {AuxPower/D_SRVTX}', 'Relay CH3 coil FB',
+            'Differs from CIF. Bootloader probes PA2 / PA3 on a blank chip: flash over SWD', dev=True),
+        row('47', 'PA1', 'PA1', 'GPIO', 'Winch ACLK relay drive (out)',
+            '{Winch/K_ACLK} IM03GR, {Winch/Q_ACLK} AO3400A, {Winch/RG_ACLK} 100 Ω, {Winch/RP_ACLK} 100k',
+            'Relay CH2 coil FB', 'Differs from CIF. Drive only one of PA0 / PA1', dev=True),
+        row('49', 'PA0', 'PA0', 'GPIO', 'Winch CLK relay drive (out)',
+            '{Winch/K_CLK} IM03GR, {Winch/Q_CLK} AO3400A, {Winch/RG_CLK} 100 Ω, {Winch/RP_CLK} 100k',
+            'Relay CH1 coil FB', 'Differs from CIF. Both winch relays off in reset (100k pull-downs)', dev=True),
+        row('51', 'PC15', 'PC15', 'GPIO', 'Autonics sensor 2 (in, HIGH = sensor on)',
+            '{Sensors/s2:U} PC817, {Sensors/s2:RP} 10k pull-down', 'Spare input',
+            'Weak pin: input only, never source. EXTI15 shared with PA15'),
+        row('53', 'PB9', 'I2C1_SDA', 'I2C', 'I²C1 SDA: 4 × INA226 (0x40 / 0x41 / 0x44 / 0x45)',
+            '{Main/R5} 2.2k pull-up to +3V3_MOD', 'I²C1 SDA', '400 kHz'),
+        row('55', 'PB8', 'I2C1_SCL', 'I2C', 'I²C1 SCL: 4 × INA226', '{Main/R6} 2.2k pull-up to +3V3_MOD',
+            'I²C1 SCL', ''),
+        row('59', 'PB6', 'PB6', 'GPIO', 'Autonics sensor 1 (in, HIGH = sensor on)',
+            '{Sensors/s1:U} PC817, {Sensors/s1:RP} 10k pull-down', 'Spare input',
+            'Bootloader pull-up on a blank chip: reads LOW with the 10k, harmless'),
+        row('61', 'PB3', 'PB3', 'GPIO', 'Relay 3 drive, battery stopper (out)', rly(3, 'Relays3-4'),
+            'Relay CH3 drive', ''),
+        row('63', 'PA15', 'PA15', 'GPIO', 'INA226 ALERT, all four wire-OR (in)', '{Main/R20} 10k pull-up to +3V3_MOD',
+            'INA226 ALERT', 'EXTI15 shared with PC15: interrupt on PC15, poll ALERT (latched)'),
+        row('others', '—', 'GND', 'GND', 'GND plane + socket hold-down pads', '—', 'GND',
+            '21, 24, 26–28, 30, 32–34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54, 56–58, 60, 62, 64–75'),
+    ]
+    widths = [15.24, 15.24, 20.32, 15.24, 81.28, 86.36, 30.48, 116.84]
+    fills = {i: GROUP for i, r in enumerate(rows) if r[1] == '' and i}
+    end = sh.table(24.13, 30.48, widths, rows, fills, bold_rows=fills, span_rows=fills)
+    sh.text('Totals: all 14 module GPIOs used (10 GPIO + USART2 on PA2 / PA3) + I2C1 + VCP UART + SWD + NRST; '
+            'CAN transceiver on the module; USB not connected.\n'
+            'Function colours as on the MES4-MCU U1 pin map. Yellow MES4-CIF §2c cells: this board differs from the '
+            'standard (no relay coil feedback, so PA0 / PA1 = winch, PA2 / PA3 = servo UART).\n'
+            'Checked against the MES4-MCU netlist on 2026-10-27: every finger carries the same signal on both boards, '
+            'and every GPIO finger goes straight to the STM32G0B1.', (24.13, end + 3.81))
     return sh
 
 
@@ -1077,7 +1179,7 @@ def root_items(sh, sheets):
         'Differs from the MES4-CIF §2c table: no relay coil feedback, so PA0-PA3 drive the winch and the servo UART.\n'
         'Relay drive per CIF §7a (AO3400A, 100 Ω, 100k pull-down); the Flasher uses a 2SC2884 BJT for the same job.\n'
         'No hot-plug: unplug the 24 V XT30 before inserting or removing the module.\n'
-        'Pages: Main (2), CAN (3), Power (4), Relays 1-2 (5), Relays 3-4 (6), Sensors (7), LoadCell (8), AuxPower (9), Winch (10).', 20.32, 221.0)
+        'Pages: Main (2), CAN (3), Power (4), Relays 1-2 (5), Relays 3-4 (6), Sensors (7), LoadCell (8), AuxPower (9), Winch (10), Pinout (11).', 20.32, 221.0)
     it.append(['rectangle', ['start', 254.00, 208.28], ['end', 403.86, 248.92],
                ['stroke', ['width', 0.35], ['type', 'dash'], ['color', 30, 30, 160, 1]],
                ['fill', ['type', 'none']], ['uuid', U('rp')]])
@@ -1103,7 +1205,7 @@ def main():
                           'Sheet 5: relay outputs 1-2 (safety light, LED DRL) with load-current feedback (INA226)'),
               relay_sheet('Relays3-4', 'Relays34.kicad_sch', 6, [3, 4],
                           'Sheet 6: relay outputs 3-4 (battery stopper, spare) with load-current feedback (INA226)'),
-              sensor_sheet(), loadcell_sheet(), aux_sheet(), winch_sheet()]
+              sensor_sheet(), loadcell_sheet(), aux_sheet(), winch_sheet(), pinout_sheet()]
     S = {s.name: s for s in sheets}
     S['Relays1-2'].box(15.24, 20.32, 106.68, 250.19)
     S['Relays1-2'].text(RELAY_DIAG[0], (17.78, 22.86), size=2, bold=True)

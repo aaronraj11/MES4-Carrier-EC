@@ -717,7 +717,7 @@
   },
   "sheets": [
     [
-      "20e873b0-a362-5816-a506-9e1cffc294d3",
+      "da774ca2-fff6-5e5d-8e21-ede9d04ec2cb",
       "Root"
     ],
     [
@@ -755,6 +755,10 @@
     [
       "0959b9ec-5a3a-5f07-b996-83d523c173ff",
       "Winch"
+    ],
+    [
+      "51ec9dcb-b59b-5b91-b6db-56b36742301d",
+      "Pinout"
     ]
   ],
   "text_variables": {}

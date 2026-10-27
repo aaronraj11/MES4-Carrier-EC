@@ -499,6 +499,39 @@ class Sheet:
         if title:
             self.text(title, (x1 + 2.54, y1 + 2.54), size=2, bold=True)
 
+    def table(self, x, y, widths, rows, fills=None, bold_rows=(), span_rows=(), size=1.27):
+        """KiCad 9 table in the MES4-MCU pin-map style: rows[0] is the header (bold, grey 194), black text,
+        3.175 mm rows. A cell is text or (text, (r, g, b)); fills: {row index: (r, g, b)} for a whole row.
+        Row height grows with the tallest cell (lines separated by \\n). span_rows: the first cell spans the row."""
+        fills = dict(fills or {})
+        fills.setdefault(0, (194, 194, 194))
+        bold_rows = {0} | set(bold_rows)
+        cell = lambda c: (c, None) if isinstance(c, str) else c
+        heights = [R2(3.175 + 2.06 * max(cell(c)[0].count('\n') for c in row)) for row in rows]
+        cells, yy = [], y
+        for r, (row, h) in enumerate(zip(rows, heights)):
+            xx = x
+            for k, (c, w) in enumerate(zip(row, widths)):
+                txt, col = cell(c)
+                span, size_w = [1, 1], w
+                if r in span_rows:
+                    span, size_w = ([len(widths), 1], sum(widths)) if k == 0 else ([0, 0], w)
+                col = col or fills.get(r)
+                font = ['font', ['size', size, size]] + ([['bold', 'yes']] if r in bold_rows else []) + \
+                    [['color', 0, 0, 0, 1]]
+                fill = ['fill', ['type', 'color'], ['color'] + list(col) + [1]] if col else ['fill', ['type', 'none']]
+                cells.append(['table_cell', Q(txt), ['exclude_from_sim', 'no'], ['at', R2(xx), R2(yy), 0],
+                              ['size', R2(size_w), h], ['margins', 0.9525, 0.9525, 0.9525, 0.9525], ['span'] + span, fill,
+                              ['effects', font, ['justify', 'left', 'top']], ['uuid', U('tc')]])
+                xx += w
+            yy += h
+        stroke = ['stroke', ['width', 0], ['type', 'solid']]
+        self.items.append(['table', ['column_count', len(widths)],
+                           ['border', ['external', 'yes'], ['header', 'yes'], stroke],
+                           ['separators', ['rows', 'yes'], ['cols', 'yes'], deep(stroke)],
+                           ['column_widths'] + list(widths), ['row_heights'] + heights, ['cells'] + cells])
+        return yy
+
     # ---------------- output ----------------
     def node(self, root_uuid, title, date, rev, company, author, resolve=None):
         used = []
@@ -515,6 +548,9 @@ class Sheet:
             it = deep(it)
             if resolve and it[0] == 'text':
                 it[1] = Q(resolve(self, it[1]))
+            if resolve and it[0] == 'table':
+                for cell in find(first(it, 'cells'), 'table_cell'):
+                    cell[1] = Q(resolve(self, cell[1]))
             n.append(it)
         path = '/%s/%s' % (root_uuid, self.uuid)
         for p_ in self.parts:

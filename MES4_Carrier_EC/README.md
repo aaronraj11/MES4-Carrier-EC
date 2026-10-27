@@ -132,6 +132,8 @@ The MES2 Harvester drives its servo through Feetech's FE-URT-2 board, which turn
 
 The UART uses module **USART2**: PA2 TX (finger 45) → R38 100 Ω → pin 4, and pin 3 → R37 100 Ω → PA3 RX (finger 43, 5 V-tolerant). There are H5VSD3B ESD clamps (D23 / D24) at the connector, per CIF rule 8. R36 10k holds RX idle-HIGH when the FE-URT-2 is unplugged.
 
+**Set the FE-URT-2's level switch to 3.3 V, not 5 V.** The switch only sets the UART signal levels on J17 pins 3 / 4. The servo 24 V (J15) and the FE-URT-2's own 5 V (J17 pin 2) don't change. At 5 V, the module's 3.3 V TX may not reliably read as HIGH, the FE-URT-2's TX back-feeds the module 3V3 through R36, and at power-up (FE-URT-2 alive before the module) it exceeds PA3's VDD + 4 V limit. After setting it, read a servo's ID or position once on the bench to confirm the servo bus works at 3.3 V.
+
 The FE-URT-2's 5 V comes from the screen converter through F10 (1.1 A PTC). A short on the servo side then can't pull down the module's supply.
 
 | Ref | Part | LCSC | Notes |
@@ -191,13 +193,14 @@ All LEDs are JLC **Basic** parts (no extended-part fee, Economic PCBA): red NCD0
 - **Sensor inputs are for PNP (sourcing) 24 V sensors.** NPN types need a different circuit.
 - **Never run CAN in a cable or connector with 24 V** (CIF rule 9).
 - **The screen port's VBUS is always on** (no cold-socket switch): plug in only the monitor or another sink, never a charger or a laptop.
+- **FE-URT-2 at 3.3 V levels only** (its level switch): at 5 V it overdrives PA3 when the module is unpowered. See Door servo.
 - **SW2 (SS12D10G5) is rated 0.5 A.** Check that the IMU draws less; the converter can supply up to 1.11 A.
 - **Servo supply is the raw 24 V bus** (as on the Harvester): only for 24 V servo types. F9 trips at 5 A.
 - **Input fuse margin:** a realistic total of 6–8 A is fine. Every load at its limit at once (4 × 2 A relays + 3 A servo + IMU + screen ≈ 13 A) exceeds F1's 75 % derating (11 A).
 
 ## Status (2026-10-27)
 
-Schematic generated from the MES4-Flasher sheets plus new Power, Main, CAN and AuxPower blocks. ERC: 0 errors, 0 warnings. Netlist checked (`generator/checks.py`, run by `run.sh`): 189 parts, every symbol pin matched to a footprint pad; every module GPIO, I²C1 and ALERT reach their circuits; no single-pin nets. Every purchased part carries its LCSC number (the net tie and bare test pads have none). No PCB yet.
+Schematic generated from the MES4-Flasher sheets plus new Power, Main, CAN, AuxPower, Winch and Pinout blocks. Page 11 is a table of every module finger: its STM32 pin, what this carrier connects to it and the MES4-CIF §2c standard use (deviations shaded). ERC: 0 errors, 0 warnings. Netlist checked (`generator/checks.py`, run by `run.sh`): 189 parts, every symbol pin matched to a footprint pad; every module GPIO, I²C1 and ALERT reach their circuits; no single-pin nets. Every purchased part carries its LCSC number (the net tie and bare test pads have none). No PCB yet.
 
 ## Files
 
@@ -205,8 +208,8 @@ Schematic generated from the MES4-Flasher sheets plus new Power, Main, CAN and A
 |---|---|
 | `MES4_Carrier_EC.kicad_pro` | KiCad project |
 | `MES4_Carrier_EC.kicad_sch` | Page 1: block diagram ("How the MES4-Carrier-EC works") |
-| `MES4_Carrier_EC.pdf` | All ten schematic pages |
-| `Main.kicad_sch`, `CAN.kicad_sch`, `Power.kicad_sch`, `Relays12.kicad_sch`, `Relays34.kicad_sch`, `Sensors.kicad_sch`, `LoadCell.kicad_sch`, `AuxPower.kicad_sch`, `Winch.kicad_sch` | Pages 2–10 |
+| `MES4_Carrier_EC.pdf` | All eleven schematic pages |
+| `Main.kicad_sch`, `CAN.kicad_sch`, `Power.kicad_sch`, `Relays12.kicad_sch`, `Relays34.kicad_sch`, `Sensors.kicad_sch`, `LoadCell.kicad_sch`, `AuxPower.kicad_sch`, `Winch.kicad_sch`, `Pinout.kicad_sch` | Pages 2–11 |
 | `MES4-Carrier-EC.kicad_sym`, `MES4-Carrier-EC.pretty/`, `MES4-Carrier-EC.3dshapes/` | Project symbols, footprints and 3D models (copied from the MES4-Flasher) |
 
 ## Credits
