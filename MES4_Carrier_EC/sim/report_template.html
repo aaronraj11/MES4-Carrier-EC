@@ -80,8 +80,8 @@ code{font-size:13px}ul{padding-left:20px}
 <ul>
 <li><b>F11 (screen PTC):</b> keep 3 A hold, or fit 4 A now? It depends on the ARZOPA Z1C's real current (AUX1, L7).</li>
 <li><b>Supply limits:</b> the pack's full-charge voltage (7S Li-ion 29.4 V or 8S LiFePO4 29.2 V) against the AB20 variant (A/B/C rated 30 V, D rated 60 V).</li>
-<li><b>Datasheet checks:</b> YLPTEC converters at 40 V for about 1 ms (PWR2); Q1 AGM60P90D I<sub>DM</sub> against the 100 A plug-in inrush; F1 melting I²t against 0.95 A²s (PWR1).</li>
-<li><b>Hold-up:</b> 4.0 ms on total power loss (PWR6). Enough for glitches; add bulk on +24V only if a clean shutdown is wanted.</li>
+<li><b>Datasheet checks: done, all pass.</b> URB2405S-6WR3, URB2409S-10WR3 and URB2405LD-20WR3 all allow a 50 V input surge for 1 s (PWR2 peaks at 40 V). Q1 AGM60P90D I<sub>DM</sub> −360 A (inrush 100 A). F1 0451015 melting I²t 97.8 A²s (inrush 0.95 A²s).</li>
+<li><b>Hold-up:</b> 4.0 ms on total power loss (PWR6), to a 9 V cut-off. The YLPTEC datasheets give an undervoltage shut-off of 5.5–6.5 V, so the real figure is a little longer. Enough for glitches; add bulk on +24V only if a clean shutdown is wanted.</li>
 </ul>
 
 <h2 class="pb">4 · Simulation summary</h2>
@@ -89,7 +89,7 @@ code{font-size:13px}ul{padding-left:20px}
 <table>
 <tr><th>Group</th><th>Sheet (page)</th><th>Bench</th><th>Test</th><th>Result</th></tr>
 <tr><td>Power</td><td>Power (4)</td><td>PWR1</td><td>XT30 hot-plug, full pack (29.4 V) via the AB20, 2 m cable</td><td><span class="pill ok">Pass</span></td></tr>
-<tr><td>Power</td><td>Power (4)</td><td>PWR2</td><td>12.4 A 10/1000 µs pulse (D9 rating)</td><td><span class="pill warn">Pass, check converters</span></td></tr>
+<tr><td>Power</td><td>Power (4)</td><td>PWR2</td><td>12.4 A 10/1000 µs pulse (D9 rating)</td><td><span class="pill ok">Pass</span></td></tr>
 <tr><td>Power</td><td>Power (4)</td><td>PWR3</td><td>IEC 61000-4-5 0.5 kV surge</td><td><span class="pill na">Not applicable</span></td></tr>
 <tr><td>Power</td><td>Power (4)</td><td>PWR4</td><td>Battery connected backwards</td><td><span class="pill ok">Pass</span></td></tr>
 <tr><td>Power</td><td>Power (4), fed by the AB20</td><td>PWR6</td><td>Line changeover and hold-up</td><td><span class="pill ok">Pass</span></td></tr>
@@ -112,12 +112,12 @@ code{font-size:13px}ul{padding-left:20px}
 <p class="grp"><b>Parts:</b> J5 XT30, F1 15 A, Q1 AGM60P90D + D8/R6, D9 SMBJ30A, C1–C3 · L1 + C4/C5 → U1 URB2405S-6WR3 (+24V_DC) · L2 + C26–C30 → U9 / U10 (AuxPower) · F9 + C31/C32 (servo). Shared model: <code>common.inc</code>.</p>
 
 <h3>PWR1 · hot-plug (<code>pwr1_hotplug.net</code>)</h3>
-<p>The XT30 closes on the AB20 output with the pack fully charged (29.4 V, above the DDR's 24 V, so the pack feeds the carrier), through a 2 m cable (2 µH, 33 mΩ). +24V rises cleanly to 29.1 V, with no overshoot on any branch, so D9 never conducts. Charging about 450 µF pulls a current pulse peaking at 100 A and lasting about 0.1 ms (F1 I²t 0.95 A²s), so the XT30 will spark. L1 and L2 saturate briefly (31 / 46 A in this linear model). That's harmless; confirm Q1's pulsed drain current and F1's melting I²t on their datasheets.</p>
+<p>The XT30 closes on the AB20 output with the pack fully charged (29.4 V, above the DDR's 24 V, so the pack feeds the carrier), through a 2 m cable (2 µH, 33 mΩ). +24V rises cleanly to 29.1 V, with no overshoot on any branch, so D9 never conducts. Charging about 450 µF pulls a current pulse peaking at 100 A and lasting about 0.1 ms (F1 I²t 0.95 A²s), so the XT30 will spark. L1 and L2 saturate briefly (31 / 46 A in this linear model). That's harmless: Q1 AGM60P90D is rated −360 A pulsed (AGMSEMI datasheet), and F1 0451015's nominal melting I²t is 97.8 A²s (Littelfuse), about 100× the simulated 0.95 A²s.</p>
 {{pwr1v}}
 {{pwr1i}}
 
 <h3>PWR2 · surge at D9's rating (<code>pwr2_tvs_pulse.net</code>)</h3>
-<p>This is the design-limit case: both AB20 inputs are gone (bus held at 29.2 V by a weak source) and a 12.4 A, 10/1000 µs pulse arrives on the cable. With the AB20's diodes blocking any return path, this is also what servo back-EMF would face. The bulk capacitors take most of it: the bus peaks at 40.0 V and D9 takes 4.4 A and 0.31 J of its ≈ 0.87 J rating. That leaves 10 V of margin to the INA236. U1, U9 and U10 see 40 V for about 1 ms, above their 36 V operating range, so check YLPTEC's input surge rating (similar Mornsun URB parts allow 50 V for 1 s).</p>
+<p>This is the design-limit case: both AB20 inputs are gone (bus held at 29.2 V by a weak source) and a 12.4 A, 10/1000 µs pulse arrives on the cable. With the AB20's diodes blocking any return path, this is also what servo back-EMF would face. The bulk capacitors take most of it: the bus peaks at 40.0 V and D9 takes 4.4 A and 0.31 J of its ≈ 0.87 J rating. That leaves 10 V of margin to the INA236. U1, U9 and U10 see 40 V for about 1 ms: above their 36 V operating range, but inside the 50 V for 1 s input surge rating on all three YLPTEC datasheets.</p>
 {{pwr2}}
 
 <h3>PWR3 · IEC 61000-4-5 surge (<code>pwr3_iec_surge.net</code>) · not applicable</h3>
