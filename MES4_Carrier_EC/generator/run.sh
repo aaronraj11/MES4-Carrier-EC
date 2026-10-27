@@ -17,5 +17,6 @@ for sh in d['sheets']:
         print('  ', v['severity'], v['type'], v['description'][:100], [i['description'][:50] for i in v['items']][:2])
 "
 $CLI sch export netlist --format kicadsexpr -o "$CHK/ec.net" MES4_Carrier_EC.kicad_sch 2>&1 | grep -v -i fontconfig
+python3 "$G/checks.py" "$CHK/ec.net" "$OUT" || exit 1
 $CLI sch export pdf -o MES4_Carrier_EC.pdf MES4_Carrier_EC.kicad_sch 2>&1 | grep -v -i fontconfig | grep -v Plotted
 echo "netlist: $CHK/ec.net  (dump a sheet: python3 $G/netdump.py $CHK/ec.net /Winch)"

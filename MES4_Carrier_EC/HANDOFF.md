@@ -25,7 +25,7 @@ Checks to run after every change (they all passed at handoff):
 - No duplicate UUIDs.
 - Every purchased BOM line has an LCSC number (the net tie and bare test pads have none).
 
-The checks are inline Python in this session's history. Re-create them from `netdump.py` plus the `kicad-cli sch export bom` output, or add them to `run.sh`.
+`run.sh` runs ERC, then `generator/checks.py` for the other four checks, and stops on a failure.
 
 **Rules the user set:**
 - Every part needs a real, checked LCSC number. Never guess one; check `https://wmsc.lcsc.com/ftps/wm/product/detail?productCode=Cxxxx`.
@@ -39,7 +39,7 @@ The user said: **"all GPIOs must match the MES4-MCU standard. That is the new st
 | Pin (finger) | Standard function | Status at handoff |
 |---|---|---|
 | PA8 (31) / PC6 (29) / PB3 (61) / PA7 (35) | Relay CH1–CH4 drive | ✅ |
-| **PA0 (49) / PA1 (47) / PA2 (45) / PA3 (43)** | **Relay CH1–CH4 coil feedback** | ❌ **TODO.** Feedback currently goes through the TCA9535 (U4, Relays 3-4 sheet). PA0 / PA1 drive the winch relays; PA2 / PA3 are no-connects. |
+| PA0 (49) / PA1 (47) / PA2 (45) / PA3 (43) | Relay CH1–CH4 coil feedback | ✅ Done 2026-10-27 (step 1). |
 | PA15 (63) | INA226 ALERT | ✅ |
 | PA4 / PA5 / PA6 (41 / 39 / 37) | ADS1232 DRDY, SCLK, PDWN | ✅ |
 | PB6 (59) / PC15 (51) | Spare (inputs only) | ✅ Used as Autonics sensor 1 / 2 inputs (PC817 opto) |
@@ -47,16 +47,21 @@ The user said: **"all GPIOs must match the MES4-MCU standard. That is the new st
 
 ## Remaining work, in order
 
-### 1. Put the coil feedback back on PA0–PA3
+### 1. Put the coil feedback back on PA0–PA3 (done 2026-10-27)
 
-In `gen.py`:
+Done as listed below. Side effects to know about:
+- Removing the TCA9535 renumbered parts: U5–U12 became U4–U11 (INA226s now U2 / U3 / U4 / U5, SC16IS740 U11) and C15–C45 became C14–C44. The README refs were updated.
+- The winch relays are **not driven** for now: their gate resistors (R50 / R52, `RG_CLK` / `RG_ACLK`) have no-connect flags on the input pin, so the 100k pull-downs hold both relays off. Step 2 replaces this circuit.
+- `add_expander()` is kept, unused, for step 2. The SC16IS740 note on the Winch sheet still lists "TCA9535 0x20", which is right again once step 2 lands.
+
+What was changed, in `gen.py`:
 - `CH` dict: change `fb='RLY1_FB'…'RLY4_FB'` back to `fb='PA0'…'PA3'`, and revert the relay-note `TCA9535 P0%d` text.
 - Revert the `RELAY_DIAG` text that mentions the TCA9535.
 - `main()`: remove the `add_expander(S['Relays3-4'])` call. Also undo its shrinking of the Relays 3-4 left-column rectangle, which happens inside `add_expander`.
 - `main_sheet()`: delete the block that removes the `PA2` / `PA3` global labels and adds NC flags on J1 pins 43 / 45. The template's labels then connect J1 to the relay sheets again.
 - Update the Main GPIO-map text, the root `Notes` GPIO-budget line, and the `README.md` GPIO table.
 
-### 2. Move the winch onto the TCA9535 and photoMOS SSRs (user's choice)
+### 2. Move the winch onto the TCA9535 and photoMOS SSRs (user's choice): next
 
 PA0 / PA1 must go back to coil feedback, so the winch comes off them. The user chose a **solid-state "one relay" style** design:
 - **Expander:** move the TCA9535 (U4, `add_expander`) to the Winch sheet. Use P00 = winch A and P01 = winch B as **outputs**. Its INT stays not connected, since no pin is free.

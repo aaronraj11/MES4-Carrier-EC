@@ -2,7 +2,7 @@
 	(version 20250114)
 	(generator "eeschema")
 	(generator_version "9.0")
-	(uuid "48499c81-7268-5b6b-b110-8ba93c245d96")
+	(uuid "078fee3d-4307-5e4c-aa2d-839fc6bf07f7")
 	(paper "A3")
 	(title_block
 		(title "MES4-Carrier-EC")
@@ -1612,6 +1612,38 @@
 		)
 	)
 	(wire
+		(pts (xy 67.31 219.71) (xy 62.23 219.71))
+		(stroke (width 0) (type default))
+		(uuid "52bbd87d-2474-5c8e-83f9-babcef746970")
+	)
+	(global_label "PA3"
+		(shape bidirectional)
+		(at 62.23 219.71 180)
+		(fields_autoplaced yes)
+		(effects (font (size 1.27 1.27)) (justify right))
+		(uuid "8744a72d-0ac8-5517-8d3a-f0113566a41f")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 62.23 219.71 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+	)
+	(wire
+		(pts (xy 67.31 222.25) (xy 62.23 222.25))
+		(stroke (width 0) (type default))
+		(uuid "0f4f3565-6bbf-553f-b361-673236da568b")
+	)
+	(global_label "PA2"
+		(shape bidirectional)
+		(at 62.23 222.25 180)
+		(fields_autoplaced yes)
+		(effects (font (size 1.27 1.27)) (justify right))
+		(uuid "edf014b5-0742-5038-a87c-e1184a4af2b7")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 62.23 222.25 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+	)
+	(wire
 		(pts (xy 67.31 224.79) (xy 62.23 224.79))
 		(stroke (width 0) (type default))
 		(uuid "a7aeb6be-0899-50c3-af6a-6c999927d58e")
@@ -2008,202 +2040,194 @@
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 	)
-	(no_connect
-		(at 67.31 219.71)
-		(uuid "840a37f7-1c9f-5b1f-8661-f33ebbbbf0b3")
-	)
-	(no_connect
-		(at 67.31 222.25)
-		(uuid "73b84208-1822-5904-b8ca-53afaafc4343")
-	)
 	(text "Power indicators"
 		(exclude_from_sim no)
 		(at 165.1 22.86 0)
 		(effects (font (size 2 2) (bold yes)) (justify left top))
-		(uuid "e323101f-b9f7-5bab-896d-389f0e0fd23b")
+		(uuid "b2598914-e18b-5217-8ef8-1b7b39549137")
 	)
 	(text "LED1 red  = module +5V present (3 mA).\nLED2 green = module 3V3 present\n(fed from finger 4, ~0.7 mA)."
 		(exclude_from_sim no)
 		(at 165.1 80.01 0)
 		(effects (font (size 1.27 1.27)) (justify left top))
-		(uuid "39f7a96c-dca2-57de-83a7-148028a504ae")
+		(uuid "87594b39-6cbd-5a5a-809e-9fcbc4bd40e1")
 	)
 	(text "I²C1 + ALERT pull-ups"
 		(exclude_from_sim no)
 		(at 223.52 22.86 0)
 		(effects (font (size 2 2) (bold yes)) (justify left top))
-		(uuid "9e76c17d-95dc-5ec1-9a44-b73cc2a082ef")
+		(uuid "f4f70a78-0fca-51d8-a0a9-c78b78ad79be")
 	)
 	(text "CIF rule 7: always fitted,\nto the module's 3V3 (finger 4).\n2.2k: 4 × INA226 at 400 kHz.\nR5: INA226 ALERT wire-OR (PA15)."
 		(exclude_from_sim no)
 		(at 223.52 80.01 0)
 		(effects (font (size 1.27 1.27)) (justify left top))
-		(uuid "bfdae127-f3f8-5c96-ad6a-1c718bb020b1")
+		(uuid "ebd24346-6b60-5e89-8f07-f437f234df56")
 	)
 	(text "Reset"
 		(exclude_from_sim no)
 		(at 271.78 22.86 0)
 		(effects (font (size 2 2) (bold yes)) (justify left top))
-		(uuid "bc7670a1-df07-5aa0-882c-be5d897d60da")
+		(uuid "2c91ad1b-1855-5a53-8372-71a5d089f37b")
 	)
 	(text "Pulls NRST low only.\nNo capacitor: C6 100 nF\nis on the module (CIF §4a)."
 		(exclude_from_sim no)
 		(at 271.78 80.01 0)
 		(effects (font (size 1.27 1.27)) (justify left top))
-		(uuid "f78e3b29-e8e8-53e1-9be4-78990a2bb193")
+		(uuid "37b7516f-3d3c-5617-98d9-940f3fbcffa3")
 	)
 	(rectangle
 		(start 314.96 20.32)
 		(end 403.86 101.6)
 		(stroke (width 0) (type dash))
 		(fill (type none))
-		(uuid "197bb005-2184-5adf-b20e-1170f87953e5")
+		(uuid "07f91e2a-2eb5-5acc-853d-d8b0bf14fd25")
 	)
 	(text "CAN bus (page 3)"
 		(exclude_from_sim no)
 		(at 317.5 22.86 0)
 		(effects (font (size 2 2) (bold yes)) (justify left top))
-		(uuid "0315ade5-65f0-5ac2-8a50-c89aad3556ea")
+		(uuid "af8dbbd1-1786-50a0-bc5a-d2a550a066d3")
 	)
 	(text "Module CANH / CANL (fingers 1 / 3) go to the CAN sheet\nas global labels:\n\nJ3 DB9 male to the IPC: 1 GND, 3 CAN_H, 5 CAN_L.\nJ4 1x4 RJ45, no magnetics: 1 CAN_H, 2 CAN_L,\n3 GND on every port (T568B: white-orange, orange,\nwhite-green).\n\nAll five ports are one bus, wired in parallel.\nESD at each connector: D6, D7 (H24VNT2B).\nTransceiver + 120 Ω terminator (JP1) are on the module."
 		(exclude_from_sim no)
 		(at 317.5 30.48 0)
 		(effects (font (size 1.27 1.27)) (justify left top))
-		(uuid "7a7381ac-be4d-5c18-91c6-c9949c7479b0")
+		(uuid "e323101f-b9f7-5bab-896d-389f0e0fd23b")
 	)
 	(rectangle
 		(start 15.24 20.32)
 		(end 160.02 101.6)
 		(stroke (width 0) (type dash))
 		(fill (type none))
-		(uuid "c043196d-fa91-56c1-8abe-6b3e0e138fca")
+		(uuid "5ccf5e9c-6b7d-515a-9a1e-0bfb0e0f72bf")
 	)
 	(text "Module GPIO map: all 14 used"
 		(exclude_from_sim no)
 		(at 17.78 22.86 0)
 		(effects (font (size 2 2) (bold yes)) (justify left top))
-		(uuid "0fffeae5-4696-519a-8ec5-7d6ba87b8d57")
+		(uuid "9e76c17d-95dc-5ec1-9a44-b73cc2a082ef")
 	)
-	(text "PA8   finger 31  out  relay 1 drive, safety light (Q2)\nPC6   finger 29  out  relay 2 drive, LED DRL (Q3)\nPB3   finger 61  out  relay 3 drive, battery stopper (Q4)\nPA7   finger 35  out  relay 4 drive, spare (Q5)\nPA2 / PA3  fingers 45 / 43  not connected (servo now on the I²C bridge U12);\n      TODO: back to relay 3 / 4 coil feedback per the MES4 standard (HANDOFF.md)\nPA0   finger 49  out  winch CLK relay (K5)\nPA1   finger 47  out  winch ACLK relay (K6)\nPA15  finger 63  in   INA226 ALERT, all four wire-OR (R5 10k pull-up)\nPA4   finger 41  in   ADS1232 DRDY/DOUT (U9)\nPA5   finger 39  out  ADS1232 SCLK (100k pull-down)\nPA6   finger 37  out  ADS1232 PDWN (100k pull-down)\nPB6   finger 59  in   Autonics sensor 1 (U7 PC817)\nPC15  finger 51  in   Autonics sensor 2 (U8 PC817)\nI²C1 SDA / SCL  fingers 53 / 55: INA226 0x40 / 0x41 / 0x44 / 0x45, TCA9535 0x20\nNot used: USB 23 / 25 (open, CIF rule 8). VCP TX / RX: STDC14 only.\nDiffers from MES4-CIF §2c: relay coil feedback on the TCA9535 (U4, polled,\nCIF §7c), freeing USART2 for the servo and PA0 / PA1 for the winch."
+	(text "PA8   finger 31  out  relay 1 drive, safety light (Q2)\nPC6   finger 29  out  relay 2 drive, LED DRL (Q3)\nPB3   finger 61  out  relay 3 drive, battery stopper (Q4)\nPA7   finger 35  out  relay 4 drive, spare (Q5)\nPA0   finger 49  in   relay 1 coil feedback (10k / 15k divider + 10 nF)\nPA1   finger 47  in   relay 2 coil feedback\nPA2   finger 45  in   relay 3 coil feedback\nPA3   finger 43  in   relay 4 coil feedback\nPA15  finger 63  in   INA226 ALERT, all four wire-OR (R5 10k pull-up)\nPA4   finger 41  in   ADS1232 DRDY/DOUT (U8)\nPA5   finger 39  out  ADS1232 SCLK (100k pull-down)\nPA6   finger 37  out  ADS1232 PDWN (100k pull-down)\nPB6   finger 59  in   Autonics sensor 1 (U6 PC817)\nPC15  finger 51  in   Autonics sensor 2 (U7 PC817)\nI²C1 SDA / SCL  fingers 53 / 55: INA226 0x40 / 0x41 / 0x44 / 0x45, SC16IS740 0x48 (servo UART)\nNot used: USB 23 / 25 (open, CIF rule 8). VCP TX / RX: STDC14 only.\nMatches the MES4-CIF §2c GPIO table (the MES4 standard). The winch and servo use I²C1,\nnot module pins. TODO: winch on TCA9535 outputs (HANDOFF.md step 2)."
 		(exclude_from_sim no)
 		(at 17.78 30.48 0)
 		(effects (font (size 1.27 1.27)) (justify left top))
-		(uuid "8b3bf223-4e40-530d-9d21-da38dc278062")
+		(uuid "bfdae127-f3f8-5c96-ad6a-1c718bb020b1")
 	)
 	(text "Links to the other pages"
 		(exclude_from_sim no)
 		(at 17.78 109.22 0)
 		(effects (font (size 2 2) (bold yes)) (justify left top))
-		(uuid "5a6c2842-c948-5103-bcfe-46087e960a08")
+		(uuid "bc7670a1-df07-5aa0-882c-be5d897d60da")
 	)
-	(text "Page 1: block diagram and page list.\nPage 3 CAN: DB9 male to the IPC + 1x4 RJ45, ESD.\nPage 4 Power: XT30 24 V input, fuse, reverse-polarity FET, TVS, noise filter, 24 V → 5 V.\nPages 5-6 Relays: PA8 / PC6 / PB3 / PA7 drive, coil feedback via TCA9535 (polled), 4 × INA226.\nPage 7 Sensors: PB6 / PC15 (two Autonics PNP sensors).\nPage 8 LoadCell: PA4 DRDY, PA5 SCLK, PA6 PDWN.\nPage 9 AuxPower: IMU 9 V (MES3.1), screen USB-C 5 V / 3 A, door servo (FE-URT-2, USART2).\nPage 10 Winch: CLK / ACLK relays (PA0 / PA1) + SC16IS740 servo UART bridge (I²C 0x48).\nSignals shared between pages are global labels."
+	(text "Page 1: block diagram and page list.\nPage 3 CAN: DB9 male to the IPC + 1x4 RJ45, ESD.\nPage 4 Power: XT30 24 V input, fuse, reverse-polarity FET, TVS, noise filter, 24 V → 5 V.\nPages 5-6 Relays: PA8 / PC6 / PB3 / PA7 drive, PA0-PA3 coil feedback, 4 × INA226.\nPage 7 Sensors: PB6 / PC15 (two Autonics PNP sensors).\nPage 8 LoadCell: PA4 DRDY, PA5 SCLK, PA6 PDWN.\nPage 9 AuxPower: IMU 9 V (MES3.1), screen USB-C 5 V / 3 A, door servo (FE-URT-2, UART via the I²C bridge).\nPage 10 Winch: CLK / ACLK direction relays (TODO: TCA9535 drive) + SC16IS740 servo UART bridge (I²C 0x48).\nSignals shared between pages are global labels."
 		(exclude_from_sim no)
 		(at 17.78 115.57 0)
 		(effects (font (size 1.27 1.27)) (justify left top))
-		(uuid "09b7566e-fabe-5568-bbe7-8bb1b2c3046b")
+		(uuid "f78e3b29-e8e8-53e1-9be4-78990a2bb193")
 	)
 	(text "MES4-MCU module socket (TE 2199230-3, M.2 B-key 4.2 mm)"
 		(exclude_from_sim no)
 		(at 17.78 160.02 0)
 		(effects (font (size 2 2) (bold yes)) (justify left top))
-		(uuid "2e209baa-22f7-5adb-bd14-2e92bbed7bb1")
+		(uuid "7757d93b-1895-54cf-b93f-f3271ebf61ef")
 	)
 	(text "Odd fingers (card top) on the left, power on the right.\n+5V = fingers 20 + 22. GND = all other fingers + the\nhold-down pads (stacked pin). USB 23/25 open (CIF rule 8).\nModule hold-down: H1 M3 × 2.5 mm SMD standoff + M3\nscrew, 40.25 mm from the socket posts (42 mm card)."
 		(exclude_from_sim no)
 		(at 17.78 254 0)
 		(effects (font (size 1.27 1.27)) (justify left top))
-		(uuid "a393d1ac-8599-5333-8585-bfc165091f0b")
+		(uuid "0315ade5-65f0-5ac2-8a50-c89aad3556ea")
 	)
 	(text "ST-Link V3MINIE (STDC14) + ESD"
 		(exclude_from_sim no)
 		(at 165.1 109.22 0)
 		(effects (font (size 2 2) (bold yes)) (justify left top))
-		(uuid "d1cc6e64-ff74-5c9f-be9d-f3dd4549e359")
+		(uuid "7a7381ac-be4d-5c18-91c6-c9949c7479b0")
 	)
 	(text "STDC14 per ST UM2448 Table 6: 3 T_VCC, 4 SWDIO, 6 SWCLK, 12 NRST,\n13 T_VCP_RX (probe → PA10), 14 T_VCP_TX (probe ← PA9), 5/7/11 GND.\nNever tie SWD, NRST or VCP to GND (MES3 bug). No BOOT0 button (CIF §4)."
 		(exclude_from_sim no)
 		(at 165.1 168.91 0)
 		(effects (font (size 1.27 1.27)) (justify left top))
-		(uuid "ce0657e4-fbaa-526d-a650-24843bfc214b")
+		(uuid "bae09ee9-4bbe-5474-9ecd-83c8d4329451")
 	)
 	(text "D1-D5: H5VSD3B ESD (5 V, 1.5 pF), pin 2 to GND."
 		(exclude_from_sim no)
 		(at 251.46 172.72 0)
 		(effects (font (size 1.27 1.27)) (justify left top))
-		(uuid "8dcc7af5-381a-5c18-b4b5-6b77d239ebac")
+		(uuid "0fffeae5-4696-519a-8ec5-7d6ba87b8d57")
 	)
 	(text "Mechanical"
 		(exclude_from_sim no)
 		(at 317.5 109.22 0)
 		(effects (font (size 2 2) (bold yes)) (justify left top))
-		(uuid "129ab8dc-0d73-5742-a503-057809fba420")
+		(uuid "8b3bf223-4e40-530d-9d21-da38dc278062")
 	)
 	(text "Design notes"
 		(exclude_from_sim no)
 		(at 317.5 137.16 0)
 		(effects (font (size 2 2) (bold yes)) (justify left top))
-		(uuid "b8443e3e-34db-56cd-b796-18ec786e2efc")
+		(uuid "5a6c2842-c948-5103-bcfe-46087e960a08")
 	)
 	(text "1. Purpose: E-Crawler carrier for one MES4-MCU module\n   (follows MES4-CIF rev A-d6). Circuits from the\n   MES4-Flasher: relays, opto inputs, load cell, 24 V in.\n2. No hot-plug (rule 5): unplug the 24 V XT30 before\n   inserting or removing a module (no power switch).\n3. +5V (fingers 20 / 22) = U1 URB2405S → F2 PTC\n   → FB1 ferrite: 4.75-5.5 V, ≥ 300 mA (rule 2, 4).\n4. +3V3_MOD = module LDO output on finger 4, never\n   driven (rule 3, ≤ 50 mA): LED 0.7 + pull-ups ≤ 3.3\n   + 2 × PC817 0.7 + 4 × INA226 1.7 + ADS1232 0.1\n   + ST-Link VTref ≈ 10 mA.\n5. NRST: SW1 and STDC14 pin 12 only pull low\n   (wired-OR). No extra capacitance (C6 on the module).\n6. ESD (rule 8): H5VSD3B on every STDC14 signal,\n   H24VNT2B on CANH / CANL, no series R on CAN.\n7. No back-powering (rule 6): carrier logic runs from\n   +3V3_MOD (pull-ups, PC817s, INA226, ADS1232 DVDD).\n8. All relay drives OFF in reset: 100k gate pull-downs.\n9. Parts: LCSC numbers in each symbol's LCSC field."
 		(exclude_from_sim no)
 		(at 317.5 142.24 0)
 		(effects (font (size 1.27 1.27)) (justify left top))
-		(uuid "4f2e33fb-9295-51dd-be50-984d038cfdb4")
+		(uuid "09b7566e-fabe-5568-bbe7-8bb1b2c3046b")
 	)
 	(rectangle
 		(start 162.56 184.15)
 		(end 284.48 281.94)
 		(stroke (width 0) (type dash))
 		(fill (type none))
-		(uuid "496cfaac-5cbc-5d89-a6a0-01ef4cdc8f5d")
+		(uuid "5997052a-c5f6-593c-9478-315063f8f024")
 	)
 	(text "Board connectors"
 		(exclude_from_sim no)
 		(at 165.1 186.69 0)
 		(effects (font (size 2 2) (bold yes)) (justify left top))
-		(uuid "d246f8a9-3ba3-5178-9472-121289ae5667")
+		(uuid "a393d1ac-8599-5333-8585-bfc165091f0b")
 	)
 	(text "J5 24V IN, XT30 male right-angle: 1 = +24 V (flat end),\n   2 = GND_24V (chamfered end).\nJ6 / J7 / J8 / J9 RLY1-4 OUT (KF250NH 2-pin):\n   1 = switched +24 V, 2 = GND_24V.\nJ10 / J11 SENS1 / SENS2 (KF250NH 3-pin): 1 = +24 V\n   (100 mA PTC, brown), 2 = output (black), 3 = 0 V (blue).\nJ12 LC SIG: 1 SIG+ green, 2 SIG- white, 3 shield.\nJ13 LC EXC: 1 EXC+ red, 2 EXC- black, 3 shield.\n   5 V load cell only: never 24 V.\nJ3 CAN DB9 male (IPC): 1 GND, 3 CAN_H, 5 CAN_L.\nJ4 CAN RJ45 x4: 1 CAN_H, 2 CAN_L, 3 GND (T568B).\nJ14 IMU 9V (KF250NH 2-pin): 1 = +9 V after the switch, 2 = GND.\nJ16 SCREEN USB-C: 5 V / 3 A power only (no data).\nJ15 SERVO 24V: 1 GND_24V, 2 +24 V (3 A PTC).\nJ17 SERVO UART: 1 GND, 2 +5 V, 3 RX, 4 TX.\nJ18 WINCH: 1 CLK, 2 COM, 3 ACLK (relay contacts).\nJ2 STDC14: ST-Link V3MINIE (SWD, NRST, VCP).\nTest points: Power sheet."
 		(exclude_from_sim no)
 		(at 165.1 191.77 0)
 		(effects (font (size 1.27 1.27)) (justify left top))
-		(uuid "022aabdb-b9d9-557d-a126-e0b1a2dbb75f")
+		(uuid "d1cc6e64-ff74-5c9f-be9d-f3dd4549e359")
 	)
 	(junction
 		(at 107.95 242.57)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "8ab0e879-78e5-5abb-aa5a-f0c8931446a0")
+		(uuid "95d71d9a-90a2-5165-b9e9-a7db6128b100")
 	)
 	(junction
 		(at 115.57 173.99)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "e7643073-c73e-51fa-9b7f-54d2b0fada9c")
+		(uuid "ba73ee1e-4e13-5231-b871-eff6091d6461")
 	)
 	(junction
 		(at 115.57 184.15)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "9f1d406c-1449-5065-b012-82dbf523e48c")
+		(uuid "b2db6935-c34e-5689-9757-d29cb85407fd")
 	)
 	(junction
 		(at 115.57 242.57)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "7d8bc6c1-7708-5c6a-891f-90d861a5c920")
+		(uuid "9acec920-8f3d-58e0-9a8f-06985bd3924c")
 	)
 	(junction
 		(at 182.88 135.89)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "1ac828d8-cf4c-56a9-a804-b0f4be0479b8")
+		(uuid "70d0e09c-f3b1-52e6-9874-deab5e599451")
 	)
 	(junction
 		(at 182.88 138.43)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "5052d062-f7ee-51df-9408-54e226db961b")
+		(uuid "b5fe9023-fa56-5b9a-bf5e-079362e92a4d")
 	)
 	(symbol
 		(lib_id "power:+5V")
@@ -2227,7 +2251,7 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/1be7b940-cec2-5b16-ad1d-4f7278757f52"
+				(path "/86b406aa-a59b-5773-8968-b904bb1c5afe/1be7b940-cec2-5b16-ad1d-4f7278757f52"
 					(reference "#PWR001")
 					(unit 1)
 				)
@@ -2275,7 +2299,7 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/1be7b940-cec2-5b16-ad1d-4f7278757f52"
+				(path "/86b406aa-a59b-5773-8968-b904bb1c5afe/1be7b940-cec2-5b16-ad1d-4f7278757f52"
 					(reference "R1")
 					(unit 1)
 				)
@@ -2323,7 +2347,7 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/1be7b940-cec2-5b16-ad1d-4f7278757f52"
+				(path "/86b406aa-a59b-5773-8968-b904bb1c5afe/1be7b940-cec2-5b16-ad1d-4f7278757f52"
 					(reference "LED1")
 					(unit 1)
 				)
@@ -2352,7 +2376,7 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/1be7b940-cec2-5b16-ad1d-4f7278757f52"
+				(path "/86b406aa-a59b-5773-8968-b904bb1c5afe/1be7b940-cec2-5b16-ad1d-4f7278757f52"
 					(reference "#PWR002")
 					(unit 1)
 				)
@@ -2381,7 +2405,7 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/1be7b940-cec2-5b16-ad1d-4f7278757f52"
+				(path "/86b406aa-a59b-5773-8968-b904bb1c5afe/1be7b940-cec2-5b16-ad1d-4f7278757f52"
 					(reference "#PWR003")
 					(unit 1)
 				)
@@ -2429,7 +2453,7 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/1be7b940-cec2-5b16-ad1d-4f7278757f52"
+				(path "/86b406aa-a59b-5773-8968-b904bb1c5afe/1be7b940-cec2-5b16-ad1d-4f7278757f52"
 					(reference "R2")
 					(unit 1)
 				)
@@ -2477,7 +2501,7 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/1be7b940-cec2-5b16-ad1d-4f7278757f52"
+				(path "/86b406aa-a59b-5773-8968-b904bb1c5afe/1be7b940-cec2-5b16-ad1d-4f7278757f52"
 					(reference "LED2")
 					(unit 1)
 				)
@@ -2506,7 +2530,7 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/1be7b940-cec2-5b16-ad1d-4f7278757f52"
+				(path "/86b406aa-a59b-5773-8968-b904bb1c5afe/1be7b940-cec2-5b16-ad1d-4f7278757f52"
 					(reference "#PWR004")
 					(unit 1)
 				)
@@ -2535,7 +2559,7 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/1be7b940-cec2-5b16-ad1d-4f7278757f52"
+				(path "/86b406aa-a59b-5773-8968-b904bb1c5afe/1be7b940-cec2-5b16-ad1d-4f7278757f52"
 					(reference "#PWR005")
 					(unit 1)
 				)
@@ -2583,7 +2607,7 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/1be7b940-cec2-5b16-ad1d-4f7278757f52"
+				(path "/86b406aa-a59b-5773-8968-b904bb1c5afe/1be7b940-cec2-5b16-ad1d-4f7278757f52"
 					(reference "R3")
 					(unit 1)
 				)
@@ -2612,7 +2636,7 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/1be7b940-cec2-5b16-ad1d-4f7278757f52"
+				(path "/86b406aa-a59b-5773-8968-b904bb1c5afe/1be7b940-cec2-5b16-ad1d-4f7278757f52"
 					(reference "#PWR006")
 					(unit 1)
 				)
@@ -2660,7 +2684,7 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/1be7b940-cec2-5b16-ad1d-4f7278757f52"
+				(path "/86b406aa-a59b-5773-8968-b904bb1c5afe/1be7b940-cec2-5b16-ad1d-4f7278757f52"
 					(reference "R4")
 					(unit 1)
 				)
@@ -2689,7 +2713,7 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/1be7b940-cec2-5b16-ad1d-4f7278757f52"
+				(path "/86b406aa-a59b-5773-8968-b904bb1c5afe/1be7b940-cec2-5b16-ad1d-4f7278757f52"
 					(reference "#PWR007")
 					(unit 1)
 				)
@@ -2737,7 +2761,7 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/1be7b940-cec2-5b16-ad1d-4f7278757f52"
+				(path "/86b406aa-a59b-5773-8968-b904bb1c5afe/1be7b940-cec2-5b16-ad1d-4f7278757f52"
 					(reference "R5")
 					(unit 1)
 				)
@@ -2785,7 +2809,7 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/1be7b940-cec2-5b16-ad1d-4f7278757f52"
+				(path "/86b406aa-a59b-5773-8968-b904bb1c5afe/1be7b940-cec2-5b16-ad1d-4f7278757f52"
 					(reference "SW1")
 					(unit 1)
 				)
@@ -2814,7 +2838,7 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/1be7b940-cec2-5b16-ad1d-4f7278757f52"
+				(path "/86b406aa-a59b-5773-8968-b904bb1c5afe/1be7b940-cec2-5b16-ad1d-4f7278757f52"
 					(reference "#PWR008")
 					(unit 1)
 				)
@@ -3063,7 +3087,7 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/1be7b940-cec2-5b16-ad1d-4f7278757f52"
+				(path "/86b406aa-a59b-5773-8968-b904bb1c5afe/1be7b940-cec2-5b16-ad1d-4f7278757f52"
 					(reference "J1")
 					(unit 1)
 				)
@@ -3092,7 +3116,7 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/1be7b940-cec2-5b16-ad1d-4f7278757f52"
+				(path "/86b406aa-a59b-5773-8968-b904bb1c5afe/1be7b940-cec2-5b16-ad1d-4f7278757f52"
 					(reference "#PWR009")
 					(unit 1)
 				)
@@ -3121,7 +3145,7 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/1be7b940-cec2-5b16-ad1d-4f7278757f52"
+				(path "/86b406aa-a59b-5773-8968-b904bb1c5afe/1be7b940-cec2-5b16-ad1d-4f7278757f52"
 					(reference "#PWR010")
 					(unit 1)
 				)
@@ -3150,7 +3174,7 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/1be7b940-cec2-5b16-ad1d-4f7278757f52"
+				(path "/86b406aa-a59b-5773-8968-b904bb1c5afe/1be7b940-cec2-5b16-ad1d-4f7278757f52"
 					(reference "#FLG001")
 					(unit 1)
 				)
@@ -3179,7 +3203,7 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/1be7b940-cec2-5b16-ad1d-4f7278757f52"
+				(path "/86b406aa-a59b-5773-8968-b904bb1c5afe/1be7b940-cec2-5b16-ad1d-4f7278757f52"
 					(reference "#PWR011")
 					(unit 1)
 				)
@@ -3208,7 +3232,7 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/1be7b940-cec2-5b16-ad1d-4f7278757f52"
+				(path "/86b406aa-a59b-5773-8968-b904bb1c5afe/1be7b940-cec2-5b16-ad1d-4f7278757f52"
 					(reference "#FLG002")
 					(unit 1)
 				)
@@ -3292,7 +3316,7 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/1be7b940-cec2-5b16-ad1d-4f7278757f52"
+				(path "/86b406aa-a59b-5773-8968-b904bb1c5afe/1be7b940-cec2-5b16-ad1d-4f7278757f52"
 					(reference "J2")
 					(unit 1)
 				)
@@ -3321,7 +3345,7 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/1be7b940-cec2-5b16-ad1d-4f7278757f52"
+				(path "/86b406aa-a59b-5773-8968-b904bb1c5afe/1be7b940-cec2-5b16-ad1d-4f7278757f52"
 					(reference "#PWR012")
 					(unit 1)
 				)
@@ -3350,7 +3374,7 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/1be7b940-cec2-5b16-ad1d-4f7278757f52"
+				(path "/86b406aa-a59b-5773-8968-b904bb1c5afe/1be7b940-cec2-5b16-ad1d-4f7278757f52"
 					(reference "#PWR013")
 					(unit 1)
 				)
@@ -3398,7 +3422,7 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/1be7b940-cec2-5b16-ad1d-4f7278757f52"
+				(path "/86b406aa-a59b-5773-8968-b904bb1c5afe/1be7b940-cec2-5b16-ad1d-4f7278757f52"
 					(reference "D1")
 					(unit 1)
 				)
@@ -3427,7 +3451,7 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/1be7b940-cec2-5b16-ad1d-4f7278757f52"
+				(path "/86b406aa-a59b-5773-8968-b904bb1c5afe/1be7b940-cec2-5b16-ad1d-4f7278757f52"
 					(reference "#PWR014")
 					(unit 1)
 				)
@@ -3475,7 +3499,7 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/1be7b940-cec2-5b16-ad1d-4f7278757f52"
+				(path "/86b406aa-a59b-5773-8968-b904bb1c5afe/1be7b940-cec2-5b16-ad1d-4f7278757f52"
 					(reference "D2")
 					(unit 1)
 				)
@@ -3504,7 +3528,7 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/1be7b940-cec2-5b16-ad1d-4f7278757f52"
+				(path "/86b406aa-a59b-5773-8968-b904bb1c5afe/1be7b940-cec2-5b16-ad1d-4f7278757f52"
 					(reference "#PWR015")
 					(unit 1)
 				)
@@ -3552,7 +3576,7 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/1be7b940-cec2-5b16-ad1d-4f7278757f52"
+				(path "/86b406aa-a59b-5773-8968-b904bb1c5afe/1be7b940-cec2-5b16-ad1d-4f7278757f52"
 					(reference "D3")
 					(unit 1)
 				)
@@ -3581,7 +3605,7 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/1be7b940-cec2-5b16-ad1d-4f7278757f52"
+				(path "/86b406aa-a59b-5773-8968-b904bb1c5afe/1be7b940-cec2-5b16-ad1d-4f7278757f52"
 					(reference "#PWR016")
 					(unit 1)
 				)
@@ -3629,7 +3653,7 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/1be7b940-cec2-5b16-ad1d-4f7278757f52"
+				(path "/86b406aa-a59b-5773-8968-b904bb1c5afe/1be7b940-cec2-5b16-ad1d-4f7278757f52"
 					(reference "D4")
 					(unit 1)
 				)
@@ -3658,7 +3682,7 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/1be7b940-cec2-5b16-ad1d-4f7278757f52"
+				(path "/86b406aa-a59b-5773-8968-b904bb1c5afe/1be7b940-cec2-5b16-ad1d-4f7278757f52"
 					(reference "#PWR017")
 					(unit 1)
 				)
@@ -3706,7 +3730,7 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/1be7b940-cec2-5b16-ad1d-4f7278757f52"
+				(path "/86b406aa-a59b-5773-8968-b904bb1c5afe/1be7b940-cec2-5b16-ad1d-4f7278757f52"
 					(reference "D5")
 					(unit 1)
 				)
@@ -3735,7 +3759,7 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/1be7b940-cec2-5b16-ad1d-4f7278757f52"
+				(path "/86b406aa-a59b-5773-8968-b904bb1c5afe/1be7b940-cec2-5b16-ad1d-4f7278757f52"
 					(reference "#PWR018")
 					(unit 1)
 				)
@@ -3777,7 +3801,7 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/1be7b940-cec2-5b16-ad1d-4f7278757f52"
+				(path "/86b406aa-a59b-5773-8968-b904bb1c5afe/1be7b940-cec2-5b16-ad1d-4f7278757f52"
 					(reference "H2")
 					(unit 1)
 				)
@@ -3819,7 +3843,7 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/1be7b940-cec2-5b16-ad1d-4f7278757f52"
+				(path "/86b406aa-a59b-5773-8968-b904bb1c5afe/1be7b940-cec2-5b16-ad1d-4f7278757f52"
 					(reference "H3")
 					(unit 1)
 				)
@@ -3861,7 +3885,7 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/1be7b940-cec2-5b16-ad1d-4f7278757f52"
+				(path "/86b406aa-a59b-5773-8968-b904bb1c5afe/1be7b940-cec2-5b16-ad1d-4f7278757f52"
 					(reference "H4")
 					(unit 1)
 				)
@@ -3903,7 +3927,7 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/1be7b940-cec2-5b16-ad1d-4f7278757f52"
+				(path "/86b406aa-a59b-5773-8968-b904bb1c5afe/1be7b940-cec2-5b16-ad1d-4f7278757f52"
 					(reference "H5")
 					(unit 1)
 				)
@@ -3948,7 +3972,7 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/1be7b940-cec2-5b16-ad1d-4f7278757f52"
+				(path "/86b406aa-a59b-5773-8968-b904bb1c5afe/1be7b940-cec2-5b16-ad1d-4f7278757f52"
 					(reference "H1")
 					(unit 1)
 				)
@@ -3977,7 +4001,7 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/b63007a2-51a5-5afa-ba23-67ba50ea48db/1be7b940-cec2-5b16-ad1d-4f7278757f52"
+				(path "/86b406aa-a59b-5773-8968-b904bb1c5afe/1be7b940-cec2-5b16-ad1d-4f7278757f52"
 					(reference "#PWR019")
 					(unit 1)
 				)
