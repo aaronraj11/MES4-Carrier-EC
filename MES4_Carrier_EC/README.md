@@ -109,7 +109,7 @@ Both converters run from their own pi filter: L2 (the same 10 µH part as L1) wi
 **Screen, USB-C 5 V / 3 A.** The ARZOPA Z1C's label reads "5V/9V/12V/15V/20VDC 3A MAX", so it's a USB-PD sink. Without a PD controller a Type-C source can only offer 5 V, which gives 15 W. Its sibling, the Z1RC, draws about 9 W (≈ 1.8 A at 5 V), so 5 V / 3 A should run it. **Check full brightness on the bench.** If it needs 9 V or more, this port needs a USB-PD source controller instead.
 
 The chain is:
-- U10 YLPTEC URB2405LD-20WR3: 5 V 4 A, 20 W isolated, 2″ × 1″, CTRL and Trim open;
+- U10 YLPTEC URB2405YMD-20WR3: 5 V 4 A, 20 W isolated, 1″ × 1″, CTRL and Trim open; C38 100 µF / 16 V output bulk;
 - C33 / C34 22 µF;
 - F11 3 A PTC (the relay outputs' part);
 - D22 SMF6.0A;
@@ -120,7 +120,8 @@ R40 / R41 (10k Rp to 5 V on CC2 / CC1) advertise Type-C current 3.0 A. The shell
 | Ref | Part | LCSC | Notes |
 |---|---|---|---|
 | U9 | YLPTEC URB2409S-10WR3, 9 V 1.11 A, SIP-8 | C7424703 | Same as the MES3.1's U15. **LCSC stock was only 78** on 2026-10-27, so order early. Footprint and 3D model copied from the MES3.1 project. |
-| U10 | YLPTEC URB2405LD-20WR3, 5 V 4 A, 50.8 × 25.4 mm | C5369825 | 378 in stock. Project footprint built from the JLC library pad data and checked against the YLPTEC drawing (2026-10-27): pin positions, pin-out and 50.8 × 25.4 mm body match. |
+| U10 | YLPTEC URB2405YMD-20WR3, 5 V 4 A, 25.4 × 25.4 mm | C5369777 | Replaced the 2″ × 1″ URB2405LD-20WR3 (2026-10-28). Project footprint built from the JLC library pad data (C5369777) and checked against the Mornsun URB_YMD-20WR3 drawing: pins 1 Ctrl, 2 GND, 3 Vin, 4 +Vo, 5 Trim, 6 0V; 9-36 V in, 40 V max, 50 V 1 s surge. |
+| C38 | CX RVT1C101M0605, 100 µF 16 V, 6.3 × 5.4 mm | C81993 | U10 output bulk (YMD datasheet Cout 100 µF / 16 V). Extended part. |
 | SW2 | SHOU HAN SS12D10G5 slide switch | C7431054 | Same as the MES3.1's U22. Uses the MES4-Flasher's SS12D10G4 footprint. |
 | C28, C30, C32 | JIERR RV100V47M8X10, 47 µF / 100 V | C48935391 | The MES3.1's input electrolytic. |
 | C29 | TDK C2012X5R1C226KT000E, 22 µF / 16 V | C76637 | The MES3.1's 9 V output capacitor. |

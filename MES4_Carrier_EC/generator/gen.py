@@ -530,7 +530,7 @@ def can_sheet():
 # ---------------------------------------------------------------- aux power (new): IMU 9 V + screen USB-C 5 V
 def aux_sheet():
     B.register_symbol(AP.urb_10w_symbol())
-    B.register_symbol(AP.urb_20w_symbol())
+    B.register_symbol(AP.urb_ymd_symbol())
     sh = Sheet('AuxPower', 'AuxPower.kicad_sch',
                'Sheet 9: IMU 9 V supply (as on the MES3.1 carrier) + screen 5 V USB-C power', 9)
     sh.ann_rows = (103,)
@@ -650,8 +650,18 @@ def aux_sheet():
     sh.label('SCR_SHIELD', (shd[0], shd[1] + 1.27))
     gl(rs.p('2'))
     gl(csd.p('2'))
-    sh.text('{U_SCR} YLPTEC URB2405LD-20WR3: 9-36 V in, 5 V 4 A, 20 W isolated, short-circuit protected, 2" x 1" DIP.\n'
-            'CTRL and Trim open (on, 5.0 V). {C_SCR_IN} 47 µF (datasheet C1 47-100 µF), {C_SCR1} / {C_SCR2} 22 µF (C2 / C3 10-22 µF).\n'
+    # 100 uF output bulk (YMD datasheet Cout), added after the rest: own UUID range, and drawn low in this box so it
+    # numbers after every existing capacitor (references are assigned in sheet order)
+    saved = B._uuid_counter[0]
+    B._uuid_counter[0] = 1000100
+    cb = npart(sh, 'C_SCR_BULK', 'C', (256.54, 181.61), tag='C_SCR4')
+    sh.wire(cb.p('1'), (256.54, 176.53))
+    sh.label('+5V_SCR', (256.54, 176.53))
+    gl(cb.p('2'))
+    B._uuid_counter[0] = saved
+    sh.text('{U_SCR} YLPTEC URB2405YMD-20WR3: 9-36 V in (40 V max, 50 V 1 s surge), 5 V 4 A, 20 W isolated, short-circuit\n'
+            'protected, 1" x 1" DIP. CTRL and Trim open (on, 5.0 V). {C_SCR_IN} 47 µF + {C_AUX100} 100 µF on +24V_AUX (datasheet\n'
+            'Cin 100 µF / 50 V); {C_SCR4} 100 µF / 16 V bulk (Cout 100 µF / 16 V) + {C_SCR1} / {C_SCR2} 22 µF + {C_SCR3} 100 nF.\n'
             '{F_SCR} 3 A PTC (same part as the relay outputs) + {D_VBUS} SMF6.0A, then {J_USB}: the MES4-Flasher\'s USB-C\n'
             'power-only receptacle, rated 5 V 3 A (3 A on VBUS; GND pins 1.25 A each).\n'
             '{R_CC1} / {R_CC2} 10k Rp to 5 V on CC1 / CC2: the monitor sees a Type-C source offering 5 V at 3.0 A.\n'
@@ -743,6 +753,26 @@ def aux_sheet():
             '24 V only for 24 V servo types.\n'
             'Blank chip: the ST bootloader probes PA2 / PA3, so flash\n'
             'over SWD first (the normal flow).', (294.64, 198.12))
+    # FE-URT-2 mount, as U21-U24 on the MES3 E-Crawler / U24-U28 on the MES3.1 carrier. UUIDs come from their own counter
+    # range, so adding these moved no other symbol's UUID (the PCB footprints are linked by them).
+    saved = B._uuid_counter[0]
+    B._uuid_counter[0] = 1000000
+    for i in range(4):
+        sh.part('Mechanical:MountingHole', 'H', 'M3 standoff 2mm', (215.90 + 10.16 * i, 243.84),
+                fp=B.LIBNAME + ':' + AP.FP_SO2, lcsc='C5301780', tag='H_FE%d' % (i + 1), fields='right', hide_value=True,
+                desc='FE-URT-2 mount: M3 x 2 mm SMD standoff (YIYUAN SMTSOM320BTR), not connected')
+    # GPS (ArduSimple simpleRTK4 Dual) stacked above the FE-URT-2: its left-bottom, left-top and right holes
+    for i in range(3):
+        sh.part('Mechanical:MountingHole', 'H', 'M3 standoff 6.5mm', (256.54 + 10.16 * i, 243.84),
+                fp=B.LIBNAME + ':' + AP.FP_SO65, lcsc='C5301796', tag='H_GPS%d' % (i + 1), fields='right', hide_value=True,
+                desc='GPS mount: M3 x 6.5 mm SMD standoff (YIYUAN SMTSOM365BTR) + M3 x 12 mm male-female spacer, not connected')
+    sh.text('FE-URT-2 mount: {H_FE1}-{H_FE4} M3 x 2 mm SMD standoffs (SMTSOM320BTR)\n'
+            'on its 48.5 x 28.7 mm holes, M3 screws from the top. No parts under it.\n'
+            'GPS (ArduSimple simpleRTK4 Dual) stacked above it: {H_GPS1}-{H_GPS3} M3 x 6.5 mm\n'
+            'SMD standoffs (SMTSOM365BTR) + M3 x 12 mm male-female spacers (fitted by\n'
+            'hand) on its left-bottom, left-top and right holes; underside 18.5 mm up.\n'
+            'The RTK is powered from its own GPS USB-C. Standoffs not connected.', (210.82, 226.06))
+    B._uuid_counter[0] = saved
     return sh
 
 
@@ -1198,7 +1228,7 @@ def root_items(sh, sheets):
     block(RX1, 111.76, RX2, 142.24, ORA, LP, 'IMU 9 V + screen 5 V (page 9)',
           'Own L pi filter from +24V.\n'
           '{AuxPower/U_IMU} URB2409S-10WR3 → 9 V →\n{AuxPower/SW_IMU} switch → {AuxPower/J_IMU} IMU terminal\n(as on the MES3.1 carrier).\n'
-          '{AuxPower/U_SCR} URB2405LD-20WR3 → 5 V 4 A\n→ 3 A PTC → {AuxPower/J_USB} USB-C (Rp 10k:\n5 V / 3 A) → ARZOPA Z1C screen.')
+          '{AuxPower/U_SCR} URB2405YMD-20WR3 → 5 V 4 A\n→ 3 A PTC → {AuxPower/J_USB} USB-C (Rp 10k:\n5 V / 3 A) → ARZOPA Z1C screen.')
     arrow([(400.05, 127.00), (RX2, 127.00)], RED)
     # winch + servo signals: through the gap above the load cell (below the end of the x = 302 rail), then up a
     # free channel; the winch line runs outside the servo line so the two never cross

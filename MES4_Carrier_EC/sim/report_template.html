@@ -36,9 +36,10 @@ h3{font-size:15px;font-weight:600;margin:22px 0 4px}
 code{font-size:13px}ul{padding-left:20px}
 </style></head><body><main>
 <h1>MES4-Carrier-EC · design review package</h1>
-<p class="sub">Input for review R2 · schematic Rev A, 27 Oct 2026 (branch <code>mes4-gpio-standard</code>) · Monkey Robotics · Aaron Raj Bhatti</p>
+<p class="sub">Input for review R3 · schematic Rev A, 28 Oct 2026 (branch <code>mes4-gpio-standard</code>) · Monkey Robotics · Aaron Raj Bhatti</p>
 
 <p><b>What's in this package:</b> (1) what changed since review R1 and the status of every R1 finding, (2) whole-board LTspice simulations (review item M4), grouped by schematic sheet, (3) the updated 11-page schematic, appended after this report.</p>
+<p><b>Since the R2 package (27 Oct):</b> U10 is now the 1″ × 1″ YLPTEC URB2405YMD-20WR3 (C5369777) instead of the 2″ × 1″ URB2405LD-20WR3, same 5 V 4 A / 20 W isolated rating and 50 V 1 s surge, with a 100 µF / 16 V output bulk C38 (CX RVT1C101M0605, C81993) per its datasheet; AUX1 re-run with it (pass). The FE-URT-2 servo driver now mounts on four YIYUAN SMTSOM320BTR M3 × 2 mm SMD standoffs (H6–H9, C5301780) as on the MES3 carriers, and a simpleRTK4 Dual GPS mount has three SMTSOM365BTR M3 × 6.5 mm SMD standoffs (H10–H12, C5301796). No other circuit changes.</p>
 <ol class="toc">
 <li>Changes since review R1</li><li>Status of the R1 findings</li><li>Open items for the reviewer</li><li>Simulation summary</li><li>Power (page 4)</li><li>Relays (pages 5–6)</li><li>Sensors (page 7)</li><li>Load cell (page 8)</li><li>Aux power (page 9)</li><li>IMU (page 9 → dev kit)</li><li>Winch (page 10)</li><li>Main (page 2)</li><li>Not simulated, and why</li><li>Models and assumptions</li><li>Schematic (11 pages)</li>
 </ol>
@@ -53,7 +54,7 @@ code{font-size:13px}ul{padding-left:20px}
 <tr><td>Relays 1-2 (5)</td><td>Diagnosis note: "current present" threshold <b>5 mA → 3 mA</b>; INA236 differences listed</td><td>L2: the LED alone draws 5.1–6.7 mA over 21–29 V</td></tr>
 <tr><td>Power (4)</td><td>F1 / Q1 notes use the real worst case: 13 A, Q1 ≈ 2.2 W, size the drain copper for 2.2 W</td><td>L6</td></tr>
 <tr><td>LoadCell (8), Main (2)</td><td>Silkscreen notes: filled box <b>"5V LOAD CELL – NEVER 24V"</b> at J12 / J13, placed away from the 24 V terminals; <b>"CAN – NOT ETHERNET"</b> at J4</td><td>M2 (silkscreen instead of a keyed connector, by choice: JLC doesn't stock the mating plugs) and L5</td></tr>
-<tr><td>Footprints</td><td><b>J4 RJ45 1×4 rebuilt from the HCTL drawing</b>: ports 14.0 mm apart (was 13.97), Ø1.5 shield holes (was Ø1.7), shield and peg positions per the drawing. U1 / U9 / U10 converter footprints checked against the JLC library and the YLPTEC drawing</td><td>L9, and the custom-footprint check before routing</td></tr>
+<tr><td>Footprints</td><td><b>J4 RJ45 1×4 rebuilt from the HCTL drawing</b>: ports 14.0 mm apart (was 13.97), Ø1.5 shield holes (was Ø1.7), shield and peg positions per the drawing. U1 / U9 converter footprints checked against the JLC library and the YLPTEC drawing; U10 (URB2405YMD-20WR3) against the JLC library and the Mornsun drawing</td><td>L9, and the custom-footprint check before routing</td></tr>
 <tr><td>sim/ (new)</td><td>16 LTspice benches covering every sheet with an analog or power circuit, on the real supply chain (sections 4–12)</td><td>M4</td></tr>
 </table>
 <p class="note">Unchanged since R1: the GPIO map (no coil feedback; PA0/PA1 winch, PA2/PA3 servo USART2), the servo TX pull-up R37, the Winch_48V net class and isolation notes, the block diagram and the page 11 finger map. All of these were already in the R1 schematic.</p>
@@ -73,14 +74,14 @@ code{font-size:13px}ul{padding-left:20px}
 <tr><td>L6</td><td>Stale Power notes</td><td><span class="pill ok">Fixed</span></td><td>13 A / 2.2 W</td></tr>
 <tr><td>L7</td><td>3 A PTC derating</td><td><span class="pill warn">Open</span></td><td>AUX1: F11 sits at its 3 A hold if the screen draws 3 A. Measure the screen; 4 A-hold PTC if needed</td></tr>
 <tr><td>L8</td><td>Screen on 5 V only</td><td><span class="pill warn">Bench</span></td><td>Bench test at full brightness</td></tr>
-<tr><td>L9</td><td>DC/DC pin numbering</td><td><span class="pill ok">Closed</span></td><td>U1 / U9 / U10 match the JLC library; U10 also the YLPTEC drawing</td></tr>
+<tr><td>L9</td><td>DC/DC pin numbering</td><td><span class="pill ok">Closed</span></td><td>U1 / U9 / U10 match the JLC library; U10 (URB2405YMD-20WR3) also the Mornsun drawing</td></tr>
 </table>
 
 <h2>3 · Open items for the reviewer</h2>
 <ul>
 <li><b>F11 (screen PTC):</b> keep 3 A hold, or fit 4 A now? It depends on the ARZOPA Z1C's real current (AUX1, L7).</li>
 <li><b>Supply limits:</b> the pack's full-charge voltage (7S Li-ion 29.4 V or 8S LiFePO4 29.2 V) against the AB20 variant (A/B/C rated 30 V, D rated 60 V).</li>
-<li><b>Datasheet checks: done, all pass.</b> URB2405S-6WR3, URB2409S-10WR3 and URB2405LD-20WR3 all allow a 50 V input surge for 1 s (PWR2 peaks at 40 V). Q1 AGM60P90D I<sub>DM</sub> −360 A (inrush 100 A). F1 0451015 melting I²t 97.8 A²s (inrush 0.95 A²s).</li>
+<li><b>Datasheet checks: done, all pass.</b> URB2405S-6WR3, URB2409S-10WR3 and URB2405YMD-20WR3 all allow a 50 V input surge for 1 s (PWR2 peaks at 40 V). Q1 AGM60P90D I<sub>DM</sub> −360 A (inrush 100 A). F1 0451015 melting I²t 97.8 A²s (inrush 0.95 A²s).</li>
 <li><b>Hold-up:</b> 4.0 ms on total power loss (PWR6), to a 9 V cut-off. The YLPTEC datasheets give an undervoltage shut-off of 5.5–6.5 V, so the real figure is a little longer. Enough for glitches; add bulk on +24V only if a clean shutdown is wanted.</li>
 </ul>
 
@@ -162,10 +163,10 @@ code{font-size:13px}ul{padding-left:20px}
 {{lc1}}
 
 <h2>9 · Aux power · sheet AuxPower (page 9)</h2>
-<p class="grp"><b>Parts:</b> L2 + C26/C27/C28/C30 → U9 URB2409S-10WR3 (IMU 9 V) and U10 URB2405LD-20WR3 (screen 5 V) → C33/C34 → F11 3 A PTC → J16 USB-C · F9 3 A PTC + C31/C32 → J15 servo 24 V · servo UART J17: R39 100 Ω / R38 1k series, D23/D24 ESD, R36/R37 10k pull-ups.</p>
+<p class="grp"><b>Parts:</b> L2 + C26/C27/C28/C30 → U9 URB2409S-10WR3 (IMU 9 V) and U10 URB2405YMD-20WR3 (screen 5 V) → C33/C34/C38 → F11 3 A PTC → J16 USB-C · F9 3 A PTC + C31/C32 → J15 servo 24 V · servo UART J17: R39 100 Ω / R38 1k series, D23/D24 ESD, R36/R37 10k pull-ups.</p>
 
 <h3>AUX1 · U10 start-up (<code>aux1_u10_startup.net</code>)</h3>
-<p>With the bus up, U10 soft-starts its 5 V output in 2 ms (fast-case assumption) into C33/C34, F11 and the screen, which pulls the full 3 A. L2 carries 0.79 A in total (U9 with the IMU + U10), far below its saturation current, and +24V_AUX dips only to 23.5 V. F11 peaks at 3.25 A and sits at 3.0 A, exactly its 23 °C hold current. In a warm enclosure (≈ 2.2 A hold at 60 °C) it would trip if the screen really draws 3 A.</p>
+<p>U10 is now the 1″ × 1″ URB2405YMD-20WR3 (9–36 V in, 40 V max, 50 V for 1 s; 5 V 4 A; 88 % minimum efficiency; over-current trip 110–190 % of 4 A, hiccup). With the bus up, it soft-starts its 5 V output in 2 ms (fast-case assumption; the datasheet's typical start-up is 10 ms, which is gentler) into C33/C34, the new 100 µF C38 (the datasheet's Cout), F11 and the screen, which pulls the full 3 A. U10 peaks at 3.58 A while charging the output capacitors: 0.8 A under the lowest possible over-current trip (4.4 A), so it can't go into hiccup at start-up. It then runs at 3.0 A (15 W, 75 % of its 20 W rating) with +5V_SCR at 4.94 V, inside its ±3 % tolerance. The total output capacitance (≈ 240 µF with the screen) is far below its 10,000 µF limit, and at 75 % load it needs no heatsink up to about 70 °C. L2 carries 0.84 A in total (U9 with the IMU + U10), far below its saturation current, and +24V_AUX dips only to 23.5 V. F11 peaks at 3.25 A and sits at 3.0 A, exactly its 23 °C hold current. In a warm enclosure (≈ 2.2 A hold at 60 °C) it would trip if the screen really draws 3 A.</p>
 {{aux1i}}
 {{aux1v}}
 
@@ -223,6 +224,6 @@ code{font-size:13px}ul{padding-left:20px}
 <li>Bus capacitance: I²C 60 pF, ALERT 40 pF, PA3 7 pF. UART cable 0.3 m (100 Ω, 1.5 ns).</li>
 </ul>
 <h2>15 · Schematic</h2>
-<p>The updated schematic (11 A3 pages, KiCad 9.0.2, ERC 0 errors / 0 warnings, 190 parts) follows on the next pages.</p>
+<p>The updated schematic (11 A3 pages, KiCad 9.0.2, ERC 0 errors / 0 warnings, 198 parts) follows on the next pages.</p>
 <p class="sub">Rerun: <code>python3 run_sims.py && python3 make_report.py</code> in <code>sim/</code>. Open any <code>.net</code> file in LTspice to see every waveform; <code>results.txt</code> has the raw measurements.</p>
 </main></body></html>

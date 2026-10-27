@@ -1,4 +1,6 @@
-* Test 3: U10 (URB2405LD-20WR3) start-up into the screen, 24 V bus already up
+* Test 3: U10 (URB2405YMD-20WR3) start-up into the screen, 24 V bus already up
+* YMD datasheet: 9-36 V in, start 9 V, UVLO 6.5 V, 5 V 4 A, eff. 88 % min, start-up 10 ms typ, OCP 110-190 % of 4 A
+* (hiccup), max capacitive load 10,000 uF, output +-3 %
 .param ton=0 Vpack=23.5 Vddr=24 tddr=1 txy=1
 .include common.inc
 .include source_ab20.inc
@@ -9,10 +11,12 @@ Vsoft s0 0 PWL(0 0 1m 0 3m 5)
 Rout s0 scr 20m
 C33 scr 0 18u Rser=3m                           ; 22 uF 25 V at 5 V bias
 C34 scr 0 18u Rser=3m
+C38 scr 0 100u Rser=0.3 Lser=5n                 ; 100 uF 16 V CX RVT 6.3 x 5.4 (datasheet Cout; low ESR = worst inrush)
+C35 scr 0 100n Rser=20m
 Rf11 scr vbus 30m                               ; F11 3 A hold PTC
 Cscreen vbus 0 100u Rser=50m                    ; ARZOPA Z1C input (assumed)
 B_scr vbus 0 I=3*limit((V(vbus)-4.3)/0.4, 0, 1)  ; screen pulls the full 3 A once VBUS is up (worst case)
-* U10 input power = output power / 0.88
+* U10 input power = output power / 0.88 (YMD minimum full-load efficiency)
 B_U10 vaux 0 I=V(scr)*I(Rout)/0.88/max(V(vaux),9)
 .tran 0 8m 0 20n uic
 .options plotwinsize=0
@@ -23,4 +27,6 @@ B_U10 vaux 0 I=V(scr)*I(Rout)/0.88/max(V(vaux),9)
 .meas tran Ipk_F11   MAX I(Rf11)
 .meas tran Ipk_U10   MAX I(Rout)
 .meas tran Vscr_end  FIND V(scr) AT 7.9m
+.meas tran Vscr_min  MIN V(scr) FROM 4m TO 8m
+.meas tran Iout_end  FIND I(Rout) AT 7.9m
 .end

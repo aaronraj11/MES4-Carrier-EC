@@ -30,14 +30,16 @@ NEWP = {
     'SW_IMU': dict(lib='Switch:SW_SPDT', value='SS12D10G5', fp='MES4-Carrier-EC:SW-TH_SHOU-HAN_SS12D10G4',
                    lcsc='C7431054', desc='IMU power switch, SHOU HAN SS12D10G5 (as U22 on the MES3.1 carrier); '
                                          '2 = common (+9V), 1 = to the IMU terminal'),
-    'U_SCR': dict(lib='MES4-Carrier-EC:URB2405LD-20WR3', value='URB2405LD-20WR3',
-                  fp='MES4-Carrier-EC:PWRM-TH_YLPTEC_URBXXXXLD-20WR3', lcsc='C5369825',
-                  ds='https://www.lcsc.com/product-detail/C5369825.html',
-                  desc='screen supply, YLPTEC URB2405LD-20WR3: 24 V to 5 V 4 A, 20 W isolated, 2" x 1" DIP'),
+    'U_SCR': dict(lib='MES4-Carrier-EC:URB2405YMD-20WR3', value='URB2405YMD-20WR3',
+                  fp='MES4-Carrier-EC:PWRM-TH_YLPTEC_URBXXXXYMD-20WR3', lcsc='C5369777',
+                  ds='https://www.lcsc.com/product-detail/C5369777.html',
+                  desc='screen supply, YLPTEC URB2405YMD-20WR3: 24 V to 5 V 4 A, 20 W isolated, 1" x 1" DIP'),
     'C_SCR_IN': dict(lib='Device:C_Polarized', value='47uF 100V', fp='Capacitor_SMD:CP_Elec_8x10', lcsc='C48935391',
-                     desc='URB2405LD-20WR3 input capacitor (datasheet C1 47-100 uF)'),
+                     desc='URB2405YMD-20WR3 input capacitor (datasheet Cin 100 uF / 50 V: this 47 uF + the 100 uF aux bulk on +24V_AUX)'),
     'C_SCR_OUT': dict(lib='Device:C', value='22uF 25V', fp='Capacitor_SMD:C_0805_2012Metric', lcsc='C45783',
-                      desc='5 V screen output capacitor (datasheet C2 / C3 10-22 uF)'),
+                      desc='5 V screen output ceramic (with the 100 uF bulk)'),
+    'C_SCR_BULK': dict(lib='Device:C_Polarized', value='100uF 16V', fp='Capacitor_SMD:CP_Elec_6.3x5.4', lcsc='C81993',
+                       desc='5 V screen output bulk, CX RVT1C101M0605 100 uF 16 V 6.3 x 5.4 mm (datasheet Cout 100 uF / 16 V)'),
     # ---- door servo (FE-URT-2, as on the MES2 Harvester)
     'J_SRVU': dict(lib='Connector:Screw_Terminal_01x04', value='SERVO UART', fp='MES4-Carrier-EC:CONN-TH_KF250NH-3.5-4P',
                    lcsc='C976558', desc='FE-URT-2 UART interface (as CN13 on the MES2 Harvester): 1 GND, 2 +5 V, '

@@ -1342,79 +1342,6 @@
 		)
 		(embedded_fonts no)
 	)
-	(symbol "URB2405LD-20WR3"
-		(pin_names (offset 1.016))
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(property "Reference" "U"
-			(at 0 8.89 0)
-			(effects (font (size 1.27 1.27)))
-		)
-		(property "Value" "URB2405LD-20WR3"
-			(at 0 -8.89 0)
-			(effects (font (size 1.27 1.27)))
-		)
-		(property "Footprint" "MES4-Carrier-EC:PWRM-TH_YLPTEC_URBXXXXLD-20WR3"
-			(at 0 0 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(property "Datasheet" "https://www.lcsc.com/product-detail/C5369825.html"
-			(at 0 0 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(property "Description" "YLPTEC URB2405LD-20WR3: 9-36 V in, 5 V 4 A out, 20 W, 1.5 kV isolated, 2\" x 1\" DIP. CTRL open = on, Trim open = 5.0 V"
-			(at 0 0 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(symbol "URB2405LD-20WR3_0_1"
-			(rectangle
-				(start -7.62 6.35)
-				(end 7.62 -6.35)
-				(stroke (width 0.254) (type default))
-				(fill (type background))
-			)
-		)
-		(symbol "URB2405LD-20WR3_1_1"
-			(pin passive line
-				(at -10.16 2.54 0)
-				(length 2.54)
-				(name "+Vin" (effects (font (size 1.27 1.27))))
-				(number "2" (effects (font (size 1.27 1.27))))
-			)
-			(pin passive line
-				(at -10.16 0 0)
-				(length 2.54)
-				(name "CTRL" (effects (font (size 1.27 1.27))))
-				(number "6" (effects (font (size 1.27 1.27))))
-			)
-			(pin passive line
-				(at -10.16 -2.54 0)
-				(length 2.54)
-				(name "-Vin" (effects (font (size 1.27 1.27))))
-				(number "1" (effects (font (size 1.27 1.27))))
-			)
-			(pin passive line
-				(at 10.16 2.54 180)
-				(length 2.54)
-				(name "+Vo" (effects (font (size 1.27 1.27))))
-				(number "3" (effects (font (size 1.27 1.27))))
-			)
-			(pin passive line
-				(at 10.16 0 180)
-				(length 2.54)
-				(name "Trim" (effects (font (size 1.27 1.27))))
-				(number "4" (effects (font (size 1.27 1.27))))
-			)
-			(pin passive line
-				(at 10.16 -2.54 180)
-				(length 2.54)
-				(name "GND" (effects (font (size 1.27 1.27))))
-				(number "5" (effects (font (size 1.27 1.27))))
-			)
-		)
-		(embedded_fonts no)
-	)
 	(symbol "URB2405S-6WR3"
 		(pin_names (offset 1.016))
 		(exclude_from_sim no)
@@ -1490,6 +1417,79 @@
 				(length 2.54)
 				(name "NC" (effects (font (size 1.27 1.27))))
 				(number "8" (effects (font (size 1.27 1.27))))
+			)
+		)
+		(embedded_fonts no)
+	)
+	(symbol "URB2405YMD-20WR3"
+		(pin_names (offset 1.016))
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(property "Reference" "U"
+			(at 0 8.89 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Value" "URB2405YMD-20WR3"
+			(at 0 -8.89 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Footprint" "MES4-Carrier-EC:PWRM-TH_YLPTEC_URBXXXXYMD-20WR3"
+			(at 0 0 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C5369777.html"
+			(at 0 0 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Description" "YLPTEC URB2405YMD-20WR3: 9-36 V in (40 V max, 50 V 1 s surge), 5 V 4 A out, 20 W, 1.5 kV isolated, 1\" x 1\" DIP. CTRL open = on, Trim open = 5.0 V"
+			(at 0 0 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(symbol "URB2405YMD-20WR3_0_1"
+			(rectangle
+				(start -7.62 6.35)
+				(end 7.62 -6.35)
+				(stroke (width 0.254) (type default))
+				(fill (type background))
+			)
+		)
+		(symbol "URB2405YMD-20WR3_1_1"
+			(pin passive line
+				(at -10.16 2.54 0)
+				(length 2.54)
+				(name "+Vin" (effects (font (size 1.27 1.27))))
+				(number "3" (effects (font (size 1.27 1.27))))
+			)
+			(pin passive line
+				(at -10.16 0 0)
+				(length 2.54)
+				(name "CTRL" (effects (font (size 1.27 1.27))))
+				(number "1" (effects (font (size 1.27 1.27))))
+			)
+			(pin passive line
+				(at -10.16 -2.54 0)
+				(length 2.54)
+				(name "-Vin" (effects (font (size 1.27 1.27))))
+				(number "2" (effects (font (size 1.27 1.27))))
+			)
+			(pin passive line
+				(at 10.16 2.54 180)
+				(length 2.54)
+				(name "+Vo" (effects (font (size 1.27 1.27))))
+				(number "4" (effects (font (size 1.27 1.27))))
+			)
+			(pin passive line
+				(at 10.16 0 180)
+				(length 2.54)
+				(name "Trim" (effects (font (size 1.27 1.27))))
+				(number "5" (effects (font (size 1.27 1.27))))
+			)
+			(pin passive line
+				(at 10.16 -2.54 180)
+				(length 2.54)
+				(name "GND" (effects (font (size 1.27 1.27))))
+				(number "6" (effects (font (size 1.27 1.27))))
 			)
 		)
 		(embedded_fonts no)

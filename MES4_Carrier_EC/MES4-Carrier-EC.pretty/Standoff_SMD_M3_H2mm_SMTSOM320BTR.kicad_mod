@@ -1,0 +1,142 @@
+(footprint "Standoff_SMD_M3_H2mm_SMTSOM320BTR"
+	(version 20241229)
+	(generator "pcbnew")
+	(generator_version "9.0")
+	(layer "F.Cu")
+	(descr "SMD threaded standoff M3, 2 mm above the board, body 5.56 mm, shank 1.53 mm into a plated hole (YIYUAN SMTSOM320BTR, LCSC C5301780; same series as SMTS0M325STR). Hole 4.25 (datasheet 4.22 +0.08), pad 6.4 (datasheet min 6.2), segmented paste ring for reflow")
+	(tags "standoff spacer SMTSO M3 2mm")
+	(property "Reference" "REF**"
+		(at 0 -4.3 0)
+		(layer "F.SilkS")
+		(effects
+			(font
+				(size 0.8 0.8)
+				(thickness 0.16)
+				(bold yes)
+			)
+		)
+	)
+	(property "Value" "M3 standoff 2mm"
+		(at 0 4.3 0)
+		(layer "F.Fab")
+		(effects
+			(font
+				(size 0.8 0.8)
+				(thickness 0.12)
+			)
+		)
+	)
+	(attr smd)
+	(fp_circle
+		(center 0 0)
+		(end 3.45 0)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.CrtYd")
+	)
+	(fp_circle
+		(center 0 0)
+		(end 2.78 0)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.Fab")
+	)
+	(fp_text user "${REFERENCE}"
+		(at 0 0 0)
+		(layer "F.Fab")
+		(effects
+			(font
+				(size 0.8 0.8)
+				(thickness 0.12)
+			)
+		)
+	)
+	(pad "1" thru_hole circle
+		(at 0 0)
+		(size 6.4 6.4)
+		(drill 4.25)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+	)
+	(pad "" smd custom
+		(at 1.9269 1.9269)
+		(size 0.3 0.3)
+		(layers "F.Paste")
+		(options
+			(clearance outline)
+			(anchor circle)
+		)
+		(primitives
+			(gr_poly
+				(pts (xy 1.0768 -1.3972) (xy 1.0192 -1.1375) (xy 0.9392 -0.8837) (xy 0.8374 -0.6379) (xy 0.7145 -0.4019) (xy 0.5715 -0.1775) (xy 0.4096 0.0336) (xy 0.2298 0.2298) (xy 0.0336 0.4096) (xy -0.1775 0.5715) (xy -0.4019 0.7145) (xy -0.6379 0.8374) (xy -0.8837 0.9392) (xy -1.1375 1.0192) (xy -1.3972 1.0768) (xy -1.5101 0.4367) (xy -1.3057 0.3914) (xy -1.1060 0.3284) (xy -0.9126 0.2483) (xy -0.7269 0.1516) (xy -0.5503 0.0391) (xy -0.3842 -0.0884) (xy -0.2298 -0.2298) (xy -0.0884 -0.3842) (xy 0.0391 -0.5503) (xy 0.1516 -0.7269) (xy 0.2483 -0.9126) (xy 0.3284 -1.1060) (xy 0.3914 -1.3057) (xy 0.4367 -1.5101))
+				(width 0)
+				(fill yes)
+			)
+		)
+	)
+	(pad "" smd custom
+		(at -1.9269 1.9269)
+		(size 0.3 0.3)
+		(layers "F.Paste")
+		(options
+			(clearance outline)
+			(anchor circle)
+		)
+		(primitives
+			(gr_poly
+				(pts (xy 1.3972 1.0768) (xy 1.1375 1.0192) (xy 0.8837 0.9392) (xy 0.6379 0.8374) (xy 0.4019 0.7145) (xy 0.1775 0.5715) (xy -0.0336 0.4096) (xy -0.2298 0.2298) (xy -0.4096 0.0336) (xy -0.5715 -0.1775) (xy -0.7145 -0.4019) (xy -0.8374 -0.6379) (xy -0.9392 -0.8837) (xy -1.0192 -1.1375) (xy -1.0768 -1.3972) (xy -0.4367 -1.5101) (xy -0.3914 -1.3057) (xy -0.3284 -1.1060) (xy -0.2483 -0.9126) (xy -0.1516 -0.7269) (xy -0.0391 -0.5503) (xy 0.0884 -0.3842) (xy 0.2298 -0.2298) (xy 0.3842 -0.0884) (xy 0.5503 0.0391) (xy 0.7269 0.1516) (xy 0.9126 0.2483) (xy 1.1060 0.3284) (xy 1.3057 0.3914) (xy 1.5101 0.4367))
+				(width 0)
+				(fill yes)
+			)
+		)
+	)
+	(pad "" smd custom
+		(at -1.9269 -1.9269)
+		(size 0.3 0.3)
+		(layers "F.Paste")
+		(options
+			(clearance outline)
+			(anchor circle)
+		)
+		(primitives
+			(gr_poly
+				(pts (xy -1.0768 1.3972) (xy -1.0192 1.1375) (xy -0.9392 0.8837) (xy -0.8374 0.6379) (xy -0.7145 0.4019) (xy -0.5715 0.1775) (xy -0.4096 -0.0336) (xy -0.2298 -0.2298) (xy -0.0336 -0.4096) (xy 0.1775 -0.5715) (xy 0.4019 -0.7145) (xy 0.6379 -0.8374) (xy 0.8837 -0.9392) (xy 1.1375 -1.0192) (xy 1.3972 -1.0768) (xy 1.5101 -0.4367) (xy 1.3057 -0.3914) (xy 1.1060 -0.3284) (xy 0.9126 -0.2483) (xy 0.7269 -0.1516) (xy 0.5503 -0.0391) (xy 0.3842 0.0884) (xy 0.2298 0.2298) (xy 0.0884 0.3842) (xy -0.0391 0.5503) (xy -0.1516 0.7269) (xy -0.2483 0.9126) (xy -0.3284 1.1060) (xy -0.3914 1.3057) (xy -0.4367 1.5101))
+				(width 0)
+				(fill yes)
+			)
+		)
+	)
+	(pad "" smd custom
+		(at 1.9269 -1.9269)
+		(size 0.3 0.3)
+		(layers "F.Paste")
+		(options
+			(clearance outline)
+			(anchor circle)
+		)
+		(primitives
+			(gr_poly
+				(pts (xy -1.3972 -1.0768) (xy -1.1375 -1.0192) (xy -0.8837 -0.9392) (xy -0.6379 -0.8374) (xy -0.4019 -0.7145) (xy -0.1775 -0.5715) (xy 0.0336 -0.4096) (xy 0.2298 -0.2298) (xy 0.4096 -0.0336) (xy 0.5715 0.1775) (xy 0.7145 0.4019) (xy 0.8374 0.6379) (xy 0.9392 0.8837) (xy 1.0192 1.1375) (xy 1.0768 1.3972) (xy 0.4367 1.5101) (xy 0.3914 1.3057) (xy 0.3284 1.1060) (xy 0.2483 0.9126) (xy 0.1516 0.7269) (xy 0.0391 0.5503) (xy -0.0884 0.3842) (xy -0.2298 0.2298) (xy -0.3842 0.0884) (xy -0.5503 -0.0391) (xy -0.7269 -0.1516) (xy -0.9126 -0.2483) (xy -1.1060 -0.3284) (xy -1.3057 -0.3914) (xy -1.5101 -0.4367))
+				(width 0)
+				(fill yes)
+			)
+		)
+	)
+	(model "${KIPRJMOD}/MES4-Carrier-EC.3dshapes/Standoff_SMD_M3_H2mm_SMTSOM320BTR.wrl"
+		(offset
+			(xyz 0 0 0)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz 0 0 0)
+		)
+	)
+)

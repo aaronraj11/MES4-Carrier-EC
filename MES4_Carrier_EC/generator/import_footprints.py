@@ -5,7 +5,9 @@ Run with KiCad's Python, KiCad closed:
   /Applications/KiCad/KiCad.app/Contents/Frameworks/Python.framework/Versions/Current/bin/python3 \
       generator/import_footprints.py <netlist from run.sh>
 Afterwards use Update PCB from Schematic (F8) in KiCad: footprints carry the schematic symbol paths, so F8
-matches them instead of adding duplicates. The script refuses to run on a board that already has footprints.
+matches them instead of adding duplicates. The script refuses to run on a board that already has footprints,
+unless --add-missing is given: then it adds only the symbols that have no footprint yet, in a row below the
+outline (KiCad's F8 without opening KiCad).
 """
 import os
 import sys
@@ -31,10 +33,11 @@ def lib_dir(lib):
     return own if os.path.isdir(own) else os.path.join(KICAD_FP, lib + '.pretty')
 
 
-def main(net_file):
+def main(net_file, add_missing=False):
     board = pcbnew.LoadBoard(PCB)
-    if len(board.GetFootprints()):
-        sys.exit('board already has footprints: use F8 (Update PCB from Schematic) in KiCad instead')
+    have = {f.GetReference() for f in board.GetFootprints()}
+    if have and not add_missing:
+        sys.exit('board already has footprints: use F8 (Update PCB from Schematic) in KiCad, or --add-missing')
     d = parse(open(net_file).read())[0]
 
     # symbols marked "exclude from BOM" in the schematic (test pads, net tie)
@@ -58,14 +61,18 @@ def main(net_file):
     nets, pad_net = {}, {}
     for n in find(first(d, 'nets'), 'net'):
         name = first(n, 'name')[1]
-        ni = pcbnew.NETINFO_ITEM(board, name)
-        board.Add(ni)
+        ni = board.FindNet(name)
+        if ni is None:
+            ni = pcbnew.NETINFO_ITEM(board, name)
+            board.Add(ni)
         nets[name] = ni
         for nd in find(n, 'node'):
             pad_net[(first(nd, 'ref')[1], first(nd, 'pin')[1])] = ni
 
     # load footprints
     groups = {s: [] for s in SHEETS}
+    if add_missing:
+        comps = [c for c in comps if c['ref'] not in have]
     for c in comps:
         lib, name = c['fp'].split(':', 1)
         fp = pcbnew.FootprintLoad(lib_dir(lib), name)
@@ -91,6 +98,16 @@ def main(net_file):
         board.Add(fp)
         groups.setdefault(c['sheet'], []).append(fp)
 
+    if add_missing:
+        x = X0
+        for c in comps:
+            fp = next(f for f in board.GetFootprints() if f.GetReference() == c['ref'])
+            fp.SetPosition(pcbnew.VECTOR2I(mm(x), mm(Y0 - 10.0)))
+            x += 10.0
+        board.BuildConnectivity()
+        pcbnew.SaveBoard(PCB, board)
+        print('added %d footprints: %s' % (len(comps), ' '.join(c['ref'] for c in comps)))
+        return
     # shelf-pack each sheet's footprints in a block, blocks stacked below the outline, one label per block
     y = Y0
     for sheet in SHEETS + [s for s in groups if s not in SHEETS]:
@@ -125,4 +142,4 @@ def main(net_file):
 
 
 if __name__ == '__main__':
-    main(sys.argv[1])
+    main(sys.argv[1], '--add-missing' in sys.argv[2:])

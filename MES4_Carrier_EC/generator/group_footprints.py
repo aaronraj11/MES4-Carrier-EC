@@ -4,10 +4,12 @@ outline, ready to drag onto the board. Footprints already inside the outline are
 Run with KiCad's Python, KiCad closed:
   /Applications/KiCad/KiCad.app/Contents/Frameworks/Python.framework/Versions/Current/bin/python3 \
       generator/group_footprints.py
-Rerunnable: groups with these names are rebuilt; the sheet labels from import_footprints.py are removed.
+Rerunnable: groups with these names are rebuilt; the sheet labels from import_footprints.py are removed. It
+never moves a placed or parked part, only new ones, and stops once groups have been edited in KiCad.
 """
 import math
 import os
+import re
 import sys
 
 import pcbnew
@@ -27,8 +29,9 @@ GROUPS = [
     ('PWR-5V module feed', 'F2 + FB1 + C8/C9: next to J1 fingers 20/22', ['F2', 'FB1', 'C8', 'C9', 'TP4']),
     ('GND joint', 'NT1 (only GND_24V-GND joint) and the ground test pads; keep J15/J17 near it (review L3)',
      ['NT1', 'TP5', 'TP6', 'TP7']),
-    ('MOD M.2 socket', 'J1 + H1 hold-down (40.25 mm from the socket posts), power LEDs, I2C / ALERT pull-ups',
-     ['J1', 'H1', 'LED1', 'R1', 'LED2', 'R2', 'R3', 'R4', 'R5']),
+    ('MES4-MCU slot', 'J1 + H1 hold-down 41.75 mm from the socket (as the MES4-Flasher), with its slot silkscreen',
+     ['J1', 'H1']),
+    ('MOD support', 'power LEDs, I2C / ALERT pull-ups: next to the MES4-MCU slot', ['LED1', 'R1', 'LED2', 'R2', 'R3', 'R4', 'R5']),
     ('DBG ST-Link + reset', 'STDC14 with its five ESD clamps and the reset button', ['J2', 'D1', 'D2', 'D3', 'D4', 'D5', 'SW1']),
     ('MECH mounting holes', 'board corners', ['H2', 'H3', 'H4', 'H5']),
     ('CAN DB9', 'D6 ESD right at the DB9 (board edge)', ['J3', 'D6']),
@@ -51,11 +54,13 @@ GROUPS = [
     ('AUX IMU 9 V', 'U9 with its in/out caps, SW2, LED8, J14', ['U9', 'C28', 'C29', 'SW2', 'LED8', 'R35', 'J14', 'TP8']),
     ('AUX screen 5 V', 'U10 with its caps, F11, D22, USB-C J16 with CC / shield parts',
      ['U10', 'C30', 'C33', 'C34', 'C35', 'F11', 'D22', 'J16', 'R40', 'R41', 'R42', 'C37', 'TP9']),
-    ('AUX servo', 'J15 24 V + J17 UART with F9/F10, bulk, series R, ESD; near NT1 (L3)',
-     ['J15', 'F9', 'C31', 'C32', 'J17', 'F10', 'C36', 'R36', 'R37', 'R38', 'R39', 'D23', 'D24']),
+    ('AUX servo', 'J15 24 V + J17 UART with F9/F10, bulk, series R, ESD; near NT1 (L3); FE-URT-2 (A1) on H6-H9, simpleRTK4 (A2) above it on H10-H12',
+     ['J15', 'F9', 'C31', 'C32', 'J17', 'F10', 'C36', 'R36', 'R37', 'R38', 'R39', 'D23', 'D24', 'A1', 'H6', 'H7', 'H8', 'H9', 'A2', 'H10', 'H11', 'H12']),
     ('WCH winch relays', 'K5/K6 with drivers and flybacks; J18 + contact side isolated (Winch_48V, >= 2 mm)',
      ['K5', 'K6', 'Q6', 'Q7', 'R43', 'R44', 'R45', 'R46', 'D25', 'D26', 'J18']),
 ]
+
+RETIRED = {'MOD M.2 socket'}  # old group names, removed on the next run
 
 
 def mm(v):
@@ -72,9 +77,16 @@ def inside(fp):
     return OUTLINE[0] < x < OUTLINE[2] and OUTLINE[1] < y < OUTLINE[3]
 
 
+def placed(fp, grouped):
+    """Left where it is: anything except a brand-new footprint, i.e. one still in the row where
+    import_footprints.py --add-missing puts it (y = Y0 - 10). Placed or parked parts are never moved."""
+    return abs(pcbnew.ToMM(fp.GetY()) - (Y0 - 10.0)) > 0.01
+
+
 def strip_previous(names):
     """Drop what this script (and import_footprints.py) added before: the Cmts.User labels and the groups with
-    these names. Done on the file text, so pcbnew never has to delete items (its SWIG bindings break on that)."""
+    these names. Done on the file text, so pcbnew never has to delete items (its SWIG bindings break on that).
+    Returns each stripped group's member UUIDs, so its drawings (e.g. a slot silkscreen) can rejoin the rebuilt group."""
     txt = open(PCB).read()
 
     def blocks(kind):
@@ -101,15 +113,28 @@ def strip_previous(names):
 
     cut = [(a, b) for a, b, n, blk in blocks('gr_text')
            if '(layer "Cmts.User")' in blk and (n.endswith(' parts)') or n in names)]
-    cut += [(a, b) for a, b, n, blk in blocks('group') if n in names]
+    kept = {}
+    for a, b, n, blk in blocks('group'):
+        if n in names:
+            cut.append((a, b))
+            kept[n] = set(re.findall(r'"([0-9a-f-]{36})"', blk[blk.find('(members'):]))
     for a, b in sorted(cut, reverse=True):
         txt = txt[:a] + txt[b + 1 if txt[b:b + 1] == '\n' else b:]
     open(PCB, 'w').write(txt)
+    return kept
 
 
 def main():
-    strip_previous({g[0] for g in GROUPS})
+    names = {g[0] for g in GROUPS} | RETIRED
+    hand = sorted({g.GetName() or '(unnamed)' for g in pcbnew.LoadBoard(PCB).Groups()} - names - {''})
+    unnamed = any(not g.GetName() for g in pcbnew.LoadBoard(PCB).Groups())
+    if (hand or unnamed) and '--force' not in sys.argv:
+        sys.exit('the board has groups made in KiCad (%s): regroup there, or pass --force to rebuild this table'
+                 % ', '.join(hand + (['(unnamed)'] if unnamed else [])))
+    kept = strip_previous(names)
     board = pcbnew.LoadBoard(PCB)
+    drawings = {d.m_Uuid.AsString(): d for d in board.GetDrawings()}
+    grouped = set().union(*kept.values()) if kept else set()
     fps = {f.GetReference(): f for f in board.GetFootprints()}
     listed = [r for _, _, refs in GROUPS for r in refs]
     dup = {r for r in listed if listed.count(r) > 1}
@@ -121,7 +146,7 @@ def main():
     gx, gy, row_h = X0, Y0, 0.0
     for name, why, refs in GROUPS:
         members = [fps[r] for r in refs]
-        free = [f for f in members if not inside(f)]
+        free = [f for f in members if not placed(f, grouped)]
         if free:
             # pack this group's free footprints into a roughly square block
             area = sum(bbox_mm(f)[0] * bbox_mm(f)[1] for f in free)
@@ -158,6 +183,7 @@ def main():
             row_h = max(row_h, bh)
         grp = pcbnew.PCB_GROUP(board)
         grp.SetName(name)
+        members += [drawings[u] for u in kept.get(name, ()) if u in drawings and drawings[u].GetLayerName() != 'Cmts.User']
         for m in members:
             grp.AddItem(m)
         board.Add(grp)

@@ -1,0 +1,110 @@
+(footprint "ArduSimple_simpleRTK4_Dual_mount"
+	(version 20241229)
+	(generator "pcbnew")
+	(generator_version "9.0")
+	(layer "F.Cu")
+	(descr "ArduSimple simpleRTK4 Dual (AS-RTK4-X20D), stacked above the FE-URT-2 on 3 x Standoff_SMD_M3_H6.5mm_SMTSOM365BTR M3 x 6.5 mm SMD standoffs + M3 x 12 mm male-female spacers (underside 18.5 mm above the carrier). Holes used: left-bottom, left-top, right. Powered from its own GPS USB-C (west edge, with the SMAs).")
+	(tags "GPS RTK ArduSimple simpleRTK4 mount")
+	(property "Reference" "REF**"
+		(at 0 23.67 0)
+		(layer "F.Fab")
+		(uuid "583c93d0-0670-593e-9781-06bfb8462ed3")
+		(effects (font (size 1 1) (thickness 0.15)))
+	)
+	(property "Value" "simpleRTK4 Dual"
+		(at 0 21.67 0)
+		(layer "F.Fab")
+		(uuid "19332767-c3ec-5a76-bcf3-a50ea754bdf4")
+		(effects (font (size 1 1) (thickness 0.15)))
+	)
+	(property "Datasheet" "https://www.ardusimple.com/product/simplertk-4-dual/"
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "95191e76-f828-5d1f-bcb6-f83b41594f87")
+		(effects (font (size 1 1) (thickness 0.15)))
+	)
+	(property "Description" "GPS mount (board-only)"
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "d9e7479e-2eef-5097-8a91-7dc734e9a306")
+		(effects (font (size 1 1) (thickness 0.15)))
+	)
+	(attr board_only exclude_from_pos_files exclude_from_bom)
+	(fp_rect
+		(start -34.29 -26.67)
+		(end 34.29 26.67)
+		(stroke (width 0.1) (type solid))
+		(fill no)
+		(layer "F.Fab")
+		(uuid "a18852ab-a8a3-5db0-b08d-9c30d15081c5")
+	)
+	(fp_text user "GPS: simpleRTK4 Dual, 18.5 mm up"
+		(at 0 19.67 0)
+		(layer "F.Fab")
+		(uuid "3069c75c-80a1-570b-812c-bfb496d17c10")
+		(effects (font (size 1 1) (thickness 0.15)))
+	)
+	(fp_circle
+		(center -20.32 24.13)
+		(end -18.72 24.13)
+		(stroke (width 0.1) (type solid))
+		(fill no)
+		(layer "F.Fab")
+		(uuid "3bf63822-0867-5a56-9a97-0e24bf067d46")
+	)
+	(fp_circle
+		(center -19.05 -24.13)
+		(end -17.45 -24.13)
+		(stroke (width 0.1) (type solid))
+		(fill no)
+		(layer "F.Fab")
+		(uuid "ed764e92-b821-5860-a546-8c8882614649")
+	)
+	(fp_circle
+		(center 31.75 -8.89)
+		(end 33.35 -8.89)
+		(stroke (width 0.1) (type solid))
+		(fill no)
+		(layer "F.Fab")
+		(uuid "a05e19a6-25f3-56e4-bb0e-581f7ee5eca8")
+	)
+	(model "${KIPRJMOD}/MES4-Carrier-EC.3dshapes/ArduSimple_simpleRTK4_Dual_mount.step"
+		(offset (xyz -34.454 -39.007 -39.59))
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz 0 0 0)
+		)
+	)
+	(model "${KIPRJMOD}/MES4-Carrier-EC.3dshapes/Spacer_M3_12mm_hex.wrl"
+		(offset (xyz -20.32 -24.13 6.5))
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz 0 0 0)
+		)
+	)
+	(model "${KIPRJMOD}/MES4-Carrier-EC.3dshapes/Spacer_M3_12mm_hex.wrl"
+		(offset (xyz -19.05 24.13 6.5))
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz 0 0 0)
+		)
+	)
+	(model "${KIPRJMOD}/MES4-Carrier-EC.3dshapes/Spacer_M3_12mm_hex.wrl"
+		(offset (xyz 31.75 8.89 6.5))
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz 0 0 0)
+		)
+	)
+	(embedded_fonts no)
+)

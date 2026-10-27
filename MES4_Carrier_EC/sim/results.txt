@@ -1,10 +1,12 @@
 == aux1_u10_startup
-   ipk_l2     0.7866
+   ipk_l2     0.84
    il2_end    0.737
-   vmin_aux   23.51
-   ipk_f11    3.25
-   ipk_u10    3.34
+   vmin_aux   23.5
+   ipk_f11    3.249
+   ipk_u10    3.583
    vscr_end   4.94
+   vscr_min   4.94
+   iout_end   3
 == aux2_servo_step
    vsrv_min   23.19
    v24_min    23.32
