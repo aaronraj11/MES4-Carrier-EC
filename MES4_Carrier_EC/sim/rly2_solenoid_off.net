@@ -1,0 +1,23 @@
+* RLY2 (Relays 3-4, page 6): contact opens on the battery stopper (24 V, 1.5 A solenoid), D16 SS34 flyback
+.include models.inc
+Vbus v24 0 24
+Rsh v24 inm 30m                               ; R16 shunt (INA236 IN+ = v24, IN- = inm)
+Sk  inm c ctl 0 SWC                           ; K3 contact
+Vctl ctl 0 PULSE(1 0 5m 1u 1u 1 2)            ; opens at 5 ms
+.model SWC SW(Ron=50m Roff=100Meg Vt=0.5 Vh=0)
+Rptc c out 30m                                ; F5 3 A PTC
+Dfw 0 out SS34                                ; D16 load flyback at the output
+Rled out led 3.3k
+Dled led 0 DLED                               ; LED6 (output on)
+Lsol out sl 50m Rser=16                       ; solenoid: 16 ohm, inductance assumed 50 mH
+Rret sl 0 10m
+.tran 0 15m 0 50n
+.options plotwinsize=0
+.save V(out) V(inm) I(Lsol) I(Dfw) V(ctl)
+.meas tran Vout_min MIN V(out)
+.meas tran Vinm_min MIN V(inm) FROM 4m TO 15m
+.meas tran Ifw_pk   MAX I(Dfw)
+.meas tran t_open  WHEN V(ctl)=0.5 FALL=1
+.meas tran t_i15   WHEN I(Lsol)=0.15 FALL=1
+.meas tran t_release PARAM t_i15-t_open
+.end

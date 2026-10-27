@@ -1,0 +1,20 @@
+* RLY1 (Relays 1-2 / 3-4, pages 5-6): one SRD-5VDC-SL-A coil driver, PA8 -> R9 100 ohm -> Q2 AO3400A, D10 flyback
+.include models.inc
+V5 v5 0 5
+Vgp gp 0 PULSE(0 3.3 0.2m 3n 3n 10m 30m)      ; GPIO on at 0.2 ms, off at 10.2 ms
+Rgp gp g1 40                                  ; STM32 output resistance
+R9  g1 g 100
+R10 g 0 100k
+M1  d g 0 0 AO3400A
+Lk  v5 d 0.2 Rser=70                          ; coil 70 ohm, inductance assumed 0.2 H
+Dfb d v5 D1N4148W                             ; D10
+.tran 0 20m 0 20n
+.options plotwinsize=0
+.save V(g) V(d) I(Lk) V(gp)
+.meas tran Vd_peak  MAX V(d)
+.meas tran I_on     FIND I(Lk) AT 10.1m
+.meas tran t_gate   TRIG V(g) VAL=0.33 RISE=1 TARG V(g) VAL=2.97 RISE=1
+.meas tran t_off   WHEN V(gp)=1.65 FALL=1
+.meas tran t_i10   WHEN I(Lk)=10m FALL=1
+.meas tran t_decay PARAM t_i10-t_off
+.end

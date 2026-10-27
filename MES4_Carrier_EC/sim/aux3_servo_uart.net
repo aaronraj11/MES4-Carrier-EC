@@ -1,0 +1,24 @@
+* AUX3 (AuxPower, page 9): servo UART at 1 Mbit/s over 0.3 m to the FE-URT-2 (3.3 V levels)
+* TX: PA2 -> R39 100 ohm -> D24 ESD -> J17 pin 4, R37 10k pull-up.  RX: FE-URT-2 TX -> J17 pin 3 -> D23 ESD -> R38 1k -> PA3, R36 10k pull-up.
+Vtx tx0 0 PULSE(3.3 0 1u 4n 4n 1u 2u)          ; 1 Mbit/s 0101... from the STM32
+Rdrv tx0 pa2 40
+Rpu2 pa2 v3 10k
+R39 pa2 j4 100
+Cesd4 j4 0 1.5p
+Tcab4 j4 0 fe4 0 Z0=100 Td=1.5n               ; 0.3 m cable
+Cfe4 fe4 0 10p                                 ; FE-URT-2 input
+Vrx rx0 0 PULSE(3.3 0 1u 4n 4n 1u 2u)          ; FE-URT-2 TX
+Rfe rx0 fe3 50
+Tcab3 fe3 0 j3 0 Z0=100 Td=1.5n
+Cesd3 j3 0 1.5p
+R38 j3 pa3 1k
+Cpa3 pa3 0 7p                                  ; PA3 pin + trace
+Rpu3 pa3 v3 10k
+V3 v3 0 3.3
+.tran 0 6u 0 0.5n
+.options plotwinsize=0
+.save V(pa2) V(fe4) V(j3) V(pa3)
+.meas tran tr_fe4 TRIG V(fe4) VAL=0.66 RISE=1 TARG V(fe4) VAL=2.64 RISE=1
+.meas tran tr_pa3 TRIG V(pa3) VAL=0.66 RISE=1 TARG V(pa3) VAL=2.64 RISE=1
+.meas tran vlow_pa3 MIN V(pa3) FROM 1.5u TO 2u
+.end

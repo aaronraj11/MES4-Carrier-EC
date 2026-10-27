@@ -1,0 +1,19 @@
+* MAIN1 (Main page 2 + Relays): I2C1 at 400 kHz, R3/R4 2.2k pull-ups to +3V3_MOD, 4 x INA236 + MCU + traces
+Vck ck 0 PULSE(0 1 0 2n 2n 1.25u 2.5u)
+Sod scl 0 ck 0 OD                              ; open-drain low side (STM32 / INA236)
+.model OD SW(Ron=60 Roff=100Meg Vt=0.5 Vh=0.1)
+R4 scl v3 2.2k
+Cbus scl 0 60p                                 ; 4 x INA236 (~4 pF) + STM32 (5 pF) + socket + ~20 cm of trace
+V3 v3 0 3.3
+* ALERT: PA15, R5 10k pull-up, 4 open-drain ALERT pins, 40 pF
+Val al 0 PULSE(1 0 0 2n 2n 5u 10u)
+Sal alert 0 al 0 OD
+R5 alert v3 10k
+Cal alert 0 40p
+.tran 0 10u 0 1n
+.options plotwinsize=0
+.save V(scl) V(alert)
+.meas tran tr_scl   TRIG V(scl) VAL=0.99 RISE=2 TARG V(scl) VAL=2.31 RISE=2
+.meas tran vol_scl  MIN V(scl)
+.meas tran tr_alert TRIG V(alert) VAL=0.99 RISE=1 TARG V(alert) VAL=2.31 RISE=1
+.end

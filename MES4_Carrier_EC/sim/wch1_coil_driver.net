@@ -1,0 +1,19 @@
+* WCH1 (Winch, page 10): IM03GR coil driver, PA0 -> R43 100 ohm -> Q6 AO3400A, D25 flyback
+.include models.inc
+V5 v5 0 5
+Vgp gp 0 PULSE(0 3.3 0.2m 3n 3n 5m 30m)
+Rgp gp g1 40
+R43 g1 g 100
+R44 g 0 100k
+M1  d g 0 0 AO3400A
+Lk  v5 d 0.1 Rser=178                         ; coil 178 ohm, inductance assumed 0.1 H
+Dfb d v5 D1N4148W                             ; D25
+.tran 0 10m 0 20n
+.options plotwinsize=0
+.save V(g) V(d) I(Lk) V(gp)
+.meas tran Vd_peak MAX V(d)
+.meas tran I_on    FIND I(Lk) AT 5.1m
+.meas tran t_off   WHEN V(gp)=1.65 FALL=1
+.meas tran t_i3    WHEN I(Lk)=3m FALL=1
+.meas tran t_decay PARAM t_i3-t_off
+.end

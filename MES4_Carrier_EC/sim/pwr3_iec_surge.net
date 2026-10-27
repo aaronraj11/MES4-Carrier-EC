@@ -1,0 +1,21 @@
+* Test 2b (informative): IEC 61000-4-5 0.5 kV line-line, 1.2/50 us, 2 ohm, through an 18 uF coupling cap,
+* battery behind a 1.5 mH decoupling inductor (standard CDN). Applies only if the bus counts as a DC power port.
+.param ton=0
+.include common.inc
+B_U10 vaux 0 I=if(V(vaux)>9, 17/V(vaux), 0)
+Vbat bat 0 29.2
+Ldec bat b2 1.5m Rser=50m
+Lcab b2 in 2u Rser=33m
+.ic V(v24)=29.2 V(vdc)=29.2 V(vaux)=29.2 V(vsrv)=29.2 V(in)=29.2 V(f)=29.2 V(b2)=29.2
+* 1.2/50 us open-circuit wave, 500 V peak
+Vsg g1 0 EXP(0 518 100u 0.4074u 100u 68.22u)
+Rsg g1 g2 2
+Ccpl g2 in 18u
+.tran 0 1m 0 10n uic
+.options plotwinsize=0
+.save V(v24) V(vaux) I(D9)
+.meas tran Vpk_24V   MAX V(v24)
+.meas tran Vpk_AUX   MAX V(vaux)
+.meas tran Ipk_D9    MAX -I(D9)
+.meas tran E_D9      INTEG -I(D9)*V(v24)
+.end

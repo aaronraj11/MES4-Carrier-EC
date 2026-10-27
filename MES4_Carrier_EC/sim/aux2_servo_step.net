@@ -1,0 +1,16 @@
+* AUX2 (AuxPower, page 9): door servo stall step 0 -> 3 A on +24V_SRV (F9), battery 24 V on a 2 m cable
+.param ton=0 Vpack=23.5 Vddr=24 tddr=1 txy=1
+.include common.inc
+B_U10 vaux 0 I=if(V(vaux)>9, 17/V(vaux), 0)
+.include source_ab20.inc
+Lcab ab in 2u Rser=33m
+.ic V(v24)=23.6 V(vdc)=23.6 V(vaux)=23.6 V(vsrv)=23.6 V(in)=23.6 V(f)=23.6 V(ab)=23.6
+Bsrv vsrv 0 I=3*limit((time-1m)/20u,0,1) - 3*limit((time-6m)/20u,0,1)   ; 3 A for 5 ms
+.tran 0 10m 0 20n uic
+.options plotwinsize=0
+.save V(v24) V(vsrv) V(vaux) I(Rf9)
+.meas tran Vsrv_min MIN V(vsrv) FROM 0.9m TO 10m
+.meas tran V24_min  MIN V(v24)  FROM 0.9m TO 10m
+.meas tran V24_max  MAX V(v24)  FROM 0.9m TO 10m
+.meas tran Vaux_min MIN V(vaux) FROM 0.9m TO 10m
+.end

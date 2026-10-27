@@ -1,0 +1,19 @@
+* PWR6 (Power, page 4, fed by the AB20): line changeover and hold-up
+* DDR on line 1 at 24 V carries the load (pack part-discharged, 23.0 V). At 2 ms the DDR stops (48 V battery UVLO / OVP):
+* the pack takes over through the AB20. At 12 ms the XY-CD63L cuts the pack too: how long the carrier keeps running.
+.param ton=0 Vpack=23.0 Vddr=24 tddr=2m txy=12m
+.include common.inc
+B_U10 vaux 0 I=if(V(vaux)>9, 17/V(vaux), 0)
+.include source_ab20.inc
+Lcab ab in 2u Rser=33m
+.ic V(v24)=23.6 V(vdc)=23.6 V(vaux)=23.6 V(vsrv)=23.6 V(in)=23.6 V(f)=23.6 V(ab)=23.6 V(d1)=24 V(p2)=23
+.tran 0 30m 0 100n uic
+.options plotwinsize=0
+.save V(v24) V(vdc) V(vaux) V(ab) I(Dab1) I(Dab2) V(xyc)
+.meas tran V24_before FIND V(v24) AT 1.9m
+.meas tran V24_dip    MIN V(v24) FROM 2m TO 11.9m
+.meas tran V24_pack   FIND V(v24) AT 11.9m
+.meas tran t_cut      WHEN V(xyc)=0.5 FALL=1
+.meas tran t_9V       WHEN V(vdc)=9 FALL=1
+.meas tran holdup     PARAM t_9V-t_cut
+.end

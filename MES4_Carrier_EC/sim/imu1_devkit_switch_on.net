@@ -1,0 +1,25 @@
+* IMU1 (AuxPower page 9 -> J14 -> MicroStrain C-Series Connectivity Board, Vaux input): SW2 switched on
+* U9 URB2409S-10WR3 9 V -> C29 -> SW2 -> LED8/R35 -> J14 -> 1 m cable -> board Vaux (2 x 2.2 uF + 0.1 uF)
+* -> TPS54260 buck -> 5 V -> 3DM-CV7-AHRS (0.23 W) + board LEDs: ~0.4 W from Vaux (75 % at light load)
+.include models.inc
+Vu9 u9 0 9.0
+Ru9 u9 v9 0.1                                  ; U9 output, load regulation
+C29 v9 0 15u Rser=5m                           ; 22 uF 16 V at 9 V bias
+Ssw v9 imu ctl 0 SWS                           ; SW2 SS12D10G5
+Vctl ctl 0 PULSE(0 1 1m 1u 1u 1 2)
+.model SWS SW(Ron=30m Roff=100Meg Vt=0.5 Vh=0)
+R35 imu led 2.2k
+Dled8 led 0 DLED                               ; LED8 green (after SW2)
+Lcab imu vaux 1u Rser=20m                      ; 1 m of wire to the board
+Cin1 vaux 0 1.8u Rser=5m                       ; 2.2 uF X7R at 9 V
+Cin2 vaux 0 1.8u Rser=5m
+Cin3 vaux 0 100n Rser=10m
+Bbuck vaux 0 I=0.4*limit((time-1.3m)/2m,0,1)/max(V(vaux),4.5)*(V(vaux)>4.5)
+.tran 0 6m 0 5n
+.options plotwinsize=0
+.save V(imu) V(vaux) I(Ssw) I(Lcab)
+.meas tran Vpk_vaux MAX V(vaux)
+.meas tran Ipk_sw2  MAX I(Ssw)
+.meas tran I_j14    FIND I(Lcab) AT 5.9m
+.meas tran I_sw2    FIND I(Ssw) AT 5.9m
+.end

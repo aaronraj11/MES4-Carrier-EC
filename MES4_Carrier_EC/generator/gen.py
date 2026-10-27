@@ -423,7 +423,7 @@ def main_sheet():
       '   5 V load cell only: never 24 V.\n'
       '{CAN/J_DB9} CAN DB9 male (IPC): 1 GND, 3 CAN_H, 5 CAN_L.\n'
       '{CAN/J_RJ} CAN RJ45 x4: 1 CAN_H, 2 CAN_L, 3 GND (T568B).\n'
-      '{AuxPower/J_IMU} IMU 9V (KF250NH 2-pin): 1 = +9 V after the switch, 2 = GND.\n'
+      '{AuxPower/J_IMU} IMU 9V (KF250NH 2-pin): 1 = +9 V after the switch, 2 = GND. To the CV7 dev board Vaux only.\n'
       '{AuxPower/J_USB} SCREEN USB-C: 5 V / 3 A power only (no data).\n'
       '{AuxPower/J_SRVP} SERVO 24V: 1 +24 V (3 A PTC), 2 GND_24V.\n'
       '{AuxPower/J_SRVU} SERVO UART: 1 GND, 2 +5 V, 3 RX, 4 TX.\n'
@@ -593,7 +593,9 @@ def aux_sheet():
             '{U_IMU} YLPTEC URB2409S-10WR3 (9-36 V in, 9 V 1.11 A, 10 W isolated, short-circuit protected;\n'
             'MES3.1 U15), {C_IMU_IN} 47 µF / 100 V and {C_IMU_OUT} 22 µF / 16 V (the datasheet\'s Cin / Cout),\n'
             '{SW_IMU} SS12D10G5 slide switch (MES3.1 U22, common = pin 2), {J_IMU} KF250NH 2-pin (MES3.1 CN10).\n'
-            'CTRL open = on. {SW_IMU} is rated 0.5 A: check the IMU draws less (the converter gives up to 1.11 A).\n'
+            'CTRL open = on. IMU: MicroStrain 3DM-CV7-AHRS on the C-Series Connectivity Board (6212-3009 kit), ≈ 45 mA at 9 V\n'
+            '({SW_IMU} 0.5 A rating OK). Wire {J_IMU} to the board\'s Vaux (5.2-28 V, micro-DB9 pin 6), NEVER Vpri (3.2-5.2 V, pin 3,\n'
+            'straight to the CV7). Vaux or Vpri, not both: switch {SW_IMU} off while the USB dev cable (5 V on Vpri) is plugged in.\n'
             '{LED_IMU} green (+ {R_LEDIMU} 2.2k, 3.2 mA) sits after {SW_IMU}: it lights only when the IMU terminal is powered.\n'
             'LCSC stock of URB2409S-10WR3 is low (78 on 2026-10-27): order early.', (124.46, 68.58))
     # ---- screen USB-C 5 V
@@ -970,7 +972,7 @@ def power_sheet():
             '+24V feeds the relay contacts, the INA236 current monitors and the sensor supplies.', (17.78, 76.20))
     sh.box(198.12, 20.32, 403.86, 106.68, 'Power budget and noise strategy')
     sh.text('24 V current: relays ≤ 4 × 2 A (CIF §7; realistic 3-5 A: lamp ~0.3 A, DRL, 1.5 A solenoid), sensors\n'
-            '2 × ≤ 100 mA, logic DC/DC ≈ 0.15 A, IMU 9 V ≤ 0.5 A + screen 5 V ≤ 0.95 A + door servo ≤ 3 A (page 9).\n'
+            '2 × ≤ 100 mA, logic DC/DC ≈ 0.15 A, IMU 9 V ≈ 0.02 A (CV7 0.23 W) + screen 5 V ≤ 0.95 A + door servo ≤ 3 A (page 9).\n'
             'Realistic total ≈ 6-8 A. Every load at its limit at once (≈ 13 A) would exceed {F_IN} {F_IN_VALUE}\'s 75 % derating\n'
             '(11 A) and the XT30\'s 15 A rating: don\'t stall the servo while all four relays carry 2 A.\n\n'
             'Noise and transients, from the cable inwards:\n'

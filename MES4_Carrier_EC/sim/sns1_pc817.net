@@ -1,0 +1,25 @@
+* SNS1 (Sensors, page 7): Autonics PNP sensor -> R24 10k -> PC817 (CTR 50 % minimum) -> PB6 with R25 10k
+* Sensor output switches 0 -> 20 V (low-battery case) and back; PC817 modelled behaviourally.
+.include models.inc
+.param ctr=0.5
+Vs sens 0 PULSE(0 20 0.2m 1u 1u 1m 3m)
+R24 sens a 10k
+Dled a k DLED                                  ; PC817 LED
+Vk k 0 0                                       ; LED current sense
+D18 0 a D1N4148W                               ; reverse clamp across the LED
+* photo-transistor: emitter follower from +3V3_MOD, speed set by a 20 us pole (CTR-limited, Vce(sat) 0.2 V)
+Bi ib 0 I=-{ctr}*I(Vk)
+Rpole ib 0 1k
+Cpole ib 0 20n
+Bce v3 pb I=limit(V(ib)/1k, 0, 0.05)*limit((V(v3)-V(pb)-0.1)/0.1,0,1)
+V3 v3 0 3.3
+R25 pb 0 10k
+Cpb pb 0 15p                                   ; PB6 pin + trace
+.tran 0 2.5m 0 50n
+.options plotwinsize=0
+.save V(sens) V(pb) I(Vk)
+.meas tran Vpb_high FIND V(pb) AT 1m
+.meas tran I_led    FIND I(Vk) AT 1m
+.meas tran t_rise   TRIG V(sens) VAL=10 RISE=1 TARG V(pb) VAL=1.65 RISE=1
+.meas tran t_fall   TRIG V(sens) VAL=10 FALL=1 TARG V(pb) VAL=1.65 FALL=1
+.end

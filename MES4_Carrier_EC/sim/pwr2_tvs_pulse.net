@@ -1,0 +1,19 @@
+* Test 2a: surge at the SMBJ30A rating: 12.4 A, 10/1000 us, battery disconnected (BMS open)
+.param ton=0
+.include common.inc
+B_U10 vaux 0 I=if(V(vaux)>9, 17/V(vaux), 0)
+* bus held at 29.2 V by a weak source (charger through 10 ohm), then the pulse arrives on the cable
+Vchg chg 0 29.2
+Rchg chg in2 10
+Isrc 0 in2 EXP(0 12.6 100u 2.6u 100u 1.443m)   ; double exponential: ~12.4 A peak at ~16 us, 50 % at ~1 ms
+Lcab in2 in 2u Rser=33m
+.ic V(v24)=29.2 V(vdc)=29.2 V(vaux)=29.2 V(vsrv)=29.2 V(in)=29.2 V(f)=29.2 V(in2)=29.2 V(chg)=29.2
+.tran 0 5m 0 50n uic
+.options plotwinsize=0
+.save V(v24) V(vdc) V(vaux) I(D9) I(L2) I(Lcab)
+.meas tran Vpk_24V   MAX V(v24) FROM 90u TO 5m
+.meas tran Vpk_24VDC MAX V(vdc)
+.meas tran Vpk_AUX   MAX V(vaux)
+.meas tran Ipk_D9    MAX -I(D9) FROM 90u TO 5m
+.meas tran E_D9      INTEG -I(D9)*V(v24)
+.end

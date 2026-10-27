@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MES4-Carrier-EC review package</title>
+<style>
+:root{--bg:#fbfaf7;--fg:#22211f;--mut:#6b6a65;--line:#d8d6cf;--card:#fff;--ok:#2f6b16;--okb:#eaf3de;--warn:#7a4806;--warnb:#faeeda;--bad:#8a2424;--badb:#fcebeb;--lim:#a32d2d}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1b1b1a;--fg:#ecebe6;--mut:#a5a39b;--line:#3a3936;--card:#242422;--ok:#b5d98c;--okb:#22331a;--warn:#f2c77a;--warnb:#3a2c13;--bad:#f2a5a5;--badb:#3d1d1d;--lim:#f09595}}
+:root[data-theme="dark"]{--bg:#1b1b1a;--fg:#ecebe6;--mut:#a5a39b;--line:#3a3936;--card:#242422;--ok:#b5d98c;--okb:#22331a;--warn:#f2c77a;--warnb:#3a2c13;--bad:#f2a5a5;--badb:#3d1d1d;--lim:#f09595}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:860px;margin:0 auto;padding:24px 16px 48px}
+h1{font-size:24px;font-weight:600;margin:0 0 4px}h2{font-size:18px;font-weight:600;margin:32px 0 8px}
+p.sub{color:var(--mut);margin:0 0 20px}
+table{border-collapse:collapse;width:100%;font-size:14px;margin:8px 0}
+th,td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+th{color:var(--mut);font-weight:500}
+.pill{display:inline-block;padding:1px 8px;border-radius:10px;font-size:12px;font-weight:600;white-space:nowrap}
+.ok{background:var(--okb);color:var(--ok)}.na{background:var(--line);color:var(--mut)}.warn{background:var(--warnb);color:var(--warn)}.bad{background:var(--badb);color:var(--bad)}
+figure{margin:12px 0;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 10px 4px}
+figcaption{font-size:13px;color:var(--mut);margin:0 0 4px}
+svg .grid{stroke:var(--line);stroke-width:.6}svg .ax{fill:var(--mut);font-size:11px}
+svg .lim{stroke:var(--lim);stroke-width:1;stroke-dasharray:5 4}svg .limt{fill:var(--lim);font-size:11px}
+svg .lg{fill:var(--fg);font-size:11px}
+.grp{font-size:12px;color:var(--mut);margin:-4px 0 8px}
+.grp b{color:var(--fg);font-weight:600}
+h3{font-size:15px;font-weight:600;margin:22px 0 4px}
+.toc{columns:2;font-size:14px;padding-left:18px}.toc li{margin:2px 0}
+.note{border-left:3px solid var(--line);padding:2px 0 2px 12px;color:var(--mut);font-size:14px}
+@page{size:A4;margin:14mm 13mm}
+@media print{
+ :root{--bg:#fff;--fg:#1d1d1b;--mut:#55544f;--line:#cfcdc5;--card:#fff;--ok:#2f6b16;--okb:#e3f0d3;--warn:#6b3f05;--warnb:#f8e7c6;--bad:#8a2424;--badb:#f8dddd;--lim:#a32d2d}
+ body{font-size:10pt;line-height:1.45}main{max-width:none;padding:0}
+ h1{font-size:20pt}h2{font-size:14pt;break-after:avoid;margin-top:18pt}h3{font-size:11.5pt;break-after:avoid}
+ figure,tr,.grp,.note{break-inside:avoid}thead{display:table-header-group}figure{border-color:#cfcdc5}
+ .pb{break-before:page}
+ .pill{border:1px solid currentColor}
+}
+code{font-size:13px}ul{padding-left:20px}
+</style></head><body><main>
+<h1>MES4-Carrier-EC · design review package</h1>
+<p class="sub">Input for review R2 · schematic Rev A, 27 Oct 2026 (branch <code>mes4-gpio-standard</code>) · Monkey Robotics · Aaron Raj Bhatti</p>
+
+<p><b>What's in this package:</b> (1) what changed since review R1 and the status of every R1 finding, (2) whole-board LTspice simulations (review item M4), grouped by schematic sheet, (3) the updated 11-page schematic, appended after this report.</p>
+<ol class="toc">
+<li>Changes since review R1</li><li>Status of the R1 findings</li><li>Open items for the reviewer</li><li>Simulation summary</li><li>Power (page 4)</li><li>Relays (pages 5–6)</li><li>Sensors (page 7)</li><li>Load cell (page 8)</li><li>Aux power (page 9)</li><li>IMU (page 9 → dev kit)</li><li>Winch (page 10)</li><li>Main (page 2)</li><li>Not simulated, and why</li><li>Models and assumptions</li><li>Schematic (11 pages)</li>
+</ol>
+
+<h2>1 · Changes since review R1</h2>
+<table>
+<tr><th>Sheet (page)</th><th>Change</th><th>Why</th></tr>
+<tr><td>Relays 1-2 / 3-4 (5, 6)</td><td>U2–U5 <b>INA226 → INA236AIDDFR</b> (LCSC C5443912, TSOT-23-8). Addresses now 0x40 / 0x41 / 0x42 / 0x43 via A0 = GND / VS / SDA / SCL. A1 and VBUS are gone; the bus voltage is read on IN−. Same CONFIG 0x4327, CAL 1707, MASK/ENABLE 0x8001 and ALERT limit; bus LSB 1.6 mV, Device ID 0xA080</td><td>M1: 50 V abs max vs the INA226's 40 V (SMBJ30A clamps up to 48.4 V). The 85 V INA238 / INA228 had 0 LCSC stock</td></tr>
+<tr><td>AuxPower (9)</td><td><b>J15 servo 24 V: pin 1 = +24 V, pin 2 = GND_24V</b>, like every other power terminal</td><td>M3. The Harvester CN5 cable gets re-pinned</td></tr>
+<tr><td>AuxPower (9)</td><td><b>R38</b> (servo RX series) <b>100 Ω → 1 kΩ</b> (LCSC C11702)</td><td>L4: limits FE-URT-2 back-feed into PA3 with the module off</td></tr>
+<tr><td>AuxPower (9), Main (2), Power (4)</td><td>IMU note: <b>3DM-CV7-AHRS on the C-Series Connectivity Board</b> (6212-3009). J14 9 V → board Vaux only, never Vpri; not with the USB cable at the same time. IMU load in the power budget ≈ 0.02 A at 24 V</td><td>The IMU is now known; Vpri (3.2–5.2 V) would be destroyed by 9 V</td></tr>
+<tr><td>Relays 1-2 (5)</td><td>Diagnosis note: "current present" threshold <b>5 mA → 3 mA</b>; INA236 differences listed</td><td>L2: the LED alone draws 5.1–6.7 mA over 21–29 V</td></tr>
+<tr><td>Power (4)</td><td>F1 / Q1 notes use the real worst case: 13 A, Q1 ≈ 2.2 W, size the drain copper for 2.2 W</td><td>L6</td></tr>
+<tr><td>LoadCell (8), Main (2)</td><td>Silkscreen notes: filled box <b>"5V LOAD CELL – NEVER 24V"</b> at J12 / J13, placed away from the 24 V terminals; <b>"CAN – NOT ETHERNET"</b> at J4</td><td>M2 (silkscreen instead of a keyed connector, by choice: JLC doesn't stock the mating plugs) and L5</td></tr>
+<tr><td>Footprints</td><td><b>J4 RJ45 1×4 rebuilt from the HCTL drawing</b>: ports 14.0 mm apart (was 13.97), Ø1.5 shield holes (was Ø1.7), shield and peg positions per the drawing. U1 / U9 / U10 converter footprints checked against the JLC library and the YLPTEC drawing</td><td>L9, and the custom-footprint check before routing</td></tr>
+<tr><td>sim/ (new)</td><td>16 LTspice benches covering every sheet with an analog or power circuit, on the real supply chain (sections 4–12)</td><td>M4</td></tr>
+</table>
+<p class="note">Unchanged since R1: the GPIO map (no coil feedback; PA0/PA1 winch, PA2/PA3 servo USART2), the servo TX pull-up R37, the Winch_48V net class and isolation notes, the block diagram and the page 11 finger map. All of these were already in the R1 schematic.</p>
+
+<h2>2 · Status of the R1 findings</h2>
+<table>
+<tr><th>ID</th><th>Finding</th><th>Status</th><th>How</th></tr>
+<tr><td>M1</td><td>INA226 40 V vs the SMBJ30A clamp</td><td><span class="pill ok">Fixed</span></td><td>INA236 (50 V). PWR2: the bus peaks at 40 V at D9's rated pulse</td></tr>
+<tr><td>M2</td><td>24 V miswire on the load-cell terminals</td><td><span class="pill warn">Mitigated</span></td><td>Silkscreen box and placement away from the 24 V terminals (no keyed connector, by choice)</td></tr>
+<tr><td>M3</td><td>J15 polarity</td><td><span class="pill ok">Fixed</span></td><td>Pin 1 = +24 V</td></tr>
+<tr><td>M4</td><td>No simulation evidence</td><td><span class="pill ok">Done</span></td><td>16 benches, sections 4–12</td></tr>
+<tr><td>L1</td><td>Relay LED resistor power</td><td><span class="pill na">No change needed</span></td><td>R14 / R15 / R22 / R23 are already 1206 (0.25 W)</td></tr>
+<tr><td>L2</td><td>5 mA threshold</td><td><span class="pill ok">Fixed</span></td><td>3 mA in the diagnosis note (firmware)</td></tr>
+<tr><td>L3</td><td>Servo return through logic GND</td><td><span class="pill warn">Layout</span></td><td>Layout checklist: J15, J17 and NT1 together, away from the load cell</td></tr>
+<tr><td>L4</td><td>PA3 back-power</td><td><span class="pill ok">Fixed</span></td><td>R38 = 1 kΩ; AUX3 shows 8.8 ns edges at 1 Mbit/s</td></tr>
+<tr><td>L5</td><td>RJ45 looks like Ethernet</td><td><span class="pill warn">Silkscreen</span></td><td>"CAN – NOT ETHERNET" on the board and the panel</td></tr>
+<tr><td>L6</td><td>Stale Power notes</td><td><span class="pill ok">Fixed</span></td><td>13 A / 2.2 W</td></tr>
+<tr><td>L7</td><td>3 A PTC derating</td><td><span class="pill warn">Open</span></td><td>AUX1: F11 sits at its 3 A hold if the screen draws 3 A. Measure the screen; 4 A-hold PTC if needed</td></tr>
+<tr><td>L8</td><td>Screen on 5 V only</td><td><span class="pill warn">Bench</span></td><td>Bench test at full brightness</td></tr>
+<tr><td>L9</td><td>DC/DC pin numbering</td><td><span class="pill ok">Closed</span></td><td>U1 / U9 / U10 match the JLC library; U10 also the YLPTEC drawing</td></tr>
+</table>
+
+<h2>3 · Open items for the reviewer</h2>
+<ul>
+<li><b>F11 (screen PTC):</b> keep 3 A hold, or fit 4 A now? It depends on the ARZOPA Z1C's real current (AUX1, L7).</li>
+<li><b>Supply limits:</b> the pack's full-charge voltage (7S Li-ion 29.4 V or 8S LiFePO4 29.2 V) against the AB20 variant (A/B/C rated 30 V, D rated 60 V).</li>
+<li><b>Datasheet checks:</b> YLPTEC converters at 40 V for about 1 ms (PWR2); Q1 AGM60P90D I<sub>DM</sub> against the 100 A plug-in inrush; F1 melting I²t against 0.95 A²s (PWR1).</li>
+<li><b>Hold-up:</b> 4.0 ms on total power loss (PWR6). Enough for glitches; add bulk on +24V only if a clean shutdown is wanted.</li>
+</ul>
+
+<h2 class="pb">4 · Simulation summary</h2>
+<p class="note">LTspice 17.2.4. Benches are in <code>MES4_Carrier_EC/sim/</code> and named by sheet: PWR = Power, RLY = Relays, SNS = Sensors, LC = LoadCell, AUX = AuxPower, IMU = AuxPower → dev kit, WCH = Winch, MAIN = Main. Each section below lists the sheet, the parts simulated and the bench file.</p>
+<table>
+<tr><th>Group</th><th>Sheet (page)</th><th>Bench</th><th>Test</th><th>Result</th></tr>
+<tr><td>Power</td><td>Power (4)</td><td>PWR1</td><td>XT30 hot-plug, full pack (29.4 V) via the AB20, 2 m cable</td><td><span class="pill ok">Pass</span></td></tr>
+<tr><td>Power</td><td>Power (4)</td><td>PWR2</td><td>12.4 A 10/1000 µs pulse (D9 rating)</td><td><span class="pill warn">Pass, check converters</span></td></tr>
+<tr><td>Power</td><td>Power (4)</td><td>PWR3</td><td>IEC 61000-4-5 0.5 kV surge</td><td><span class="pill na">Not applicable</span></td></tr>
+<tr><td>Power</td><td>Power (4)</td><td>PWR4</td><td>Battery connected backwards</td><td><span class="pill ok">Pass</span></td></tr>
+<tr><td>Power</td><td>Power (4), fed by the AB20</td><td>PWR6</td><td>Line changeover and hold-up</td><td><span class="pill ok">Pass</span></td></tr>
+<tr><td>Power</td><td>Power (4) + Main (2)</td><td>PWR5</td><td>+5V_24 / module +5V under load steps</td><td><span class="pill ok">Pass</span></td></tr>
+<tr><td>Relays</td><td>Relays 1-2 / 3-4 (5, 6)</td><td>RLY1</td><td>SRD coil driver on / off</td><td><span class="pill ok">Pass</span></td></tr>
+<tr><td>Relays</td><td>Relays 3-4 (6)</td><td>RLY2</td><td>Solenoid output switched off</td><td><span class="pill ok">Pass</span></td></tr>
+<tr><td>Sensors</td><td>Sensors (7)</td><td>SNS1</td><td>PC817 input, 20 V sensor, CTR 50 %</td><td><span class="pill ok">Pass</span></td></tr>
+<tr><td>Load cell</td><td>LoadCell (8)</td><td>LC1</td><td>ADC input filter, AC response</td><td><span class="pill ok">Pass</span></td></tr>
+<tr><td>Aux power</td><td>AuxPower (9)</td><td>AUX1</td><td>U10 start-up into the screen</td><td><span class="pill warn">Pass, check F11</span></td></tr>
+<tr><td>Aux power</td><td>AuxPower (9)</td><td>AUX2</td><td>3 A servo stall step</td><td><span class="pill ok">Pass</span></td></tr>
+<tr><td>Aux power</td><td>AuxPower (9)</td><td>AUX3</td><td>Servo UART, 1 Mbit/s</td><td><span class="pill ok">Pass</span></td></tr>
+<tr><td>Winch</td><td>Winch (10)</td><td>WCH1</td><td>IM03GR coil driver on / off</td><td><span class="pill ok">Pass</span></td></tr>
+<tr><td>IMU</td><td>AuxPower (9) → J14 → dev kit</td><td>IMU1</td><td>SW2 switches 9 V into the CV7 dev board</td><td><span class="pill ok">Pass</span></td></tr>
+<tr><td>Main</td><td>Main (2) + Relays (5, 6)</td><td>MAIN1</td><td>I²C1 at 400 kHz, ALERT</td><td><span class="pill ok">Pass</span></td></tr>
+</table>
+<p class="note">Everything still to decide or check is collected in section 3.</p>
+
+<h2>5 · Power · sheet Power (page 4)</h2>
+<p class="grp"><b>Supply into J5 (your system):</b> 48 V main battery → Mean Well <b>DDR-480C-24</b> (set to 24 V; adjustable 24–28 V; OVP 28.8–35 V; 4 kV isolated; 20 A) → <b>AB20</b> line 1. 24 V 12 Ah Li-ion pack → <b>XY-CD63L</b> discharge monitor → AB20 line 2. The AB20 is a diode-OR ("zero-delay", anti-backflow): the higher input feeds the carrier. Model: <code>source_ab20.inc</code>.</p>
+<p class="grp"><b>Parts:</b> J5 XT30, F1 15 A, Q1 AGM60P90D + D8/R6, D9 SMBJ30A, C1–C3 · L1 + C4/C5 → U1 URB2405S-6WR3 (+24V_DC) · L2 + C26–C30 → U9 / U10 (AuxPower) · F9 + C31/C32 (servo). Shared model: <code>common.inc</code>.</p>
+
+<h3>PWR1 · hot-plug (<code>pwr1_hotplug.net</code>)</h3>
+<p>The XT30 closes on the AB20 output with the pack fully charged (29.4 V, above the DDR's 24 V, so the pack feeds the carrier), through a 2 m cable (2 µH, 33 mΩ). +24V rises cleanly to 29.1 V, with no overshoot on any branch, so D9 never conducts. Charging about 450 µF pulls a current pulse peaking at 100 A and lasting about 0.1 ms (F1 I²t 0.95 A²s), so the XT30 will spark. L1 and L2 saturate briefly (31 / 46 A in this linear model). That's harmless; confirm Q1's pulsed drain current and F1's melting I²t on their datasheets.</p>
+{{pwr1v}}
+{{pwr1i}}
+
+<h3>PWR2 · surge at D9's rating (<code>pwr2_tvs_pulse.net</code>)</h3>
+<p>This is the design-limit case: both AB20 inputs are gone (bus held at 29.2 V by a weak source) and a 12.4 A, 10/1000 µs pulse arrives on the cable. With the AB20's diodes blocking any return path, this is also what servo back-EMF would face. The bulk capacitors take most of it: the bus peaks at 40.0 V and D9 takes 4.4 A and 0.31 J of its ≈ 0.87 J rating. That leaves 10 V of margin to the INA236. U1, U9 and U10 see 40 V for about 1 ms, above their 36 V operating range, so check YLPTEC's input surge rating (similar Mornsun URB parts allow 50 V for 1 s).</p>
+{{pwr2}}
+
+<h3>PWR3 · IEC 61000-4-5 surge (<code>pwr3_iec_surge.net</code>) · not applicable</h3>
+<p><b>Not applicable to this system:</b> the carrier's 24 V comes from the isolated DDR-480C-24 and an internal pack through the AB20, on short wiring inside the robot. The run is kept for reference, in case the bus ever gets an external charger port or a long harness.</p>
+<p>0.5 kV line-to-line, 1.2/50 µs, 2 Ω, through an 18 µF coupling capacitor, with the battery behind a 1.5 mH decoupling inductor. D9 conducts 27 A and the bus reaches 62.9 V, above the INA236's 50 V and the 50 V ceramics. +24V_AUX stays at 39.7 V behind L2. This surge is normally required only for long or external DC power cables. If the bus ever goes off the robot (a charger port, a long harness), fit an <b>SMCJ30A</b> (1500 W, same standoff, Vc 48.4 V at 31 A, about 47 V here).</p>
+{{pwr3}}
+
+<h3>PWR4 · reverse battery (<code>pwr4_reverse.net</code>)</h3>
+<p>The battery is connected as −29.2 V. Q1's body diode is reverse-biased and its gate stays off, so +24V stays between −4 mV and +2 mV and only 0.12 mA of leakage flows. D9 sits after Q1, so it never sees the reverse voltage. <span class="pill ok">Pass</span></p>
+
+<h3>PWR6 · line changeover and hold-up (<code>pwr6_changeover.net</code>)</h3>
+<p>The DDR on line 1 carries the load at 24 V (the carrier sees 23.6 V after the AB20 diode), with the pack part-discharged at 23.0 V. At 2 ms the DDR stops (48 V battery below its 33 V UVLO, or an OVP trip). The pack takes over through the AB20 with no gap: +24V simply steps to 22.5 V. At 12 ms the XY-CD63L cuts the pack as well. With both sources gone, the carrier keeps running on its own bulk capacitance for <b>4.0 ms</b> (screen at full load) before U1's input falls to 9 V and the module loses 5 V. That's enough to ride through glitches, not enough to shut down cleanly. If you ever want a clean shutdown on total power loss, add bulk capacitance on +24V (2,200 µF would give about 20 ms). Also, the DDR alone can never put more than 35 V on the bus (its OVP), which is inside the converters' 36 V and the INA236's 50 V.</p>
+{{pwr6}}
+
+<h3>PWR5 · 5 V rails (<code>pwr5_5v_rail.net</code>, sheets Power + Main)</h3>
+<p class="grp"><b>Parts:</b> U1 output → C6/C7 (+5V_24) → F2 1.1 A PTC → FB1 → C8/C9 → module fingers 20/22 (module 10 µF + SMF6.0A); relay K1–K4 and winch K5 coils on +5V_24; load cell excitation via FB2.</p>
+<p>The module steps from 40 mA to 240 mA at 2 ms, then four relay coils and one winch coil switch on together at 5 ms (0.27 A after 5 ms, rising to 0.31 A). The module's +5V stays between 4.91 V and 4.99 V, inside its 4.75–5.5 V window, and +5V_24 never drops below 4.95 V.</p>
+{{pwr5}}
+
+<h2>6 · Relays · sheets Relays 1-2 / Relays 3-4 (pages 5–6)</h2>
+<p class="grp"><b>Parts per channel:</b> GPIO → R9 100 Ω (R10 100k pull-down) → Q2 AO3400A → K1 SRD-5VDC-SL-A coil, D10 1N4148W flyback; contact → F3 3 A PTC → J6, D12 SS34 load flyback, LED4 + R14; R8 30 mΩ shunt → U2 INA236. Same for channels 2–4.</p>
+
+<h3>RLY1 · coil driver (<code>rly1_coil_driver.net</code>)</h3>
+<p>3.3 V GPIO on at 0.2 ms, off at 10.2 ms. The gate rises in 0.28 µs, and the coil draws 69 mA. At turn-off, D10 clamps the drain at 5.8 V (the AO3400A is rated 30 V). The coil current takes 3.9 ms to fall to 10 mA, which delays the relay's release a little. That's normal with a plain diode flyback and fine for lamps and the solenoid.</p>
+{{rly1v}}
+{{rly1i}}
+
+<h3>RLY2 · solenoid switched off (<code>rly2_solenoid_off.net</code>, channel 3 battery stopper)</h3>
+<p>A 24 V, 1.5 A solenoid (16 Ω, 50 mH assumed) is on when K3 opens at 5 ms. D16 SS34 clamps the output at −0.36 V and carries 1.49 A (rated 3 A). The current decays to 10 % in 6.9 ms. The INA236's IN− sits on the supply side of the contact and stays at 23.96 V, so the flyback never reaches its −0.3 V input limit.</p>
+{{rly2}}
+
+<h2>7 · Sensors · sheet Sensors (page 7)</h2>
+<p class="grp"><b>Parts:</b> J10 → F7 100 mA PTC → sensor; sensor output → R24 10k → U6 PC817 (D18 reverse clamp) → PB6 with R25 10k pull-down, collector on +3V3_MOD. Sensor 2 (PC15) is identical.</p>
+<h3>SNS1 · PC817 input (<code>sns1_pc817.net</code>)</h3>
+<p>This is the weak case: the sensor output is only 20 V (low battery) and the PC817 has its minimum CTR of 50 %. The LED draws 1.84 mA. PB6 goes HIGH to 3.17 V, well above the STM32's 2.31 V threshold, with about 3× margin on CTR. Rise is 4 µs and fall is 34 µs, much faster than any proximity sensor switches.</p>
+{{sns1}}
+
+<h2>8 · Load cell · sheet LoadCell (page 8)</h2>
+<p class="grp"><b>Parts:</b> J12 SIG → R28/R29 100 Ω → C17 100 nF differential + C16/C18 10 nF to GND → D20/D21 BAV199 clamps → U8 ADS1232 (gain 128, 10 SPS). Source: two SOPLF-102 cells in parallel (700 Ω each → 350 Ω).</p>
+<h3>LC1 · input filter (<code>lc1_input_filter.net</code>, AC)</h3>
+<p>The differential signal is flat in the passband (−0.001 dB at 50 Hz) and rolls off at −3 dB at 2.76 kHz, including the cells' 350 Ω source. Common-mode noise converts to a differential error only through component mismatch. With C18 10 % low, that's −56 dB at 1 kHz, worst ≈ −47 dB around 20 kHz and −71 dB at 1 MHz. The ADS1232's 10 SPS digital filter removes what's left at those frequencies. The C0G capacitors keep the mismatch small and stable.</p>
+{{lc1}}
+
+<h2>9 · Aux power · sheet AuxPower (page 9)</h2>
+<p class="grp"><b>Parts:</b> L2 + C26/C27/C28/C30 → U9 URB2409S-10WR3 (IMU 9 V) and U10 URB2405LD-20WR3 (screen 5 V) → C33/C34 → F11 3 A PTC → J16 USB-C · F9 3 A PTC + C31/C32 → J15 servo 24 V · servo UART J17: R39 100 Ω / R38 1k series, D23/D24 ESD, R36/R37 10k pull-ups.</p>
+
+<h3>AUX1 · U10 start-up (<code>aux1_u10_startup.net</code>)</h3>
+<p>With the bus up, U10 soft-starts its 5 V output in 2 ms (fast-case assumption) into C33/C34, F11 and the screen, which pulls the full 3 A. L2 carries 0.79 A in total (U9 with the IMU + U10), far below its saturation current, and +24V_AUX dips only to 23.5 V. F11 peaks at 3.25 A and sits at 3.0 A, exactly its 23 °C hold current. In a warm enclosure (≈ 2.2 A hold at 60 °C) it would trip if the screen really draws 3 A.</p>
+{{aux1i}}
+{{aux1v}}
+
+<h3>AUX2 · servo stall step (<code>aux2_servo_step.net</code>)</h3>
+<p>The servo draws 3 A for 5 ms (stall), supplied through the AB20 from the DDR at 24 V over a 2 m cable. +24V_SRV dips to 23.19 V and the main +24V to 23.32 V. The relays, INA236s and +24V_AUX (23.27 V) barely notice.</p>
+{{aux2}}
+
+<h3>AUX3 · servo UART (<code>aux3_servo_uart.net</code>)</h3>
+<p>1 Mbit/s (Feetech default) over 0.3 m, with the FE-URT-2 at 3.3 V levels. TX edges at the FE-URT-2 rise in 4 ns. RX edges at PA3 rise in 8.8 ns through the 1 kΩ R38: both under 1 % of the 1 µs bit. PA3's LOW level is 0.31 V (1k against the 10k pull-up), under the STM32's 0.99 V threshold.</p>
+{{aux3}}
+
+<h2>10 · IMU · sheet AuxPower (page 9) → J14 → MicroStrain dev kit</h2>
+<p class="grp"><b>Parts:</b> U9 URB2409S-10WR3 9 V → C29 → SW2 SS12D10G5 → LED8 / R35 → J14 → 1 m cable → <b>C-Series Connectivity Board</b> (part of the 6212-3009 USB development kit) Vaux input → its TPS54260 buck → 5 V → <b>3DM-CV7-AHRS</b> (3.2–5.2 V, 0.23 W, per HBK's product page and the board's Interface Control Document).</p>
+<h3>IMU1 · switching the IMU on (<code>imu1_devkit_switch_on.net</code>)</h3>
+<p>SW2 closes with U9's 9 V already up. The 1 m cable and the board's ceramic input capacitors (2 × 2.2 µF + 0.1 µF) ring: Vaux overshoots to 14.3 V, inside the board's 5.2–28 V Vaux range. The inrush through SW2 peaks at 9.1 A for a few microseconds (0.3 mJ of capacitor charge). Then the buck soft-starts, and the steady draw is 44 mA at J14, 48 mA through SW2 with LED8. That's about a tenth of SW2's 0.5 A rating, so review item L8's SW2 check is closed. U9 (1.11 A) runs at about 4 % load.</p>
+{{imu1v}}
+{{imu1i}}
+<p><b>Wiring rules from the dev kit's Interface Control Document</b>, not things a simulation can show:</p>
+<ul>
+<li><b>Feed J14's 9 V into the board's Vaux input</b> (micro-DB9 pin 6, "+4 V to +35 VDC" in the pin table, 5.2–28 V in the schematic notes). <b>Never into Vpri</b> (pin 3, 3.2–5.2 V): Vpri goes straight to the CV7, and 9 V there would destroy it.</li>
+<li><b>Vaux or Vpri, never both.</b> The USB dev cable (micro-DB9 to USB) powers Vpri from the PC's 5 V. When the USB cable is plugged in for configuration, switch SW2 off.</li>
+<li>J14 pin 2 is the carrier's logic GND. Over USB the IMU also connects to the PC's ground: normal, but keep the IMU's USB and power cables together.</li>
+</ul>
+
+<h2>11 · Winch · sheet Winch (page 10)</h2>
+<p class="grp"><b>Parts:</b> PA0 → R43 100 Ω (R44 100k) → Q6 AO3400A → K5 IM03GR coil (178 Ω), D25 1N4148W flyback. K6 / PA1 is identical. The contact side (J18) is isolated and passive.</p>
+<h3>WCH1 · coil driver (<code>wch1_coil_driver.net</code>)</h3>
+<p>The coil draws 28 mA. At turn-off, D25 clamps the drain at 5.75 V, and the current falls to 3 mA in 0.87 ms, so release is quick.</p>
+{{wch1}}
+
+<h2>12 · Main · sheet Main (page 2), devices on Relays (pages 5–6)</h2>
+<p class="grp"><b>Parts:</b> R3/R4 2.2k I²C1 pull-ups and R5 10k ALERT pull-up to +3V3_MOD; four INA236 (U2–U5) and the STM32 on the bus.</p>
+<h3>MAIN1 · I²C and ALERT (<code>main1_i2c.net</code>)</h3>
+<p>400 kHz with an estimated 60 pF of bus capacitance. SCL rises (30–70 %) in 112 ns, against the 300 ns fast-mode limit, and the LOW level is 0.09 V. ALERT (10k, 40 pF) rises in 0.34 µs, which is plenty for an interrupt or polled line.</p>
+{{main1}}
+
+<h2>13 · Not simulated, and why</h2>
+<table>
+<tr><th>Sheet (page)</th><th>Circuit</th><th>Reason</th></tr>
+<tr><td>CAN (3)</td><td>DB9 + RJ45, H24VNT2B ESD</td><td>Passive on the carrier: the transceiver and terminator are on the MES4-MCU module, which has its own review</td></tr>
+<tr><td>AuxPower (9)</td><td>USB-C CC (R40/R41), shield R42/C37</td><td>Static: 10k Rp to 5 V advertises 3 A; nothing changes over time</td></tr>
+<tr><td>LoadCell (8)</td><td>ADS1232 digital interface (PA4–PA6)</td><td>Digital at 10 SPS, handled in firmware</td></tr>
+<tr><td>Winch (10)</td><td>Contact interlock, J18</td><td>Logic of the contacts, traced in the design review; isolated 48 V side</td></tr>
+<tr><td>Main (2)</td><td>ST-Link, reset, ESD</td><td>Passive</td></tr>
+</table>
+
+<h2>14 · Models and assumptions</h2>
+<ul>
+<li>Values come from the schematic netlist. Ceramic 10 µF / 50 V parts are modelled at ≈ 4 µF at 24–30 V, and 22 µF / 25 V at ≈ 15–18 µF at 5 V (DC bias).</li>
+<li>Electrolytic ESR: 100 µF / 63 V 0.25 Ω, 47 µF / 100 V 0.6 Ω (datasheet-class, not measured).</li>
+<li>Supply: DDR-480C-24 at 24 V (10 mΩ); pack 29.4 V full (7S Li-ion; 8S LiFePO4 would be 29.2 V), 60 mΩ assumed; XY-CD63L switch 5 mΩ assumed; AB20 Schottky diodes ≈ 0.45 V at 10 A (assumed; Autoro gives no drop figure). Cable from the AB20 to the carrier 2 m (2 µH, 33 mΩ).</li>
+<li>SMBJ30A: Zener model fitted to Vc 48.4 V at 12.4 A. AO3400A: generic VDMOS (Vth 1.05 V). 1N4148W and SS34: generic diode models. PC817: behavioural, CTR 50 %, 20 µs pole.</li>
+<li>Converters are constant-power loads above 9 V (U1 3.75 W, U9 0.5 W for the CV7 dev kit, U10 17 W), with 5 ms soft start (U10's output ramp 2 ms in AUX1). Screen input 100 µF, drawing 3 A.</li>
+<li>Assumed inductances (not on the datasheets): SRD coil 0.2 H, IM03GR 0.1 H, battery-stopper solenoid 50 mH. Inductors are linear (no saturation).</li>
+<li>Bus capacitance: I²C 60 pF, ALERT 40 pF, PA3 7 pF. UART cable 0.3 m (100 Ω, 1.5 ns).</li>
+</ul>
+<h2>15 · Schematic</h2>
+<p>The updated schematic (11 A3 pages, KiCad 9.0.2, ERC 0 errors / 0 warnings, 190 parts) follows on the next pages.</p>
+<p class="sub">Rerun: <code>python3 run_sims.py && python3 make_report.py</code> in <code>sim/</code>. Open any <code>.net</code> file in LTspice to see every waveform; <code>results.txt</code> has the raw measurements.</p>
+</main></body></html>

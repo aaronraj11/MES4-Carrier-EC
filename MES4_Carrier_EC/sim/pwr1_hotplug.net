@@ -1,0 +1,25 @@
+* PWR1 (Power, page 4): XT30 hot-plug on the AB20 output (pack full, 29.4 V; DDR at 24 V), 2 m cable
+.param ton=0.6m Vpack=29.4 Vddr=24 tddr=1 txy=1
+.include common.inc
+* U10 screen converter at full load (17 W in), starts with the others
+B_U10 vaux 0 I=if(V(vaux)>9, 17/V(vaux), 0)*limit((time-{ton})/5m,0,1)
+.include source_ab20.inc
+S_XT ab b2 ctl 0 SWXT
+Vctl ctl 0 PULSE(0 1 100u 10n 10n 1 2)
+.model SWXT SW(Ron=2m Roff=1G Vt=0.5 Vh=0)
+Lcab b2 in 2u Rser=33m                     ; 2 m pair: ~1 uH/m loop, 2 x 2 m of 14 AWG
+.tran 0 10m 0 20n
+.options plotwinsize=0
+.save V(in) V(v24) V(vdc) V(vaux) I(Lcab) I(L1) I(L2) I(D9) I(Rf1)
+.meas tran Vpk_in    MAX V(in)
+.meas tran Vpk_24V   MAX V(v24)
+.meas tran Vpk_24VDC MAX V(vdc)
+.meas tran Vpk_AUX   MAX V(vaux)
+.meas tran Ipk_cable MAX I(Lcab)
+.meas tran Ipk_L1    MAX I(L1)
+.meas tran Ipk_L2    MAX I(L2)
+.meas tran Ipk_D9    MAX -I(D9)
+.meas tran E_D9      INTEG -I(D9)*V(v24)
+.meas tran I2t_F1    INTEG I(Rf1)*I(Rf1)
+.meas tran V24_end   FIND V(v24) AT 9.9m
+.end

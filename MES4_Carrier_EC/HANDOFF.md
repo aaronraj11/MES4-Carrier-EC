@@ -58,7 +58,7 @@ What went with it:
 
 - ARZOPA Z1C screen at 5 V only (no USB-PD source): check full brightness on the bench.
 - FE-URT-2 must be set to **3.3 V UART levels** (noted on the AuxPower sheet and in the README). Bench check: read a servo's ID / position at 3.3 V; the FE-URT-2 datasheet wasn't found, so it's unconfirmed whether the switch also changes the servo-bus side. Servo supply is raw 24 V through F9 3 A PTC: check the servos' stall current against it.
-- SW2 (SS12D10G5, IMU switch) is rated 0.5 A: check the IMU's current.
+- IMU = 3DM-CV7-AHRS on the C-Series Connectivity Board (6212-3009): J14 9 V → board Vaux (5.2–28 V), never Vpri (3.2–5.2 V); not both at once (SW2 off with the USB cable). Draw ≈ 45 mA (sim IMU1), so SW2's 0.5 A rating is fine.
 - Low stock at last check: URB2409S-10WR3 C7424703 (78), SMBJ30A C113998 (920 global), L1 SWPA5040S100MT C84608 (LCSC page "not found", JLC page live).
 - Custom footprints checked against the manufacturer drawings (2026-10-27): RJ45 1×4 now built from the HCTL drawing (14.0 mm ports, Ø1.0 / Ø1.5 / Ø3.2 holes; the JLC library part has 13.97 mm ports, 2.50 mm rows and Ø3.5 pegs, so it isn't used); URB2405LD-20WR3 matches the YLPTEC drawing and the JLC part. Still worth a print-out test fit before ordering.
 - No PCB has been started.
@@ -70,7 +70,7 @@ What went with it:
 | M1 INA226 40 V vs SMBJ30A 48 V clamp | Fixed: U2–U5 are now INA236AIDDFR (C5443912, 50 V abs max, TSOT-23-8), addresses 0x40–0x43 via A0 (GND / VS / SDA / SCL). INA238 / INA228 (85 V) had 0 LCSC stock |
 | M2 24 V on the load-cell terminals | Silkscreen only (user's choice: no keyed connector): "5V LOAD CELL – NEVER 24V" box, J12 / J13 away from 24 V terminals |
 | M3 J15 polarity | Fixed: pin 1 = +24 V, pin 2 = GND_24V. Re-pin the Harvester CN5 cable |
-| M4 Simulations | Open: hot-plug, surge into D9 (with M1), U10 start-up |
+| M4 Simulations | Done for the whole board: 16 LTspice benches in `sim/` grouped by sheet, report `sim/report.html`, fed by the real supply (DDR-480C-24 at 24 V and a 24 V Li-ion pack via XY-CD63L, diode-OR'd by an AB20). All pass; PWR3 (IEC surge) is not applicable to this internal, isolated supply. Hold-up on total loss 4.0 ms. Open checks: F11 at its 3 A hold if the screen draws 3 A; converters' 40 V input surge rating; Q1 I_DM vs 100 A inrush; F1 melting I²t; pack full-charge voltage vs the AB20 variant (A/B/C are 30 V) |
 | L1 LED resistor power | Already 1206 (0.25 W): no change |
 | L2 5 mA threshold | Fixed: 3 mA in the diagnosis note |
 | L3 Servo return via logic GND | Layout: J15, J17 and NT1 together, away from the load cell; heavy wire on J15 |
@@ -87,6 +87,10 @@ What went with it:
 - Q1 drain-tab copper for 2.2 W.
 - J15, J17 and NT1 together, away from the load cell (L3).
 - Silkscreen: "5V LOAD CELL – NEVER 24V" (filled box) at J12 / J13, placed away from the 24 V terminals; "CAN – NOT ETHERNET" at J4; polarity marks on every power terminal.
+
+## Supply into the carrier (from the user, 27 Oct 2026)
+
+48 V main battery → Mean Well DDR-480C-24 (set 24 V, isolated, OVP 28.8–35 V) → Autoro AB20 line 1. 24 V 12 Ah Li-ion pack → XY-CD63L discharge monitor → AB20 line 2. The DDR also charges the pack through a charge board. The AB20 is a diode-OR ATS (higher input wins, zero delay, blocks back-feed). Pack cell count unknown: 7S Li-ion = 29.4 V full, 8S LiFePO4 = 29.2 V. The AB20A/B/C are rated 30 V, the AB20D 60 V.
 
 ## Decisions already made with the user (don't re-ask)
 

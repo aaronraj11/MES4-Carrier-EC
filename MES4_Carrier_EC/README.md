@@ -198,7 +198,7 @@ All LEDs are JLC **Basic** parts (no extended-part fee, Economic PCBA): red NCD0
 - **Never run CAN in a cable or connector with 24 V** (CIF rule 9).
 - **The screen port's VBUS is always on** (no cold-socket switch): plug in only the monitor or another sink, never a charger or a laptop.
 - **FE-URT-2 at 3.3 V levels only** (its level switch): at 5 V it overdrives PA3 when the module is unpowered. See Door servo.
-- **SW2 (SS12D10G5) is rated 0.5 A.** Check that the IMU draws less; the converter can supply up to 1.11 A.
+- **IMU: MicroStrain 3DM-CV7-AHRS on the C-Series Connectivity Board** (6212-3009 USB development kit). The CV7 takes 3.2–5.2 V and 0.23 W; the board's Vaux input takes 5.2–28 V through its own TPS54260 buck. Wire J14's 9 V to **Vaux** (micro-DB9 pin 6), **never Vpri** (pin 3, straight to the CV7: 9 V there destroys it). Use Vaux or Vpri, not both: switch SW2 off while the USB dev cable (which puts the PC's 5 V on Vpri) is plugged in. Simulated draw ≈ 45 mA at 9 V, a tenth of SW2's 0.5 A rating (sim IMU1).
 - **Servo supply is the raw 24 V bus** (as on the Harvester): only for 24 V servo types. F9 trips at 5 A.
 - **Input fuse margin:** a realistic total of 6–8 A is fine. Every load at its limit at once (4 × 2 A relays + 3 A servo + IMU + screen ≈ 13 A) exceeds F1's 75 % derating (11 A).
 

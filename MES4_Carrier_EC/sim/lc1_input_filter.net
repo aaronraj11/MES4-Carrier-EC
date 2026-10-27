@@ -1,0 +1,27 @@
+* LC1 (LoadCell, page 8): ADS1232 input filter R28/R29 100 ohm, C17 100 nF diff, C16/C18 10 nF to GND
+* Two SOPLF-102 cells in parallel: 700 ohm output each -> 350 ohm source. C18 at -10 % to show CM->DM conversion.
+Vdm dp dn AC 1                                 ; differential test signal (AC 1)
+Rsp dp sp 175
+Rsn dn sn 175
+Vcm dn 0 AC 0
+R28 sp ainp 100
+R29 sn ainn 100
+C17 ainp ainn 100n
+C16 ainp 0 10n
+C18 ainn 0 10n
+* common-mode path: same network driven by a CM source, C18 low by 10 %
+Vcm2 cm 0 AC 1
+Rsp2 cm sp2 175
+Rsn2 cm sn2 175
+R28b sp2 ainp2 100
+R29b sn2 ainn2 100
+C17b ainp2 ainn2 100n
+C16b ainp2 0 10n
+C18b ainn2 0 9n
+.ac dec 50 1 10Meg
+.save V(ainp,ainn) V(ainp2,ainn2)
+.meas ac DM_50Hz  FIND mag(V(ainp,ainn)) AT 50
+.meas ac DM_f3dB  WHEN mag(V(ainp,ainn))=0.7071
+.meas ac CMDM_1k  FIND mag(V(ainp2,ainn2)) AT 1k
+.meas ac CMDM_1M  FIND mag(V(ainp2,ainn2)) AT 1Meg
+.end

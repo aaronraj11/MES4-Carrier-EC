@@ -1700,7 +1700,7 @@
 		(stroke (width 0) (type default))
 		(uuid "70ce61bd-d8cd-5f45-ab9d-0ee2a9b3221a")
 	)
-	(text "Same parts as the MES3.1-Carrier-LH \"IMU Power Supply @ 9V\":\nU9 YLPTEC URB2409S-10WR3 (9-36 V in, 9 V 1.11 A, 10 W isolated, short-circuit protected;\nMES3.1 U15), C28 47 µF / 100 V and C29 22 µF / 16 V (the datasheet's Cin / Cout),\nSW2 SS12D10G5 slide switch (MES3.1 U22, common = pin 2), J14 KF250NH 2-pin (MES3.1 CN10).\nCTRL open = on. SW2 is rated 0.5 A: check the IMU draws less (the converter gives up to 1.11 A).\nLED8 green (+ R35 2.2k, 3.2 mA) sits after SW2: it lights only when the IMU terminal is powered.\nLCSC stock of URB2409S-10WR3 is low (78 on 2026-10-27): order early."
+	(text "Same parts as the MES3.1-Carrier-LH \"IMU Power Supply @ 9V\":\nU9 YLPTEC URB2409S-10WR3 (9-36 V in, 9 V 1.11 A, 10 W isolated, short-circuit protected;\nMES3.1 U15), C28 47 µF / 100 V and C29 22 µF / 16 V (the datasheet's Cin / Cout),\nSW2 SS12D10G5 slide switch (MES3.1 U22, common = pin 2), J14 KF250NH 2-pin (MES3.1 CN10).\nCTRL open = on. IMU: MicroStrain 3DM-CV7-AHRS on the C-Series Connectivity Board (6212-3009 kit), ≈ 45 mA at 9 V\n(SW2 0.5 A rating OK). Wire J14 to the board's Vaux (5.2-28 V, micro-DB9 pin 6), NEVER Vpri (3.2-5.2 V, pin 3,\nstraight to the CV7). Vaux or Vpri, not both: switch SW2 off while the USB dev cable (5 V on Vpri) is plugged in.\nLED8 green (+ R35 2.2k, 3.2 mA) sits after SW2: it lights only when the IMU terminal is powered.\nLCSC stock of URB2409S-10WR3 is low (78 on 2026-10-27): order early."
 		(exclude_from_sim no)
 		(at 124.46 68.58 0)
 		(effects (font (size 1.27 1.27)) (justify left top))

@@ -1,0 +1,94 @@
+== aux1_u10_startup
+   ipk_l2     0.7866
+   il2_end    0.737
+   vmin_aux   23.51
+   ipk_f11    3.25
+   ipk_u10    3.34
+   vscr_end   4.94
+== aux2_servo_step
+   vsrv_min   23.19
+   v24_min    23.32
+   v24_max    23.62
+   vaux_min   23.27
+== aux3_servo_uart
+   tr_fe4     3.984e-09
+   tr_pa3     8.823e-09
+   vlow_pa3   0.3136
+== imu1_devkit_switch_on
+   vpk_vaux   14.27
+   ipk_sw2    9.112
+   i_j14      0.04448
+   i_sw2      -0.0478
+== lc1_input_filter
+   dm_50hz_db -0.001429
+   dm_f3db    2756
+   cmdm_1k_db -55.79
+   cmdm_1m_db -70.74
+== main1_i2c
+   tr_scl     1.118e-07
+   vol_scl    0.08761
+   tr_alert   3.39e-07
+== pwr1_hotplug
+   vpk_in     29.08
+   vpk_24v    29.07
+   vpk_24vdc  29.07
+   vpk_aux    29.07
+   ipk_cable  100.5
+   ipk_l1     31.34
+   ipk_l2     46.3
+   ipk_d9     0.002446
+   e_d9       1.993e-07
+   i2t_f1     0.9451
+   v24_end    28.95
+== pwr2_tvs_pulse
+   vpk_24v    39.99
+   vpk_24vdc  40
+   vpk_aux    39.97
+   ipk_d9     4.422
+   e_d9       0.3057
+== pwr3_iec_surge
+   vpk_24v    62.94
+   vpk_aux    39.72
+   ipk_d9     27.01
+   e_d9       0.02174
+== pwr4_reverse
+   vmin_24v   -0.004107
+   vmax_24v   0.001671
+   i_rev      0.0001196
+== pwr5_5v_rail
+   v5_min     4.909
+   v5_max     4.987
+   v524_min   4.947
+   icoil      0.2729
+== pwr6_changeover
+   v24_before 23.6
+   v24_dip    22.52
+   v24_pack   22.52
+   t_cut      0.01201
+   t_9v       0.01603
+   holdup     0.004029
+== rly1_coil_driver
+   vd_peak    5.816
+   i_on       0.06916
+   t_gate     2.763e-07
+   t_off      0.0102
+   t_i10      0.01407
+   t_decay    0.003871
+== rly2_solenoid_off
+   vout_min   -0.3638
+   vinm_min   23.96
+   ifw_pk     1.491
+   t_open     0.005
+   t_i15      0.01185
+   t_release  0.006852
+== sns1_pc817
+   vpb_high   3.166
+   i_led      0.001835
+   t_rise     4.145e-06
+   t_fall     3.439e-05
+== wch1_coil_driver
+   vd_peak    5.751
+   i_on       0.02808
+   t_off      0.0052
+   t_i3       0.006066
+   t_decay    0.0008659

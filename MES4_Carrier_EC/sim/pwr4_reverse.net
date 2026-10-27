@@ -1,0 +1,16 @@
+* PWR4 (Power, page 4): battery connected backwards (-29.2 V) through the XT30
+.param ton=1
+.include common.inc
+Vbat bat 0 -29.2
+Rbat bat b1 20m
+S_XT b1 b2 ctl 0 SWXT
+Vctl ctl 0 PULSE(0 1 100u 10n 10n 1 2)
+.model SWXT SW(Ron=2m Roff=1G Vt=0.5 Vh=0)
+Lcab b2 in 2u Rser=33m
+.tran 0 2m 0 20n
+.options plotwinsize=0
+.save V(in) V(v24) I(Lcab) I(D_Q1)
+.meas tran Vmin_24V MIN V(v24)
+.meas tran Vmax_24V MAX V(v24)
+.meas tran I_rev    MAX abs(I(Lcab)) FROM 0.5m TO 2m
+.end

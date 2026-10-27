@@ -1,0 +1,29 @@
+* PWR5 (Power page 4 + Main page 2): +5V_24 and module +5V during module start-up and coil switching
+.include models.inc
+Vu1 u1 0 5.0                                  ; U1 URB2405S-6WR3 output, regulated
+Ru1 u1 v5_24 0.1                              ; worst-case load regulation
+C6  v5_24 0 15u Rser=5m                       ; 22 uF 25 V at 5 V bias
+C7  v5_24 0 100n Rser=20m
+Rf2 v5_24 f2 0.12                             ; F2 Littelfuse 1206L110 (cold)
+Lfb1 f2 v5 0.5u Rser=30m                      ; FB1 BLM21PG121SN1D (low-frequency model)
+Rfb1 f2 v5 120
+C8  v5 0 7u Rser=5m                           ; 10 uF 25 V at 5 V
+C9  v5 0 100n Rser=20m
+Cmod v5 0 7u Rser=5m                          ; module input cap (10 uF 25 V on the MES4-MCU)
+Dmod 0 v5 SMF6V0                              ; module SMF6.0A
+Bmod v5 0 I=0.04 + 0.20*limit((time-2m)/10u,0,1)  ; module 40 mA, then a 240 mA worst-case step at 2 ms
+Rlc v5 0 390                                  ; load-cell excitation, 2 x 780 ohm (via FB2)
+* relay + winch coils on +5V_24: 4 x SRD (70 ohm) + 1 x IM03GR (178 ohm) switched on together at 5 ms
+Lk  v5_24 kc 0.037 Rser=15.9                  ; 5 coils in parallel: 70||70||70||70||178 = 15.9 ohm, 0.2||..||0.1 H
+Sk  kc 0 g 0 SWK
+Vg g 0 PULSE(0 1 5m 1u 1u 5m 20m)
+.model SWK SW(Ron=50m Roff=100Meg Vt=0.5 Vh=0)
+Dk  kc v5_24 D1N4148W
+.tran 0 14m 0 50n
+.options plotwinsize=0
+.save V(v5_24) V(v5) I(Lk)
+.meas tran V5_min  MIN V(v5) FROM 1m TO 14m
+.meas tran V5_max  MAX V(v5) FROM 1m TO 14m
+.meas tran V524_min MIN V(v5_24) FROM 1m TO 14m
+.meas tran Icoil   FIND I(Lk) AT 9.9m
+.end
