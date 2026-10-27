@@ -117,5 +117,14 @@
 		(remove_unused_layers no)
 		(uuid "10915700-5236-5452-83d6-c75f08b96ea7")
 	)
+	(model "${KIPRJMOD}/MES4-Carrier-EC.3dshapes/PWRM-TH_YLPTEC_URBXXXXYMD-20WR3.step"
+		(offset (xyz 0 0 0))
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz 0 0 0)
+		)
+	)
 	(embedded_fonts no)
 )

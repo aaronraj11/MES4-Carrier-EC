@@ -6201,6 +6201,17 @@
 			(uuid "cd2807c6-b2e5-4e6c-baa0-1dc537f15c28")
 		)
 		(embedded_fonts no)
+		(model "${KIPRJMOD}/MES4-Carrier-EC.3dshapes/PWRM-TH_YLPTEC_URBXXXXYMD-20WR3.step"
+			(offset
+				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
 	)
 	(footprint "Capacitor_SMD:C_0402_1005Metric"
 		(layer "F.Cu")

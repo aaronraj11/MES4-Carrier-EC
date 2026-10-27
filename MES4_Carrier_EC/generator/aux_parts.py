@@ -213,6 +213,10 @@ def urb_ymd_footprint():
         fp.append(['pad', Q(num), 'thru_hole', 'rect' if num == '1' else 'circle', ['at'] + list(mm(*raw)),
                    ['size', 2.4, 2.4], ['drill', 1.5], ['layers', Q('*.Cu'), Q('*.Mask')],
                    ['remove_unused_layers', 'no'], ['uuid', U('fpymd')]])
+    # 3D: the EasyEDA/LCSC model of C5369777 (downloaded once into the 3dshapes folder); its origin is the body centre
+    # on the board surface and its pins sit on these pads, so no offset or rotation
+    fp.append(['model', Q('${KIPRJMOD}/' + LIBNAME + '.3dshapes/' + FP_YMD + '.step'),
+               ['offset', ['xyz', 0, 0, 0]], ['scale', ['xyz', 1, 1, 1]], ['rotate', ['xyz', 0, 0, 0]]])
     fp.append(['embedded_fonts', 'no'])
     return fp
 
