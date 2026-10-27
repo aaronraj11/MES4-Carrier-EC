@@ -541,6 +541,24 @@
         "via_diameter": 0.6,
         "via_drill": 0.3,
         "wire_width": 6
+      },
+      {
+        "bus_width": 12,
+        "clearance": 0.6,
+        "diff_pair_gap": 0.25,
+        "diff_pair_via_gap": 0.25,
+        "diff_pair_width": 0.2,
+        "line_style": 0,
+        "microvia_diameter": 0.3,
+        "microvia_drill": 0.1,
+        "name": "Winch_48V",
+        "pcb_color": "rgba(0, 0, 0, 0.000)",
+        "priority": 2147483647,
+        "schematic_color": "rgba(0, 0, 0, 0.000)",
+        "track_width": 0.3,
+        "via_diameter": 0.6,
+        "via_drill": 0.3,
+        "wire_width": 6
       }
     ],
     "meta": {
@@ -596,6 +614,14 @@
       {
         "netclass": "Out_2A",
         "pattern": "Net-(F*-Pad1)"
+      },
+      {
+        "netclass": "Winch_48V",
+        "pattern": "/Winch/WINCH_*"
+      },
+      {
+        "netclass": "Winch_48V",
+        "pattern": "/Winch/ILK_*"
       }
     ]
   },
@@ -717,7 +743,7 @@
   },
   "sheets": [
     [
-      "da774ca2-fff6-5e5d-8e21-ede9d04ec2cb",
+      "0370b922-a365-5c71-ab6f-f5cfbc7b5e5a",
       "Root"
     ],
     [
@@ -753,11 +779,11 @@
       "AuxPower"
     ],
     [
-      "0959b9ec-5a3a-5f07-b996-83d523c173ff",
+      "1faebd9f-5ef7-5632-999b-932f8eeca23c",
       "Winch"
     ],
     [
-      "51ec9dcb-b59b-5b91-b6db-56b36742301d",
+      "e4fdf398-68fc-5df0-b425-388721a51a5c",
       "Pinout"
     ]
   ],

@@ -103,7 +103,7 @@ The module's transceiver (and its 120 Ω terminator behind JP1) is on the MES4-M
 
 Both converters run from their own pi filter: L2 (the same 10 µH part as L1) with C26 / C27 off +24V. This keeps the screen's 20 W converter off the logic supply's L1 filter. Inputs are on GND_24V and outputs on GND, the same scheme as U1.
 
-**IMU, 9 V.** The MES3.1-Carrier-LH "IMU Power Supply @ 9V" with the same parts: U9 YLPTEC URB2409S-10WR3 (9 V, 1.11 A, 10 W isolated) with C28 47 µF / 100 V in and C29 22 µF / 16 V out, the datasheet's values. SW2 (SS12D10G5) switches it to J14. LED8 (green, with R43 2.2k at 3.2 mA) sits after SW2, so it lights only when the IMU terminal is powered.
+**IMU, 9 V.** The MES3.1-Carrier-LH "IMU Power Supply @ 9V" with the same parts: U9 YLPTEC URB2409S-10WR3 (9 V, 1.11 A, 10 W isolated) with C28 47 µF / 100 V in and C29 22 µF / 16 V out, the datasheet's values. SW2 (SS12D10G5) switches it to J14. LED8 (green, with R35 2.2k at 3.2 mA) sits after SW2, so it lights only when the IMU terminal is powered.
 
 **Screen, USB-C 5 V / 3 A.** The ARZOPA Z1C's label reads "5V/9V/12V/15V/20VDC 3A MAX", so it's a USB-PD sink. Without a PD controller a Type-C source can only offer 5 V, which gives 15 W. Its sibling, the Z1RC, draws about 9 W (≈ 1.8 A at 5 V), so 5 V / 3 A should run it. **Check full brightness on the bench.** If it needs 9 V or more, this port needs a USB-PD source controller instead.
 
@@ -114,7 +114,7 @@ The chain is:
 - D22 SMF6.0A;
 - J16, the MES4-Flasher's USB-C power-only receptacle. It is rated 5 V 3 A: 3 A on VBUS, 1.25 A per GND pin.
 
-R39 / R40 (10k Rp to 5 V on CC2 / CC1) advertise Type-C current 3.0 A. The shell goes to GND through R41 1 MΩ ∥ C37 2.2 µF, as on the Flasher. The port carries power only: video goes over the monitor's own HDMI / USB-C cable from the IPC.
+R40 / R41 (10k Rp to 5 V on CC2 / CC1) advertise Type-C current 3.0 A. The shell goes to GND through R42 1 MΩ ∥ C37 2.2 µF, as on the Flasher. The port carries power only: video goes over the monitor's own HDMI / USB-C cable from the IPC.
 
 | Ref | Part | LCSC | Notes |
 |---|---|---|---|
@@ -130,7 +130,7 @@ The MES2 Harvester drives its servo through Feetech's FE-URT-2 board, which turn
 - **J15 SERVO 24V** (CN5 on the Harvester): +24 V through F9, a 3 A PTC (the relay outputs' part), plus C31 100 nF and C32 47 µF.
 - **J17 SERVO UART** (CN13 on the Harvester): GND, +5 V, RX, TX.
 
-The UART uses module **USART2**: PA2 TX (finger 45) → R38 100 Ω → pin 4, and pin 3 → R37 100 Ω → PA3 RX (finger 43, 5 V-tolerant). There are H5VSD3B ESD clamps (D23 / D24) at the connector, per CIF rule 8. R36 10k holds RX idle-HIGH when the FE-URT-2 is unplugged.
+The UART uses module **USART2**: PA2 TX (finger 45) → R39 100 Ω → pin 4, and pin 3 → R38 100 Ω → PA3 RX (finger 43, 5 V-tolerant). There are H5VSD3B ESD clamps (D23 / D24) at the connector, per CIF rule 8. R36 10k holds RX idle-HIGH when the FE-URT-2 is unplugged, and R37 10k holds TX idle-HIGH while PA2 floats during MCU reset and boot, so the FE-URT-2 never sees a floating input.
 
 **Set the FE-URT-2's level switch to 3.3 V, not 5 V.** The switch only sets the UART signal levels on J17 pins 3 / 4. The servo 24 V (J15) and the FE-URT-2's own 5 V (J17 pin 2) don't change. At 5 V, the module's 3.3 V TX may not reliably read as HIGH, the FE-URT-2's TX back-feeds the module 3V3 through R36, and at power-up (FE-URT-2 alive before the module) it exceeds PA3's VDD + 4 V limit. After setting it, read a servo's ID or position once on the bench to confirm the servo bus works at 3.3 V.
 
@@ -146,12 +146,13 @@ These are the MES2_Extension's "WINCH CONTROL" relays: two TE **IM03GR** (C21531
 
 | Direction | Module pin | Relay | Driver |
 |---|---|---|---|
-| CLK | PA0 (finger 49) | K5 | Q6 AO3400A, R42 100 Ω gate, R43 100k pull-down |
-| ACLK | PA1 (finger 47) | K6 | Q7 AO3400A, R44 100 Ω gate, R45 100k pull-down |
+| CLK | PA0 (finger 49) | K5 | Q6 AO3400A, R43 100 Ω gate, R44 100k pull-down |
+| ACLK | PA1 (finger 47) | K6 | Q7 AO3400A, R45 100 Ω gate, R46 100k pull-down |
 
 - **Contacts:** from TE's terminal assignment: coil 1 (+) / 8 (−); pole 1 is 3 COM, 2 NC, 4 NO; pole 2 is 6 COM, 7 NC, 5 NO. Pole 1 (3 → 4) is the Extension's switching contact.
 - **Drivers:** the Extension drove the coils with 2SC2884 transistors and no pull-down. Here they follow the relay channels (CIF §7a), so both relays stay OFF while PA0 / PA1 float during reset and boot. D25 / D26 are the coil flybacks.
 - **Hardware interlock (new, using the spare pole 2):** each direction's common is fed through the other relay's resting contact (NC2). CLK can close only while K6 is at rest, and ACLK only while K5 is at rest. If both are energised, both outputs stay open.
+- **Isolation from the 48 V winch system:** J18 and the contact-side nets (WINCH_CLK / COM / ACLK, ILK_CLK / ILK_ACLK) connect only to relay contacts, never to carrier GND or a supply. The IM03GR's coil-to-contact insulation (TE IM series, up to 2500 Vrms) is the barrier. PCB: these nets are in net class `Winch_48V`; keep ≥ 2 mm from all other copper and no GND pour under J18 or the contact pins. Don't add a TVS or ESD diode to GND on J18: it would bridge the isolation.
 
 ## Connectors
 
@@ -200,7 +201,7 @@ All LEDs are JLC **Basic** parts (no extended-part fee, Economic PCBA): red NCD0
 
 ## Status (2026-10-27)
 
-Schematic generated from the MES4-Flasher sheets plus new Power, Main, CAN, AuxPower, Winch and Pinout blocks. Page 11 is a table of every module finger: its STM32 pin, what this carrier connects to it and the MES4-CIF §2c standard use (deviations shaded). ERC: 0 errors, 0 warnings. Netlist checked (`generator/checks.py`, run by `run.sh`): 189 parts, every symbol pin matched to a footprint pad; every module GPIO, I²C1 and ALERT reach their circuits; no single-pin nets. Every purchased part carries its LCSC number (the net tie and bare test pads have none). No PCB yet.
+Schematic generated from the MES4-Flasher sheets plus new Power, Main, CAN, AuxPower, Winch and Pinout blocks. Page 11 is a table of every module finger: its STM32 pin, what this carrier connects to it and the MES4-CIF §2c standard use (deviations shaded). ERC: 0 errors, 0 warnings. Netlist checked (`generator/checks.py`, run by `run.sh`): 190 parts, every symbol pin matched to a footprint pad; every module GPIO, I²C1 and ALERT reach their circuits; no single-pin nets. Every purchased part carries its LCSC number (the net tie and bare test pads have none). No PCB yet.
 
 ## Files
 

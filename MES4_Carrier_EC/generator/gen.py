@@ -689,10 +689,13 @@ def aux_sheet():
     sh.label('SRV_RX', (198.12, yr))
     gl(dr.p('A2'))
     sh.glabel('PA2', (160.02, yt), 180)
+    rtp = fpart(sh, 'R10', (165.10, yt - 3.81), tag='R_SRVTXPU', value='10k', fields='left',
+                desc='servo TX pull-up: idle HIGH while PA2 floats in MCU reset / boot')
+    sh.pwr('+3V3_MOD', rtp.p('1'), 90)  # sideways: clears the RX line above
     rt = fpart(sh, 'R36', (177.80, yt), rot=90, tag='R_SRVTX', desc='servo TX series resistor (CIF rule 8: 22-100 Ω)')
     dt = fpart(sh, 'D2', (190.50, yt + 3.81), rot=270, tag='D_SRVTX', fields='right',
                desc='servo TX ESD, H5VSD3B (5 V, 1.5 pF)')
-    sh.wire((160.02, yt), rt.p('1'))
+    sh.wire((160.02, yt), rtp.p('2'), rt.p('1'))
     sh.wire(rt.p('2'), dt.p('A1'), (198.12, yt))
     sh.label('SRV_TX', (198.12, yt))
     gl(dt.p('A2'))
@@ -708,7 +711,8 @@ def aux_sheet():
             'The FE-URT-2 turns the UART into the Feetech half-duplex\n'
             'servo bus and passes the 24 V on to the servos.\n'
             'UART on module USART2: PA2 TX → pin 4,\n'
-            'pin 3 → PA3 RX (5 V-tolerant).\n'
+            'pin 3 → PA3 RX (5 V-tolerant). {R_SRVPU} / {R_SRVTXPU} 10k\n'
+            'pull-ups keep RX / TX idle HIGH (TX floats in reset).\n'
             'Set the FE-URT-2 level switch to 3.3 V (not 5 V):\n'
             'it only sets the UART levels, the servo 24 V is\n'
             'unchanged. At 5 V its TX exceeds PA3\'s limit while\n'
@@ -786,6 +790,10 @@ def winch_sheet():
             'Hardware interlock (new, uses the spare second pole): CLK closes COM → ILK_CLK → {K_CLK} NO1 → CLK only\n'
             'while {K_ACLK} rests (its NC2 feeds ILK_CLK), and the same the other way. If both relays are energised, both\n'
             'outputs stay open, so the winch can never see both directions at once. Firmware still drives only one.\n\n'
+            'Isolation from the 48 V winch system: {J_WINCH} and the WINCH_ / ILK_ nets touch only relay contacts. No carrier\n'
+            'GND, supply or ESD clamp connects to that side, so the relays\' coil-to-contact insulation is the barrier\n'
+            '(TE IM series, up to 2500 Vrms). PCB: net class Winch_48V; keep ≥ 2 mm from all other copper and no GND\n'
+            'pour under {J_WINCH} or the contact pins. Never add a TVS / ESD diode to GND on {J_WINCH}: it bridges the isolation.\n\n'
             'PA0 / PA1 are relay 1 / 2 coil feedback in the MES4-CIF §2c table. This board drops the coil feedback\n'
             'to free them for the winch (E-Crawler GPIO budget).', (17.78, 156.21))
     return sh
@@ -851,7 +859,8 @@ def pinout_sheet():
             '{AuxPower/J_SRVU}, {AuxPower/R_SRVRX} 100 Ω, {AuxPower/R_SRVPU} 10k pull-up, {AuxPower/D_SRVRX}',
             'Relay CH4 coil FB', 'Differs from CIF. FE-URT-2 must be set to 3.3 V levels', dev=True),
         row('45', 'PA2', 'PA2', 'UART', 'USART2 TX → J17 pin 4, door servo (FE-URT-2)',
-            '{AuxPower/J_SRVU}, {AuxPower/R_SRVTX} 100 Ω, {AuxPower/D_SRVTX}', 'Relay CH3 coil FB',
+            '{AuxPower/J_SRVU}, {AuxPower/R_SRVTX} 100 Ω, {AuxPower/R_SRVTXPU} 10k pull-up, {AuxPower/D_SRVTX}',
+            'Relay CH3 coil FB',
             'Differs from CIF. Bootloader probes PA2 / PA3 on a blank chip: flash over SWD', dev=True),
         row('47', 'PA1', 'PA1', 'GPIO', 'Winch ACLK relay drive (out)',
             '{Winch/K_ACLK} IM03GR, {Winch/Q_ACLK} AO3400A, {Winch/RG_ACLK} 100 Ω, {Winch/RP_ACLK} 100k',
@@ -1129,7 +1138,7 @@ def root_items(sh, sheets):
           '+24V → 30 mΩ shunt → contact →\n{F_CH_VALUE} PTC → output (2 A continuous).\n'
           'No coil feedback (pins used elsewhere).\n'
           'INA226 per channel: load current +\n24 V rail, ALERT → PA15.')
-    block(205.74, 116.84, 297.18, 147.32, RED, (222, 242, 222), '2 Autonics sensor inputs',
+    block(205.74, 116.84, 297.18, 142.24, RED, (222, 242, 222), '2 Autonics sensor inputs',
           '+24V → 100 mA PTC → sensor supply.\n'
           'Sensor OUT → 10k → PC817 → PB6 / PC15\n(HIGH = sensor ON). PNP 24 V sensors.')
     block(205.74, 157.48, 297.18, 203.20, BLU, (238, 228, 250), 'Load cell ({LoadCell/lc:U13} ADS1232)',
@@ -1143,21 +1152,40 @@ def root_items(sh, sheets):
     txt('+5V_24', 52.07, 103.38, 1.6, False, ORA)
     arrow([(83.82, 121.92), (95.25, 121.92), (95.25, 60.96), (106.68, 60.96)], ORA)
     txt('+5V', 86.36, 118.11, 1.6, False, ORA)
-    line([(50.80, 40.64), (50.80, 33.02), (302.26, 33.02), (302.26, 132.08)], RED)
-    arrow([(302.26, 55.88), (297.18, 55.88)], RED)
-    arrow([(302.26, 132.08), (297.18, 132.08)], RED)
-    txt('+24V rail: relay contacts, INA226 VBUS and sensor supplies', 120.65, 29.21, 1.6, False, RED)
-    block(309.88, 142.24, 403.86, 190.50, ORA, LP, 'IMU 9 V + screen 5 V (page 9)',
+    # +24V: one rail along the top. The middle column takes it down the gap at x = 302 (relays, sensors), the
+    # right column down the right edge, so no 24 V line crosses a signal line.
+    # channel between the middle column (right edge 297.18) and the right column: every parallel line and
+    # block edge sits on one pitch P, here and in the gap above the load cell (142.24-157.48 = 3 P);
+    # P = 5.08 leaves every arrowhead (2.8 mm) a clear final segment
+    P = 5.08
+    XR, XW, XS = R2(297.18 + P), R2(297.18 + 2 * P), R2(297.18 + 3 * P)  # 24 V drop, winch line, servo line
+    YW, YS = R2(142.24 + P), R2(142.24 + 2 * P)                          # winch line, servo line
+    RX1, RX2 = R2(297.18 + 4 * P), R2(400.05 - P)                        # right column
+    line([(50.80, 40.64), (50.80, 33.02), (400.05, 33.02), (400.05, 127.00)], RED)
+    line([(XR, 33.02), (XR, 132.08)], RED)
+    arrow([(XR, 55.88), (297.18, 55.88)], RED)
+    arrow([(XR, 132.08), (297.18, 132.08)], RED)
+    txt('+24V rail: relay contacts, INA226 VBUS, sensor supplies, servo and aux power', 120.65, 29.21, 1.6, False, RED)
+    block(RX1, 40.64, RX2, 66.04, GRY, (238, 238, 238), 'Winch control (page 10)',
+          'Two IM03GR relays, as on the MES2_Extension:\nPA0 → CLK, PA1 → ACLK (AO3400A drivers).\n'
+          'Contacts switch the 48 V winch controller\'s\ndirection inputs ({Winch/J_WINCH}).\n'
+          'Hardware interlock: both on = both open.')
+    block(RX1, 76.20, RX2, 101.60, RED, (222, 242, 222), 'Door servo (page 9)',
+          '{AuxPower/J_SRVP}: +24V → {AuxPower/F_SRV} 3 A PTC → FE-URT-2\n→ Feetech servos (24 V types).\n'
+          '{AuxPower/J_SRVU}: USART2 PA2 TX / PA3 RX, 100 Ω + ESD.\nFE-URT-2 set to 3.3 V levels; its 5 V\n'
+          'logic supply comes from the screen converter.')
+    arrow([(400.05, 88.90), (RX2, 88.90)], RED)
+    block(RX1, 111.76, RX2, 142.24, ORA, LP, 'IMU 9 V + screen 5 V (page 9)',
           'Own L pi filter from +24V.\n'
           '{AuxPower/U_IMU} URB2409S-10WR3 → 9 V →\n{AuxPower/SW_IMU} switch → {AuxPower/J_IMU} IMU terminal\n(as on the MES3.1 carrier).\n'
-          '{AuxPower/U_SCR} URB2405LD-20WR3 → 5 V 4 A\n→ 3 A PTC → {AuxPower/J_USB} USB-C (Rp 10k:\n5 V / 3 A) → ARZOPA Z1C screen.\n'
-          'Door servo (FE-URT-2): {AuxPower/J_SRVP} 24 V\n+ {AuxPower/J_SRVU} UART (USART2).')
-    line([(302.26, 132.08), (302.26, 157.48)], RED)
-    block(309.88, 40.64, 403.86, 96.52, GRY, (238, 238, 238), 'Winch control (page 10)',
-          'Two IM03GR relays, as on the\nMES2_Extension: PA0 → CLK,\nPA1 → ACLK (AO3400A drivers).\n'
-          'Contacts switch the 48 V winch\ncontroller\'s direction inputs.\n'
-          'Hardware interlock: both on =\nboth open.')
-    arrow([(302.26, 157.48), (309.88, 157.48)], RED)
+          '{AuxPower/U_SCR} URB2405LD-20WR3 → 5 V 4 A\n→ 3 A PTC → {AuxPower/J_USB} USB-C (Rp 10k:\n5 V / 3 A) → ARZOPA Z1C screen.')
+    arrow([(400.05, 127.00), (RX2, 127.00)], RED)
+    # winch + servo signals: through the gap above the load cell (below the end of the x = 302 rail), then up a
+    # free channel; the winch line runs outside the servo line so the two never cross
+    arrow([(182.88, YW), (XW, YW), (XW, 53.34), (RX1, 53.34)], BLU)
+    txt('PA0 / PA1', 185.42, R2(YW - 2.79), 1.6, False, BLU)
+    arrow([(182.88, YS), (XS, YS), (XS, 88.90), (RX1, 88.90)], BLU, both=True)
+    txt('PA2 / PA3', 185.42, R2(YS - 2.79), 1.6, False, BLU)
     arrow([(83.82, 154.94), (106.68, 154.94)], BLU, both=True)
     txt('SWD, NRST,\nVCP', 86.36, 147.32, 1.6, False, BLU)
     arrow([(83.82, 190.50), (106.68, 190.50)], BLU, both=True)
@@ -1264,11 +1292,15 @@ def main():
         if c['name'] == 'Out_1A5':
             c['name'] = 'Out_2A'
             c['track_width'] = 1.0
+    iso = dict(next(c for c in ns['classes'] if c['name'] == 'Default'))
+    iso.update(name='Winch_48V', clearance=0.6, track_width=0.3)  # 48 V side; ≥ 2 mm to other copper (see Winch sheet)
+    ns['classes'] = [c for c in ns['classes'] if c['name'] != 'Winch_48V'] + [iso]
     ns['netclass_patterns'] = (
         [{'netclass': 'Power', 'pattern': p} for p in ('+5V', '+5V_24', '+3V3_MOD', 'GND')] +
         [{'netclass': '24V_Power', 'pattern': p} for p in ('+24V', 'GND_24V', '/Power/+24V_IN', '/Power/+24V_F')] +
         [{'netclass': 'Power', 'pattern': '/Power/+24V_DC'}] +
-        [{'netclass': 'Out_2A', 'pattern': p} for p in ('/Relays*/RLY*_OUT', 'Net-(U*-Vin-)', 'Net-(F*-Pad1)')])
+        [{'netclass': 'Out_2A', 'pattern': p} for p in ('/Relays*/RLY*_OUT', 'Net-(U*-Vin-)', 'Net-(F*-Pad1)')] +
+        [{'netclass': 'Winch_48V', 'pattern': p} for p in ('/Winch/WINCH_*', '/Winch/ILK_*')])
     pro.get('pcbnew', {}).pop('last_paths', None)
     json.dump(pro, open(OUT + 'MES4_Carrier_EC.kicad_pro', 'w'), indent=2)
     return sheets
