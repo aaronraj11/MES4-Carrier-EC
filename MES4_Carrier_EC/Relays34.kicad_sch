@@ -583,7 +583,7 @@
 				(at 3.81 11.43 0)
 				(effects (font (size 1.27 1.27)))
 			)
-			(property "Footprint" "Package_TO_SOT_SMD:TSOT-23-8"
+			(property "Footprint" "MES4-Carrier-EC:TSOT-23-8_TI_DDF"
 				(at 20.32 -11.43 0)
 				(effects (font (size 1.27 1.27)) (hide yes))
 			)
@@ -2220,7 +2220,7 @@
 			(at 231.14 113.03 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
-		(property "Footprint" "Package_TO_SOT_SMD:TSOT-23-8"
+		(property "Footprint" "MES4-Carrier-EC:TSOT-23-8_TI_DDF"
 			(at 226.06 96.52 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -3161,7 +3161,7 @@
 			(at 231.14 217.17 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
-		(property "Footprint" "Package_TO_SOT_SMD:TSOT-23-8"
+		(property "Footprint" "MES4-Carrier-EC:TSOT-23-8_TI_DDF"
 			(at 226.06 200.66 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)

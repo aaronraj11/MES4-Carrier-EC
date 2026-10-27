@@ -11,6 +11,7 @@ EXT = '/Users/aaron/Desktop/MES3 Ecosystem/MES2_Extension/'
 FP_IM = 'RELAY-SMD_IMXXGR'
 FP_10W = 'PWRM-TH_YLPTEC_URBXXXXS-10WR3'
 FP_20W = 'PWRM-TH_YLPTEC_URBXXXXLD-20WR3'
+FP_DDF = 'TSOT-23-8_TI_DDF'
 
 
 def _pin(num, name, x, y, ang, kind='passive'):
@@ -90,7 +91,7 @@ def ina236_symbol():
         if p[1] == 'Value':
             p[2] = Q(new)
         elif p[1] == 'Footprint':
-            p[2] = Q('Package_TO_SOT_SMD:TSOT-23-8')
+            p[2] = Q(LIBNAME + ':' + FP_DDF)
         elif p[1] == 'Datasheet':
             p[2] = Q('https://www.ti.com/lit/ds/symlink/ina236.pdf')
         elif p[1] == 'Description':
@@ -228,6 +229,16 @@ def write_footprints(pretty_dir, shapes_dir):
         f = HARV + 'EasyEDA.3dshapes/' + FP_4P + ext
         if os.path.exists(f):
             shutil.copy(f, shapes_dir)
+    # INA236 (TI DDF, SOT-23-THIN 8): KiCad's TSOT-23-8 with TI's land pattern (DDF0008A: 8 x 1.05 x 0.45 mm pads,
+    # rows 2.6 mm apart, 0.65 mm pitch). KiCad's 0.5 mm pads leave 0.15 mm gaps, under the 0.2 mm net-class clearance.
+    src = open('/Applications/KiCad/KiCad.app/Contents/SharedSupport/footprints/Package_TO_SOT_SMD.pretty/'
+               'TSOT-23-8.kicad_mod').read()
+    assert src.count('(size 1.325 0.5)') == 8 and src.count('1.1375') == 8
+    src = src.replace('(footprint "TSOT-23-8"', '(footprint "%s"' % FP_DDF, 1)
+    src = src.replace('(size 1.325 0.5)', '(size 1.05 0.45)').replace('-1.1375 ', '-1.3 ').replace('(at 1.1375 ', '(at 1.3 ')
+    src = re.sub(r'\(descr "[^"]*"\)', '(descr "TI DDF0008A (SOT-23-THIN 8, 2.9 x 1.6 mm, 0.65 mm pitch), land pattern from the '
+                 'INA236 datasheet: 8 x 1.05 x 0.45 mm pads, rows 2.6 mm apart")', src, count=1)
+    open(os.path.join(pretty_dir, FP_DDF + '.kicad_mod'), 'w').write(src)
     # IM03GR relay: the MES2_Extension's footprint + 3D model
     src = open(EXT + 'EasyEDA.pretty/' + FP_IM + '.kicad_mod').read()
     src = src.replace('easyeda2kicad:' + FP_IM, FP_IM)

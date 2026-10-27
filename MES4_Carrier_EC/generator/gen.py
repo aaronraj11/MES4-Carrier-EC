@@ -123,7 +123,7 @@ def relay_sheet(name, file, page, chans, comment):
         setf(g(t['F']), value=fch['value'], lcsc=fch['lcsc'], fp=fch['fp'], lib=fch['lib'],
              desc='relay %d output PTC: a shorted output trips only this channel' % n)
         # INA236 instead of the Flasher's INA236: 50 V abs max vs 40 V (SMBJ30A clamps at up to 48.4 V, review M1)
-        setf(g(t['U']), lib=B.LIBNAME + ':INA236', value='INA236', lcsc='C5443912', fp='Package_TO_SOT_SMD:TSOT-23-8',
+        setf(g(t['U']), lib=B.LIBNAME + ':INA236', value='INA236', lcsc='C5443912', fp=B.LIBNAME + ':' + AP.FP_DDF,
              ds='https://www.ti.com/lit/ds/symlink/ina236.pdf',
              desc='INA236AIDDFR, I²C %s: relay %d (%s) load current + 24 V rail (bus read on IN-)'
              % (c['addr'], n, c['load']))
