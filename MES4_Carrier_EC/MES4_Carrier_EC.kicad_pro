@@ -51,7 +51,23 @@
           "min_clearance": 0.5
         }
       },
-      "diff_pair_dimensions": [],
+      "diff_pair_dimensions": [
+        {
+          "gap": 0.0,
+          "via_gap": 0.0,
+          "width": 0.0
+        },
+        {
+          "gap": 0.2,
+          "via_gap": 0.25,
+          "width": 0.25
+        },
+        {
+          "gap": 0.25,
+          "via_gap": 0.25,
+          "width": 0.25
+        }
+      ],
       "drc_exclusions": [],
       "meta": {
         "version": 2
@@ -183,9 +199,12 @@
       "track_widths": [
         0.0,
         0.2,
+        0.25,
         0.3,
         0.5,
-        0.8
+        1.0,
+        1.5,
+        3.0
       ],
       "tuning_pattern_settings": {
         "diff_pair_defaults": {
@@ -221,6 +240,10 @@
         {
           "diameter": 0.6,
           "drill": 0.3
+        },
+        {
+          "diameter": 0.8,
+          "drill": 0.4
         }
       ],
       "zones_allow_external_fillets": false
@@ -497,63 +520,9 @@
         "line_style": 0,
         "microvia_diameter": 0.3,
         "microvia_drill": 0.1,
-        "name": "24V_Power",
+        "name": "Power_Small",
         "pcb_color": "rgba(0, 0, 0, 0.000)",
-        "priority": 1,
-        "schematic_color": "rgba(0, 0, 0, 0.000)",
-        "track_width": 1.0,
-        "via_diameter": 0.8,
-        "via_drill": 0.4,
-        "wire_width": 6
-      },
-      {
-        "bus_width": 12,
-        "clearance": 0.2,
-        "diff_pair_gap": 0.25,
-        "diff_pair_via_gap": 0.25,
-        "diff_pair_width": 0.2,
-        "line_style": 0,
-        "microvia_diameter": 0.3,
-        "microvia_drill": 0.1,
-        "name": "Out_2A",
-        "pcb_color": "rgba(0, 0, 0, 0.000)",
-        "priority": 2,
-        "schematic_color": "rgba(0, 0, 0, 0.000)",
-        "track_width": 1.0,
-        "via_diameter": 0.8,
-        "via_drill": 0.4,
-        "wire_width": 6
-      },
-      {
-        "bus_width": 12,
-        "clearance": 0.2,
-        "diff_pair_gap": 0.25,
-        "diff_pair_via_gap": 0.25,
-        "diff_pair_width": 0.2,
-        "line_style": 0,
-        "microvia_diameter": 0.3,
-        "microvia_drill": 0.1,
-        "name": "Power",
-        "pcb_color": "rgba(0, 0, 0, 0.000)",
-        "priority": 0,
-        "schematic_color": "rgba(0, 0, 0, 0.000)",
-        "track_width": 0.5,
-        "via_diameter": 0.6,
-        "via_drill": 0.3,
-        "wire_width": 6
-      },
-      {
-        "bus_width": 12,
-        "clearance": 0.6,
-        "diff_pair_gap": 0.25,
-        "diff_pair_via_gap": 0.25,
-        "diff_pair_width": 0.2,
-        "line_style": 0,
-        "microvia_diameter": 0.3,
-        "microvia_drill": 0.1,
-        "name": "Winch_48V",
-        "pcb_color": "rgba(0, 0, 0, 0.000)",
-        "priority": 2147483647,
+        "priority": 8,
         "schematic_color": "rgba(0, 0, 0, 0.000)",
         "track_width": 0.3,
         "via_diameter": 0.6,
@@ -569,13 +538,121 @@
         "line_style": 0,
         "microvia_diameter": 0.3,
         "microvia_drill": 0.1,
+        "name": "Power",
+        "pcb_color": "rgba(0, 0, 0, 0.000)",
+        "priority": 7,
+        "schematic_color": "rgba(0, 0, 0, 0.000)",
+        "track_width": 0.5,
+        "via_diameter": 0.6,
+        "via_drill": 0.3,
+        "wire_width": 6
+      },
+      {
+        "bus_width": 12,
+        "clearance": 0.2,
+        "diff_pair_gap": 0.25,
+        "diff_pair_via_gap": 0.25,
+        "diff_pair_width": 0.2,
+        "line_style": 0,
+        "microvia_diameter": 0.3,
+        "microvia_drill": 0.1,
+        "name": "24V_Power",
+        "pcb_color": "rgba(0, 0, 0, 0.000)",
+        "priority": 6,
+        "schematic_color": "rgba(0, 0, 0, 0.000)",
+        "track_width": 1.0,
+        "via_diameter": 0.8,
+        "via_drill": 0.4,
+        "wire_width": 6
+      },
+      {
+        "bus_width": 12,
+        "clearance": 0.2,
+        "diff_pair_gap": 0.25,
+        "diff_pair_via_gap": 0.25,
+        "diff_pair_width": 0.2,
+        "line_style": 0,
+        "microvia_diameter": 0.3,
+        "microvia_drill": 0.1,
         "name": "Out_3A",
         "pcb_color": "rgba(0, 0, 0, 0.000)",
-        "priority": 3,
+        "priority": 5,
         "schematic_color": "rgba(0, 0, 0, 0.000)",
         "track_width": 1.5,
         "via_diameter": 0.8,
         "via_drill": 0.4,
+        "wire_width": 6
+      },
+      {
+        "bus_width": 12,
+        "clearance": 0.3,
+        "diff_pair_gap": 0.25,
+        "diff_pair_via_gap": 0.25,
+        "diff_pair_width": 0.2,
+        "line_style": 0,
+        "microvia_diameter": 0.3,
+        "microvia_drill": 0.1,
+        "name": "Input_15A",
+        "pcb_color": "rgba(0, 0, 0, 0.000)",
+        "priority": 4,
+        "schematic_color": "rgba(0, 0, 0, 0.000)",
+        "track_width": 3.0,
+        "via_diameter": 0.8,
+        "via_drill": 0.4,
+        "wire_width": 6
+      },
+      {
+        "bus_width": 12,
+        "clearance": 0.6,
+        "diff_pair_gap": 0.25,
+        "diff_pair_via_gap": 0.25,
+        "diff_pair_width": 0.2,
+        "line_style": 0,
+        "microvia_diameter": 0.3,
+        "microvia_drill": 0.1,
+        "name": "Winch_48V",
+        "pcb_color": "rgba(0, 0, 0, 0.000)",
+        "priority": 3,
+        "schematic_color": "rgba(0, 0, 0, 0.000)",
+        "track_width": 0.4,
+        "via_diameter": 0.6,
+        "via_drill": 0.3,
+        "wire_width": 6
+      },
+      {
+        "bus_width": 12,
+        "clearance": 0.2,
+        "diff_pair_gap": 0.25,
+        "diff_pair_via_gap": 0.25,
+        "diff_pair_width": 0.25,
+        "line_style": 0,
+        "microvia_diameter": 0.3,
+        "microvia_drill": 0.1,
+        "name": "CAN",
+        "pcb_color": "rgba(0, 0, 0, 0.000)",
+        "priority": 2,
+        "schematic_color": "rgba(0, 0, 0, 0.000)",
+        "track_width": 0.25,
+        "via_diameter": 0.6,
+        "via_drill": 0.3,
+        "wire_width": 6
+      },
+      {
+        "bus_width": 12,
+        "clearance": 0.2,
+        "diff_pair_gap": 0.2,
+        "diff_pair_via_gap": 0.25,
+        "diff_pair_width": 0.25,
+        "line_style": 0,
+        "microvia_diameter": 0.3,
+        "microvia_drill": 0.1,
+        "name": "LoadCell",
+        "pcb_color": "rgba(0, 0, 0, 0.000)",
+        "priority": 1,
+        "schematic_color": "rgba(0, 0, 0, 0.000)",
+        "track_width": 0.25,
+        "via_diameter": 0.6,
+        "via_drill": 0.3,
         "wire_width": 6
       }
     ],
@@ -586,16 +663,24 @@
     "netclass_assignments": null,
     "netclass_patterns": [
       {
+        "netclass": "Power_Small",
+        "pattern": "+3V3_MOD"
+      },
+      {
+        "netclass": "Power_Small",
+        "pattern": "/Sensors/SENS*_PWR"
+      },
+      {
+        "netclass": "Power_Small",
+        "pattern": "/LoadCell/LC_EXC+"
+      },
+      {
         "netclass": "Power",
         "pattern": "+5V"
       },
       {
         "netclass": "Power",
         "pattern": "+5V_24"
-      },
-      {
-        "netclass": "Power",
-        "pattern": "+3V3_MOD"
       },
       {
         "netclass": "Power",
@@ -614,35 +699,35 @@
         "pattern": "/AuxPower/IMU_9V"
       },
       {
+        "netclass": "Power",
+        "pattern": "/Power/+24V_DC"
+      },
+      {
         "netclass": "24V_Power",
         "pattern": "+24V"
-      },
-      {
-        "netclass": "24V_Power",
-        "pattern": "/Power/+24V_IN"
-      },
-      {
-        "netclass": "24V_Power",
-        "pattern": "/Power/+24V_F"
       },
       {
         "netclass": "24V_Power",
         "pattern": "/AuxPower/+24V_AUX"
       },
       {
-        "netclass": "Power",
-        "pattern": "/Power/+24V_DC"
+        "netclass": "Input_15A",
+        "pattern": "/Power/+24V_IN"
       },
       {
-        "netclass": "Out_2A",
+        "netclass": "Input_15A",
+        "pattern": "/Power/+24V_F"
+      },
+      {
+        "netclass": "Out_3A",
         "pattern": "/Relays*/RLY*_OUT"
       },
       {
-        "netclass": "Out_2A",
+        "netclass": "Out_3A",
         "pattern": "Net-(U*-IN-)"
       },
       {
-        "netclass": "Out_2A",
+        "netclass": "Out_3A",
         "pattern": "Net-(F*-Pad1)"
       },
       {
@@ -664,6 +749,30 @@
       {
         "netclass": "Winch_48V",
         "pattern": "/Winch/ILK_*"
+      },
+      {
+        "netclass": "CAN",
+        "pattern": "CANH"
+      },
+      {
+        "netclass": "CAN",
+        "pattern": "CANL"
+      },
+      {
+        "netclass": "LoadCell",
+        "pattern": "/LoadCell/LC_SIG*"
+      },
+      {
+        "netclass": "LoadCell",
+        "pattern": "/LoadCell/LC_AIN*"
+      },
+      {
+        "netclass": "LoadCell",
+        "pattern": "/LoadCell/LC_REF*"
+      },
+      {
+        "netclass": "LoadCell",
+        "pattern": "/LoadCell/LC_CAP*"
       }
     ]
   },

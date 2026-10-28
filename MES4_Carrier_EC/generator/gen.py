@@ -1377,26 +1377,45 @@ def main():
     pro['meta']['filename'] = 'MES4_Carrier_EC.kicad_pro'
     pro['sheets'] = [[str(root_uuid), 'Root']] + [[str(s.uuid), s.name] for s in sheets]
     ns = pro['net_settings']
-    for c in ns['classes']:
-        if c['name'] == 'Out_1A5':
-            c['name'] = 'Out_2A'
-            c['track_width'] = 1.0
-    iso = dict(next(c for c in ns['classes'] if c['name'] == 'Default'))
-    iso.update(name='Winch_48V', clearance=0.6, track_width=0.3)  # 48 V side; ≥ 2 mm to other copper (see Winch sheet)
-    # 3 A branches: servo 24 V (3 A PTC), screen 5 V (20 W converter, 3.6 A start-up peak) and its USB-C VBUS
-    o3 = dict(next(c for c in ns['classes'] if c['name'] == '24V_Power'))
-    o3.update(name='Out_3A', track_width=1.5, priority=3)
-    ns['classes'] = [c for c in ns['classes'] if c['name'] not in ('Winch_48V', 'Out_3A')] + [iso, o3]
+    # Track width per class from the current it carries (1 oz outer copper, about 10 °C rise, IPC-2221):
+    #   0.2 mm signals; 0.25 mm analog / CAN pairs; 0.3 mm < 0.3 A; 0.5 mm <= 1.2 A; 1.0 mm <= 2 A;
+    #   1.5 mm the 3 A fused branches; 3.0 mm (plus pours) the 15 A input before the plane.
+    base = dict(next(c for c in ns['classes'] if c['name'] == 'Default'))
+    def cls(name, track, clear=0.2, via=(0.6, 0.3), prio=0, pair=None):
+        c = dict(base)
+        c.update(name=name, track_width=track, clearance=clear, via_diameter=via[0], via_drill=via[1], priority=prio)
+        if pair:
+            c.update(diff_pair_width=pair[0], diff_pair_gap=pair[1], diff_pair_via_gap=0.25)
+        return c
+    keep = {c['name']: c for c in ns['classes'] if c['name'] == 'Default'}
+    ns['classes'] = [keep['Default'],
+                     cls('Power_Small', 0.3, prio=8),                   # 3V3 rail, sensor supplies, load-cell excitation
+                     cls('Power', 0.5, prio=7),                         # 5 V rails (<= 1.2 A), 9 V IMU, DC/DC 24 V input
+                     cls('24V_Power', 1.0, via=(0.8, 0.4), prio=6),     # +24V into the plane, +24V_AUX (1.5 A)
+                     cls('Out_3A', 1.5, via=(0.8, 0.4), prio=5),        # 3 A PTC branches: relay outputs, servo, screen
+                     cls('Input_15A', 3.0, clear=0.3, via=(0.8, 0.4), prio=4),   # XT30 to Q1: pour it, 3 mm minimum
+                     cls('Winch_48V', 0.4, clear=0.6, prio=3),          # 48 V relay contacts; >= 2 mm to other copper
+                     cls('CAN', 0.25, prio=2, pair=(0.25, 0.25)),       # CANH / CANL as a pair
+                     cls('LoadCell', 0.25, prio=1, pair=(0.25, 0.2))]   # ADS1232 inputs, reference, CAP pins
     ns['netclass_patterns'] = (
-        [{'netclass': 'Power', 'pattern': p} for p in ('+5V', '+5V_24', '+3V3_MOD', 'GND', '/AuxPower/+5V_SRV',
-                                                       '/AuxPower/+9V_IMU', '/AuxPower/IMU_9V')] +
+        [{'netclass': 'Power_Small', 'pattern': p} for p in ('+3V3_MOD', '/Sensors/SENS*_PWR', '/LoadCell/LC_EXC+')] +
+        [{'netclass': 'Power', 'pattern': p} for p in ('+5V', '+5V_24', 'GND', '/AuxPower/+5V_SRV', '/AuxPower/+9V_IMU',
+                                                       '/AuxPower/IMU_9V', '/Power/+24V_DC')] +
         [{'netclass': '24V_Power', 'pattern': p} for p in ('+24V',) + (() if ONE_GND else ('GND_24V',)) +
-         ('/Power/+24V_IN', '/Power/+24V_F', '/AuxPower/+24V_AUX')] +
-        [{'netclass': 'Power', 'pattern': '/Power/+24V_DC'}] +
-        [{'netclass': 'Out_2A', 'pattern': p} for p in ('/Relays*/RLY*_OUT', 'Net-(U*-IN-)', 'Net-(F*-Pad1)')] +
-        [{'netclass': 'Out_3A', 'pattern': p} for p in ('/AuxPower/+24V_SRV', '/AuxPower/+5V_SCR',
-                                                        '/AuxPower/VBUS_SCR')] +
-        [{'netclass': 'Winch_48V', 'pattern': p} for p in ('/Winch/WINCH_*', '/Winch/ILK_*')])
+         ('/AuxPower/+24V_AUX',)] +
+        [{'netclass': 'Input_15A', 'pattern': p} for p in ('/Power/+24V_IN', '/Power/+24V_F')] +
+        [{'netclass': 'Out_3A', 'pattern': p} for p in ('/Relays*/RLY*_OUT', 'Net-(U*-IN-)', 'Net-(F*-Pad1)',
+                                                        '/AuxPower/+24V_SRV', '/AuxPower/+5V_SCR', '/AuxPower/VBUS_SCR')] +
+        [{'netclass': 'Winch_48V', 'pattern': p} for p in ('/Winch/WINCH_*', '/Winch/ILK_*')] +
+        [{'netclass': 'CAN', 'pattern': p} for p in ('CANH', 'CANL')] +
+        [{'netclass': 'LoadCell', 'pattern': p} for p in ('/LoadCell/LC_SIG*', '/LoadCell/LC_AIN*', '/LoadCell/LC_REF*',
+                                                          '/LoadCell/LC_CAP*')])
+    # router presets: the class widths, plus the two via sizes and the two pair geometries
+    ds = pro['board']['design_settings']
+    ds['track_widths'] = [0.0, 0.2, 0.25, 0.3, 0.5, 1.0, 1.5, 3.0]
+    ds['via_dimensions'] = [{'diameter': 0.0, 'drill': 0.0}, {'diameter': 0.6, 'drill': 0.3}, {'diameter': 0.8, 'drill': 0.4}]
+    ds['diff_pair_dimensions'] = [{'gap': 0.0, 'via_gap': 0.0, 'width': 0.0}, {'gap': 0.2, 'via_gap': 0.25, 'width': 0.25},
+                                  {'gap': 0.25, 'via_gap': 0.25, 'width': 0.25}]
     pro.get('pcbnew', {}).pop('last_paths', None)
     json.dump(pro, open(OUT + 'MES4_Carrier_EC.kicad_pro', 'w'), indent=2)
     return sheets
