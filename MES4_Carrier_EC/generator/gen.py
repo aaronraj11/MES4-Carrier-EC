@@ -14,6 +14,7 @@ FL = '/Users/aaron/Desktop/MES4 Ecosystem/MES4-Flasher/'
 OUT = '/Users/aaron/Desktop/MES4 Ecosystem/MES4-Carrier-EC/MES4_Carrier_EC/'
 TITLE, DATE, REV, COMPANY, AUTHOR = 'MES4-Carrier-EC', '2026-10-27', 'A', 'Monkey Robotics', 'Aaron Raj Bhatti'
 GPS_MOUNT = False   # simpleRTK4 Dual mount standoffs over the FE-URT-2 (left out for now)
+ONE_GND = True      # GND_24V merged into GND: one ground net (one GND plane on the PCB), net tie NT1 left out
 
 
 # ---------------------------------------------------------------- Flasher part fields
@@ -554,9 +555,11 @@ def aux_sheet():
             'of its own for the IMU and screen converters, so the screen\'s\n'
             '20 W converter neither loads nor disturbs the logic supply\n'
             '(L1, Power sheet). Load at 24 V: IMU ≤ 0.5 A + screen ≤ 0.95 A\n'
-            '≈ 1.45 A; {L_AUX} is rated 2.1 A (2.9 A saturation).\n'
-            'Both converters are isolated: input side on GND_24V,\n'
-            'output side on GND (same scheme as the logic DC/DC).', (17.78, 68.58))
+            '≈ 1.45 A; {L_AUX} is rated 2.1 A (2.9 A saturation).\n' +
+            ('Both converters are isolated modules; on this board their\n'
+             'input and output sides share the one GND (as the logic DC/DC).' if ONE_GND else
+             'Both converters are isolated: input side on GND_24V,\n'
+             'output side on GND (same scheme as the logic DC/DC).'), (17.78, 68.58))
     # ---- IMU 9 V
     sh.box(121.92, 20.32, 403.86, 101.60, 'IMU power: 9 V (as on the MES3.1 carrier)')
     sh.label('+24V_AUX', (132.08, y))
@@ -1082,11 +1085,19 @@ def power_sheet():
     sh.wire(nt.p('2'), (350.52, 132.08), (350.52, 137.16))
     gl((350.52, 137.16))
     sh.pwr('PWR_FLAG', (335.28, 132.08))
-    sh.text('GND_24V: 24 V return (XT30 pin 2, relay outputs,\n'
-            'sensor 0 V, TVS, bulk caps, DC/DC input side).\n'
-            'GND: logic (module, INA236, ADS1232, DC/DC output).\n'
-            '{NT}: the only joint between them (the INA236s\n'
-            'measure +24V against GND). Place it at the DC/DC.', (314.96, 152.40))
+    if ONE_GND:
+        # one ground: drop the net tie and its wiring again (made first, so no later UUID moves)
+        sh.delete_region(330.0, 125.0, 355.0, 140.0)
+        sh.text('One ground, GND, for the 24 V side and the logic:\n'
+                'XT30 pin 2, relay outputs, sensor 0 V, TVS, bulk caps,\n'
+                'both DC/DC sides, module, INA236, ADS1232.\n'
+                'PCB: a solid GND plane on In1.Cu under the whole board.', (314.96, 152.40))
+    else:
+        sh.text('GND_24V: 24 V return (XT30 pin 2, relay outputs,\n'
+                'sensor 0 V, TVS, bulk caps, DC/DC input side).\n'
+                'GND: logic (module, INA236, ADS1232, DC/DC output).\n'
+                '{NT}: the only joint between them (the INA236s\n'
+                'measure +24V against GND). Place it at the DC/DC.', (314.96, 152.40))
     # ======== row 3: test points, bring-up
     sh.box(15.24, 187.96, 203.20, 248.92, 'Test points (bring-up)')
     tps = [('+24V', 'TP1'), ('+24V_DC', 'TP1'), ('+5V_24', 'TP2'), ('+5V', 'TP4'), ('+3V3_MOD', 'TP5'),
@@ -1104,8 +1115,9 @@ def power_sheet():
             sh.wire(tp.p('1'), (x + 7.62, 210.82))
             sh.pwr(net, (x + 7.62, 210.82))
         x += 27.94
-    sh.text('2 mm pads with a 1 mm hole: probe tip, or solder a wire loop for clips (not in the BOM).\n'
-            'Clip the scope ground to GND for the module side and to GND_24V for the 24 V side.',
+    sh.text('2 mm pads with a 1 mm hole: probe tip, or solder a wire loop for clips (not in the BOM).\n' +
+            ('Clip the scope ground to either GND pad, the one nearer the circuit you probe.' if ONE_GND else
+             'Clip the scope ground to GND for the module side and to GND_24V for the 24 V side.'),
             (17.78, 236.22))
     sh.box(205.74, 187.96, 403.86, 248.92, 'First power-up')
     sh.text('1. No module fitted. Apply 24 V on {J_IN} from a current-limited supply: {LED24} lights;\n'
@@ -1295,6 +1307,21 @@ def main():
     S['Relays1-2'].text(RELAY_DIAG[1].replace('U? DC/DC', '{Power/U_DCDC} DC/DC'), (17.78, 27.94))
     S['Relays3-4'].text(RELAY_LOADS[0], (17.78, 22.86), size=2, bold=True)
     S['Relays3-4'].text(RELAY_LOADS[1].replace('U? URB2405S', '{Power/U_DCDC} URB2405S'), (17.78, 27.94))
+    if ONE_GND:   # every GND_24V power symbol (ours and the Flasher's) becomes GND: same symbols, same UUIDs
+        for s in sheets:
+            for p in s.parts:
+                if p.lib_id.endswith(':GND_24V'):
+                    p.lib_id = 'power:GND'
+                    p.set('Value', 'GND')
+            for it in s.items:   # Power-sheet notes that cite the net tie
+                if it[0] == 'text':
+                    for a, b in (('5. Isolated DC/DC: the grounds meet only at {NT}, so relay load currents never '
+                                  'flow in GND.', '5. One ground: relay load currents return through the solid GND '
+                                  'plane (In1.Cu), not through tracks.'),
+                                 ('{NT} ties the grounds (the 1.5 kV isolation is not used).',
+                                  'One GND on both sides (the 1.5 kV isolation is not used).')):
+                        it[1] = Q(it[1].replace(a, b))
+                    assert '{NT}' not in it[1], it[1][:80]
     for s in sheets:
         s.clean()
     B.assign_refs(sheets)
@@ -1319,7 +1346,10 @@ def main():
     root_uuid = U('root')
     os.makedirs(OUT, exist_ok=True)
     for s in sheets:
-        open(OUT + s.file, 'w').write(dump(s.node(root_uuid, TITLE, DATE, REV, COMPANY, AUTHOR, resolve)) + '\n')
+        txt = dump(s.node(root_uuid, TITLE, DATE, REV, COMPANY, AUTHOR, resolve))
+        if ONE_GND:   # notes and descriptions that still say GND_24V (no symbol or net is left with that name)
+            txt = txt.replace('GND_24V', 'GND')
+        open(OUT + s.file, 'w').write(txt + '\n')
     # root
     rs = Sheet('Root', 'MES4_Carrier_EC.kicad_sch',
                'E-Crawler carrier for the MES4-MCU M.2 module', 1)
@@ -1337,7 +1367,8 @@ def main():
         root.append(sheet_symbol(s, x, y, root_uuid, w=26.67))
     root.append(['sheet_instances', ['path', Q('/'), ['page', Q('1')]]])
     root.append(['embedded_fonts', 'no'])
-    open(OUT + 'MES4_Carrier_EC.kicad_sch', 'w').write(dump(root) + '\n')
+    txt = dump(root)
+    open(OUT + 'MES4_Carrier_EC.kicad_sch', 'w').write((txt.replace('GND_24V', 'GND') if ONE_GND else txt) + '\n')
     # project file
     pro = json.load(open(FL + 'MES4-Flasher.kicad_pro'))
     pro['meta']['filename'] = 'MES4_Carrier_EC.kicad_pro'
@@ -1349,12 +1380,19 @@ def main():
             c['track_width'] = 1.0
     iso = dict(next(c for c in ns['classes'] if c['name'] == 'Default'))
     iso.update(name='Winch_48V', clearance=0.6, track_width=0.3)  # 48 V side; ≥ 2 mm to other copper (see Winch sheet)
-    ns['classes'] = [c for c in ns['classes'] if c['name'] != 'Winch_48V'] + [iso]
+    # 3 A branches: servo 24 V (3 A PTC), screen 5 V (20 W converter, 3.6 A start-up peak) and its USB-C VBUS
+    o3 = dict(next(c for c in ns['classes'] if c['name'] == '24V_Power'))
+    o3.update(name='Out_3A', track_width=1.5, priority=3)
+    ns['classes'] = [c for c in ns['classes'] if c['name'] not in ('Winch_48V', 'Out_3A')] + [iso, o3]
     ns['netclass_patterns'] = (
-        [{'netclass': 'Power', 'pattern': p} for p in ('+5V', '+5V_24', '+3V3_MOD', 'GND')] +
-        [{'netclass': '24V_Power', 'pattern': p} for p in ('+24V', 'GND_24V', '/Power/+24V_IN', '/Power/+24V_F')] +
+        [{'netclass': 'Power', 'pattern': p} for p in ('+5V', '+5V_24', '+3V3_MOD', 'GND', '/AuxPower/+5V_SRV',
+                                                       '/AuxPower/+9V_IMU', '/AuxPower/IMU_9V')] +
+        [{'netclass': '24V_Power', 'pattern': p} for p in ('+24V',) + (() if ONE_GND else ('GND_24V',)) +
+         ('/Power/+24V_IN', '/Power/+24V_F', '/AuxPower/+24V_AUX')] +
         [{'netclass': 'Power', 'pattern': '/Power/+24V_DC'}] +
-        [{'netclass': 'Out_2A', 'pattern': p} for p in ('/Relays*/RLY*_OUT', 'Net-(U*-Vin-)', 'Net-(F*-Pad1)')] +
+        [{'netclass': 'Out_2A', 'pattern': p} for p in ('/Relays*/RLY*_OUT', 'Net-(U*-IN-)', 'Net-(F*-Pad1)')] +
+        [{'netclass': 'Out_3A', 'pattern': p} for p in ('/AuxPower/+24V_SRV', '/AuxPower/+5V_SCR',
+                                                        '/AuxPower/VBUS_SCR')] +
         [{'netclass': 'Winch_48V', 'pattern': p} for p in ('/Winch/WINCH_*', '/Winch/ILK_*')])
     pro.get('pcbnew', {}).pop('last_paths', None)
     json.dump(pro, open(OUT + 'MES4_Carrier_EC.kicad_pro', 'w'), indent=2)

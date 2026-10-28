@@ -2,7 +2,7 @@
 	(version 20250114)
 	(generator "eeschema")
 	(generator_version "9.0")
-	(uuid "a32e9ed5-f4fe-5915-a8d3-4f65e117da2a")
+	(uuid "6bd9eb96-f0ad-5065-b348-fadec360b929")
 	(paper "A3")
 	(title_block
 		(title "MES4-Carrier-EC")
@@ -1005,84 +1005,6 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "MES4-Carrier-EC:GND_24V"
-			(power)
-			(pin_numbers (hide yes))
-			(pin_names (offset 0) (hide yes))
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "#PWR"
-				(at 0 -5.08 0)
-				(effects (font (size 1.27 1.27)) (hide yes))
-			)
-			(property "Value" "GND_24V"
-				(at 0 -3.302 0)
-				(effects (font (size 1.27 1.27)))
-			)
-			(property "Footprint" ""
-				(at 0 -1.27 0)
-				(effects (font (size 1.27 1.27)) (hide yes))
-			)
-			(property "Datasheet" ""
-				(at 0 -1.27 0)
-				(effects (font (size 1.27 1.27)) (hide yes))
-			)
-			(property "Description" "24 V side return (sensors, relay loads) - isolated from the logic GND"
-				(at 0 0 0)
-				(effects (font (size 1.27 1.27)) (hide yes))
-			)
-			(property "ki_keywords" "global ground"
-				(at 0 0 0)
-				(effects (font (size 1.27 1.27)) (hide yes))
-			)
-			(symbol "GND_24V_0_1"
-				(polyline
-					(pts (xy -1.016 -1.27) (xy -1.27 -2.032) (xy -1.27 -2.032))
-					(stroke (width 0.2032) (type default))
-					(fill (type none))
-				)
-				(polyline
-					(pts (xy -0.508 -1.27) (xy -0.762 -2.032) (xy -0.762 -2.032))
-					(stroke (width 0.2032) (type default))
-					(fill (type none))
-				)
-				(polyline
-					(pts (xy 0 -1.27) (xy 0 0))
-					(stroke (width 0) (type default))
-					(fill (type none))
-				)
-				(polyline
-					(pts (xy 0 -1.27) (xy -0.254 -2.032) (xy -0.254 -2.032))
-					(stroke (width 0.2032) (type default))
-					(fill (type none))
-				)
-				(polyline
-					(pts (xy 0.508 -1.27) (xy 0.254 -2.032) (xy 0.254 -2.032))
-					(stroke (width 0.2032) (type default))
-					(fill (type none))
-				)
-				(polyline
-					(pts (xy 1.016 -1.27) (xy -1.016 -1.27) (xy -1.016 -1.27))
-					(stroke (width 0.2032) (type default))
-					(fill (type none))
-				)
-				(polyline
-					(pts (xy 1.016 -1.27) (xy 0.762 -2.032) (xy 0.762 -2.032) (xy 0.762 -2.032))
-					(stroke (width 0.2032) (type default))
-					(fill (type none))
-				)
-			)
-			(symbol "GND_24V_1_1"
-				(pin power_in line
-					(at 0 0 270)
-					(length 0)
-					(name "~" (effects (font (size 1.27 1.27))))
-					(number "1" (effects (font (size 1.27 1.27))))
-				)
-			)
-			(embedded_fonts no)
-		)
 		(symbol "Device:LED"
 			(pin_numbers (hide yes))
 			(pin_names (offset 1.016) (hide yes))
@@ -1683,97 +1605,97 @@
 		(at 154.94 101.6)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "0aa2bacd-56b9-55ef-9bc3-d87764b5d11f")
+		(uuid "6d4eff25-26ae-57c0-95c8-ce39d1acc640")
 	)
 	(junction
 		(at 154.94 205.74)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "3d8c925d-7498-581a-b327-2c43aadf7319")
+		(uuid "0aa2bacd-56b9-55ef-9bc3-d87764b5d11f")
 	)
 	(junction
 		(at 167.64 53.34)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "291803e8-b5fd-5fc9-a708-98e561e6d21e")
+		(uuid "3d8c925d-7498-581a-b327-2c43aadf7319")
 	)
 	(junction
 		(at 167.64 81.28)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "8891a49e-8bf7-5716-9722-773a98c492cb")
+		(uuid "291803e8-b5fd-5fc9-a708-98e561e6d21e")
 	)
 	(junction
 		(at 167.64 157.48)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "ddace9e3-de40-5b88-8d47-cbda05370f4e")
+		(uuid "8891a49e-8bf7-5716-9722-773a98c492cb")
 	)
 	(junction
 		(at 167.64 185.42)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "4d77ac31-c9cb-549c-8f63-7aca8f26b0bc")
+		(uuid "ddace9e3-de40-5b88-8d47-cbda05370f4e")
 	)
 	(junction
 		(at 189.23 73.66)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "a47b76a9-c4f1-5dc8-939e-1bd9ff3f9625")
+		(uuid "4d77ac31-c9cb-549c-8f63-7aca8f26b0bc")
 	)
 	(junction
 		(at 189.23 177.8)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "ca417062-7c58-5ae9-89c2-401bfec803a5")
+		(uuid "a47b76a9-c4f1-5dc8-939e-1bd9ff3f9625")
 	)
 	(junction
 		(at 203.2 73.66)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "91852a88-05cf-5ca9-822d-bc373163d9ca")
+		(uuid "ca417062-7c58-5ae9-89c2-401bfec803a5")
 	)
 	(junction
 		(at 203.2 177.8)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "8c0f6af4-d855-5f24-ba64-be6c63607bb0")
+		(uuid "91852a88-05cf-5ca9-822d-bc373163d9ca")
 	)
 	(junction
 		(at 226.06 78.74)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "4c0cca14-fdb5-5e60-9436-823c9a908af5")
+		(uuid "8c0f6af4-d855-5f24-ba64-be6c63607bb0")
 	)
 	(junction
 		(at 226.06 182.88)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "6299c755-701f-567d-ac87-bfd4b0b6fd23")
+		(uuid "4c0cca14-fdb5-5e60-9436-823c9a908af5")
 	)
 	(junction
 		(at 269.24 58.42)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "63e1b96a-0ebb-58d6-8c19-e0784a82a3ea")
+		(uuid "6299c755-701f-567d-ac87-bfd4b0b6fd23")
 	)
 	(junction
 		(at 269.24 162.56)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "c212c522-8a53-5c00-b70e-934105e0a2d6")
+		(uuid "63e1b96a-0ebb-58d6-8c19-e0784a82a3ea")
 	)
 	(junction
 		(at 287.02 58.42)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "7bb628f7-fcf4-5971-962a-7f13149c324d")
+		(uuid "c212c522-8a53-5c00-b70e-934105e0a2d6")
 	)
 	(junction
 		(at 287.02 162.56)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "604e857e-c718-533d-952c-3e63f82927a5")
+		(uuid "7bb628f7-fcf4-5971-962a-7f13149c324d")
 	)
 	(symbol
 		(lib_id "Relay:SANYOU_SRD_Form_A")
@@ -1822,7 +1744,7 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/0d8fbf0e-dd62-5be6-8889-307c6423adb0/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
+				(path "/c8064e3b-00cc-53cd-8117-975fda80bac6/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
 					(reference "K1")
 					(unit 1)
 				)
@@ -1838,7 +1760,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "ee70e5b0-b6ad-54bb-b400-40145906bed9")
-		(property "Reference" "#PWR058"
+		(property "Reference" "#PWR056"
 			(at 167.64 44.45 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -1851,8 +1773,8 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/0d8fbf0e-dd62-5be6-8889-307c6423adb0/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
-					(reference "#PWR058")
+				(path "/c8064e3b-00cc-53cd-8117-975fda80bac6/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
+					(reference "#PWR056")
 					(unit 1)
 				)
 			)
@@ -1899,7 +1821,7 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/0d8fbf0e-dd62-5be6-8889-307c6423adb0/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
+				(path "/c8064e3b-00cc-53cd-8117-975fda80bac6/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
 					(reference "D10")
 					(unit 1)
 				)
@@ -1950,7 +1872,7 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/0d8fbf0e-dd62-5be6-8889-307c6423adb0/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
+				(path "/c8064e3b-00cc-53cd-8117-975fda80bac6/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
 					(reference "Q2")
 					(unit 1)
 				)
@@ -1966,7 +1888,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "01c6209f-46ce-5a49-ac6a-ff9bae0887bd")
-		(property "Reference" "#PWR059"
+		(property "Reference" "#PWR057"
 			(at 167.64 113.03 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -1979,8 +1901,8 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/0d8fbf0e-dd62-5be6-8889-307c6423adb0/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
-					(reference "#PWR059")
+				(path "/c8064e3b-00cc-53cd-8117-975fda80bac6/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
+					(reference "#PWR057")
 					(unit 1)
 				)
 			)
@@ -2027,7 +1949,7 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/0d8fbf0e-dd62-5be6-8889-307c6423adb0/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
+				(path "/c8064e3b-00cc-53cd-8117-975fda80bac6/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
 					(reference "R9")
 					(unit 1)
 				)
@@ -2075,7 +1997,7 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/0d8fbf0e-dd62-5be6-8889-307c6423adb0/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
+				(path "/c8064e3b-00cc-53cd-8117-975fda80bac6/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
 					(reference "R10")
 					(unit 1)
 				)
@@ -2091,7 +2013,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "dbd7d041-20fe-580f-b18b-33948d6b5e02")
-		(property "Reference" "#PWR060"
+		(property "Reference" "#PWR058"
 			(at 154.94 119.38 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -2104,8 +2026,8 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/0d8fbf0e-dd62-5be6-8889-307c6423adb0/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
-					(reference "#PWR060")
+				(path "/c8064e3b-00cc-53cd-8117-975fda80bac6/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
+					(reference "#PWR058")
 					(unit 1)
 				)
 			)
@@ -2152,7 +2074,7 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/0d8fbf0e-dd62-5be6-8889-307c6423adb0/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
+				(path "/c8064e3b-00cc-53cd-8117-975fda80bac6/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
 					(reference "R8")
 					(unit 1)
 				)
@@ -2168,7 +2090,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "52a4bae0-4558-5857-b4e1-fdc55d568aec")
-		(property "Reference" "#PWR061"
+		(property "Reference" "#PWR059"
 			(at 203.20 62.23 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -2181,8 +2103,8 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/0d8fbf0e-dd62-5be6-8889-307c6423adb0/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
-					(reference "#PWR061")
+				(path "/c8064e3b-00cc-53cd-8117-975fda80bac6/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
+					(reference "#PWR059")
 					(unit 1)
 				)
 			)
@@ -2247,7 +2169,7 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/0d8fbf0e-dd62-5be6-8889-307c6423adb0/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
+				(path "/c8064e3b-00cc-53cd-8117-975fda80bac6/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
 					(reference "U2")
 					(unit 1)
 				)
@@ -2263,7 +2185,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "6a759636-861f-52b9-ba06-bfeb9ea72a46")
-		(property "Reference" "#PWR062"
+		(property "Reference" "#PWR060"
 			(at 226.06 72.39 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -2276,8 +2198,8 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/0d8fbf0e-dd62-5be6-8889-307c6423adb0/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
-					(reference "#PWR062")
+				(path "/c8064e3b-00cc-53cd-8117-975fda80bac6/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
+					(reference "#PWR060")
 					(unit 1)
 				)
 			)
@@ -2324,7 +2246,7 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/0d8fbf0e-dd62-5be6-8889-307c6423adb0/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
+				(path "/c8064e3b-00cc-53cd-8117-975fda80bac6/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
 					(reference "C10")
 					(unit 1)
 				)
@@ -2340,7 +2262,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "6c3dbe2e-ab0a-5e93-80a5-09cd27190a7f")
-		(property "Reference" "#PWR063"
+		(property "Reference" "#PWR061"
 			(at 237.49 78.74 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -2353,8 +2275,8 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/0d8fbf0e-dd62-5be6-8889-307c6423adb0/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
-					(reference "#PWR063")
+				(path "/c8064e3b-00cc-53cd-8117-975fda80bac6/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
+					(reference "#PWR061")
 					(unit 1)
 				)
 			)
@@ -2369,7 +2291,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "d41572de-acf8-59c0-87cc-772b8535a02d")
-		(property "Reference" "#PWR064"
+		(property "Reference" "#PWR062"
 			(at 226.06 115.57 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -2382,8 +2304,8 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/0d8fbf0e-dd62-5be6-8889-307c6423adb0/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
-					(reference "#PWR064")
+				(path "/c8064e3b-00cc-53cd-8117-975fda80bac6/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
+					(reference "#PWR062")
 					(unit 1)
 				)
 			)
@@ -2430,7 +2352,7 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/0d8fbf0e-dd62-5be6-8889-307c6423adb0/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
+				(path "/c8064e3b-00cc-53cd-8117-975fda80bac6/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
 					(reference "F3")
 					(unit 1)
 				)
@@ -2462,7 +2384,7 @@
 			(at 325.12 58.42 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
-		(property "Description" "relay 1 (safety light) output: 1 = switched +24 V, 2 = GND_24V (KF250NH 3.5 mm push-in)"
+		(property "Description" "relay 1 (safety light) output: 1 = switched +24 V, 2 = GND (KF250NH 3.5 mm push-in)"
 			(at 325.12 58.42 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -2478,7 +2400,7 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/0d8fbf0e-dd62-5be6-8889-307c6423adb0/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
+				(path "/c8064e3b-00cc-53cd-8117-975fda80bac6/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
 					(reference "J6")
 					(unit 1)
 				)
@@ -2526,7 +2448,7 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/0d8fbf0e-dd62-5be6-8889-307c6423adb0/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
+				(path "/c8064e3b-00cc-53cd-8117-975fda80bac6/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
 					(reference "D12")
 					(unit 1)
 				)
@@ -2534,7 +2456,7 @@
 		)
 	)
 	(symbol
-		(lib_id "MES4-Carrier-EC:GND_24V")
+		(lib_id "power:GND")
 		(at 269.24 69.85 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -2542,11 +2464,11 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "abdc5da5-c4b8-5a59-8cea-3fded3345949")
-		(property "Reference" "#PWR065"
+		(property "Reference" "#PWR063"
 			(at 269.24 76.20 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
-		(property "Value" "GND_24V"
+		(property "Value" "GND"
 			(at 269.24 73.66 0)
 			(effects (font (size 1.27 1.27)))
 		)
@@ -2555,8 +2477,8 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/0d8fbf0e-dd62-5be6-8889-307c6423adb0/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
-					(reference "#PWR065")
+				(path "/c8064e3b-00cc-53cd-8117-975fda80bac6/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
+					(reference "#PWR063")
 					(unit 1)
 				)
 			)
@@ -2603,7 +2525,7 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/0d8fbf0e-dd62-5be6-8889-307c6423adb0/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
+				(path "/c8064e3b-00cc-53cd-8117-975fda80bac6/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
 					(reference "R14")
 					(unit 1)
 				)
@@ -2651,7 +2573,7 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/0d8fbf0e-dd62-5be6-8889-307c6423adb0/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
+				(path "/c8064e3b-00cc-53cd-8117-975fda80bac6/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
 					(reference "LED4")
 					(unit 1)
 				)
@@ -2659,7 +2581,7 @@
 		)
 	)
 	(symbol
-		(lib_id "MES4-Carrier-EC:GND_24V")
+		(lib_id "power:GND")
 		(at 287.02 81.28 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -2667,11 +2589,11 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "940e4b19-75a4-5ea8-9241-38eb3bf70d56")
-		(property "Reference" "#PWR066"
+		(property "Reference" "#PWR064"
 			(at 287.02 87.63 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
-		(property "Value" "GND_24V"
+		(property "Value" "GND"
 			(at 287.02 85.09 0)
 			(effects (font (size 1.27 1.27)))
 		)
@@ -2680,15 +2602,15 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/0d8fbf0e-dd62-5be6-8889-307c6423adb0/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
-					(reference "#PWR066")
+				(path "/c8064e3b-00cc-53cd-8117-975fda80bac6/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
+					(reference "#PWR064")
 					(unit 1)
 				)
 			)
 		)
 	)
 	(symbol
-		(lib_id "MES4-Carrier-EC:GND_24V")
+		(lib_id "power:GND")
 		(at 307.34 60.96 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -2696,11 +2618,11 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "22dc0311-41f7-5d5f-84d7-2d70ef892955")
-		(property "Reference" "#PWR067"
+		(property "Reference" "#PWR065"
 			(at 307.34 67.31 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
-		(property "Value" "GND_24V"
+		(property "Value" "GND"
 			(at 307.34 64.77 0)
 			(effects (font (size 1.27 1.27)))
 		)
@@ -2709,8 +2631,8 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/0d8fbf0e-dd62-5be6-8889-307c6423adb0/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
-					(reference "#PWR067")
+				(path "/c8064e3b-00cc-53cd-8117-975fda80bac6/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
+					(reference "#PWR065")
 					(unit 1)
 				)
 			)
@@ -2763,7 +2685,7 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/0d8fbf0e-dd62-5be6-8889-307c6423adb0/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
+				(path "/c8064e3b-00cc-53cd-8117-975fda80bac6/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
 					(reference "K2")
 					(unit 1)
 				)
@@ -2779,7 +2701,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "bcf6e236-1fce-5583-ba4d-a02387c4631c")
-		(property "Reference" "#PWR068"
+		(property "Reference" "#PWR066"
 			(at 167.64 148.59 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -2792,8 +2714,8 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/0d8fbf0e-dd62-5be6-8889-307c6423adb0/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
-					(reference "#PWR068")
+				(path "/c8064e3b-00cc-53cd-8117-975fda80bac6/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
+					(reference "#PWR066")
 					(unit 1)
 				)
 			)
@@ -2840,7 +2762,7 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/0d8fbf0e-dd62-5be6-8889-307c6423adb0/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
+				(path "/c8064e3b-00cc-53cd-8117-975fda80bac6/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
 					(reference "D11")
 					(unit 1)
 				)
@@ -2891,7 +2813,7 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/0d8fbf0e-dd62-5be6-8889-307c6423adb0/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
+				(path "/c8064e3b-00cc-53cd-8117-975fda80bac6/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
 					(reference "Q3")
 					(unit 1)
 				)
@@ -2907,7 +2829,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "b80c7d8f-f288-5350-a2ab-1e042a18f732")
-		(property "Reference" "#PWR069"
+		(property "Reference" "#PWR067"
 			(at 167.64 217.17 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -2920,8 +2842,8 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/0d8fbf0e-dd62-5be6-8889-307c6423adb0/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
-					(reference "#PWR069")
+				(path "/c8064e3b-00cc-53cd-8117-975fda80bac6/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
+					(reference "#PWR067")
 					(unit 1)
 				)
 			)
@@ -2968,7 +2890,7 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/0d8fbf0e-dd62-5be6-8889-307c6423adb0/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
+				(path "/c8064e3b-00cc-53cd-8117-975fda80bac6/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
 					(reference "R12")
 					(unit 1)
 				)
@@ -3016,7 +2938,7 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/0d8fbf0e-dd62-5be6-8889-307c6423adb0/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
+				(path "/c8064e3b-00cc-53cd-8117-975fda80bac6/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
 					(reference "R13")
 					(unit 1)
 				)
@@ -3032,7 +2954,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "09544d34-95bc-5c3f-90ab-5d87fa9ca969")
-		(property "Reference" "#PWR070"
+		(property "Reference" "#PWR068"
 			(at 154.94 223.52 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -3045,8 +2967,8 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/0d8fbf0e-dd62-5be6-8889-307c6423adb0/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
-					(reference "#PWR070")
+				(path "/c8064e3b-00cc-53cd-8117-975fda80bac6/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
+					(reference "#PWR068")
 					(unit 1)
 				)
 			)
@@ -3093,7 +3015,7 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/0d8fbf0e-dd62-5be6-8889-307c6423adb0/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
+				(path "/c8064e3b-00cc-53cd-8117-975fda80bac6/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
 					(reference "R11")
 					(unit 1)
 				)
@@ -3109,7 +3031,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "b493d1f1-011f-508d-90a2-6ab8226b9bd2")
-		(property "Reference" "#PWR071"
+		(property "Reference" "#PWR069"
 			(at 203.20 166.37 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -3122,8 +3044,8 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/0d8fbf0e-dd62-5be6-8889-307c6423adb0/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
-					(reference "#PWR071")
+				(path "/c8064e3b-00cc-53cd-8117-975fda80bac6/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
+					(reference "#PWR069")
 					(unit 1)
 				)
 			)
@@ -3188,7 +3110,7 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/0d8fbf0e-dd62-5be6-8889-307c6423adb0/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
+				(path "/c8064e3b-00cc-53cd-8117-975fda80bac6/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
 					(reference "U3")
 					(unit 1)
 				)
@@ -3204,7 +3126,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "cf9da120-f823-5e1e-8072-6a69c5327798")
-		(property "Reference" "#PWR072"
+		(property "Reference" "#PWR070"
 			(at 226.06 176.53 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -3217,8 +3139,8 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/0d8fbf0e-dd62-5be6-8889-307c6423adb0/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
-					(reference "#PWR072")
+				(path "/c8064e3b-00cc-53cd-8117-975fda80bac6/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
+					(reference "#PWR070")
 					(unit 1)
 				)
 			)
@@ -3265,7 +3187,7 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/0d8fbf0e-dd62-5be6-8889-307c6423adb0/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
+				(path "/c8064e3b-00cc-53cd-8117-975fda80bac6/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
 					(reference "C11")
 					(unit 1)
 				)
@@ -3281,7 +3203,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "58dbf773-43f4-5186-81f7-feee3af7deb4")
-		(property "Reference" "#PWR073"
+		(property "Reference" "#PWR071"
 			(at 237.49 182.88 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -3294,8 +3216,8 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/0d8fbf0e-dd62-5be6-8889-307c6423adb0/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
-					(reference "#PWR073")
+				(path "/c8064e3b-00cc-53cd-8117-975fda80bac6/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
+					(reference "#PWR071")
 					(unit 1)
 				)
 			)
@@ -3310,7 +3232,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "903c440f-e1b2-538e-96c4-e2cca0a4c880")
-		(property "Reference" "#PWR074"
+		(property "Reference" "#PWR072"
 			(at 226.06 219.71 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -3323,8 +3245,8 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/0d8fbf0e-dd62-5be6-8889-307c6423adb0/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
-					(reference "#PWR074")
+				(path "/c8064e3b-00cc-53cd-8117-975fda80bac6/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
+					(reference "#PWR072")
 					(unit 1)
 				)
 			)
@@ -3371,7 +3293,7 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/0d8fbf0e-dd62-5be6-8889-307c6423adb0/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
+				(path "/c8064e3b-00cc-53cd-8117-975fda80bac6/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
 					(reference "F4")
 					(unit 1)
 				)
@@ -3403,7 +3325,7 @@
 			(at 325.12 162.56 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
-		(property "Description" "relay 2 (LED DRL) output: 1 = switched +24 V, 2 = GND_24V (KF250NH 3.5 mm push-in)"
+		(property "Description" "relay 2 (LED DRL) output: 1 = switched +24 V, 2 = GND (KF250NH 3.5 mm push-in)"
 			(at 325.12 162.56 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -3419,7 +3341,7 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/0d8fbf0e-dd62-5be6-8889-307c6423adb0/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
+				(path "/c8064e3b-00cc-53cd-8117-975fda80bac6/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
 					(reference "J7")
 					(unit 1)
 				)
@@ -3467,7 +3389,7 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/0d8fbf0e-dd62-5be6-8889-307c6423adb0/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
+				(path "/c8064e3b-00cc-53cd-8117-975fda80bac6/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
 					(reference "D13")
 					(unit 1)
 				)
@@ -3475,7 +3397,7 @@
 		)
 	)
 	(symbol
-		(lib_id "MES4-Carrier-EC:GND_24V")
+		(lib_id "power:GND")
 		(at 269.24 173.99 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -3483,11 +3405,11 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "177d93cf-9227-5c6c-92d1-53fa0ed20a7a")
-		(property "Reference" "#PWR075"
+		(property "Reference" "#PWR073"
 			(at 269.24 180.34 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
-		(property "Value" "GND_24V"
+		(property "Value" "GND"
 			(at 269.24 177.80 0)
 			(effects (font (size 1.27 1.27)))
 		)
@@ -3496,8 +3418,8 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/0d8fbf0e-dd62-5be6-8889-307c6423adb0/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
-					(reference "#PWR075")
+				(path "/c8064e3b-00cc-53cd-8117-975fda80bac6/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
+					(reference "#PWR073")
 					(unit 1)
 				)
 			)
@@ -3544,7 +3466,7 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/0d8fbf0e-dd62-5be6-8889-307c6423adb0/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
+				(path "/c8064e3b-00cc-53cd-8117-975fda80bac6/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
 					(reference "R15")
 					(unit 1)
 				)
@@ -3592,7 +3514,7 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/0d8fbf0e-dd62-5be6-8889-307c6423adb0/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
+				(path "/c8064e3b-00cc-53cd-8117-975fda80bac6/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
 					(reference "LED5")
 					(unit 1)
 				)
@@ -3600,7 +3522,7 @@
 		)
 	)
 	(symbol
-		(lib_id "MES4-Carrier-EC:GND_24V")
+		(lib_id "power:GND")
 		(at 287.02 185.42 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -3608,11 +3530,11 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "5a91c509-39b5-5788-95f5-9b05bb3609a7")
-		(property "Reference" "#PWR076"
+		(property "Reference" "#PWR074"
 			(at 287.02 191.77 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
-		(property "Value" "GND_24V"
+		(property "Value" "GND"
 			(at 287.02 189.23 0)
 			(effects (font (size 1.27 1.27)))
 		)
@@ -3621,15 +3543,15 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/0d8fbf0e-dd62-5be6-8889-307c6423adb0/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
-					(reference "#PWR076")
+				(path "/c8064e3b-00cc-53cd-8117-975fda80bac6/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
+					(reference "#PWR074")
 					(unit 1)
 				)
 			)
 		)
 	)
 	(symbol
-		(lib_id "MES4-Carrier-EC:GND_24V")
+		(lib_id "power:GND")
 		(at 307.34 165.10 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -3637,11 +3559,11 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "d56541a7-67bf-51dd-9bc6-168d96ef471a")
-		(property "Reference" "#PWR077"
+		(property "Reference" "#PWR075"
 			(at 307.34 171.45 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
-		(property "Value" "GND_24V"
+		(property "Value" "GND"
 			(at 307.34 168.91 0)
 			(effects (font (size 1.27 1.27)))
 		)
@@ -3650,8 +3572,8 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/0d8fbf0e-dd62-5be6-8889-307c6423adb0/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
-					(reference "#PWR077")
+				(path "/c8064e3b-00cc-53cd-8117-975fda80bac6/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
+					(reference "#PWR075")
 					(unit 1)
 				)
 			)
@@ -3666,7 +3588,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "6aa9b9f3-d418-5ed4-b66c-52ab285b0714")
-		(property "Reference" "#PWR078"
+		(property "Reference" "#PWR076"
 			(at 243.84 91.44 90)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -3691,8 +3613,8 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/0d8fbf0e-dd62-5be6-8889-307c6423adb0/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
-					(reference "#PWR078")
+				(path "/c8064e3b-00cc-53cd-8117-975fda80bac6/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
+					(reference "#PWR076")
 					(unit 1)
 				)
 			)
@@ -3707,7 +3629,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "17fcf0cb-dd51-52f7-b581-e6dd91e24cc2")
-		(property "Reference" "#PWR079"
+		(property "Reference" "#PWR077"
 			(at 243.84 195.58 90)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -3732,8 +3654,8 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/0d8fbf0e-dd62-5be6-8889-307c6423adb0/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
-					(reference "#PWR079")
+				(path "/c8064e3b-00cc-53cd-8117-975fda80bac6/95e2e50b-8f9a-5239-8965-2e90ce2499cb"
+					(reference "#PWR077")
 					(unit 1)
 				)
 			)

@@ -2,7 +2,7 @@
 	(version 20250114)
 	(generator "eeschema")
 	(generator_version "9.0")
-	(uuid "4f2268b3-710b-52ee-ad04-f14737a0f718")
+	(uuid "de9b0ce3-3984-57fd-a791-95c7e583b9fd")
 	(paper "A3")
 	(title_block
 		(title "MES4-Carrier-EC")
@@ -888,37 +888,37 @@
 		(at 78.74 73.66)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "0f0798bd-65d2-59e6-ade6-a0ed4e0195fd")
+		(uuid "448aa81e-4e60-5f2c-9f94-1595db90faea")
 	)
 	(junction
 		(at 78.74 124.46)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "da27f29e-3c43-576f-860b-5f81b16fb002")
+		(uuid "0f0798bd-65d2-59e6-ade6-a0ed4e0195fd")
 	)
 	(junction
 		(at 83.82 55.88)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "1f21f4a0-73d2-53b7-988a-4b2ac8d3ede9")
+		(uuid "da27f29e-3c43-576f-860b-5f81b16fb002")
 	)
 	(junction
 		(at 83.82 106.68)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "d0ac2dbf-3ce3-5a8d-97ea-83d5e4fe8093")
+		(uuid "1f21f4a0-73d2-53b7-988a-4b2ac8d3ede9")
 	)
 	(junction
 		(at 88.9 66.04)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "1fdd5d58-dcc4-5958-ab19-9a68c2740683")
+		(uuid "d0ac2dbf-3ce3-5a8d-97ea-83d5e4fe8093")
 	)
 	(junction
 		(at 88.9 116.84)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "106386d3-e706-5a47-b136-df24f714842a")
+		(uuid "1fdd5d58-dcc4-5958-ab19-9a68c2740683")
 	)
 	(symbol
 		(lib_id "MES4-Carrier-EC:IM03GR")
@@ -979,7 +979,7 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/0d8fbf0e-dd62-5be6-8889-307c6423adb0/ab87f4c8-555d-52c8-a423-b1818ccd4582"
+				(path "/c8064e3b-00cc-53cd-8117-975fda80bac6/ab87f4c8-555d-52c8-a423-b1818ccd4582"
 					(reference "K5")
 					(unit 1)
 				)
@@ -995,7 +995,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "17232ced-9c4c-5470-a616-f2fdad7a41ef")
-		(property "Reference" "#PWR164"
+		(property "Reference" "#PWR162"
 			(at 83.82 50.8 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -1020,8 +1020,8 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/0d8fbf0e-dd62-5be6-8889-307c6423adb0/ab87f4c8-555d-52c8-a423-b1818ccd4582"
-					(reference "#PWR164")
+				(path "/c8064e3b-00cc-53cd-8117-975fda80bac6/ab87f4c8-555d-52c8-a423-b1818ccd4582"
+					(reference "#PWR162")
 					(unit 1)
 				)
 			)
@@ -1068,7 +1068,7 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/0d8fbf0e-dd62-5be6-8889-307c6423adb0/ab87f4c8-555d-52c8-a423-b1818ccd4582"
+				(path "/c8064e3b-00cc-53cd-8117-975fda80bac6/ab87f4c8-555d-52c8-a423-b1818ccd4582"
 					(reference "D25")
 					(unit 1)
 				)
@@ -1119,7 +1119,7 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/0d8fbf0e-dd62-5be6-8889-307c6423adb0/ab87f4c8-555d-52c8-a423-b1818ccd4582"
+				(path "/c8064e3b-00cc-53cd-8117-975fda80bac6/ab87f4c8-555d-52c8-a423-b1818ccd4582"
 					(reference "Q6")
 					(unit 1)
 				)
@@ -1135,7 +1135,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "d7199068-c742-5b8d-b01f-0c967098d0bc")
-		(property "Reference" "#PWR165"
+		(property "Reference" "#PWR163"
 			(at 88.9 78.74 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -1160,8 +1160,8 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/0d8fbf0e-dd62-5be6-8889-307c6423adb0/ab87f4c8-555d-52c8-a423-b1818ccd4582"
-					(reference "#PWR165")
+				(path "/c8064e3b-00cc-53cd-8117-975fda80bac6/ab87f4c8-555d-52c8-a423-b1818ccd4582"
+					(reference "#PWR163")
 					(unit 1)
 				)
 			)
@@ -1208,7 +1208,7 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/0d8fbf0e-dd62-5be6-8889-307c6423adb0/ab87f4c8-555d-52c8-a423-b1818ccd4582"
+				(path "/c8064e3b-00cc-53cd-8117-975fda80bac6/ab87f4c8-555d-52c8-a423-b1818ccd4582"
 					(reference "R43")
 					(unit 1)
 				)
@@ -1256,7 +1256,7 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/0d8fbf0e-dd62-5be6-8889-307c6423adb0/ab87f4c8-555d-52c8-a423-b1818ccd4582"
+				(path "/c8064e3b-00cc-53cd-8117-975fda80bac6/ab87f4c8-555d-52c8-a423-b1818ccd4582"
 					(reference "R44")
 					(unit 1)
 				)
@@ -1272,7 +1272,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "2db85c06-c4c1-5bc6-a16a-316378ab0c1d")
-		(property "Reference" "#PWR166"
+		(property "Reference" "#PWR164"
 			(at 78.74 81.28 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -1297,8 +1297,8 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/0d8fbf0e-dd62-5be6-8889-307c6423adb0/ab87f4c8-555d-52c8-a423-b1818ccd4582"
-					(reference "#PWR166")
+				(path "/c8064e3b-00cc-53cd-8117-975fda80bac6/ab87f4c8-555d-52c8-a423-b1818ccd4582"
+					(reference "#PWR164")
 					(unit 1)
 				)
 			)
@@ -1363,7 +1363,7 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/0d8fbf0e-dd62-5be6-8889-307c6423adb0/ab87f4c8-555d-52c8-a423-b1818ccd4582"
+				(path "/c8064e3b-00cc-53cd-8117-975fda80bac6/ab87f4c8-555d-52c8-a423-b1818ccd4582"
 					(reference "K6")
 					(unit 1)
 				)
@@ -1379,7 +1379,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "3332d849-4cec-58f1-9297-b9549072da5a")
-		(property "Reference" "#PWR167"
+		(property "Reference" "#PWR165"
 			(at 83.82 101.6 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -1404,8 +1404,8 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/0d8fbf0e-dd62-5be6-8889-307c6423adb0/ab87f4c8-555d-52c8-a423-b1818ccd4582"
-					(reference "#PWR167")
+				(path "/c8064e3b-00cc-53cd-8117-975fda80bac6/ab87f4c8-555d-52c8-a423-b1818ccd4582"
+					(reference "#PWR165")
 					(unit 1)
 				)
 			)
@@ -1452,7 +1452,7 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/0d8fbf0e-dd62-5be6-8889-307c6423adb0/ab87f4c8-555d-52c8-a423-b1818ccd4582"
+				(path "/c8064e3b-00cc-53cd-8117-975fda80bac6/ab87f4c8-555d-52c8-a423-b1818ccd4582"
 					(reference "D26")
 					(unit 1)
 				)
@@ -1503,7 +1503,7 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/0d8fbf0e-dd62-5be6-8889-307c6423adb0/ab87f4c8-555d-52c8-a423-b1818ccd4582"
+				(path "/c8064e3b-00cc-53cd-8117-975fda80bac6/ab87f4c8-555d-52c8-a423-b1818ccd4582"
 					(reference "Q7")
 					(unit 1)
 				)
@@ -1519,7 +1519,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "71800a29-a347-5b1f-8e45-dffb6e35e265")
-		(property "Reference" "#PWR168"
+		(property "Reference" "#PWR166"
 			(at 88.9 129.54 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -1544,8 +1544,8 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/0d8fbf0e-dd62-5be6-8889-307c6423adb0/ab87f4c8-555d-52c8-a423-b1818ccd4582"
-					(reference "#PWR168")
+				(path "/c8064e3b-00cc-53cd-8117-975fda80bac6/ab87f4c8-555d-52c8-a423-b1818ccd4582"
+					(reference "#PWR166")
 					(unit 1)
 				)
 			)
@@ -1592,7 +1592,7 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/0d8fbf0e-dd62-5be6-8889-307c6423adb0/ab87f4c8-555d-52c8-a423-b1818ccd4582"
+				(path "/c8064e3b-00cc-53cd-8117-975fda80bac6/ab87f4c8-555d-52c8-a423-b1818ccd4582"
 					(reference "R45")
 					(unit 1)
 				)
@@ -1640,7 +1640,7 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/0d8fbf0e-dd62-5be6-8889-307c6423adb0/ab87f4c8-555d-52c8-a423-b1818ccd4582"
+				(path "/c8064e3b-00cc-53cd-8117-975fda80bac6/ab87f4c8-555d-52c8-a423-b1818ccd4582"
 					(reference "R46")
 					(unit 1)
 				)
@@ -1656,7 +1656,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "9b16b0a8-3e24-58d4-9ff7-d1286d511165")
-		(property "Reference" "#PWR169"
+		(property "Reference" "#PWR167"
 			(at 78.74 132.08 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -1681,8 +1681,8 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/0d8fbf0e-dd62-5be6-8889-307c6423adb0/ab87f4c8-555d-52c8-a423-b1818ccd4582"
-					(reference "#PWR169")
+				(path "/c8064e3b-00cc-53cd-8117-975fda80bac6/ab87f4c8-555d-52c8-a423-b1818ccd4582"
+					(reference "#PWR167")
 					(unit 1)
 				)
 			)
@@ -1732,7 +1732,7 @@
 		)
 		(instances
 			(project "MES4_Carrier_EC"
-				(path "/0d8fbf0e-dd62-5be6-8889-307c6423adb0/ab87f4c8-555d-52c8-a423-b1818ccd4582"
+				(path "/c8064e3b-00cc-53cd-8117-975fda80bac6/ab87f4c8-555d-52c8-a423-b1818ccd4582"
 					(reference "J18")
 					(unit 1)
 				)
