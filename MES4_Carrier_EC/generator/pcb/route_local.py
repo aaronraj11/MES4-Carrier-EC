@@ -30,7 +30,12 @@ guard: analog GND guard on F.Cu around the load-cell block (J12 -> R28 / R29 -> 
 ADS1232, REF / CAP caps, C23-C25). A priority-2 GND zone (above any later general fill) with a 0.3 mm gap so it sits
 evenly beside the analog lines, notched out of the ADS1232's digital corner (pins 22-24, R32-R34) and off J3 (CAN cable / shield currents stay out); 40 GND stitching
 vias (2 mm grid, at least 0.7 mm from the analog lines, clear of other nets on both layers and of part bodies) tie it
-to In1 so the input traces run in a grounded trough."""
+to In1 so the input traces run in a grounded trough.
+fill: GND on both outer layers over the whole board, priority 0 (below the 24 V-input pours, raised to 1, and the
+analog guard, 2), 0.3 mm gap, thermal reliefs, islands removed; the winch rule area keeps it off the 48 V copper. On F.Cu it
+leaves a 0.5 mm moat round the analog guard, so the guard meets the rest of GND only through its vias to In1.
+A 5 mm stitching-via grid ties it to In1: worked out at build time, each via clear of other nets on both layers, of
+holes and of part bodies, and kept out of the guard, the winch area and the input pours."""
 import sys
 sys.path.insert(0, __file__.rsplit('/', 1)[0]); from handroute import Board
 
@@ -84,6 +89,7 @@ G['usb'] = [
     ('/AuxPower/SCR_SHIELD', 0.4, [('B', [(57.43, 128.10), (53.62, 128.10), (53.62, 136.74), (57.43, 136.74)])]),
 ]
 GUARD = [(90.3, 50.0), (103.0, 50.0), (103.0, 79.3), (96.6, 79.3), (96.6, 84.2), (78.6, 84.2), (78.6, 62.2), (90.3, 62.2)]   # J3 (CAN) corner left out
+GUARD_MOAT = [(89.8, 49.5), (103.5, 49.5), (103.5, 79.8), (97.1, 79.8), (97.1, 84.7), (78.1, 84.7), (78.1, 61.7), (89.8, 61.7)]   # GUARD + 0.5
 GUARD_VIAS = [(92.2, 50.6), (92.2, 52.6), (92.2, 54.6), (92.2, 56.6), (92.2, 58.6), (92.2, 60.6), (94.2, 60.6), (96.2, 60.6),
               (100.2, 60.6), (79.2, 63.6), (83.2, 63.6), (100.2, 64.6), (102.2, 64.6), (79.2, 65.6), (89.2, 65.6), (98.2, 66.6),
               (100.2, 66.6), (102.2, 66.6), (79.2, 67.6), (85.2, 67.6), (102.2, 68.6), (79.2, 70.6), (79.2, 72.6), (100.2, 73.6),
@@ -107,4 +113,50 @@ if not only or 'guard' in only:
         v = pcbnew.PCB_VIA(b); v.SetPosition(pcbnew.VECTOR2I(mm(x), mm(y))); v.SetWidth(mm(0.6)); v.SetDrill(mm(0.3))
         v.SetLayerPair(pcbnew.F_Cu, pcbnew.B_Cu); v.SetNet(g); b.Add(v)
     print('guard zone +', len(GUARD_VIAS), 'vias')
+if not only or 'fill' in only:
+    import pcbnew, math
+    b = B.b; mm = pcbnew.FromMM; T = pcbnew.ToMM; g = b.FindNet('GND'); V = lambda x, y: pcbnew.VECTOR2I(mm(x), mm(y))
+    outer = (pcbnew.F_Cu, pcbnew.B_Cu)
+    for z in b.Zones():                                     # the 24 V-input pours sit above the general fill
+        if not z.GetIsRuleArea() and z.GetZoneName() != 'Analog guard' and any(z.IsOnLayer(L) for L in outer):
+            z.SetAssignedPriority(max(z.GetAssignedPriority(), 1))
+    bb = b.GetBoardEdgesBoundingBox(); x0, y0, x1, y1 = T(bb.GetLeft()), T(bb.GetTop()), T(bb.GetRight()), T(bb.GetBottom())
+    for L, name in ((pcbnew.F_Cu, 'GND fill F'), (pcbnew.B_Cu, 'GND fill B')):
+        z = pcbnew.ZONE(b); z.SetLayer(L); z.SetNet(g); z.SetZoneName(name); z.SetAssignedPriority(0)
+        z.Outline().NewOutline()
+        for x, y in ((x0 - 1, y0 - 1), (x1 + 1, y0 - 1), (x1 + 1, y1 + 1), (x0 - 1, y1 + 1)): z.Outline().Append(mm(x), mm(y))
+        if L == pcbnew.F_Cu:                                # 0.5 mm moat round the analog guard: it reaches GND only by its vias
+            h = z.Outline().NewHole()
+            for x, y in GUARD_MOAT: z.Outline().Append(mm(x), mm(y), 0, h)
+        z.SetLocalClearance(mm(0.3)); z.SetMinThickness(mm(0.25)); z.SetPadConnection(pcbnew.ZONE_CONNECTION_THERMAL)
+        z.SetThermalReliefGap(mm(0.3)); z.SetThermalReliefSpokeWidth(mm(0.4)); z.SetIslandRemovalMode(pcbnew.ISLAND_REMOVAL_MODE_ALWAYS)
+        b.Add(z)
+    for f in b.GetFootprints():                             # U7's GND pad is hemmed in by tracks (one spoke fits): solid
+        if f.GetReference() == 'U7':
+            for p in f.Pads():
+                if p.GetNumber() == '2': p.SetLocalZoneConnection(pcbnew.ZONE_CONNECTION_FULL)
+    keep_out = [(GUARD_BOX := (77.6, 49.0, 104.0, 85.2)), (159.1, 0.0, 181.2, 76.9), (203.0, 0.0, 999.0, 76.0)]
+    items = [t for t in b.GetTracks() if t.GetNetname() != 'GND' or t.GetClass() == 'PCB_VIA'] + list(b.GetPads())
+    for f in b.GetFootprints(): f.BuildCourtyardCaches()
+    crt = [f.GetCourtyard(L) for f in b.GetFootprints() for L in outer]
+    placed = []; y = y0 + 2.5
+    while y < y1 - 2.0:
+        x = x0 + 2.5
+        while x < x1 - 2.0:
+            P = V(x, y); ok = not any(a <= x <= c and bb_ <= y <= d for a, bb_, c, d in keep_out)
+            for i in items if ok else []:
+                ib = i.GetBoundingBox()
+                if not (T(ib.GetLeft()) - 2 < x < T(ib.GetRight()) + 2 and T(ib.GetTop()) - 2 < y < T(ib.GetBottom()) + 2): continue
+                if i.GetClass() == 'PCB_VIA':
+                    if math.hypot(T(i.GetPosition().x) - x, T(i.GetPosition().y) - y) < 0.3 + T(i.GetWidth()) / 2 + 0.35: ok = False; break
+                    continue
+                if i.GetNetname() == 'GND' and i.GetClass() == 'PAD' and i.GetDrillSize().x == 0: continue
+                need = 0.3 + (0.6 if i.GetClass() == 'PAD' and i.GetDrillSize().x > 0 else 0.3)
+                if i.HitTest(P, mm(need)): ok = False; break
+            if ok and not any(c.Contains(P) for c in crt if c.OutlineCount()):
+                v = pcbnew.PCB_VIA(b); v.SetPosition(P); v.SetWidth(mm(0.6)); v.SetDrill(mm(0.3))
+                v.SetLayerPair(pcbnew.F_Cu, pcbnew.B_Cu); v.SetNet(g); b.Add(v); placed.append((x, y))
+            x += 5.0
+        y += 5.0
+    print('GND fill F / B +', len(placed), 'stitching vias')
 B.save()
