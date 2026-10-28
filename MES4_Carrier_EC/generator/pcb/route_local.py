@@ -25,7 +25,12 @@ usb: the screen's USB-C (J16). CC1 / CC2 sit between the two VBUS pins, whose tr
 them in on F.Cu, so each leaves by a via off its pad end and runs B.Cu NE to a via beside its 5.1k (CC1 -> R41's east
 end, CC2 -> R40's west end, so neither passes the other's via). The shield: the four shell pads tied on B.Cu, and one
 0.4 mm F.Cu line over the top of F11 and the CC resistors (crossing the CC lines on the other layer) that comes round
-into C37 from the east and on to R42."""
+into C37 from the east and on to R42.
+guard: analog GND guard on F.Cu around the load-cell block (J12 -> R28 / R29 -> C16-C18 -> D20 / D21 -> C17 / C22 ->
+ADS1232, REF / CAP caps, C23-C25). A priority-2 GND zone (above any later general fill) with a 0.3 mm gap so it sits
+evenly beside the analog lines, notched out of the ADS1232's digital corner (pins 22-24, R32-R34) and off J3 (CAN cable / shield currents stay out); 40 GND stitching
+vias (2 mm grid, at least 0.7 mm from the analog lines, clear of other nets on both layers and of part bodies) tie it
+to In1 so the input traces run in a grounded trough."""
 import sys
 sys.path.insert(0, __file__.rsplit('/', 1)[0]); from handroute import Board
 
@@ -78,9 +83,28 @@ G['usb'] = [
                                           (77.60, 128.66), (76.75, 128.66), (75.84, 129.57), (74.67, 129.57)])]),
     ('/AuxPower/SCR_SHIELD', 0.4, [('B', [(57.43, 128.10), (53.62, 128.10), (53.62, 136.74), (57.43, 136.74)])]),
 ]
+GUARD = [(90.3, 50.0), (103.0, 50.0), (103.0, 79.3), (96.6, 79.3), (96.6, 84.2), (78.6, 84.2), (78.6, 62.2), (90.3, 62.2)]   # J3 (CAN) corner left out
+GUARD_VIAS = [(92.2, 50.6), (92.2, 52.6), (92.2, 54.6), (92.2, 56.6), (92.2, 58.6), (92.2, 60.6), (94.2, 60.6), (96.2, 60.6),
+              (100.2, 60.6), (79.2, 63.6), (83.2, 63.6), (100.2, 64.6), (102.2, 64.6), (79.2, 65.6), (89.2, 65.6), (98.2, 66.6),
+              (100.2, 66.6), (102.2, 66.6), (79.2, 67.6), (85.2, 67.6), (102.2, 68.6), (79.2, 70.6), (79.2, 72.6), (100.2, 73.6),
+              (81.2, 74.6), (102.2, 74.6), (100.2, 75.6), (81.2, 76.6), (84.2, 76.6), (87.2, 76.6), (89.2, 76.6), (102.2, 76.6),
+              (101.2, 78.6), (79.2, 81.6), (85.2, 81.6), (90.2, 81.6), (89.2, 83.6), (91.2, 83.6), (93.2, 83.6), (95.2, 83.6)]
 
 for k, paths in G.items():
     if only and k not in only: continue
     for net, w, runs in paths: B.path(net, w, runs)
     print(k, len(paths), 'paths')
+if not only or 'guard' in only:
+    import pcbnew
+    b = B.b; mm = pcbnew.FromMM; g = b.FindNet('GND')
+    z = pcbnew.ZONE(b); z.SetLayer(pcbnew.F_Cu); z.SetNet(g); z.SetZoneName('Analog guard'); z.SetAssignedPriority(2)
+    z.Outline().NewOutline()
+    for x, y in GUARD: z.Outline().Append(mm(x), mm(y))
+    z.SetLocalClearance(mm(0.3)); z.SetMinThickness(mm(0.25)); z.SetPadConnection(pcbnew.ZONE_CONNECTION_THERMAL)
+    z.SetThermalReliefGap(mm(0.3)); z.SetThermalReliefSpokeWidth(mm(0.4)); z.SetIslandRemovalMode(pcbnew.ISLAND_REMOVAL_MODE_ALWAYS)
+    b.Add(z)
+    for x, y in GUARD_VIAS:
+        v = pcbnew.PCB_VIA(b); v.SetPosition(pcbnew.VECTOR2I(mm(x), mm(y))); v.SetWidth(mm(0.6)); v.SetDrill(mm(0.3))
+        v.SetLayerPair(pcbnew.F_Cu, pcbnew.B_Cu); v.SetNet(g); b.Add(v)
+    print('guard zone +', len(GUARD_VIAS), 'vias')
 B.save()
