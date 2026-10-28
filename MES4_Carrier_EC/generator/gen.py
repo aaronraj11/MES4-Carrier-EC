@@ -15,6 +15,9 @@ OUT = '/Users/aaron/Desktop/MES4 Ecosystem/MES4-Carrier-EC/MES4_Carrier_EC/'
 TITLE, DATE, REV, COMPANY, AUTHOR = 'MES4-Carrier-EC', '2026-10-27', 'A', 'Monkey Robotics', 'Aaron Raj Bhatti'
 GPS_MOUNT = False   # simpleRTK4 Dual mount standoffs over the FE-URT-2 (left out for now)
 ONE_GND = True      # GND_24V merged into GND: one ground net (one GND plane on the PCB), net tie NT1 left out
+# test-point values = their knockout labels on the PCB: what the rail is, in bring-up order
+TP_NAME = {'+24V': '24V', '+24V_DC': '24V FILT', '+5V_24': '5V MAIN', '+5V': '5V MCU', '+3V3_MOD': '3V3',
+           'GND': 'GND', 'GND_24V': 'GND' if ONE_GND else 'GND_24V', '+9V_IMU': '9V IMU', '+5V_SCR': '5V SCREEN'}
 
 
 # ---------------------------------------------------------------- Flasher part fields
@@ -575,7 +578,7 @@ def aux_sheet():
     sh.wire(ui.p('-Vo'), (191.77, 50.80), (191.77, 54.61))
     gl((191.77, 54.61))
     co = npart(sh, 'C_IMU_OUT', 'C', (200.66, 49.53))
-    tp9 = fpart(sh, 'TP1', (213.36, y), value='+9V_IMU', tag='TP_9V', fields=((0, -6.35), (0, -3.81), None))
+    tp9 = fpart(sh, 'TP1', (213.36, y), value=TP_NAME['+9V_IMU'], tag='TP_9V', fields=((0, -6.35), (0, -3.81), None))
     sw = npart(sh, 'SW_IMU', 'SW', (238.76, y), tag='SW_IMU', fields=((0, -8.89), (0, -6.35), None))
     sh.wire(ui.p('+Vo'), co.p('1'), tp9.p('1'), (223.52, y), sw.p('B'))
     sh.label('+9V_IMU', (223.52, y))
@@ -619,7 +622,7 @@ def aux_sheet():
     o1 = npart(sh, 'C_SCR_OUT', 'C', (93.98, 135.89), tag='C_SCR1')
     o2 = npart(sh, 'C_SCR_OUT', 'C', (109.22, 135.89), tag='C_SCR2')
     o3 = fpart(sh, 'C4', (124.46, 135.89), tag='C_SCR3', desc='5 V screen output bypass')
-    tp5 = fpart(sh, 'TP1', (134.62, y2), value='+5V_SCR', tag='TP_5VS', fields=((0, -6.35), (0, -3.81), None))
+    tp5 = fpart(sh, 'TP1', (134.62, y2), value=TP_NAME['+5V_SCR'], tag='TP_5VS', fields=((0, -6.35), (0, -3.81), None))
     fs = npart(sh, 'F_CH', 'F', (149.86, y2), rot=90, tag='F_SCR',
                desc='screen USB-C PTC, LUTE 2920L300/36GR: 3 A hold (the connector is rated 3 A)')
     sh.wire(us.p('+Vo'), o1.p('1'), o2.p('1'), o3.p('1'), tp5.p('1'), (139.70, y2), fs.p('1'))
@@ -1104,7 +1107,7 @@ def power_sheet():
            ('GND', 'TP6'), ('GND_24V', 'TP7')]
     x = 30.48
     for net, old in tps:
-        tp = fpart(sh, old, (x, 210.82), value=net, tag='TP_' + net, fields=((-1.27, -3.81), (-1.27, -1.27), 'right'))
+        tp = fpart(sh, old, (x, 210.82), value=TP_NAME[net], tag='TP_' + net, fields=((-1.27, -3.81), (-1.27, -1.27), 'right'))
         if net.startswith('GND'):
             sh.wire(tp.p('1'), (x, 215.90))
             sh.pwr(net, (x, 215.90))

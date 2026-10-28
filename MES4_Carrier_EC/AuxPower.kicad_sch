@@ -2780,7 +2780,7 @@
 			(at 213.36 39.37 0)
 			(effects (font (size 1.27 1.27)))
 		)
-		(property "Value" "+9V_IMU"
+		(property "Value" "9V IMU"
 			(at 213.36 41.91 0)
 			(effects (font (size 1.27 1.27)))
 		)
@@ -3514,7 +3514,7 @@
 			(at 134.62 125.73 0)
 			(effects (font (size 1.27 1.27)))
 		)
-		(property "Value" "+5V_SCR"
+		(property "Value" "5V SCREEN"
 			(at 134.62 128.27 0)
 			(effects (font (size 1.27 1.27)))
 		)
