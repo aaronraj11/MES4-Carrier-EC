@@ -3,40 +3,12 @@ run, width changes only at a pad or via). Run after route_relays.py and route_sr
 
     route_rails.py <pcb> [group,group,...]
 
-A path is (net, width, runs); runs = [('F'|'B', [(x, y), ...]), ...]. A via joins consecutive runs at the
-last point of a run; a run with a single point only places that via. A route that ends on the middle of
-another track gets a vertex there (KiCad wants an anchor)."""
-import sys, math, pcbnew
+Path format: see handroute.py."""
+import sys
+sys.path.insert(0, __file__.rsplit('/', 1)[0]); from handroute import Board
 
 P = sys.argv[1]; only = sys.argv[2].split(',') if len(sys.argv) > 2 else None
-b = pcbnew.LoadBoard(P); mm = pcbnew.FromMM; T = pcbnew.ToMM; V = lambda x, y: pcbnew.VECTOR2I(mm(x), mm(y))
-LAY = {'F': pcbnew.F_Cu, 'B': pcbnew.B_Cu}
-added = []
-
-def path(net, w, runs):
-    ni = b.FindNet(net)
-    for k, (lc, pts) in enumerate(runs):
-        for a, c in zip(pts, pts[1:]):
-            t = pcbnew.PCB_TRACK(b); t.SetStart(V(*a)); t.SetEnd(V(*c)); t.SetWidth(mm(w)); t.SetLayer(LAY[lc]); t.SetNet(ni); b.Add(t); added.append(t)
-        if k < len(runs) - 1:
-            v = pcbnew.PCB_VIA(b); v.SetPosition(V(*pts[-1])); v.SetWidth(mm(0.6)); v.SetDrill(mm(0.3))
-            v.SetLayerPair(pcbnew.F_Cu, pcbnew.B_Cu); v.SetNet(ni); b.Add(v)
-
-def d_seg(px, py, ax, ay, bx, by):
-    dx, dy = bx - ax, by - ay; L = dx * dx + dy * dy
-    t = 0 if L == 0 else max(0, min(1, ((px - ax) * dx + (py - ay) * dy) / L))
-    return math.hypot(px - ax - t * dx, py - ay - t * dy)
-
-def split_tees():
-    for t0 in added:
-        for q in (t0.GetStart(), t0.GetEnd()):
-            px, py = T(q.x), T(q.y)
-            for t in list(b.GetTracks()):
-                if t.GetClass() != 'PCB_TRACK' or t is t0 or t.GetLayer() != t0.GetLayer() or t.GetNetname() != t0.GetNetname(): continue
-                a, c = t.GetStart(), t.GetEnd(); ax, ay, cx, cy = T(a.x), T(a.y), T(c.x), T(c.y)
-                if min(math.hypot(px - ax, py - ay), math.hypot(px - cx, py - cy)) < 0.005 or d_seg(px, py, ax, ay, cx, cy) > 0.005: continue
-                n = pcbnew.PCB_TRACK(b); n.SetStart(q); n.SetEnd(c); n.SetWidth(t.GetWidth()); n.SetLayer(t.GetLayer()); n.SetNet(t.GetNet())
-                t.SetEnd(q); b.Add(n); break
+B = Board(P)
 
 DC, AUX, P5, P524, P33 = '/Power/+24V_DC', '/AuxPower/+24V_AUX', '+5V', '+5V_24', '+3V3_MOD'
 G = {}
@@ -62,9 +34,10 @@ G['5v24'] = [
     (P524, 1.0, [('F', [(102.12, 72.30), (107.32, 77.50), (110.82, 77.50), (112.34, 79.02)])]),                      # F2 -> D10, over D10's anode pad
     # winch coils: coil <-> diode on F.Cu, a via off each diode's pad end, B.Cu feed from U1 pin 6 (nothing under the 48 V pads)
     (P524, 0.5, [('F', [(180.00, 64.15), (181.89, 64.15), (183.24, 65.50)])]),
-    (P524, 0.5, [('F', [(157.08, 68.80), (158.97, 68.80), (160.32, 70.15)])]),
     (P524, 0.5, [('F', [(183.24, 65.50), (183.24, 64.65)]), ('B', [(183.24, 64.65)])]),
-    (P524, 0.5, [('F', [(157.08, 68.80), (157.08, 69.65)]), ('B', [(157.08, 69.65), (161.08, 73.65), (178.08, 73.65), (183.24, 68.49), (183.24, 64.65)])]),
+    (P524, 0.5, [('F', [(160.32, 70.15), (160.32, 71.55)]), ('B', [(160.32, 71.55)])]),                            # K6 coil+ via (keeps x 159.6 free for coil-)
+    (P524, 0.5, [('F', [(157.08, 68.80), (157.08, 69.65)]), ('B', [(157.08, 69.65), (158.98, 71.55), (160.32, 71.55), (162.42, 73.65), (178.08, 73.65),
+                                                                  (183.24, 68.49), (183.24, 64.65)])]),
     (P524, 0.5, [('B', [(197.91, 78.83), (189.51, 70.43), (181.30, 70.43)])]),                                    # tees into the diagonal
 ]
 
@@ -152,8 +125,6 @@ G['tp'] = [
 
 for k, paths in G.items():
     if only and k not in only: continue
-    for net, w, runs in paths: path(net, w, runs)
+    for net, w, runs in paths: B.path(net, w, runs)
     print(k, len(paths), 'paths')
-split_tees()
-pcbnew.ZONE_FILLER(b).Fill(b.Zones())
-pcbnew.SaveBoard(P, b)
+B.save()
