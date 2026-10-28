@@ -135,6 +135,8 @@ if not only or 'fill' in only:
         if f.GetReference() == 'U7':
             for p in f.Pads():
                 if p.GetNumber() == '2': p.SetLocalZoneConnection(pcbnew.ZONE_CONNECTION_FULL)
+    for p in b.GetPads():                                   # bare holes (H2-H5, J1 / J4 pegs): every pour and plane 0.4 mm off
+        if p.GetAttribute() == pcbnew.PAD_ATTRIB_NPTH: p.SetLocalClearance(mm(0.4))   # the wall (JLC: 0.3 inner)
     keep_out = [(GUARD_BOX := (77.6, 49.0, 104.0, 85.2)), (159.1, 0.0, 181.2, 76.9), (203.0, 0.0, 999.0, 76.0)]
     items = [t for t in b.GetTracks() if t.GetNetname() != 'GND' or t.GetClass() == 'PCB_VIA'] + list(b.GetPads())
     for f in b.GetFootprints(): f.BuildCourtyardCaches()
