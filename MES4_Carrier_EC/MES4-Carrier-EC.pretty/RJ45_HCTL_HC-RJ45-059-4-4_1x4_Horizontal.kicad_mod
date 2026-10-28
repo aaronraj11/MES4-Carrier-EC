@@ -442,5 +442,14 @@
 		(remove_unused_layers no)
 		(uuid "20c37be5-0df0-5ab3-857b-4cf60c3e029d")
 	)
+	(model "${KIPRJMOD}/MES4-Carrier-EC.3dshapes/RJ45_HCTL_HC-RJ45-059-4-4_1x4_Horizontal.step"
+		(offset (xyz 71.495 -10.31 13.5))
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz 0 0 0)
+		)
+	)
 	(embedded_fonts no)
 )

@@ -130,6 +130,12 @@ def rj45x4_footprint():
         fp.append(pad(num, 'thru_hole', 'circle', (round(x, 3), y), 2.3, 1.5))
     for x in (c - 26.75, c + 26.75):
         fp.append(pad('', 'np_thru_hole', 'circle', (round(x, 3), yp), 3.2, 3.2))
+    # 3D: the EasyEDA/LCSC model of C3000204 (downloaded once into the 3dshapes folder), measured in FreeCAD:
+    # pegs at x -72.8 / -19.3, y 3.96, seating plane z -13.5, port fronts toward -y. Shifted so its pegs sit on
+    # ours and its base on the board; its contact rows are the library's (2.50 mm), ours are 2.54 mm.
+    fp.append(['model', Q('${KIPRJMOD}/MES4-Carrier-EC.3dshapes/' + RJ_FP + '.step'),
+               ['offset', ['xyz', round(c + 46.05, 3), round(-3.96 - yp, 3), 13.5]], ['scale', ['xyz', 1, 1, 1]],
+               ['rotate', ['xyz', 0, 0, 0]]])
     fp.append(['embedded_fonts', 'no'])
     return fp
 
