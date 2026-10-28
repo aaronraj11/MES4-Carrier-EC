@@ -1,6 +1,74 @@
 # MES4-Carrier-EC: handoff for the next Claude session
 
-Written 2026-10-27, updated the same day after the second session (GPIO map settled). Read this file first, then `README.md`.
+Written 2026-10-27, updated 2026-10-28 after the PCB prep session (placement, planes, vias, net classes). Read this file first, then `README.md`.
+
+## Start here: where the PCB stands (2026-10-28)
+
+Branch `mes4-gpio-standard`, last commit `ead91b1` ("Net classes sized by current, +24V plane vias, fused M.2 GND bars"). The PCB helper scripts are in `generator/pcb/`.
+
+**Done**
+- Every part placed and grouped (23 KiCad groups), silkscreen pass, logo, test points named (TP labels from `TP_NAME` in `gen.py`).
+- 4-layer stackup JLC04161H-7628: **F.Cu** "Top Signal", **In1** solid GND plane, **In2** solid +24V plane, **B.Cu** "Bottom Signal". One ground (`ONE_GND = True`); the GPS mount is left out (`GPS_MOUNT = False`).
+- **GND vias** on every SMD GND pad (commit `7e09c66`), straight off the pad end, gap 0.1 mm.
+- **Net classes sized by current** (in `gen.py`, written to the `.kicad_pro`):
+
+| Class | Track / clearance | Via | Nets |
+|---|---|---|---|
+| Default | 0.2 / 0.2 | 0.6 / 0.3 | signals |
+| Power_Small | 0.3 | | +3V3_MOD, SENS*_PWR, LC_EXC+ |
+| Power | 0.5 | | +5V, +5V_24, GND, +5V_SRV, +9V_IMU, IMU_9V, +24V_DC |
+| 24V_Power | 1.0 | 0.8 / 0.4 | +24V, +24V_AUX |
+| Out_3A | 1.5 | 0.8 / 0.4 | relay outputs, Net-(F*-Pad1), Net-(U*-IN-), +24V_SRV, +5V_SCR, VBUS_SCR |
+| Input_15A | 3.0 / 0.3 | | +24V_IN, +24V_F (use pours) |
+| Winch_48V | 0.4 / **0.6** | | J18, WINCH_*, ILK_* |
+| CAN | 0.25, pair 0.25 / 0.25 | | CANH / CANL (not auto-detected as a pair: route as a pair by hand) |
+| LoadCell | 0.25, pair 0.25 / 0.2 | | LC_SIG*, AIN*, REF*, CAP* |
+
+  Router presets: tracks 0.2 / 0.25 / 0.3 / 0.5 / 1.0 / 1.5 / 3.0, vias 0.6/0.3 and 0.8/0.4, diff pairs 0.25/0.2 and 0.25/0.25.
+- **+24V vias** into the In2 plane (0.8/0.4), one pattern per part type: two vias across the pad end on the shunts R8 / R11 / R16 / R19, L1 / L2, F9, C1, D9; one via on C2 / C3, F7 / F8, D8, R7.
+- **J1 (M.2) GND**: vias on the inner side of the pad rows (under the socket body, so the outer side stays free for signal escape). Runs of 3+ GND fingers are **fused by a 0.6 mm F.Cu bar** with a few vias: pins 24–74 (6 vias), 65–75 (2 vias). Isolated GND fingers have one via each.
+- DRC baseline: **14 notes, all accepted** (13 silk_edge_clearance, 1 silk_over_copper on the J1 circle), schematic parity 0. **258 unrouted**. Keep DRC at exactly these 14 after every step.
+
+**Next: route, in this order** (one group at a time; DRC and show the user a render after each; commit only when the user says so)
+
+| # | Group | What to route | Class | Watch-outs |
+|---|---|---|---|---|
+| 1 | 24 V input | J5 → F1 → Q1 → +24V, TVS D9, bulk C1–C3 | F.Cu pours (15 A), not tracks | Q1 drain-tab copper for ≈ 2.2 W; a via field from Q1's output into In2 |
+| 2 | AUX 24 V filter + DC/DC | L1 / L2 → bulk caps → U1 / U9 / U10 inputs; outputs +5V_24, +9V_IMU, +5V_SCR | 24V_Power / Power / Out_3A | Short input-cap loops |
+| 3 | Module 5 V feed | +5V_24 → F2 → FB1 → C8 / C9 → J1 pins 20 / 22 | Power 0.5 or wider | ≈ 30 mm; the module's only 5 V |
+| 4 | Relays CH1–CH4 | +24V via → shunt → relay contacts → 3 A fuse → output; then coil, FET, flyback | Out_3A 1.5 on the load path | **INA236 IN+ / IN− as a tight Kelvin pair from the shunt pads** (still to do); load returns away from the ADC |
+| 5 | Winch relays | K5 / K6 contacts → J18, coil drive | Winch_48V | ≥ 2 mm from other copper, no GND pour under J18 / contacts |
+| 6 | FE-URT-2 servo | F9 → +24V_SRV → J15; F10 → +5V_SRV → J17; TX / RX via R38 / R39, D23 / D24 | Out_3A for +24V_SRV | +24V_SRV passes under J17: B.Cu if needed |
+| 7 | Screen 5 V | +5V_SCR → F11 → VBUS_SCR → J16, CC resistors | Out_3A | 3 A: short and wide |
+| 8 | Load cell | J12 SIG± → R28 / R29 → ADS1232; J13 EXC from FB2; REF filter; CAP | LoadCell pairs | Before the digital crowds it; nothing digital crossing |
+| 9 | CAN | CANH / CANL: J1 → J3 → the four J4 ports, D6 / D7 | CAN pair, ≈ 120 Ω diff | Bus with short stubs |
+| 10 | MES4-MCU escape + debug | SWD / VCP → J2, I²C → U2–U5 (R3–R5), PA2 / PA3 → J17, PA4–PA6 → ADC, PB6 / PC15 → sensors, relay gates | Default 0.2 | J1's outer side is kept free for this |
+| 11 | Sensors 1 / 2 | J10 / J11 → opto blocks → PB6 / PC15 | Default / Power | Slow; use the channel by the FE-URT-2 or B.Cu |
+| 12 | IMU 9 V | +9V_IMU → SW2 → J14, LED8 | Power | Short |
+| 13 | LEDs, pull-ups, test points | | Default / Power | Last |
+
+After routing: unrouted = 0; refill planes and check islands / starved thermals / +24V clearance holes cutting GND returns; decide on F.Cu / B.Cu GND fill (stitch to In1 if added); teardrops; silkscreen pass; JLC DFM check; BOM / CPL with LCSC numbers re-verified; Gerbers + drill; final 3D review.
+
+**PCB workflow (learned the hard way)**
+- **KiCad must be closed** before any script writes the `.kicad_pcb`: check there is no `~MES4_Carrier_EC.kicad_pcb.lck` and `pgrep -fl MacOS/kicad` is empty. Ask the user to close it.
+- Back up the board to the scratchpad before every scripted edit.
+- `pcbnew.SaveBoard` rewrites `MES4_Carrier_EC.kicad_pro`: afterwards run `git checkout MES4_Carrier_EC.kicad_pro` (or rerun `run.sh` if `gen.py` changed). KiCad does the same on exit; the content is equivalent but restore it anyway.
+- KiCad's Python: `/Applications/KiCad/KiCad.app/Contents/Frameworks/Python.framework/Versions/Current/bin/python3`. CLI: `/Applications/KiCad/KiCad.app/Contents/MacOS/kicad-cli`.
+- DRC: `kicad-cli pcb drc --schematic-parity --format json --severity-all -o drc.json MES4_Carrier_EC.kicad_pcb`.
+- Renders for the user: `kicad-cli pcb export svg --layers F.Cu,F.Silkscreen,Edge.Cuts --mode-single --exclude-drawing-sheet`, edit the `viewBox` to crop (units are board mm), screenshot with headless Chrome; 3D with `kicad-cli pcb render`.
+- Helper scripts (one-shot, already applied; kept for reuse) in `generator/pcb/`:
+  - `vias_gnd.py <pcb>`: GND vias on every SMD GND pad.
+  - `vias_24v_j1.py <pcb>`: +24V via patterns (`GROUPS`) and the per-finger J1 GND vias. Run `strip_net_tracks.py <pcb> +24V` first. **Don't rerun on the current board**: it would re-add per-finger J1 vias on top of the fused bars.
+  - `fuse_j1.py <pcb> generator/pcb/vias_24v_j1.py`: fuses J1 GND runs into bars.
+  - `strip_net_tracks.py <pcb> <net>[,<net>]`: removes all tracks and vias of those nets (text level).
+  - `strip_del.py <pcb>`: removes `__DEL__` texts and their group members.
+
+**Via and routing style the user wants**
+- Vias straight off the pad end at 0 / 90 / 180 / 270° only: no 45° stubs, no bends, as close as possible (gap 0.1 mm). Good examples: C6 / C7.
+- The same pattern on every part of a type (e.g. both inductors, all four shunts). Uneven patterns get flagged.
+- Keep stubs short; move silkscreen labels out of the way rather than moving vias.
+- Fuse neighbouring same-net pads (like the J1 GND fingers) instead of a via per pad when it frees routing space.
+- Be quick and token-efficient; show a render of what changed; commit only when the user says "commit".
 
 ## How this schematic is made
 
@@ -63,7 +131,7 @@ What went with it:
 - IMU = 3DM-CV7-AHRS on the C-Series Connectivity Board (6212-3009): J14 9 V → board Vaux (5.2–28 V), never Vpri (3.2–5.2 V); not both at once (SW2 off with the USB cable). Draw ≈ 45 mA (sim IMU1), so SW2's 0.5 A rating is fine.
 - Low stock at last check: URB2409S-10WR3 C7424703 (78), SMBJ30A C113998 (920 global), L1 SWPA5040S100MT C84608 (LCSC page "not found", JLC page live).
 - Custom footprints checked against the manufacturer drawings (2026-10-27): RJ45 1×4 now built from the HCTL drawing (14.0 mm ports, Ø1.0 / Ø1.5 / Ø3.2 holes; the JLC library part has 13.97 mm ports, 2.50 mm rows and Ø3.5 pegs, so it isn't used); the screen converter is now URB2405YMD-20WR3 (1" x 1", 2026-10-28): footprint from the JLC/EasyEDA part C5369777, checked against the Mornsun URB_YMD-20WR3 drawing (pins 1 Ctrl, 2 GND, 3 Vin, 4 +Vo, 5 Trim, 6 0V). Still worth a print-out test fit before ordering.
-- No PCB has been started.
+- PCB: placed, planes and vias done, not routed yet (see "Start here").
 
 ## Design review R1 (MES4-Carrier-EC_Design_Review.pdf, 27 Oct 2026)
 
