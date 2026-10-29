@@ -9,7 +9,10 @@ NEWP = {
     'Q_RP': dict(lib='Transistor_FET:Q_PMOS_GDS', value='AGM60P90D', fp='Package_TO_SOT_SMD:TO-252-2',
                  lcsc='C5464761',
                  desc='reverse-polarity P-MOSFET, AGMSEMI AGM60P90D: -60 V, 13 mOhm max @ -10 V, TO-252 '
-                      '(1 G, 2 D tab, 3 S); give the drain tab a large copper area'),
+                      '(1 G, 2 D tab, 3 S); give the drain tab a large copper area',
+                 # JLC's TO-252 footprint has its tab the other way round and its origin on the body centre, 1.8 mm
+                 # from the pads' centre (Fabrication Toolkit placement fields, checked by pcb/cpl_check.py)
+                 extra={'FT Rotation Offset': '180', 'FT Position Offset': '-1.8,0'}),
     'DZ': dict(lib='Device:D_Zener', value='MMSZ5245B', fp='Diode_SMD:D_SOD-123', lcsc='C2126',
                desc='P-FET gate clamp, 15 V Zener (CJ MMSZ5245B): keeps Vgs inside +/-20 V'),
     'TVS': dict(lib='Device:D_Zener', value='SMBJ30A', fp='Diode_SMD:D_SMB', lcsc='C113998',

@@ -6,7 +6,8 @@ items). Runs first in the rebuild chain, right after the base board is restored.
 - A footprint changed in the schematic (U9: URB2409S-10WR3 -> URB2409S-6WR3, review B1) is loaded from the project
   library and put where the old one sat, pad 1 on pad 1 (both are the same SIP-8 pad pattern, so every track still
   lands), with the old one's nets, schematic link, group and reference / value text placement.
-- Value, Datasheet, Description and LCSC come from the schematic. Parts the schematic keeps out of the BOM (the bare
+- Value, Datasheet, Description, LCSC and the Fabrication Toolkit's placement fields ("FT Rotation Offset", "FT Position
+  Offset": JLC's footprint turned / offset from ours, found by cpl_check.py) come from the schematic. Parts the schematic keeps out of the BOM (the bare
   test pads TP1-TP9) are kept out of the BOM and the placement file too.
 - The "LCSC Part" field that EasyEDA footprints carry is dropped: the Fabrication Toolkit reads it ahead of "LCSC",
   so a stale one put a 5 V converter at U9 and the wrong switch at SW2 in the production BOM (review B1)."""
@@ -61,7 +62,7 @@ for f in list(b.GetFootprints()):
     if c['fp'] and f.GetFPIDAsString() != c['fp']:
         old.append(f); swapped.append(f'{f.GetReference()} {f.GetFPIDAsString()} -> {c["fp"]}'); f = swap(f, c['fp'])
     f.SetValue(c['value'])
-    for name in ('Datasheet', 'Description', 'LCSC'):
+    for name in ('Datasheet', 'Description', 'LCSC') + tuple(k for k in c['fields'] if k.startswith('FT ')):
         if c['fields'].get(name) or f.GetFieldByName(name) is not None: set_field(f, name, c['fields'].get(name, ''))
     if f.GetFieldByName('LCSC Part') is not None: f.RemoveField('LCSC Part'); dropped += 1
     a = f.GetAttributes() & ~(pcbnew.FP_EXCLUDE_FROM_BOM | pcbnew.FP_EXCLUDE_FROM_POS_FILES)

@@ -1745,6 +1745,10 @@
 			(at 172.72 66.04 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(property "FT Rotation Offset" "180"
+			(at 172.72 66.04 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
 		(pin "5"
 			(uuid "22bcb6bc-e943-5a35-ba2b-58976d4de6b8")
 		)
@@ -2683,6 +2687,10 @@
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "LCSC" "C140615"
+			(at 172.72 170.18 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "FT Rotation Offset" "180"
 			(at 172.72 170.18 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)

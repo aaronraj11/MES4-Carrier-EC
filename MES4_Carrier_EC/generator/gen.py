@@ -48,7 +48,7 @@ def fpart(sh, oldref, at, rot=0, mirror=None, tag=None, value=None, desc=None, *
 def npart(sh, key, prefix, at, rot=0, mirror=None, tag=None, value=None, desc=None, **kw):
     f = NEWP[key]
     return sh.part(f['lib'], prefix, value or f['value'], at, rot, mirror, fp=f['fp'], lcsc=f['lcsc'],
-                   desc=desc or f['desc'], tag=tag or key, ds=f.get('ds', '~'), **kw)
+                   desc=desc or f['desc'], tag=tag or key, ds=f.get('ds', '~'), **{'extra': f.get('extra'), **kw})
 
 
 def setf(p, value=None, lcsc=None, desc=None, fp=None, lib=None, ds=None):
@@ -135,6 +135,7 @@ def relay_sheet(name, file, page, chans, comment):
         setf(g(t['J']), value='RLY%d OUT' % n,
              desc='relay %d (%s) output: 1 = switched +24 V, 2 = GND_24V (KF250NH 3.5 mm push-in)' % (n, c['load']))
         g(t['K']).set('Description', 'relay %d (%s), SRD-5VDC-SL-A, 5 V coil, SPST-NO 10 A' % (n, c['load']))
+        g(t['K']).set('FT Rotation Offset', '180')          # JLC's SRD footprint is drawn turned round (pcb/cpl_check.py)
         region = (100, t['y0'], 420, t['y1'])
         relabel(sh, t['drv'], c['drv'], region=region)
         sh.remove_parts(['old:' + r for r in t['fb_parts']])
@@ -976,7 +977,8 @@ def power_sheet():
     y = 50.80
     sh.box(15.24, 20.32, 195.58, 106.68, '24 V input: XT30, fuse, reverse-polarity FET, TVS, bulk')
     j = fpart(sh, 'J8', (25.40, y), mirror='y', tag='J_IN', fields=((-3.81, -1.27), (-3.81, 1.27), 'left'),
-              desc='24 V DC input (Amass XT30PW-M30.G.Y right-angle male, pin 1 = + flat end, pin 2 = - chamfered end)')
+              desc='24 V DC input (Amass XT30PW-M30.G.Y right-angle male, pin 1 = + flat end, pin 2 = - chamfered end)',
+              extra={'FT Position Offset': '0,9.7'})   # JLC's XT30 origin is the body centre, 9.7 mm from the pins'
     sh.wire(j.p('2'), (35.56, 53.34), (35.56, 58.42))
     gy((35.56, 58.42))
     f = npart(sh, 'F_IN', 'F', (50.80, y), rot=90)

@@ -1820,6 +1820,10 @@
 			(at 25.4 50.8 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(property "FT Position Offset" "0,9.7"
+			(at 25.4 50.8 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
 		(pin "1"
 			(uuid "3ed668fb-1ee2-55d5-a6bc-90da9fc11dcf")
 		)
@@ -1954,6 +1958,14 @@
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "LCSC" "C5464761"
+			(at 71.12 53.34 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "FT Rotation Offset" "180"
+			(at 71.12 53.34 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "FT Position Offset" "-1.8,0"
 			(at 71.12 53.34 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
