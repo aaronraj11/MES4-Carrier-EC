@@ -4,7 +4,7 @@ Written 2026-10-27, updated 2026-10-28 after the PCB prep session (placement, pl
 
 ## Start here: where the PCB stands (2026-10-28)
 
-Branch `mes4-gpio-standard`, last commit `ead91b1` ("Net classes sized by current, +24V plane vias, fused M.2 GND bars"). The PCB helper scripts are in `generator/pcb/`.
+Branch `main`, the only branch (`mes4-gpio-standard` was merged into it on 29 Oct 2026). The PCB helper scripts are in `generator/pcb/`.
 
 **Done**
 - Every part placed and grouped (23 KiCad groups), silkscreen pass, logo, test points named (TP labels from `TP_NAME` in `gen.py`).
