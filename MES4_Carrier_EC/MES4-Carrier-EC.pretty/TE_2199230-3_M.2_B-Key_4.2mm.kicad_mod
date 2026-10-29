@@ -616,9 +616,9 @@
 		(uuid "34067c0d-0798-47d7-a8b3-5f940e45e25f")
 	)
 	(embedded_fonts no)
-	(model "${KIPRJMOD}/MES4-Carrier-EC.3dshapes/PCIE-SMD_2199230-3_1.wrl"
+	(model "${KIPRJMOD}/MES4-Carrier-EC.3dshapes/PCIE-SMD_2199230-3_1.step"
 		(offset
-			(xyz 0 0 0)
+			(xyz 0 0.45 5.76)
 		)
 		(scale
 			(xyz 1 1 1)

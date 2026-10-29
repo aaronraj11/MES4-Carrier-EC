@@ -7,8 +7,12 @@ items). Runs first in the rebuild chain, right after the base board is restored.
   library and put where the old one sat, pad 1 on pad 1 (both are the same SIP-8 pad pattern, so every track still
   lands), with the old one's nets, schematic link, group and reference / value text placement.
 - Value, Datasheet, Description, LCSC and the Fabrication Toolkit's placement fields ("FT Rotation Offset", "FT Position
-  Offset": JLC's footprint turned / offset from ours, found by cpl_check.py) come from the schematic. Parts the schematic keeps out of the BOM (the bare
-  test pads TP1-TP9) are kept out of the BOM and the placement file too.
+  Offset": JLC's footprint turned / offset from ours, found by cpl_check.py) come from the schematic; an "FT" field
+  the schematic no longer has is removed, and an empty field the schematic has is kept (KiCad 10's parity check, R4 E3).
+  Parts the schematic keeps out of the BOM (the bare test pads TP1-TP9) are kept out of the BOM and the placement file
+  too.
+- Project-library footprints take their 3D models from the library (libs.py places the EasyEDA STEP models whose origin
+  differs from their VRML's, e.g. J1's M.2 socket).
 - The "LCSC Part" field that EasyEDA footprints carry is dropped: the Fabrication Toolkit reads it ahead of "LCSC",
   so a stale one put a 5 V converter at U9 and the wrong switch at SW2 in the production BOM (review B1)."""
 import sys, os, shutil, subprocess, tempfile, xml.etree.ElementTree as ET, pcbnew
@@ -55,7 +59,7 @@ def swap(f, libfp):
     return n
 
 
-old, swapped, dropped, nobom = [], [], 0, []
+old, swapped, dropped, nobom, models = [], [], 0, [], 0
 for f in list(b.GetFootprints()):
     c = comps.get(f.GetReference())
     if c is None: continue                                  # board-only parts (the FE-URT-2 standoffs)
@@ -63,11 +67,21 @@ for f in list(b.GetFootprints()):
         old.append(f); swapped.append(f'{f.GetReference()} {f.GetFPIDAsString()} -> {c["fp"]}'); f = swap(f, c['fp'])
     f.SetValue(c['value'])
     for name in ('Datasheet', 'Description', 'LCSC') + tuple(k for k in c['fields'] if k.startswith('FT ')):
-        if c['fields'].get(name) or f.GetFieldByName(name) is not None: set_field(f, name, c['fields'].get(name, ''))
+        if name in c['fields'] or f.GetFieldByName(name) is not None: set_field(f, name, c['fields'].get(name, ''))
+    for x in [x for x in f.GetFields() if x.GetName().startswith('FT ') and x.GetName() not in c['fields']]:
+        f.RemoveField(x.GetName())                          # an offset the schematic dropped (J5, review R4 E2)
     if f.GetFieldByName('LCSC Part') is not None: f.RemoveField('LCSC Part'); dropped += 1
+    if f.GetFPID().GetLibNickname() == 'MES4-Carrier-EC':     # 3D models as in the library
+        lib = pcbnew.PCB_IO_KICAD_SEXPR().FootprintLoad(LIBDIR, f.GetFPID().GetLibItemName().wx_str())
+        key = lambda fp: [(m.m_Filename, m.m_Offset.x, m.m_Offset.y, m.m_Offset.z, m.m_Rotation.z) for m in fp.Models()]
+        if lib and key(lib) != key(f):
+            f.Models().clear()
+            for m in lib.Models(): f.Models().push_back(m)
+            models += 1
     a = f.GetAttributes() & ~(pcbnew.FP_EXCLUDE_FROM_BOM | pcbnew.FP_EXCLUDE_FROM_POS_FILES)
     if not c['bom']: a |= pcbnew.FP_EXCLUDE_FROM_BOM | pcbnew.FP_EXCLUDE_FROM_POS_FILES; nobom.append(f.GetReference())
     f.SetAttributes(a)
 for f in old: b.Remove(f)
 pcbnew.SaveBoard(P, b)
-print('parts_sync: swapped', swapped, '| "LCSC Part" dropped on', dropped, '| out of BOM / CPL:', ' '.join(sorted(nobom)))
+print('parts_sync: swapped', swapped, '| "LCSC Part" dropped on', dropped, '| 3D models updated on', models,
+      '| out of BOM / CPL:', ' '.join(sorted(nobom)))

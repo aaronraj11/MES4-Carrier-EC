@@ -2388,6 +2388,10 @@
 			(at 71.12 49.53 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(property "FT Rotation Offset" "180"
+			(at 71.12 49.53 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
 		(pin "1"
 			(uuid "a85b270c-2e6e-55ec-b82b-1c84552e0bcf")
 		)
@@ -2515,6 +2519,10 @@
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "LCSC" "C48935391"
+			(at 142.24 49.53 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "FT Rotation Offset" "180"
 			(at 142.24 49.53 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -3159,6 +3167,10 @@
 			(at 35.56 135.89 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(property "FT Rotation Offset" "180"
+			(at 35.56 135.89 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
 		(pin "1"
 			(uuid "74284b9b-aca4-572f-8362-6ebd25a9195a")
 		)
@@ -3559,7 +3571,7 @@
 			(at 149.86 135.89 90)
 			(effects (font (size 1.27 1.27)))
 		)
-		(property "Footprint" "Fuse:Fuse_2920_7451Metric"
+		(property "Footprint" "MES4-Carrier-EC:Fuse_2920_7451Metric"
 			(at 149.86 132.08 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -4214,6 +4226,10 @@
 			(at 256.54 181.61 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(property "FT Rotation Offset" "180"
+			(at 256.54 181.61 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
 		(pin "1"
 			(uuid "10b48f27-ddd9-58ad-9abd-6378109b4854")
 		)
@@ -4328,7 +4344,7 @@
 			(at 35.56 219.71 90)
 			(effects (font (size 1.27 1.27)))
 		)
-		(property "Footprint" "Fuse:Fuse_2920_7451Metric"
+		(property "Footprint" "MES4-Carrier-EC:Fuse_2920_7451Metric"
 			(at 35.56 215.9 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -4437,6 +4453,10 @@
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "LCSC" "C48935391"
+			(at 71.12 219.71 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "FT Rotation Offset" "180"
 			(at 71.12 219.71 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)

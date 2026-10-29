@@ -70,7 +70,7 @@ YLPTEC's EMC circuit for the URB2405S adds a 470 µH common-mode choke and 1 nF 
 
 ### New parts (not on the MES4-Flasher)
 
-All are checked against LCSC / JLCPCB product pages; all are JLC Extended parts.
+All are checked against LCSC / JLCPCB product pages; all are JLC Extended parts. The production files come from `generator/pcb/production.sh`, which keeps the order zip only if every placed part lands on our pads in JLC's own footprint (`generator/pcb/cpl_check.py`); C1 / C5 / C27 (C48970912) and U9 have no published JLC footprint, so check their orientation in JLC's placement preview.
 
 | Ref | Part | LCSC | Why |
 |---|---|---|---|
@@ -160,7 +160,7 @@ These are the MES2_Extension's "WINCH CONTROL" relays: two TE **IM03GR** (C21531
 
 | Ref | Part | Pins |
 |---|---|---|
-| J5 | XT30 male, right-angle (Amass XT30PW-M) | 1 = **+24 V** (flat end), 2 = **GND** (chamfered end). A reversed lead is blocked by Q1. |
+| J5 | XT30 male, right-angle (Amass XT30PW-M) | 1 = **+24 V** (flat end), 2 = **GND** (chamfered end). A reversed lead is blocked by Q1. JLC's footprint numbers the two pins the other way round: check the flat end sits at the +24V silk on a real part. |
 | J6–J9 | 2-pin 3.5 mm push-in | Relay 1–4 output: 1 = switched +24 V, 2 = GND |
 | J10, J11 | 3-pin 3.5 mm push-in | Sensor 1 / 2: 1 = +24 V via 100 mA PTC (brown), 2 = output (black), 3 = 0 V (blue) |
 | J12 | 3-pin 3.5 mm push-in | Load-cell signal: 1 SIG+ (green), 2 SIG− (white), 3 shield. **5 V load cell only: never 24 V.** |

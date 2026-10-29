@@ -1820,10 +1820,6 @@
 			(at 25.4 50.8 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
-		(property "FT Position Offset" "0,9.7"
-			(at 25.4 50.8 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
 		(pin "1"
 			(uuid "3ed668fb-1ee2-55d5-a6bc-90da9fc11dcf")
 		)
@@ -1897,7 +1893,7 @@
 			(at 50.8 54.61 90)
 			(effects (font (size 1.27 1.27)))
 		)
-		(property "Footprint" "Fuse:Fuse_Littelfuse-NANO2-451_453"
+		(property "Footprint" "MES4-Carrier-EC:Fuse_Littelfuse-NANO2-451_453"
 			(at 50.8 50.8 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -2202,6 +2198,10 @@
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "LCSC" "C48970912"
+			(at 116.84 54.61 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "FT Rotation Offset" "180"
 			(at 116.84 54.61 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -2866,6 +2866,10 @@
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "LCSC" "C48970912"
+			(at 71.12 140.97 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "FT Rotation Offset" "180"
 			(at 71.12 140.97 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)

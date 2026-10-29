@@ -977,8 +977,9 @@ def power_sheet():
     y = 50.80
     sh.box(15.24, 20.32, 195.58, 106.68, '24 V input: XT30, fuse, reverse-polarity FET, TVS, bulk')
     j = fpart(sh, 'J8', (25.40, y), mirror='y', tag='J_IN', fields=((-3.81, -1.27), (-3.81, 1.27), 'left'),
-              desc='24 V DC input (Amass XT30PW-M30.G.Y right-angle male, pin 1 = + flat end, pin 2 = - chamfered end)',
-              extra={'FT Position Offset': '0,9.7'})   # JLC's XT30 origin is the body centre, 9.7 mm from the pins'
+              desc='24 V DC input (Amass XT30PW-M30.G.Y right-angle male, pin 1 = + flat end, pin 2 = - chamfered end)')
+    # (JLC's XT30PW-M footprint, C431092, has the same origin as ours, midway between the pin and peg rows; it numbers
+    # the two pins the other way round, but the pegs only let the part in one way: review R4 E2)
     sh.wire(j.p('2'), (35.56, 53.34), (35.56, 58.42))
     gy((35.56, 58.42))
     f = npart(sh, 'F_IN', 'F', (50.80, y), rot=90)
@@ -1336,6 +1337,12 @@ def main():
                     assert '{NT}' not in it[1], it[1][:80]
     for s in sheets:
         s.clean()
+        # JLC's SMD electrolytic footprints (CAP-SMD_BD8.0 / BD6.3) have pad 1 = + on the left, as KiCad's CP_Elec
+        # does, but the Fabrication Toolkit's table turns every CP_Elec_ 180 deg: undo it, or the CPL fits them
+        # reversed (review R4 E1; checked by pcb/cpl_check.py)
+        for p in s.parts:
+            if (prop(p.node, 'Footprint') or [0, 0, ''])[2].startswith('Capacitor_SMD:CP_Elec_'):
+                p.set('FT Rotation Offset', '180')
     B.assign_refs(sheets)
     tagmap = {}
     for s in sheets:

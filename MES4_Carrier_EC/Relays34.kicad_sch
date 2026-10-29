@@ -2347,7 +2347,7 @@
 			(at 189.23 54.61 90)
 			(effects (font (size 1.27 1.27)))
 		)
-		(property "Footprint" "Fuse:Fuse_2920_7451Metric"
+		(property "Footprint" "MES4-Carrier-EC:Fuse_2920_7451Metric"
 			(at 185.42 58.42 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -3292,7 +3292,7 @@
 			(at 189.23 158.75 90)
 			(effects (font (size 1.27 1.27)))
 		)
-		(property "Footprint" "Fuse:Fuse_2920_7451Metric"
+		(property "Footprint" "MES4-Carrier-EC:Fuse_2920_7451Metric"
 			(at 185.42 162.56 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)

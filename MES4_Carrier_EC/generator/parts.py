@@ -1,10 +1,10 @@
 """New parts (not on the MES4-Flasher). LCSC numbers verified on lcsc.com / jlcpcb.com (2026-10-27)."""
 NEWP = {
-    'F_IN': dict(lib='Device:Fuse', value='15A', fp='Fuse:Fuse_Littelfuse-NANO2-451_453', lcsc='C44480',
+    'F_IN': dict(lib='Device:Fuse', value='15A', fp='MES4-Carrier-EC:Fuse_Littelfuse-NANO2-451_453', lcsc='C44480',
                  ds='https://www.littelfuse.com/products/fuses/surface-mount-fuses/nano2-fuses/451-453',
                  desc='main 24 V input fuse, Littelfuse 0451015.MRL Nano2 2410, 15 A fast, 65 V DC '
                       '(worst case 8.5 A stays under the 75 % derating; 10 A alt: 0451010.MRL C44479)'),
-    'F_CH': dict(lib='Device:Polyfuse', value='3A', fp='Fuse:Fuse_2920_7451Metric', lcsc='C22435908',
+    'F_CH': dict(lib='Device:Polyfuse', value='3A', fp='MES4-Carrier-EC:Fuse_2920_7451Metric', lcsc='C22435908',
                  desc='relay output PTC, LUTE 2920L300/36GR: 3 A hold, 5 A trip, 36 V'),
     'Q_RP': dict(lib='Transistor_FET:Q_PMOS_GDS', value='AGM60P90D', fp='Package_TO_SOT_SMD:TO-252-2',
                  lcsc='C5464761',

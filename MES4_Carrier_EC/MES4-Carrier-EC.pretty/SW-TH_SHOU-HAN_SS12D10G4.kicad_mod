@@ -337,9 +337,9 @@
 		(uuid "3f4437c3-a307-4cb2-945a-a58e896e9e84")
 	)
 	(embedded_fonts no)
-	(model "${KIPRJMOD}/MES4-Carrier-EC.3dshapes/SW-TH_SHOU-HAN_SS12D10G4.wrl"
+	(model "${KIPRJMOD}/MES4-Carrier-EC.3dshapes/SW-TH_SHOU-HAN_SS12D10G4.step"
 		(offset
-			(xyz 0 0 0)
+			(xyz 0 0 2.1)
 		)
 		(scale
 			(xyz 1 1 1)

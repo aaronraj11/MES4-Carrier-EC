@@ -29,6 +29,16 @@ import can_parts
 can_parts.write_footprint(OUT + LIB + '.pretty')
 import aux_parts
 aux_parts.write_footprints(OUT + LIB + '.pretty', OUT + LIB + '.3dshapes')
+# KiCad's own fuse footprints point at 3D models KiCad doesn't ship, so the fuses were missing from the board STEP.
+# Project copies (same pads) use LCSC's models, kept as downloaded from EasyEDA (with their colours) in the
+# 3dshapes folder: C22435908 2920 PTC (EasyEDA 3D "F2920-1", c20979b6eed84fe694c25fdbe1326c05) and C44480 Nano2
+# ("FUSE-SMD_L6.1-W2.6-H2.6", ceafb183c74347baabbacc2158b065b9, centred on the board surface: lifted 1.3 mm).
+KICAD_FP = '/Applications/KiCad/KiCad.app/Contents/SharedSupport/footprints/'
+for name, off in (('Fuse_2920_7451Metric', (0, 0, 0)), ('Fuse_Littelfuse-NANO2-451_453', (0, 0, 1.3))):
+    s = open(KICAD_FP + 'Fuse.pretty/' + name + '.kicad_mod').read()
+    s = re.sub(r'\(model "[^"]*"', '(model "${KIPRJMOD}/%s.3dshapes/%s.step"' % (LIB, name), s, count=1)
+    s = re.sub(r'(\(offset\s*\(xyz) [^)]*\)', r'\1 %g %g %g)' % off, s, count=1)
+    open(OUT + LIB + '.pretty/' + name + '.kicad_mod', 'w').write(s)
 for fp in sorted(used_fp):
     src = FL + 'MES4-Flasher.pretty/' + fp + '.kicad_mod'
     if not os.path.exists(src):
@@ -66,8 +76,25 @@ def unprintable_dot(b):
     return 'SilkS"' in b and '(fill yes)' not in b and r < 0.1 and float(w[2]) < 0.1
 
 
+# EasyEDA's STEP models don't share their VRML twins' origin, so a STEP export (which swaps the VRML for the STEP)
+# put J1's M.2 socket 5.8 mm under the board, sank K5 / K6 1 mm into it and slid J16 0.4 mm. These footprints use the
+# STEP directly, placed so its pins land on the pads (offsets measured from the pegs / legs / feet against the pads).
+STEP_3D = {'TE_2199230-3_M.2_B-Key_4.2mm': ('PCIE-SMD_2199230-3_1', (0, 0.45, 5.76), (0, 0, 0)),
+           'USB-C_Receptacle_PowerOnly_6P_C456012': ('TYPE-C-SMD_6P-L8.9-W6.8-H3.2-P1.00', (0, -2.025, 0), (0, 0, 180)),
+           'RELAY-SMD_IMXXGR': ('RELAY-SMD_IMXXGR', (0, 0, 1.0), (0, 0, 0)),
+           # VRML-only in the Flasher's library (KiCad's STEP export drops VRML): LCSC's STEP, fetched from EasyEDA
+           # (C3031185 / C7431054), placed onto the VRML (U1 / U9's pin row incl. the missing pin 4 matches; SW2 1:1)
+           'PWRM-TH_YLPTEC_URXXXXXS-6WR3': ('PWRM-TH_YLPTEC_URXXXXXS-6WR3', (0, -2.18, 12.10), (0, 0, 0)),
+           'SW-TH_SHOU-HAN_SS12D10G4': ('SW-TH_SHOU-HAN_SS12D10G4', (0, 0, 2.10), (0, 0, 0))}
+# The KF250NH 2P / 3P STEPs (LCSC C976556 / C976557, same origin as their VRML) and the standoffs' STEPs
+# (generator/pcb/wrl2step.py from their VRML) sit beside the VRML in the 3dshapes folder: the export substitutes them.
 for fn in os.listdir(OUT + LIB + '.pretty'):
     path = OUT + LIB + '.pretty/' + fn; s = open(path).read()
+    if fn[:-10] in STEP_3D:
+        m, off, rot = STEP_3D[fn[:-10]]; i, j = next(blocks(s, '(model '))
+        xyz = lambda v: ' '.join('%g' % a for a in v)
+        s = s[:i] + ('(model "${KIPRJMOD}/%s.3dshapes/%s.step"\n\t\t(offset\n\t\t\t(xyz %s)\n\t\t)\n\t\t(scale\n\t\t\t(xyz 1 1 1)\n'
+                     '\t\t)\n\t\t(rotate\n\t\t\t(xyz %s)\n\t\t)\n\t)') % (LIB, m, xyz(off), xyz(rot)) + s[j:]
     cut = [(i, j) for i, j in blocks(s, '(property "LCSC Part"')] + \
           [(i, j) for i, j in blocks(s, '(fp_circle') if unprintable_dot(s[i:j])]
     for i, j in sorted(cut, reverse=True):

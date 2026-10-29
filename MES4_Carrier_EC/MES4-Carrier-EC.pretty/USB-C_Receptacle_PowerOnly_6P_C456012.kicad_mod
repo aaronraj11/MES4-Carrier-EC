@@ -503,9 +503,9 @@
 		(uuid "9c351b64-1266-49a0-8e4a-fe9dd24076f6")
 	)
 	(embedded_fonts no)
-	(model "${KIPRJMOD}/MES4-Carrier-EC.3dshapes/TYPE-C-SMD_6P-L8.9-W6.8-H3.2-P1.00.wrl"
+	(model "${KIPRJMOD}/MES4-Carrier-EC.3dshapes/TYPE-C-SMD_6P-L8.9-W6.8-H3.2-P1.00.step"
 		(offset
-			(xyz 0 -2.44 0)
+			(xyz 0 -2.025 0)
 		)
 		(scale
 			(xyz 1 1 1)
