@@ -1416,7 +1416,7 @@
 		)
 		(embedded_fonts no)
 	)
-	(symbol "URB2409S-10WR3"
+	(symbol "URB2409S-6WR3"
 		(pin_names (offset 1.016))
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -1425,23 +1425,23 @@
 			(at -7.62 6.35 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
-		(property "Value" "URB2409S-10WR3"
+		(property "Value" "URB2409S-6WR3"
 			(at -7.62 -8.89 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
-		(property "Footprint" "MES4-Carrier-EC:PWRM-TH_YLPTEC_URBXXXXS-10WR3"
+		(property "Footprint" "MES4-Carrier-EC:PWRM-TH_YLPTEC_URXXXXXS-6WR3"
 			(at 0 0 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
-		(property "Datasheet" "https://www.lcsc.com/product-detail/C7424703.html"
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C7468814.html"
 			(at 0 0 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
-		(property "Description" "YLPTEC URB2409S-10WR3: 9-36 V in, 9 V 1.11 A out, 10 W, 1.5 kV isolated, SIP-8"
+		(property "Description" "YLPTEC URB2409S-6WR3: 9-36 V in, 9 V 0.67 A out, 6 W, 1.6 kV isolated, SIP-8"
 			(at 0 0 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
-		(symbol "URB2409S-10WR3_0_1"
+		(symbol "URB2409S-6WR3_0_1"
 			(rectangle
 				(start -7.62 5.08)
 				(end 7.62 -7.62)
@@ -1449,7 +1449,7 @@
 				(fill (type background))
 			)
 		)
-		(symbol "URB2409S-10WR3_1_1"
+		(symbol "URB2409S-6WR3_1_1"
 			(pin passive line
 				(at -10.16 2.54 0)
 				(length 2.54)

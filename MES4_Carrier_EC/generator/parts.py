@@ -19,10 +19,11 @@ NEWP = {
     'FB_5V': dict(lib='Device:FerriteBead', value='120R', fp='Inductor_SMD:L_0805_2012Metric', lcsc='C79382',
                   desc='module 5 V feed ferrite, Murata BLM21PG121SN1D: 120 Ohm @ 100 MHz, 3 A, 30 mOhm'),
     # ---- aux power: IMU 9 V (MES3.1-Carrier-LH parts) + screen USB-C 5 V
-    'U_IMU': dict(lib='MES4-Carrier-EC:URB2409S-10WR3', value='URB2409S-10WR3',
-                  fp='MES4-Carrier-EC:PWRM-TH_YLPTEC_URBXXXXS-10WR3', lcsc='C7424703',
-                  ds='https://www.lcsc.com/product-detail/C7424703.html',
-                  desc='IMU supply, YLPTEC URB2409S-10WR3: 24 V to 9 V 1.11 A, 10 W isolated (as U15 on the MES3.1 carrier)'),
+    'U_IMU': dict(lib='MES4-Carrier-EC:URB2409S-6WR3', value='URB2409S-6WR3',
+                  fp='MES4-Carrier-EC:PWRM-TH_YLPTEC_URXXXXXS-6WR3', lcsc='C7468814',
+                  ds='https://www.lcsc.com/product-detail/C7468814.html',
+                  desc='IMU supply, YLPTEC URB2409S-6WR3: 24 V to 9 V 0.67 A, 6 W isolated, SIP-8 (the logic DC/DC\'s family and '
+                       'footprint; the MES3.1 carrier\'s 10 W URB2409S-10WR3, C7424703, is not in JLC\'s assembly library)'),
     'C_IMU_IN': dict(lib='Device:C_Polarized', value='47uF 100V', fp='Capacitor_SMD:CP_Elec_8x10', lcsc='C48935391',
                      desc='URB2409S input capacitor, JIERR RV100V47M8X10 (datasheet Cin 47 uF / 100 V, MES3.1 C1)'),
     'C_IMU_OUT': dict(lib='Device:C', value='22uF 16V', fp='Capacitor_SMD:C_0805_2012Metric', lcsc='C76637',

@@ -19,7 +19,7 @@ Monkey Robotics · Rev A · KiCad 9 · Designed by Aaron Raj Bhatti
 - **CAN** on a male DB9 to the IPC (1 GND, 3 CAN_H, 5 CAN_L) and a 1×4 RJ45 jack without magnetics (1 CAN_H, 2 CAN_L, 3 GND on every port). All five ports are wired in parallel on one bus, with an H24VNT2B ESD clamp at each connector.
 - **ST-Link V3MINIE** on the STDC14 connector (SWD, NRST, VCP), plus a reset button.
 - **24 V input on an XT30** (the MES4-Flasher's right-angle part) with the noise filtering described below.
-- **IMU power, 9 V**: the MES3.1 carrier's "IMU Power Supply @ 9V" with the same parts (URB2409S-10WR3, SS12D10G5 switch, 2-pin terminal).
+- **IMU power, 9 V**: the MES3.1 carrier's "IMU Power Supply @ 9V" (SS12D10G5 switch, 2-pin terminal) on a URB2409S-6WR3: the MES3.1's 10 W URB2409S-10WR3 isn't in JLC's assembly library.
 - **Screen power on USB-C**: 5 V / 3 A for the ARZOPA Z1C portable monitor, on the MES4-Flasher's USB-C receptacle.
 - **Door servo (Feetech, via the FE-URT-2 board)**: 24 V supply + UART on USART2, the same two terminals as on the MES2 Harvester.
 - **Winch control**: the MES2_Extension's two IM03GR direction relays (CLK / ACLK) for the 48 V winch controller, with a hardware interlock.
@@ -60,13 +60,13 @@ Noise filtering, from the cable inwards:
 2. C1 electrolytic damps the cable inductance, so hot-plugging doesn't ring above 24 V.
 3. C2 / C3 ceramics: low impedance for high frequencies at the input.
 4. The L1 pi filter feeds only the DC/DC. The logic supply is decoupled from the bus, and the converter's switching noise stays off it.
-5. The isolated DC/DC means GND_24V and GND meet only at NT1, so relay load currents never flow in the logic ground.
+5. One ground: the 24 V return and the logic ground are one net, GND, with a solid plane on In1 (the old GND_24V / NT1 split is gone). The load returns (relay outputs J6–J9, servo J15) run east to J5, away from the load cell and the module.
 6. Another pi filter (FB1) on the module 5 V keeps relay-coil switching off the module and the load-cell excitation. FB2 filters the ADS1232 AVDD again.
 7. Flyback diodes sit at every relay coil (1N4148W) and every output (SS34).
 
 The Flasher blocks a reversed lead with an SS56 Schottky. At this board's current (up to ~8 A with all four outputs loaded) that diode would dissipate 3–4 W, so a P-MOSFET does the job here.
 
-YLPTEC's EMC circuit for the URB2405S adds a 470 µH common-mode choke and 1 nF Y-capacitors. They are not fitted: NT1 ties the two grounds together, so the converter's isolation isn't used, and a differential pi filter (L1) does the filtering instead. YLPTEC also lists hot-plug as unsupported for this converter. L1 slows the inrush into C5, and Q1, D9 and C1 absorb the XT30 plug-in.
+YLPTEC's EMC circuit for the URB2405S adds a 470 µH common-mode choke and 1 nF Y-capacitors. They are not fitted: the board has one ground, so the converter's isolation isn't used, and a differential pi filter (L1) does the filtering instead. YLPTEC also lists hot-plug as unsupported for this converter. L1 slows the inrush into C5, and Q1, D9 and C1 absorb the XT30 plug-in.
 
 ### New parts (not on the MES4-Flasher)
 
@@ -102,9 +102,9 @@ The module's transceiver (and its 120 Ω terminator behind JP1) is on the MES4-M
 
 ## IMU and screen power (page 9)
 
-Both converters run from their own pi filter: L2 (the same 10 µH part as L1) with C26 / C27 off +24V. This keeps the screen's 20 W converter off the logic supply's L1 filter. Inputs are on GND_24V and outputs on GND, the same scheme as U1.
+Both converters run from their own pi filter: L2 (the same 10 µH part as L1) with C26 / C27 off +24V. This keeps the screen's 20 W converter off the logic supply's L1 filter. Their input and output sides share the one GND, as U1's do.
 
-**IMU, 9 V.** The MES3.1-Carrier-LH "IMU Power Supply @ 9V" with the same parts: U9 YLPTEC URB2409S-10WR3 (9 V, 1.11 A, 10 W isolated) with C28 47 µF / 100 V in and C29 22 µF / 16 V out, the datasheet's values. SW2 (SS12D10G5) switches it to J14. LED8 (green, with R35 2.2k at 3.2 mA) sits after SW2, so it lights only when the IMU terminal is powered.
+**IMU, 9 V.** The MES3.1-Carrier-LH "IMU Power Supply @ 9V" with the same parts: U9 YLPTEC URB2409S-6WR3 (9 V, 0.67 A, 6 W isolated; the IMU draws ≈ 45 mA) with C28 47 µF / 100 V in and C29 22 µF / 16 V out, the MES3.1's values. It is U1's family, footprint and pinout; the MES3.1 used the 10 W URB2409S-10WR3, which JLC can't assemble. SW2 (SS12D10G5) switches it to J14. LED8 (green, with R35 2.2k at 3.2 mA) sits after SW2, so it lights only when the IMU terminal is powered.
 
 **Screen, USB-C 5 V / 3 A.** The ARZOPA Z1C's label reads "5V/9V/12V/15V/20VDC 3A MAX", so it's a USB-PD sink. Without a PD controller a Type-C source can only offer 5 V, which gives 15 W. Its sibling, the Z1RC, draws about 9 W (≈ 1.8 A at 5 V), so 5 V / 3 A should run it. **Check full brightness on the bench.** If it needs 9 V or more, this port needs a USB-PD source controller instead.
 
@@ -119,7 +119,7 @@ R40 / R41 (10k Rp to 5 V on CC2 / CC1) advertise Type-C current 3.0 A. The shell
 
 | Ref | Part | LCSC | Notes |
 |---|---|---|---|
-| U9 | YLPTEC URB2409S-10WR3, 9 V 1.11 A, SIP-8 | C7424703 | Same as the MES3.1's U15. **LCSC stock was only 78** on 2026-10-27, so order early. Footprint and 3D model copied from the MES3.1 project. |
+| U9 | YLPTEC URB2409S-6WR3, 9 V 0.67 A, 6 W, SIP-8 | C7468814 | U1's family and footprint. The MES3.1's U15 (URB2409S-10WR3, C7424703) isn't in JLC's assembly library. |
 | U10 | YLPTEC URB2405YMD-20WR3, 5 V 4 A, 25.4 × 25.4 mm | C5369777 | Replaced the 2″ × 1″ URB2405LD-20WR3 (2026-10-28). Project footprint built from the JLC library pad data (C5369777) and checked against the Mornsun URB_YMD-20WR3 drawing: pins 1 Ctrl, 2 GND, 3 Vin, 4 +Vo, 5 Trim, 6 0V; 9-36 V in, 40 V max, 50 V 1 s surge. |
 | C38 | CX RVT1C101M0605, 100 µF 16 V, 6.3 × 5.4 mm | C81993 | U10 output bulk (YMD datasheet Cout 100 µF / 16 V). Extended part. |
 | SW2 | SHOU HAN SS12D10G5 slide switch | C7431054 | Same as the MES3.1's U22. Uses the MES4-Flasher's SS12D10G4 footprint. |
@@ -129,7 +129,7 @@ R40 / R41 (10k Rp to 5 V on CC2 / CC1) advertise Type-C current 3.0 A. The shell
 ### Door servo (Feetech, via the FE-URT-2)
 
 The MES2 Harvester drives its servo through Feetech's FE-URT-2 board, which turns a normal UART into the half-duplex servo bus and passes the supply through to the servos. This board copies its two terminals, so the Harvester's cables fit:
-- **J15 SERVO 24V**: pin 1 = +24 V, pin 2 = GND_24V, like every other power terminal on this board. The Harvester's CN5 has them the other way round, so re-pin that cable. +24 V comes through F9, a 3 A PTC (the relay outputs' part), plus C31 100 nF and C32 47 µF.
+- **J15 SERVO 24V**: pin 1 = +24 V, pin 2 = GND, like every other power terminal on this board. The Harvester's CN5 has them the other way round, so re-pin that cable. +24 V comes through F9, a 3 A PTC (the relay outputs' part), plus C31 100 nF and C32 47 µF.
 - **J17 SERVO UART** (CN13 on the Harvester): GND, +5 V, RX, TX.
 
 The UART uses module **USART2**: PA2 TX (finger 45) → R39 100 Ω → pin 4, and pin 3 → R38 1 kΩ → PA3 RX (finger 43, 5 V-tolerant). There are H5VSD3B ESD clamps (D23 / D24) at the connector, per CIF rule 8. R36 10k holds RX idle-HIGH when the FE-URT-2 is unplugged, and R37 10k holds TX idle-HIGH while PA2 floats during MCU reset and boot, so the FE-URT-2 never sees a floating input. R38 is 1 kΩ (not 100 Ω) so that if the module is off while the FE-URT-2 is powered, its TX can push at most a few mA into PA3 (MES4-CIF rule 6); that's still fast enough for 1 Mbit/s.
@@ -160,8 +160,8 @@ These are the MES2_Extension's "WINCH CONTROL" relays: two TE **IM03GR** (C21531
 
 | Ref | Part | Pins |
 |---|---|---|
-| J5 | XT30 male, right-angle (Amass XT30PW-M) | 1 = **+24 V** (flat end), 2 = **GND_24V** (chamfered end). A reversed lead is blocked by Q1. |
-| J6–J9 | 2-pin 3.5 mm push-in | Relay 1–4 output: 1 = switched +24 V, 2 = GND_24V |
+| J5 | XT30 male, right-angle (Amass XT30PW-M) | 1 = **+24 V** (flat end), 2 = **GND** (chamfered end). A reversed lead is blocked by Q1. |
+| J6–J9 | 2-pin 3.5 mm push-in | Relay 1–4 output: 1 = switched +24 V, 2 = GND |
 | J10, J11 | 3-pin 3.5 mm push-in | Sensor 1 / 2: 1 = +24 V via 100 mA PTC (brown), 2 = output (black), 3 = 0 V (blue) |
 | J12 | 3-pin 3.5 mm push-in | Load-cell signal: 1 SIG+ (green), 2 SIG− (white), 3 shield. **5 V load cell only: never 24 V.** |
 | J13 | 3-pin 3.5 mm push-in | Load-cell excitation: 1 EXC+ (red), 2 EXC− (black), 3 shield. **5 V load cell only: never 24 V.** |
@@ -170,12 +170,12 @@ These are the MES2_Extension's "WINCH CONTROL" relays: two TE **IM03GR** (C21531
 | J2 | STDC14, 1.27 mm (Samtec FTSH-107-01-L-DV-K) | ST-Link V3MINIE: SWD, NRST, VCP |
 | J1 | TE 2199230-3 M.2 B-key 4.2 mm | MES4-MCU module; hold-down H1 (M3 SMD standoff) |
 | J14 | 2-pin 3.5 mm push-in | IMU power: 1 = **+9 V** after SW2, 2 = GND |
-| J15 | 2-pin 3.5 mm push-in | Door servo supply (FE-URT-2 power in): 1 = **+24 V** via F9 3 A PTC, 2 = GND_24V (Harvester CN5 cable: re-pin) |
-| J16 | USB-C power-only receptacle (as the MES4-Flasher's J2) | Screen power: 5 V / 3 A source, CC1 / CC2 with 10k Rp (Type-C 3.0 A), no data |
+| J15 | 2-pin 3.5 mm push-in | Door servo supply (FE-URT-2 power in): 1 = **+24 V** via F9 3 A PTC, 2 = GND (Harvester CN5 cable: re-pin) |
+| J16 | USB-C power-only receptacle (as the MES4-Flasher's J2) | Screen power: 5 V / 3 A source, CC1 / CC2 with 10k Rp (Type-C 3.0 A), no data. Its mouth sits 0.1 mm past the board edge, so a cable's overmould clears the board |
 | J17 | 4-pin 3.5 mm push-in KF250NH-3.5-4P (as CN13 on the MES2 Harvester) | Door servo UART (FE-URT-2): 1 = GND, 2 = +5 V (F10 1.1 A PTC, from the screen converter), 3 = RX → PA3, 4 = TX ← PA2 (100 Ω + H5VSD3B ESD on both) |
 | J18 | 3-pin 3.5 mm push-in (as CN1 on the MES2_Extension) | Winch controller direction inputs: 1 = CLK, 2 = COM, 3 = ACLK (relay contacts, 2 A / 220 VDC max) |
 | SW2 | Slide switch SS12D10G5 | IMU 9 V on / off |
-| TP1–TP9 | 2 mm test pads | +24V, +24V_DC, +5V_24, +5V, +3V3_MOD, GND, GND_24V, +9V_IMU, +5V_SCR |
+| TP1–TP9 | 2 mm test pads | +24V, +24V_DC, +5V_24, +5V, +3V3_MOD, GND, GND, +9V_IMU, +5V_SCR. Bare pads: out of the BOM and the placement file |
 
 ## LEDs
 
@@ -192,8 +192,8 @@ All LEDs are JLC **Basic** parts (no extended-part fee, Economic PCBA): red NCD0
 ## Limits
 
 - **No hot-plug** (CIF rule 5). There is no module power switch: unplug the XT30 before inserting or removing a module.
-- **J12 / J13 are 5 V load-cell terminals** of the same push-in type as the 24 V outputs. A 24 V wire there damages the module and the ADC. Countermeasure (no keyed connector, to keep one terminal type): a filled silkscreen box "5V LOAD CELL – NEVER 24V" at J12 / J13, and place them away from the 24 V terminals.
-- **J4 RJ45 ports are CAN, not Ethernet.** An Ethernet cable or passive PoE on them damages the bus: silkscreen and panel label "CAN – NOT ETHERNET".
+- **J12 / J13 are 5 V load-cell terminals** of the same push-in type as the 24 V outputs. A 24 V wire there damages the module and the ADC. Countermeasure (no keyed connector, to keep one terminal type): the silkscreen names them "5V LOAD CELL", one label across both, and they sit away from the 24 V terminals.
+- **J4 RJ45 ports are CAN, not Ethernet.** An Ethernet cable or passive PoE on them damages the bus: a "CANBUS" knockout on the silkscreen beside the bank; label the panel the same.
 - **3 A PTCs derate** to about 2.2 A hold at 60 °C (F3–F6, F9, F11): still above the 2 A relay rating, but check against the enclosure temperature.
 - **Sensor inputs are for PNP (sourcing) 24 V sensors.** NPN types need a different circuit.
 - **Never run CAN in a cable or connector with 24 V** (CIF rule 9).

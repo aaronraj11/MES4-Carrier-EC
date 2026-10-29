@@ -335,7 +335,7 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "MES4-Carrier-EC:URB2409S-10WR3"
+		(symbol "MES4-Carrier-EC:URB2409S-6WR3"
 			(pin_names (offset 1.016))
 			(exclude_from_sim no)
 			(in_bom yes)
@@ -344,23 +344,23 @@
 				(at -7.62 6.35 0)
 				(effects (font (size 1.27 1.27)) (justify left))
 			)
-			(property "Value" "URB2409S-10WR3"
+			(property "Value" "URB2409S-6WR3"
 				(at -7.62 -8.89 0)
 				(effects (font (size 1.27 1.27)) (justify left))
 			)
-			(property "Footprint" "MES4-Carrier-EC:PWRM-TH_YLPTEC_URBXXXXS-10WR3"
+			(property "Footprint" "MES4-Carrier-EC:PWRM-TH_YLPTEC_URXXXXXS-6WR3"
 				(at 0 0 0)
 				(effects (font (size 1.27 1.27)) (hide yes))
 			)
-			(property "Datasheet" "https://www.lcsc.com/product-detail/C7424703.html"
+			(property "Datasheet" "https://www.lcsc.com/product-detail/C7468814.html"
 				(at 0 0 0)
 				(effects (font (size 1.27 1.27)) (hide yes))
 			)
-			(property "Description" "YLPTEC URB2409S-10WR3: 9-36 V in, 9 V 1.11 A out, 10 W, 1.5 kV isolated, SIP-8"
+			(property "Description" "YLPTEC URB2409S-6WR3: 9-36 V in, 9 V 0.67 A out, 6 W, 1.6 kV isolated, SIP-8"
 				(at 0 0 0)
 				(effects (font (size 1.27 1.27)) (hide yes))
 			)
-			(symbol "URB2409S-10WR3_0_1"
+			(symbol "URB2409S-6WR3_0_1"
 				(rectangle
 					(start -7.62 5.08)
 					(end 7.62 -7.62)
@@ -368,7 +368,7 @@
 					(fill (type background))
 				)
 			)
-			(symbol "URB2409S-10WR3_1_1"
+			(symbol "URB2409S-6WR3_1_1"
 				(pin passive line
 					(at -10.16 2.54 0)
 					(length 2.54)
@@ -1532,7 +1532,7 @@
 		(effects (font (size 1.27 1.27)) (justify left bottom))
 		(uuid "5c437c43-8262-52d5-9e54-7a2ccb904fca")
 	)
-	(text "L2 10 µH (same part as L1) + C26 / C27: a pi filter\nof its own for the IMU and screen converters, so the screen's\n20 W converter neither loads nor disturbs the logic supply\n(L1, Power sheet). Load at 24 V: IMU ≤ 0.5 A + screen ≤ 0.95 A\n≈ 1.45 A; L2 is rated 2.1 A (2.9 A saturation).\nBoth converters are isolated modules; on this board their\ninput and output sides share the one GND (as the logic DC/DC)."
+	(text "L2 10 µH (same part as L1) + C26 / C27: a pi filter\nof its own for the IMU and screen converters, so the screen's\n20 W converter neither loads nor disturbs the logic supply\n(L1, Power sheet). Load at 24 V: IMU ≈ 0.02 A (CV7 0.23 W) +\nscreen ≤ 0.95 A ≈ 1 A (0.79 A peak at start-up, LTspice AUX1);\nL2 is rated 2.1 A (2.9 A saturation).\nBoth converters are isolated modules; on this board their\ninput and output sides share the one GND (as the logic DC/DC)."
 		(exclude_from_sim no)
 		(at 17.78 68.58 0)
 		(effects (font (size 1.27 1.27)) (justify left top))
@@ -1665,7 +1665,7 @@
 		(stroke (width 0) (type default))
 		(uuid "70ce61bd-d8cd-5f45-ab9d-0ee2a9b3221a")
 	)
-	(text "Same parts as the MES3.1-Carrier-LH \"IMU Power Supply @ 9V\":\nU9 YLPTEC URB2409S-10WR3 (9-36 V in, 9 V 1.11 A, 10 W isolated, short-circuit protected;\nMES3.1 U15), C28 47 µF / 100 V and C29 22 µF / 16 V (the datasheet's Cin / Cout),\nSW2 SS12D10G5 slide switch (MES3.1 U22, common = pin 2), J14 KF250NH 2-pin (MES3.1 CN10).\nCTRL open = on. IMU: MicroStrain 3DM-CV7-AHRS on the C-Series Connectivity Board (6212-3009 kit), ≈ 45 mA at 9 V\n(SW2 0.5 A rating OK). Wire J14 to the board's Vaux (5.2-28 V, micro-DB9 pin 6), NEVER Vpri (3.2-5.2 V, pin 3,\nstraight to the CV7). Vaux or Vpri, not both: switch SW2 off while the USB dev cable (5 V on Vpri) is plugged in.\nLED8 green (+ R35 2.2k, 3.2 mA) sits after SW2: it lights only when the IMU terminal is powered.\nLCSC stock of URB2409S-10WR3 is low (78 on 2026-10-27): order early."
+	(text "Same parts as the MES3.1-Carrier-LH \"IMU Power Supply @ 9V\":\nU9 YLPTEC URB2409S-6WR3 (9-36 V in, 9 V 0.67 A, 6 W isolated, short-circuit protected; the logic DC/DC's\nfamily and footprint. MES3.1 U15 is the 10 W URB2409S-10WR3, which JLC can't assemble), C28 47 µF / 100 V\nand C29 22 µF / 16 V (the MES3.1 Cin / Cout),\nSW2 SS12D10G5 slide switch (MES3.1 U22, common = pin 2), J14 KF250NH 2-pin (MES3.1 CN10).\nCTRL open = on. IMU: MicroStrain 3DM-CV7-AHRS on the C-Series Connectivity Board (6212-3009 kit), ≈ 45 mA at 9 V\n(SW2 0.5 A rating OK). Wire J14 to the board's Vaux (5.2-28 V, micro-DB9 pin 6), NEVER Vpri (3.2-5.2 V, pin 3,\nstraight to the CV7). Vaux or Vpri, not both: switch SW2 off while the USB dev cable (5 V on Vpri) is plugged in.\nLED8 green (+ R35 2.2k, 3.2 mA) sits after SW2: it lights only when the IMU terminal is powered.\nJLC part C7468814."
 		(exclude_from_sim no)
 		(at 124.46 68.58 0)
 		(effects (font (size 1.27 1.27)) (justify left top))
@@ -2534,7 +2534,7 @@
 		)
 	)
 	(symbol
-		(lib_id "MES4-Carrier-EC:URB2409S-10WR3")
+		(lib_id "MES4-Carrier-EC:URB2409S-6WR3")
 		(at 177.8 48.26 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -2546,23 +2546,23 @@
 			(at 177.8 39.37 0)
 			(effects (font (size 1.27 1.27)))
 		)
-		(property "Value" "URB2409S-10WR3"
+		(property "Value" "URB2409S-6WR3"
 			(at 177.8 59.69 0)
 			(effects (font (size 1.27 1.27)))
 		)
-		(property "Footprint" "MES4-Carrier-EC:PWRM-TH_YLPTEC_URBXXXXS-10WR3"
+		(property "Footprint" "MES4-Carrier-EC:PWRM-TH_YLPTEC_URXXXXXS-6WR3"
 			(at 177.8 48.26 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
-		(property "Datasheet" "https://www.lcsc.com/product-detail/C7424703.html"
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C7468814.html"
 			(at 177.8 48.26 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
-		(property "Description" "IMU supply, YLPTEC URB2409S-10WR3: 24 V to 9 V 1.11 A, 10 W isolated (as U15 on the MES3.1 carrier)"
+		(property "Description" "IMU supply, YLPTEC URB2409S-6WR3: 24 V to 9 V 0.67 A, 6 W isolated, SIP-8 (the logic DC/DC's family and footprint; the MES3.1 carrier's 10 W URB2409S-10WR3, C7424703, is not in JLC's assembly library)"
 			(at 177.8 48.26 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
-		(property "LCSC" "C7424703"
+		(property "LCSC" "C7468814"
 			(at 177.8 48.26 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -2772,7 +2772,7 @@
 		(at 213.36 45.72 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(uuid "9ce8450f-325b-57f6-bf73-1853e0c2edc3")
@@ -3506,7 +3506,7 @@
 		(at 134.62 132.08 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(uuid "39611368-9b81-5b9c-999b-442ccf25fe17")

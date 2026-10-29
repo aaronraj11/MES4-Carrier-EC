@@ -11,7 +11,10 @@ inter-row channel without a crossing. Three GND vias leave the J1 / J2 corridor:
 west end, SW1 pin 2's via to the pad's inner end, J1 pin 10's via to the finger's outer end (frees pin 8's escape).
 MCU escape (ADC lane, user-approved): R32 / R33 / R34 move off the row under U8, where R32 blocked pins 22 / 23. PA6,
 PA5 and LC_DOUT now drop straight from U8 pins 22-24: R34 (PA6 pull-down) sits on PA6's line, R33 (PA5) on PA5's
-with its GND via east, R32 (DOUT -> PA4) stands upright east of them so PA4 leaves on the east side, in J1's order."""
+with its GND via east, R32 (DOUT -> PA4) stands upright east of them so PA4 leaves on the east side, in J1's order.
+J16 (screen USB-C, review B2): its mouth sat 1.13 mm inside the board edge (3D model front at x 51.03, edge 49.9), so
+a cable's overmould would hit the board before the plug seats. It moves 1.25 mm west (mouth 0.12 mm past the edge)
+with its pad stubs and GND vias; route_srv_scr.py / route_local.py start J16's tracks 1.25 mm further west."""
 import sys, pcbnew
 
 P = sys.argv[1]; b = pcbnew.LoadBoard(P); mm, T = pcbnew.FromMM, pcbnew.ToMM
@@ -26,6 +29,7 @@ OLD_GND_VIAS = [(92.23, 88.07), (92.23, 91.27), (93.96, 83.61), (89.73, 82.89)] 
 NEW_GND = {'D4': ((0, -1), 0.4), 'D5': ((0, -1), 0.4), 'R34': ((-1, 0), 0.49), 'R33': ((1, 0), 0.49)}   # pad 2's end, stub width
 VIA_MOVES = {(78.20, 96.85): (77.20, 98.63), (75.25, 96.89): (75.25, 98.91), (81.55, 104.27): (81.55, 106.575),
              (87.30, 98.98): (87.30, 96.685)}   # J1 pin 33: frees PA8 / PA7's south escapes
+SHIFTS = {'J16': ((-1.25, 0.0), (50.0, 126.5, 59.5, 138.0))}   # ref: (dx, dy), box of the tracks / vias that go along
 VIA_BENDS = {(85.80, 98.98): ((85.80, 99.20), (85.30, 99.70))}   # J1 pin 27 (its north end sits on the +5V B.Cu diagonal): via SW,
                                                                  # behind the unused pin 25, frees PC6's escape
 
@@ -46,6 +50,11 @@ for ref, ((dx, dy), w) in NEW_GND.items():                 # GND via straight of
     vx, vy = round(x + dx * (hw + 0.4), 2), round(y + dy * (hh + 0.4), 2)
     t = pcbnew.PCB_TRACK(b); t.SetStart(V(x, y)); t.SetEnd(V(vx, vy)); t.SetWidth(mm(w)); t.SetLayer(pcbnew.F_Cu); t.SetNet(g); b.Add(t)
     v = pcbnew.PCB_VIA(b); v.SetPosition(V(vx, vy)); v.SetWidth(mm(0.6)); v.SetDrill(mm(0.3)); v.SetLayerPair(pcbnew.F_Cu, pcbnew.B_Cu); v.SetNet(g); b.Add(v)
+for ref, ((dx, dy), (x0, y0, x1, y1)) in SHIFTS.items():  # rigid moves: the part and its stubs / vias
+    d = V(dx, dy); fps[ref].Move(d)
+    for t in b.GetTracks():
+        pts = [t.GetPosition()] if t.GetClass() == 'PCB_VIA' else [t.GetStart(), t.GetEnd()]
+        if all(x0 < T(p.x) < x1 and y0 < T(p.y) < y1 for p in pts): t.Move(d)
 for t in b.GetTracks():                                    # GND via moves: the via and its stub's end
     for (ox, oy), (nx, ny) in VIA_MOVES.items():
         hit = lambda p: abs(T(p.x) - ox) < 0.01 and abs(T(p.y) - oy) < 0.01

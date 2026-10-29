@@ -1024,7 +1024,7 @@
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 	)
-	(text "J4 HCTL HC-RJ45-059-4-4: 4 ports, shielded, no magnetics, no LEDs.\nEvery port: 1 = CAN_H (white-orange), 2 = CAN_L (orange): one twisted pair;\n3 = GND (white-green); 4-8 open. T568B colours, CiA 303-1 pinout,\nsame as the MES4-Flasher RJ45. Shield tabs to GND.\nFootprint: pad positions from the JLC library part, drills from the\nHCTL drawing (32 × Ø1.0, shield Ø1.7, pegs Ø3.2). Port fronts 17 mm\nin front of the pin-1 row: place them at the board edge.\nD7 H24VNT2B: ESD at the RJ45 bank."
+	(text "J4 HCTL HC-RJ45-059-4-4: 4 ports, shielded, no magnetics, no LEDs.\nEvery port: 1 = CAN_H (white-orange), 2 = CAN_L (orange): one twisted pair;\n3 = GND (white-green); 4-8 open. T568B colours, CiA 303-1 pinout,\nsame as the MES4-Flasher RJ45. Shield tabs to GND.\nFootprint: pad positions from the JLC library part, drills from the\nHCTL drawing (32 × Ø1.0, shield Ø1.5, pegs Ø3.2). Port fronts 17 mm\nin front of the pin-1 row: place them at the board edge.\nD7 H24VNT2B: ESD at the RJ45 bank."
 		(exclude_from_sim no)
 		(at 205.74 88.9 0)
 		(effects (font (size 1.27 1.27)) (justify left top))

@@ -50,18 +50,6 @@
 			)
 		)
 	)
-	(property "LCSC Part" "C976557"
-		(at 0 0 0)
-		(layer "F.Fab")
-		(hide yes)
-		(uuid "27526440-e037-4402-94b1-e27fa8c04e3b")
-		(effects
-			(font
-				(size 1.27 1.27)
-				(thickness 0.15)
-			)
-		)
-	)
 	(attr through_hole)
 	(fp_line
 		(start -5.8 -4.3)

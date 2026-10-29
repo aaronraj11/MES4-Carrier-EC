@@ -1,4 +1,4 @@
-"""Aux power parts: URB2409S-10WR3 (IMU 9 V, as on the MES3.1 carrier) and URB2405YMD-20WR3 (screen 5 V)."""
+"""Aux power parts: URB2409S-6WR3 (IMU 9 V) and URB2405YMD-20WR3 (screen 5 V)."""
 import os, re, shutil, subprocess
 from sx import Q, dump, find, first, deep, parse
 import builder as B
@@ -9,7 +9,7 @@ HARV = '/Users/aaron/Desktop/MES3 Ecosystem/MES2_Harvester Project/MES2_Harveste
 FP_4P = 'CONN-TH_KF250NH-3.5-4P'
 EXT = '/Users/aaron/Desktop/MES3 Ecosystem/MES2_Extension/'
 FP_IM = 'RELAY-SMD_IMXXGR'
-FP_10W = 'PWRM-TH_YLPTEC_URBXXXXS-10WR3'
+FP_6W = 'PWRM-TH_YLPTEC_URXXXXXS-6WR3'     # the logic DC/DC's (U1) footprint, from the MES4-Flasher
 FP_YMD = 'PWRM-TH_YLPTEC_URBXXXXYMD-20WR3'
 FP_DDF = 'TSOT-23-8_TI_DDF'
 FL = '/Users/aaron/Desktop/MES4 Ecosystem/MES4-Flasher/'
@@ -44,11 +44,12 @@ def _props(name, value, fp, ds, desc, ref_y, val_y):
             ['property', Q('Description'), Q(desc), ['at', 0, 0, 0], e(True)]]
 
 
-def urb_10w_symbol():
-    """Same pins / graphics as the URB2405S-6WR3 symbol (1 GND, 2 VIN, 3 CTRL, 5 NC, 6 +Vo, 7 -Vo, 8 NC)."""
+def urb_9v_symbol():
+    """Same pins / graphics as the URB2405S-6WR3 symbol (1 GND, 2 VIN, 3 CTRL, 5 NC, 6 +Vo, 7 -Vo, 8 NC): the 9 V
+    member of the same YLPTEC family. JLC can't assemble the 10 W URB2409S-10WR3 the MES3.1 carrier used."""
     base = deep(B.symdef(LIBNAME + ':URB2405S-6WR3'))
     old = 'URB2405S-6WR3'
-    new = 'URB2409S-10WR3'
+    new = 'URB2409S-6WR3'
     base[1] = Q(LIBNAME + ':' + new)
     for sub in find(base, 'symbol'):
         sub[1] = Q(sub[1].replace(old, new))
@@ -56,11 +57,11 @@ def urb_10w_symbol():
         if p[1] == 'Value':
             p[2] = Q(new)
         elif p[1] == 'Footprint':
-            p[2] = Q(LIBNAME + ':' + FP_10W)
+            p[2] = Q(LIBNAME + ':' + FP_6W)
         elif p[1] == 'Description':
-            p[2] = Q('YLPTEC URB2409S-10WR3: 9-36 V in, 9 V 1.11 A out, 10 W, 1.5 kV isolated, SIP-8')
+            p[2] = Q('YLPTEC URB2409S-6WR3: 9-36 V in, 9 V 0.67 A out, 6 W, 1.6 kV isolated, SIP-8')
         elif p[1] == 'Datasheet':
-            p[2] = Q('https://www.lcsc.com/product-detail/C7424703.html')
+            p[2] = Q('https://www.lcsc.com/product-detail/C7468814.html')
     return base
 
 
@@ -223,23 +224,10 @@ def urb_ymd_footprint():
 
 def write_footprints(pretty_dir, shapes_dir):
     open(os.path.join(pretty_dir, FP_YMD + '.kicad_mod'), 'w').write(dump(urb_ymd_footprint()) + '\n')
-    # 10 W SIP-8: the MES3.1 carrier's footprint (easyeda2kicad, KiCad 5 format) + its 3D model
-    src = open(MES3 + 'EasyEDA.pretty/' + FP_10W + '.kicad_mod').read()
-    src = src.replace('easyeda2kicad:' + FP_10W, FP_10W)
-    src = src.replace('${KIPRJMOD}/EasyEDA.3dshapes/', '${KIPRJMOD}/' + LIBNAME + '.3dshapes/')
-    # upgrade the KiCad 5 file to the current format (kicad-cli fp upgrade on a one-file library)
+    # the IMU's URB2409S-6WR3 uses U1's footprint (copied from the MES4-Flasher by libs.py)
+    # upgrade the KiCad 5 files to the current format (kicad-cli fp upgrade on a one-file library)
     import tempfile
     work = os.path.join(tempfile.gettempdir(), 'mes4ec_fp_upgrade.pretty')
-    shutil.rmtree(work, ignore_errors=True)
-    os.makedirs(work)
-    open(os.path.join(work, FP_10W + '.kicad_mod'), 'w').write(src)
-    subprocess.run(['/Applications/KiCad/KiCad.app/Contents/MacOS/kicad-cli', 'fp', 'upgrade', '--force', work],
-                   capture_output=True)
-    shutil.copy(os.path.join(work, FP_10W + '.kicad_mod'), pretty_dir)
-    for ext in ('.wrl', '.step'):
-        f = MES3 + 'EasyEDA.3dshapes/' + FP_10W + ext
-        if os.path.exists(f):
-            shutil.copy(f, shapes_dir)
     # KF250NH-3.5-4P: the MES2 Harvester's footprint (CN13) + its 3D model
     src = open(HARV + 'EasyEDA.pretty/' + FP_4P + '.kicad_mod').read()
     src = src.replace('easyeda2kicad:' + FP_4P, FP_4P)

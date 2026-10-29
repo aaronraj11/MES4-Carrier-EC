@@ -2089,7 +2089,7 @@
 		(effects (font (size 2 2) (bold yes)) (justify left top))
 		(uuid "af8dbbd1-1786-50a0-bc5a-d2a550a066d3")
 	)
-	(text "Module CANH / CANL (fingers 1 / 3) go to the CAN sheet\nas global labels:\n\nJ3 DB9 male to the IPC: 1 GND, 3 CAN_H, 5 CAN_L.\nJ4 1x4 RJ45, no magnetics: 1 CAN_H, 2 CAN_L,\n3 GND on every port (T568B: white-orange, orange,\nwhite-green).\n\nAll five ports are one bus, wired in parallel.\nESD at each connector: D6, D7 (H24VNT2B).\nTransceiver + 120 Ω terminator (JP1) are on the module.\nSilkscreen + panel at J4: \"CAN - NOT ETHERNET\" (review L5)."
+	(text "Module CANH / CANL (fingers 1 / 3) go to the CAN sheet\nas global labels:\n\nJ3 DB9 male to the IPC: 1 GND, 3 CAN_H, 5 CAN_L.\nJ4 1x4 RJ45, no magnetics: 1 CAN_H, 2 CAN_L,\n3 GND on every port (T568B: white-orange, orange,\nwhite-green).\n\nAll five ports are one bus, wired in parallel.\nESD at each connector: D6, D7 (H24VNT2B).\nTransceiver + 120 Ω terminator (JP1) are on the module.\nSilkscreen at J4: a \"CANBUS\" knockout; mark the panel\nthe same, so nobody plugs Ethernet in (review L5)."
 		(exclude_from_sim no)
 		(at 317.5 30.48 0)
 		(effects (font (size 1.27 1.27)) (justify left top))

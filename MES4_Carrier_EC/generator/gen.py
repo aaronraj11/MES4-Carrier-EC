@@ -308,11 +308,12 @@ def loadcell_sheet():
       "Read: wait for DRDY/DOUT LOW, clock 24 bits on SCLK (MSB first, two's complement). Clocking 26 bits instead also runs the\n"
       'offset self-calibration: do it after power-up and when the temperature changes. Discard the first conversions after power-up or reset.\n\n'
       'Scale: 2 × SOP SOPLF-102 (1.5 t, 1.5 mV/V) summed in the junction box → 7.5 mV full scale at 5 V ≈ 38 % of ±19.5 mV, ≈ 2.5 µV per kg.\n'
-      'Bridge current ≈ 13 mA (two 780 Ω cells) from +5V. Warn at 1.5 t, alarm at 2.0 t total. Re-calibrate the scale factor (the old HX711\n'
+      'Bridge current ≈ 13 mA from +5V (two cells in parallel, 780 Ω input each; their 700 Ω outputs, 350 Ω together, feed SIG±).\n'
+      'Warn at 1.5 t, alarm at 2.0 t total. Re-calibrate the scale factor (the old HX711\n'
       'factor was taken at 3.3 V). Filtering as before: 0.5 kg noise threshold, ±0.25 kg stability window, 0.1 kg rounding.\n\n'
       '5 V load cell only: {lc:J18} pin 1 is the +5V rail through {lc:FB1}. Never land a 24 V wire on {lc:J15} / {lc:J18}\n'
-      '(same push-in terminal type as the relay and sensor outputs): mark them on the silk:\n'
-      'a filled box "5V LOAD CELL - NEVER 24V" at {lc:J15} / {lc:J18}, and place them away from the 24 V terminals (review M2).\n'
+      '(same push-in terminal type as the relay and sensor outputs): the silk names them "5V LOAD CELL" (one label across both),\n'
+      'and they sit away from the 24 V terminals (review M2).\n'
       'Excitation comes from +5V (Power sheet: URB2405S → PTC → ferrite pi filter), the same rail as the module.',
       (17.78, 177.80))
     return sh
@@ -356,7 +357,8 @@ def main_sheet():
       'All five ports are one bus, wired in parallel.\n'
       'ESD at each connector: {CAN/D_DB9}, {CAN/D_RJ} (H24VNT2B).\n'
       'Transceiver + 120 Ω terminator (JP1) are on the module.\n'
-      'Silkscreen + panel at {CAN/J_RJ}: "CAN - NOT ETHERNET" (review L5).', (317.50, 30.48))
+      'Silkscreen at {CAN/J_RJ}: a "CANBUS" knockout; mark the panel\n'
+      'the same, so nobody plugs Ethernet in (review L5).', (317.50, 30.48))
     sh.box(15.24, 20.32, 160.02, 101.60, 'Module GPIO map: all 14 used')
     T('PA8   finger 31  out  relay 1 drive, safety light ({Relays1-2/ch1:Q})\n'
       'PC6   finger 29  out  relay 2 drive, LED DRL ({Relays1-2/ch2:Q})\n'
@@ -517,7 +519,7 @@ def can_sheet():
             '3 = GND (white-green); 4-8 open. T568B colours, CiA 303-1 pinout,\n'
             'same as the MES4-Flasher RJ45. Shield tabs to GND.\n'
             'Footprint: pad positions from the JLC library part, drills from the\n'
-            'HCTL drawing (32 × Ø1.0, shield Ø1.7, pegs Ø3.2). Port fronts 17 mm\n'
+            'HCTL drawing (32 × Ø1.0, shield Ø1.5, pegs Ø3.2). Port fronts 17 mm\n'
             'in front of the pin-1 row: place them at the board edge.\n'
             '{D_RJ} H24VNT2B: ESD at the RJ45 bank.', (205.74, 88.90))
     # ---- rules
@@ -534,7 +536,7 @@ def can_sheet():
 
 # ---------------------------------------------------------------- aux power (new): IMU 9 V + screen USB-C 5 V
 def aux_sheet():
-    B.register_symbol(AP.urb_10w_symbol())
+    B.register_symbol(AP.urb_9v_symbol())
     B.register_symbol(AP.urb_ymd_symbol())
     sh = Sheet('AuxPower', 'AuxPower.kicad_sch',
                'Sheet 9: IMU 9 V supply (as on the MES3.1 carrier) + screen 5 V USB-C power', 9)
@@ -557,8 +559,9 @@ def aux_sheet():
     sh.text('{L_AUX} 10 µH (same part as L1) + {C_AUX10} / {C_AUX100}: a pi filter\n'
             'of its own for the IMU and screen converters, so the screen\'s\n'
             '20 W converter neither loads nor disturbs the logic supply\n'
-            '(L1, Power sheet). Load at 24 V: IMU ≤ 0.5 A + screen ≤ 0.95 A\n'
-            '≈ 1.45 A; {L_AUX} is rated 2.1 A (2.9 A saturation).\n' +
+            '(L1, Power sheet). Load at 24 V: IMU ≈ 0.02 A (CV7 0.23 W) +\n'
+            'screen ≤ 0.95 A ≈ 1 A (0.79 A peak at start-up, LTspice AUX1);\n'
+            '{L_AUX} is rated 2.1 A (2.9 A saturation).\n' +
             ('Both converters are isolated modules; on this board their\n'
              'input and output sides share the one GND (as the logic DC/DC).' if ONE_GND else
              'Both converters are isolated: input side on GND_24V,\n'
@@ -578,7 +581,8 @@ def aux_sheet():
     sh.wire(ui.p('-Vo'), (191.77, 50.80), (191.77, 54.61))
     gl((191.77, 54.61))
     co = npart(sh, 'C_IMU_OUT', 'C', (200.66, 49.53))
-    tp9 = fpart(sh, 'TP1', (213.36, y), value=TP_NAME['+9V_IMU'], tag='TP_9V', fields=((0, -6.35), (0, -3.81), None))
+    tp9 = fpart(sh, 'TP1', (213.36, y), value=TP_NAME['+9V_IMU'], tag='TP_9V', fields=((0, -6.35), (0, -3.81), None),
+                in_bom=False)
     sw = npart(sh, 'SW_IMU', 'SW', (238.76, y), tag='SW_IMU', fields=((0, -8.89), (0, -6.35), None))
     sh.wire(ui.p('+Vo'), co.p('1'), tp9.p('1'), (223.52, y), sw.p('B'))
     sh.label('+9V_IMU', (223.52, y))
@@ -597,14 +601,15 @@ def aux_sheet():
     sh.wire(j.p('2'), (279.40, 48.26), (279.40, 52.07))
     gl((279.40, 52.07))
     sh.text('Same parts as the MES3.1-Carrier-LH "IMU Power Supply @ 9V":\n'
-            '{U_IMU} YLPTEC URB2409S-10WR3 (9-36 V in, 9 V 1.11 A, 10 W isolated, short-circuit protected;\n'
-            'MES3.1 U15), {C_IMU_IN} 47 µF / 100 V and {C_IMU_OUT} 22 µF / 16 V (the datasheet\'s Cin / Cout),\n'
+            '{U_IMU} YLPTEC URB2409S-6WR3 (9-36 V in, 9 V 0.67 A, 6 W isolated, short-circuit protected; the logic DC/DC\'s\n'
+            'family and footprint. MES3.1 U15 is the 10 W URB2409S-10WR3, which JLC can\'t assemble), {C_IMU_IN} 47 µF / 100 V\n'
+            'and {C_IMU_OUT} 22 µF / 16 V (the MES3.1 Cin / Cout),\n'
             '{SW_IMU} SS12D10G5 slide switch (MES3.1 U22, common = pin 2), {J_IMU} KF250NH 2-pin (MES3.1 CN10).\n'
             'CTRL open = on. IMU: MicroStrain 3DM-CV7-AHRS on the C-Series Connectivity Board (6212-3009 kit), ≈ 45 mA at 9 V\n'
             '({SW_IMU} 0.5 A rating OK). Wire {J_IMU} to the board\'s Vaux (5.2-28 V, micro-DB9 pin 6), NEVER Vpri (3.2-5.2 V, pin 3,\n'
             'straight to the CV7). Vaux or Vpri, not both: switch {SW_IMU} off while the USB dev cable (5 V on Vpri) is plugged in.\n'
             '{LED_IMU} green (+ {R_LEDIMU} 2.2k, 3.2 mA) sits after {SW_IMU}: it lights only when the IMU terminal is powered.\n'
-            'LCSC stock of URB2409S-10WR3 is low (78 on 2026-10-27): order early.', (124.46, 68.58))
+            'JLC part C7468814.', (124.46, 68.58))
     # ---- screen USB-C 5 V
     y2 = 132.08
     sh.box(15.24, 104.14, 403.86, 190.50, 'Screen power: USB-C 5 V / 3 A (ARZOPA Z1C portable monitor)')
@@ -622,7 +627,8 @@ def aux_sheet():
     o1 = npart(sh, 'C_SCR_OUT', 'C', (93.98, 135.89), tag='C_SCR1')
     o2 = npart(sh, 'C_SCR_OUT', 'C', (109.22, 135.89), tag='C_SCR2')
     o3 = fpart(sh, 'C4', (124.46, 135.89), tag='C_SCR3', desc='5 V screen output bypass')
-    tp5 = fpart(sh, 'TP1', (134.62, y2), value=TP_NAME['+5V_SCR'], tag='TP_5VS', fields=((0, -6.35), (0, -3.81), None))
+    tp5 = fpart(sh, 'TP1', (134.62, y2), value=TP_NAME['+5V_SCR'], tag='TP_5VS', fields=((0, -6.35), (0, -3.81), None),
+                in_bom=False)
     fs = npart(sh, 'F_CH', 'F', (149.86, y2), rot=90, tag='F_SCR',
                desc='screen USB-C PTC, LUTE 2920L300/36GR: 3 A hold (the connector is rated 3 A)')
     sh.wire(us.p('+Vo'), o1.p('1'), o2.p('1'), o3.p('1'), tp5.p('1'), (139.70, y2), fs.p('1'))
@@ -1107,7 +1113,8 @@ def power_sheet():
            ('GND', 'TP6'), ('GND_24V', 'TP7')]
     x = 30.48
     for net, old in tps:
-        tp = fpart(sh, old, (x, 210.82), value=TP_NAME[net], tag='TP_' + net, fields=((-1.27, -3.81), (-1.27, -1.27), 'right'))
+        tp = fpart(sh, old, (x, 210.82), value=TP_NAME[net], tag='TP_' + net, fields=((-1.27, -3.81), (-1.27, -1.27), 'right'),
+                   in_bom=False)   # bare test pads: nothing to buy or place
         if net.startswith('GND'):
             sh.wire(tp.p('1'), (x, 215.90))
             sh.pwr(net, (x, 215.90))
@@ -1247,7 +1254,7 @@ def root_items(sh, sheets):
     arrow([(400.05, 88.90), (RX2, 88.90)], RED)
     block(RX1, 111.76, RX2, 142.24, ORA, LP, 'IMU 9 V + screen 5 V (page 9)',
           'Own L pi filter from +24V.\n'
-          '{AuxPower/U_IMU} URB2409S-10WR3 → 9 V →\n{AuxPower/SW_IMU} switch → {AuxPower/J_IMU} IMU terminal\n(as on the MES3.1 carrier).\n'
+          '{AuxPower/U_IMU} URB2409S-6WR3 → 9 V →\n{AuxPower/SW_IMU} switch → {AuxPower/J_IMU} IMU terminal\n(as on the MES3.1 carrier).\n'
           '{AuxPower/U_SCR} URB2405YMD-20WR3 → 5 V 4 A\n→ 3 A PTC → {AuxPower/J_USB} USB-C (Rp 10k:\n5 V / 3 A) → ARZOPA Z1C screen.')
     arrow([(400.05, 127.00), (RX2, 127.00)], RED)
     # winch + servo signals: through the gap above the load cell (below the end of the x = 302 rail), then up a

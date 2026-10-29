@@ -44,5 +44,34 @@ for fp in sorted(used_fp):
         print('  model', fp, m)
     s = s.replace('MES4-Flasher.3dshapes', LIB + '.3dshapes').replace('MES4-Flasher:', LIB + ':')
     open(OUT + LIB + '.pretty/' + fp + '.kicad_mod', 'w').write(s)
+# Two clean-ups on the imported footprints, so the board (see generator/pcb/silk.py, parts_sync.py) matches the library:
+# - EasyEDA imports carry an "LCSC Part" field. The Fabrication Toolkit reads it ahead of the symbol's "LCSC", so a
+#   stale one overrides the schematic (review B1: U9 / SW2): keep LCSC numbers on the symbols only.
+# - their 0.06 mm pin-1 dots (radius 0.03) are far under JLC's 0.15 mm silk minimum and never print.
+def blocks(s, head):
+    """(start, end) of every top-level-in-footprint block that starts with head."""
+    i = s.find(head)
+    while i >= 0:
+        d = 0
+        for j in range(i, len(s)):
+            d += {'(': 1, ')': -1}.get(s[j], 0)
+            if d == 0: break
+        yield i, j + 1
+        i = s.find(head, j + 1)
+
+
+def unprintable_dot(b):
+    c, e, w = (re.search(r'\((center|end|width) ([-\d.]+)(?: ([-\d.]+))?\)'.replace('center|end|width', k), b) for k in ('center', 'end', 'width'))
+    r = ((float(e[2]) - float(c[2])) ** 2 + (float(e[3]) - float(c[3])) ** 2) ** 0.5
+    return 'SilkS"' in b and '(fill yes)' not in b and r < 0.1 and float(w[2]) < 0.1
+
+
+for fn in os.listdir(OUT + LIB + '.pretty'):
+    path = OUT + LIB + '.pretty/' + fn; s = open(path).read()
+    cut = [(i, j) for i, j in blocks(s, '(property "LCSC Part"')] + \
+          [(i, j) for i, j in blocks(s, '(fp_circle') if unprintable_dot(s[i:j])]
+    for i, j in sorted(cut, reverse=True):
+        s = s[:s.rindex('\n', 0, i)] + s[j:]
+    open(path, 'w').write(s)
 open(OUT + 'sym-lib-table', 'w').write('(sym_lib_table\n  (version 7)\n  (lib (name "%s")(type "KiCad")(uri "${KIPRJMOD}/%s.kicad_sym")(options "")(descr "MES4-Carrier-EC project symbols (from the MES4-Flasher)"))\n)\n' % (LIB, LIB))
 open(OUT + 'fp-lib-table', 'w').write('(fp_lib_table\n  (version 7)\n  (lib (name "%s")(type "KiCad")(uri "${KIPRJMOD}/%s.pretty")(options "")(descr "MES4-Carrier-EC project footprints (from the MES4-Flasher, checked against datasheets)"))\n)\n' % (LIB, LIB))
